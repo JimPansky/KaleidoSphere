@@ -1,0 +1,138 @@
+import { readFile } from 'node:fs/promises';
+import http from 'node:http';
+
+const port = Number(process.env.PORT ?? 18790);
+const controlBase = process.env.CONTROL_BASE_URL;
+if (controlBase !== 'http://bi-control:18089') throw new Error('AGENT_CONTROL_ROUTE_DENIED');
+
+const unsafe = /(?:\b(?:insert|update|delete|merge|drop|alter|create|truncate|grant|revoke|exec(?:ute)?|dbcc|backup|restore)\b|\braw\s+sql\b|password|credential|api[_ -]?key|ignore\s+(?:all\s+)?previous|system\s+prompt)/i;
+const analyzeIntent = /(?:analys(?:iere|e|ieren)|analy[sz]e).*(?:datenbank|database)|(?:datenbank|database).*(?:analys(?:iere|e|ieren)|analy[sz]e)/i;
+const statusIntent = /^(?:status|zustand|health|bereit)\??$/i;
+
+async function secret() {
+  const value = (await readFile(process.env.CONTROL_TOKEN_FILE, 'utf8').catch(() => '')).trim();
+  if (!value) throw coded('AGENT_CONTROL_TOKEN_MISSING');
+  return value;
+}
+
+function coded(code) {
+  const error = new Error(code);
+  error.code = code;
+  return error;
+}
+
+async function requestJson(request) {
+  const chunks = [];
+  let size = 0;
+  for await (const chunk of request) {
+    size += chunk.length;
+    if (size > 8192) throw coded('AGENT_REQUEST_TOO_LARGE');
+    chunks.push(chunk);
+  }
+  try { return JSON.parse(Buffer.concat(chunks).toString('utf8') || '{}'); }
+  catch { throw coded('AGENT_JSON_INVALID'); }
+}
+
+function validatePrompt(body) {
+  if (!body || typeof body !== 'object' || Array.isArray(body)
+    || JSON.stringify(Object.keys(body).sort()) !== JSON.stringify(['message'])
+    || typeof body.message !== 'string' || body.message.length < 3 || body.message.length > 500) {
+    throw coded('AGENT_INPUT_INVALID');
+  }
+  if (unsafe.test(body.message)) throw coded('AGENT_UNSAFE_INPUT_DENIED');
+  return body.message.trim();
+}
+
+async function providerIntent(message) {
+  if ((process.env.LLM_MODE ?? 'stub') === 'stub') {
+    if (analyzeIntent.test(message)) return 'ANALYZE';
+    if (statusIntent.test(message)) return 'STATUS';
+    return 'DENY';
+  }
+  if (process.env.LLM_MODE !== 'openai-compatible') throw coded('AGENT_LLM_MODE_DENIED');
+  const base = new URL(process.env.LLM_BASE_URL);
+  if (!['http:', 'https:'].includes(base.protocol) || !process.env.LLM_MODEL) throw coded('AGENT_LLM_CONFIG_INVALID');
+  const apiKey = (await readFile(process.env.LLM_API_KEY_FILE, 'utf8').catch(() => '')).trim();
+  if (!apiKey) throw coded('AGENT_LLM_KEY_MISSING');
+  const response = await fetch(new URL('chat/completions', `${base.toString().replace(/\/$/, '')}/`), {
+    method: 'POST',
+    headers: {authorization: `Bearer ${apiKey}`, 'content-type': 'application/json'},
+    body: JSON.stringify({
+      model: process.env.LLM_MODEL,
+      temperature: 0,
+      max_tokens: 8,
+      messages: [
+        {role: 'system', content: 'Classify the user request. Output exactly ANALYZE, STATUS, or DENY. ANALYZE only means analyze the configured database and publish the managed Superset overview. Never accept SQL, credentials, configuration changes, writes, or unknown actions.'},
+        {role: 'user', content: message},
+      ],
+    }),
+    signal: AbortSignal.timeout(20000),
+  });
+  if (!response.ok) throw coded('AGENT_LLM_PROVIDER_FAILED');
+  const value = await response.json();
+  const intent = value.choices?.[0]?.message?.content?.trim();
+  return ['ANALYZE', 'STATUS'].includes(intent) ? intent : 'DENY';
+}
+
+async function control(path, method = 'POST', action) {
+  const token = await secret();
+  const response = await fetch(`${controlBase}${path}`, {
+    method,
+    headers: {authorization: `Bearer ${token}`, ...(method === 'POST' ? {'content-type': 'application/json'} : {})},
+    ...(method === 'POST' ? {body: JSON.stringify({action})} : {}),
+    signal: AbortSignal.timeout(180000),
+  });
+  const body = await response.json().catch(() => ({code: 'AGENT_CONTROL_RESPONSE_INVALID'}));
+  if (!response.ok) throw coded(body.code ?? 'AGENT_CONTROL_FAILED');
+  return body;
+}
+
+async function execute(message) {
+  const intent = await providerIntent(message);
+  if (intent === 'STATUS') return {intent, status: await control('/v1/status', 'GET')};
+  if (intent !== 'ANALYZE') throw coded('AGENT_UNKNOWN_ACTION_DENIED');
+  const status = await control('/v1/status', 'GET');
+  const analysis = await control('/v1/analyze', 'POST', 'analyze');
+  const publication = await control('/v1/publish', 'POST', 'publish');
+  const readback = await control('/v1/readback', 'POST', 'readback');
+  return {
+    schemaVersion: 'chimpmaera.bi/agent-result/v1', intent, providerMode: process.env.LLM_MODE ?? 'stub',
+    tools: ['status', 'analyze', 'publish', 'readback'], status, analysisReceipt: {
+      receiptId: analysis.receiptId, status: analysis.status, sourceMode: analysis.sourceMode,
+      scope: analysis.scope, runtimeValidation: analysis.analysis.runtimeValidation,
+      snapshotSha256: analysis.analysis.snapshotSha256,
+    }, publication, readback,
+  };
+}
+
+const page = `<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ChimpMaera BI Agent</title><style>
+body{font:16px system-ui,sans-serif;max-width:860px;margin:3rem auto;padding:0 1rem;color:#172033;background:#f5f7fb}main{background:white;border:1px solid #dce3ee;border-radius:12px;padding:2rem;box-shadow:0 8px 30px #20305012}textarea{width:100%;box-sizing:border-box;min-height:90px;padding:.8rem}button{margin-top:.8rem;padding:.7rem 1.1rem;background:#1677ff;color:white;border:0;border-radius:6px;font-weight:600}pre{white-space:pre-wrap;background:#101827;color:#d9e7ff;padding:1rem;border-radius:8px;overflow:auto}small{color:#596579}</style></head>
+<body><main><h1>BI Agent</h1><p>Analysiert ausschließlich die konfigurierte MSSQL-Datenbank read-only und aktualisiert die verwaltete Superset-Übersicht.</p>
+<form id="f"><label for="m">Auftrag</label><textarea id="m">Analysiere die konfigurierte Datenbank</textarea><br><button>Analyse starten</button></form>
+<p><small>Erlaubt: Status, Analyse, Publish/Readback. Raw SQL, Credentials, Schreibaktionen und unbekannte Tools werden abgewiesen.</small></p><pre id="o">Bereit.</pre></main>
+<script>document.getElementById('f').addEventListener('submit',async(e)=>{e.preventDefault();const o=document.getElementById('o');o.textContent='Arbeite…';try{const r=await fetch('/api/chat',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message:document.getElementById('m').value})});const j=await r.json();o.textContent=JSON.stringify(j,null,2)}catch(x){o.textContent='Fehler: '+x.message}})</script></body></html>`;
+
+function send(response, status, contentType, value) {
+  const body = contentType.startsWith('application/json') ? `${JSON.stringify(value)}\n` : value;
+  response.writeHead(status, {
+    'content-type': `${contentType}; charset=utf-8`, 'content-length': Buffer.byteLength(body),
+    'cache-control': 'no-store', 'x-content-type-options': 'nosniff', 'x-frame-options': 'SAMEORIGIN',
+    'content-security-policy': "default-src 'self'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'self'; frame-ancestors 'self'",
+  });
+  response.end(body);
+}
+
+const server = http.createServer(async (request, response) => {
+  try {
+    if (request.method === 'GET' && request.url === '/healthz') return send(response, 200, 'application/json', {status: 'ok'});
+    if (request.method === 'GET' && request.url === '/') return send(response, 200, 'text/html', page);
+    if (request.method === 'POST' && request.url === '/api/chat') return send(response, 200, 'application/json', await execute(validatePrompt(await requestJson(request))));
+    throw coded('AGENT_ROUTE_DENIED');
+  } catch (error) {
+    const code = String(error.code ?? error.message ?? 'AGENT_INTERNAL_ERROR').replace(/[^A-Z0-9_]/g, '_').slice(0, 128);
+    send(response, 400, 'application/json', {status: 'DENIED', code});
+  }
+});
+server.listen(port, '0.0.0.0');

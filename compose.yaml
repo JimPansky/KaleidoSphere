@@ -1,0 +1,150 @@
+name: ${COMPOSE_PROJECT_NAME:-chimpmaera-bi-m0}
+
+services:
+  superset-init:
+    image: chimpmaera-bi/superset:${CM_BI_IMAGE_TAG:-local}
+    command: ["/opt/chimpmaera-bi/init.sh"]
+    environment:
+      SUPERSET_CONFIG_PATH: /opt/chimpmaera-bi/superset_config.py
+      AGENT_PUBLIC_URL: http://localhost:${AGENT_PORT:-18790}
+      SUPERSET_PUBLIC_URL: http://localhost:${SUPERSET_PORT:-18088}
+    secrets: [superset_secret_key, superset_admin_password, superset_analyst_password, control_token]
+    volumes:
+      - ./.runtime/metadata:/var/lib/chimpmaera-bi/metadata
+      - ./.runtime/projection:/var/lib/chimpmaera-bi/projection
+    networks: [control]
+    user: "${BI_UID:-1000}:${BI_GID:-1000}"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    tmpfs: ["/tmp:rw,noexec,nosuid,nodev,size=64m,mode=1777"]
+    restart: "no"
+
+  superset:
+    image: chimpmaera-bi/superset:${CM_BI_IMAGE_TAG:-local}
+    build:
+      context: .
+      dockerfile: services/superset/Dockerfile
+      provenance: false
+    depends_on:
+      superset-init: {condition: service_completed_successfully}
+    environment:
+      SUPERSET_CONFIG_PATH: /opt/chimpmaera-bi/superset_config.py
+      AGENT_PUBLIC_URL: http://localhost:${AGENT_PORT:-18790}
+      SUPERSET_PUBLIC_URL: http://localhost:${SUPERSET_PORT:-18088}
+    secrets: [superset_secret_key, control_token]
+    volumes:
+      - ./.runtime/metadata:/var/lib/chimpmaera-bi/metadata
+      - ./.runtime/projection:/var/lib/chimpmaera-bi/projection:ro
+    ports: ["127.0.0.1:${SUPERSET_PORT:-18088}:8088"]
+    expose: ["8090"]
+    networks: [frontend, control]
+    user: "${BI_UID:-1000}:${BI_GID:-1000}"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    pids_limit: 256
+    mem_limit: 1536m
+    tmpfs: ["/tmp:rw,noexec,nosuid,nodev,size=128m,mode=1777"]
+    healthcheck:
+      test: ["CMD", "python", "/opt/chimpmaera-bi/healthcheck.py"]
+      interval: 5s
+      timeout: 4s
+      retries: 40
+      start_period: 20s
+    restart: unless-stopped
+
+  bi-control:
+    image: chimpmaera-bi/control:${CM_BI_IMAGE_TAG:-local}
+    build:
+      context: services/bi-control
+      dockerfile: Dockerfile
+      provenance: false
+    depends_on:
+      superset: {condition: service_healthy}
+    environment:
+      PORT: "18089"
+      BI_SOURCE_MODE: ${BI_SOURCE_MODE:-fixture}
+      MSSQL_HOST: ${MSSQL_HOST:-host.docker.internal}
+      MSSQL_PORT: ${MSSQL_PORT:-1433}
+      MSSQL_DATABASE: ${MSSQL_DATABASE:-CM_BI_FIXTURE}
+      MSSQL_USER: ${MSSQL_USER:-bi_readonly}
+      MSSQL_SCHEMAS: ${MSSQL_SCHEMAS:-dbo}
+      MSSQL_ENCRYPT: ${MSSQL_ENCRYPT:-true}
+      MSSQL_TRUST_SERVER_CERTIFICATE: ${MSSQL_TRUST_SERVER_CERTIFICATE:-false}
+      MSSQL_QUERY_TIMEOUT_MS: ${MSSQL_QUERY_TIMEOUT_MS:-10000}
+      MSSQL_PASSWORD_FILE: /run/secrets/mssql_password
+      CONTROL_TOKEN_FILE: /run/secrets/control_token
+      SUPERSET_MATERIALIZER_URL: http://superset:8090/internal/materialize
+      RECEIPT_DIR: /var/lib/chimpmaera-bi/receipts
+      PROJECTION_DB: /var/lib/chimpmaera-bi/projection/analytics.db
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    secrets: [mssql_password, control_token]
+    volumes:
+      - ./.runtime/receipts:/var/lib/chimpmaera-bi/receipts
+      - ./.runtime/projection:/var/lib/chimpmaera-bi/projection
+    expose: ["18089"]
+    networks: [control, source_egress]
+    user: "${BI_UID:-1000}:${BI_GID:-1000}"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    pids_limit: 128
+    mem_limit: 512m
+    tmpfs: ["/tmp:rw,noexec,nosuid,nodev,size=64m,mode=1777"]
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:18089/healthz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 4s
+      timeout: 3s
+      retries: 30
+      start_period: 5s
+    restart: unless-stopped
+
+  bi-agent:
+    image: chimpmaera-bi/agent:${CM_BI_IMAGE_TAG:-local}
+    build:
+      context: services/bi-agent
+      dockerfile: Dockerfile
+      provenance: false
+    depends_on:
+      bi-control: {condition: service_healthy}
+    environment:
+      PORT: "18790"
+      CONTROL_BASE_URL: http://bi-control:18089
+      CONTROL_TOKEN_FILE: /run/secrets/control_token
+      LLM_MODE: ${LLM_MODE:-stub}
+      LLM_BASE_URL: ${LLM_BASE_URL:-}
+      LLM_MODEL: ${LLM_MODEL:-}
+      LLM_API_KEY_FILE: /run/secrets/llm_api_key
+      SUPERSET_PUBLIC_URL: http://localhost:${SUPERSET_PORT:-18088}
+    secrets: [control_token, llm_api_key]
+    ports: ["127.0.0.1:${AGENT_PORT:-18790}:18790"]
+    networks: [frontend, control]
+    user: "${BI_UID:-1000}:${BI_GID:-1000}"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    pids_limit: 96
+    mem_limit: 256m
+    tmpfs: ["/tmp:rw,noexec,nosuid,nodev,size=32m,mode=1777"]
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:18790/healthz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 4s
+      timeout: 3s
+      retries: 30
+      start_period: 5s
+    restart: unless-stopped
+
+secrets:
+  superset_secret_key: {file: .runtime/secrets/superset_secret_key}
+  superset_admin_password: {file: .runtime/secrets/superset_admin_password}
+  superset_analyst_password: {file: .runtime/secrets/superset_analyst_password}
+  control_token: {file: .runtime/secrets/control_token}
+  mssql_password: {file: .secrets/mssql_password}
+  llm_api_key: {file: .secrets/llm_api_key}
+
+networks:
+  frontend:
+  control:
+    internal: true
+  source_egress:
