@@ -1,13 +1,20 @@
 # M1 Oracle Runtime Foundation evidence
 
-Validation date: 2026-08-13. Base: public `main`
-`bd1e344753faa0ae7ab82b182fd9f2d881274aac`.
+Validation date: 2026-08-13. Base implementation merge: public `main`
+`77aa962bc9eb386d954c38a085665c50742cfd85` from PR #2.
 
 ## Decision
 
-All M1 implementation/runtime gates are closed. Release decision remains
-`CLOSED_NO_RELEASE`: M1 is a foundation and does not form a coherent Oracle
-discovery release on its own.
+All M1 implementation/runtime gates are closed. M1 is released only by a regular
+GitHub release created after the protected-main release-truth correction lands.
+The planned tag is `v0.2.0`, chosen conservatively because the pre-correction
+package line was `0.2.0-m1` and GitHub API readback showed no existing tags or
+releases before publication.
+
+Assumption safety and rollback marker: `v0.2.0` must not replace any existing tag
+or asset. If a conflicting tag or release appears before publication, stop the
+release step, keep the merged correction, and choose the next non-conflicting
+regular semver in a reviewed follow-up.
 
 ## Runtime evidence
 

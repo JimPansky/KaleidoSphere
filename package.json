@@ -1,6 +1,6 @@
 {
   "name": "chimpmaera-bi",
-  "version": "0.2.0-m1",
+  "version": "0.2.0",
   "private": true,
   "description": "Standalone Docker M1 Oracle/MSSQL runtime foundation, BI agent, and Apache Superset.",
   "license": "Apache-2.0",
