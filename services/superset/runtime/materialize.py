@@ -21,7 +21,7 @@ def exact(value, keys):
 
 def source_readback(request):
     exact(request, ["receiptId", "snapshotSha256", "projectionSha256"])
-    if not isinstance(request["receiptId"], str) or not request["receiptId"].startswith("mssql-"):
+    if not isinstance(request["receiptId"], str) or not request["receiptId"].startswith(("mssql-", "oracle-")):
         fail("SUPERSET_RECEIPT_ID_DENIED")
     for key in ("snapshotSha256", "projectionSha256"):
         value = request[key]
@@ -80,10 +80,10 @@ def materialize(request):
             summary_dataset = SqlaTable(uuid=SUMMARY_DATASET_UUID, table_name="bi_analysis_summary", database=database, is_sqllab_view=False)
             db.session.add(summary_dataset)
             db.session.flush()
-        summary_dataset.description = f"Managed read-only MSSQL analysis receipt {request['receiptId']} · source mode {summary['source_mode']} · snapshot {request['snapshotSha256']}"
+        summary_dataset.description = f"Managed read-only {summary['source_engine']} analysis receipt {request['receiptId']} · source mode {summary['source_mode']} · snapshot {request['snapshotSha256']}"
         if not summary_dataset.columns:
-            summary_dataset.columns = [TableColumn(column_name=name, type=column_type, filterable=name in {"source_database", "source_mode", "status"}, groupby=name in {"source_database", "source_mode", "status"}) for name, column_type in [
-                ("receipt_id","TEXT"),("source_database","TEXT"),("source_mode","TEXT"),("runtime_validation","TEXT"),("status","TEXT"),("analyzed_at","TEXT"),("relation_count","INTEGER"),("column_count","INTEGER"),("constraint_count","INTEGER"),("index_count","INTEGER"),("snapshot_sha256","TEXT"),("source_read_only","INTEGER")]]
+            summary_dataset.columns = [TableColumn(column_name=name, type=column_type, filterable=name in {"source_engine", "source_database", "source_mode", "status"}, groupby=name in {"source_engine", "source_database", "source_mode", "status"}) for name, column_type in [
+                ("receipt_id","TEXT"),("source_engine","TEXT"),("source_database","TEXT"),("source_mode","TEXT"),("runtime_validation","TEXT"),("status","TEXT"),("analyzed_at","TEXT"),("relation_count","INTEGER"),("column_count","INTEGER"),("constraint_count","INTEGER"),("index_count","INTEGER"),("snapshot_sha256","TEXT"),("source_read_only","INTEGER")]]
         metric_specs = [
             ("bi_relation_count", "SUM(relation_count)", "Relations"),
             ("bi_column_count", "SUM(column_count)", "Columns"),
@@ -138,7 +138,7 @@ def materialize(request):
         dashboard.dashboard_title = "ChimpMaera BI Database Overview"
         dashboard.slug = "chimpmaera-bi-database-overview"
         dashboard.published = True
-        dashboard.description = f"MSSQL {summary['source_mode']} · READ-ONLY receipt {request['receiptId']} · database {summary['source_database']} · Open BI Agent: {os.environ.get('AGENT_PUBLIC_URL', 'http://localhost:18790')}"
+        dashboard.description = f"{summary['source_engine']} {summary['source_mode']} · READ-ONLY receipt {request['receiptId']} · database {summary['source_database']} · Open BI Agent: {os.environ.get('AGENT_PUBLIC_URL', 'http://localhost:18790')}"
         dashboard.slices = charts
         chart_ids = [f"CHART-{chart.id}" for chart in charts]
         position = {

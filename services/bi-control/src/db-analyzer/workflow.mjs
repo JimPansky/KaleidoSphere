@@ -14,6 +14,7 @@ import {
 } from './core.mjs';
 import { buildOptionalParserEnrichment } from './parser-enrichment.mjs';
 import { auditQueryPackSafety } from './query-safety.mjs';
+import { buildOracleConnectString } from '../runtime-config.mjs';
 
 const REPOSITORY_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 
@@ -95,6 +96,109 @@ async function runMssqlQueries({ profile, manifest, entries }) {
   }
 }
 
+const oracleReasonCode = (error) => {
+  const source = String(error?.code ?? error?.errorNum ?? 'ORACLE_QUERY_FAILED').toUpperCase();
+  return source.replace(/[^A-Z0-9_]/g, '_').slice(0, 128) || 'ORACLE_QUERY_FAILED';
+};
+
+const oracleResultRows = (result, query) => (result.rows ?? []).map((row) => Object.fromEntries(
+  query.outputColumns.map((column) => {
+    const key = Object.keys(row).find((candidate) => candidate.toLowerCase() === column.toLowerCase());
+    return [column, key === undefined ? undefined : row[key]];
+  }),
+));
+
+export function compileOracleScopedQuery(query, statement, schemas) {
+  if (query.scopeColumn === null) return {statement, binds: {}};
+  if (!Array.isArray(schemas) || schemas.length === 0 || schemas.some((schema) => !/^[A-Z][A-Z0-9_$#]{0,127}$/.test(schema))) {
+    fail('DB_ANALYZE_SCOPE_INVALID');
+  }
+  const inner = statement.trim().replace(/;\s*$/, '');
+  const columns = query.outputColumns.map((column) => `scope.${column} AS ${column}`).join(', ');
+  const placeholders = schemas.map((_schema, index) => `:scope${index}`);
+  const binds = Object.fromEntries(schemas.map((schema, index) => [`scope${index}`, schema]));
+  return {statement: `SELECT ${columns} FROM (${inner}) scope WHERE scope.${query.scopeColumn} IN (${placeholders.join(', ')}) ORDER BY ${query.sortKeys.map((key) => `scope.${key}`).join(', ')};`, binds};
+}
+
+export function assertOracleIdentity(profile, rows) {
+  if (!Array.isArray(rows) || rows.length === 0 || rows.some((row) => row.engine !== 'oracle'
+    || row.database_name !== profile.scope.database || row.container_name !== profile.scope.container
+    || typeof row.engine_version !== 'string' || row.engine_version.length === 0)) {
+    fail('DB_ANALYZE_SCOPE_MISMATCH');
+  }
+}
+
+export function assertOracleReadOnlyCapabilities(profile, rows) {
+  if (!Array.isArray(rows) || !rows.some((row) => row.permission_name === 'SYSTEM:CREATE SESSION')) {
+    fail('DB_ANALYZE_ORACLE_PREFLIGHT_FAILED');
+  }
+  for (const row of rows) {
+    if (row.has_permission !== 1 || typeof row.permission_name !== 'string') fail('DB_ANALYZE_ORACLE_PREFLIGHT_FAILED');
+    if (row.permission_name.startsWith('SYSTEM:') && !['SYSTEM:CREATE SESSION', 'SYSTEM:SET CONTAINER'].includes(row.permission_name)) {
+      fail('DB_ANALYZE_PRINCIPAL_NOT_READ_ONLY');
+    }
+    const object = /^(?:OBJECT|COLUMN_OBJECT|ROLE_OBJECT):([^:]+):([^.]+)\./.exec(row.permission_name);
+    if (object && (!['READ', 'SELECT'].includes(object[1]) || !profile.scope.schemas.includes(object[2]))) {
+      fail('DB_ANALYZE_PRINCIPAL_NOT_READ_ONLY');
+    }
+    if (!row.permission_name.startsWith('SYSTEM:') && !object) fail('DB_ANALYZE_ORACLE_PREFLIGHT_FAILED');
+  }
+}
+
+export async function runOracleQueries({ profile, manifest, entries, driver }) {
+  const password = process.env[profile.adapter.passwordEnv];
+  if (!password) fail('DB_ANALYZE_CREDENTIAL_MISSING');
+  const oracle = driver ?? (await import('oracledb')).default;
+  if (oracle.thin === false) fail('DB_ANALYZE_ORACLE_THIN_REQUIRED');
+  let pool;
+  let connection;
+  try {
+    pool = await oracle.createPool({
+      user: profile.adapter.user,
+      password,
+      connectString: buildOracleConnectString(profile.adapter),
+      poolMin: 0,
+      poolMax: 2,
+      poolIncrement: 1,
+      poolTimeout: 30,
+      queueTimeout: profile.adapter.connectTimeoutMs,
+    });
+    connection = await pool.getConnection();
+    connection.callTimeout = profile.policy.maxQueryTimeoutMs;
+    const results = {};
+    for (const query of manifest.queries) {
+      const source = entries.find(([id]) => id === query.id)?.[1];
+      if (typeof source !== 'string' || !/^\s*SELECT\b/i.test(source)) fail('DB_ANALYZE_PACK_POLICY_DENIED');
+      const compiled = compileOracleScopedQuery(query, source, profile.scope.schemas);
+      auditQueryPackSafety({manifest: {...manifest, queries: [query]}, sqlByQueryId: {[query.id]: compiled.statement}});
+      try {
+        const response = await connection.execute(compiled.statement, compiled.binds, {outFormat: oracle.OUT_FORMAT_OBJECT});
+        const rows = oracleResultRows(response, query);
+        results[query.id] = {state: 'SUCCEEDED', reasonCode: null, rows};
+        if (query.id === 'oracle.preflight.identity') assertOracleIdentity(profile, rows);
+        if (query.id === 'oracle.preflight.rights') assertOracleReadOnlyCapabilities(profile, rows);
+        if (query.id === 'oracle.structure.schemas') {
+          const observed = rows.map((row) => row.schema_name).sort();
+          const expected = [...profile.scope.schemas].sort();
+          if (canonicalJson(observed) !== canonicalJson(expected)) fail('DB_ANALYZE_SCOPE_MISMATCH');
+        }
+      } catch (error) {
+        if (String(error?.code ?? error?.message).startsWith('DB_ANALYZE_')) throw error;
+        if (query.category === 'preflight' || query.id === 'oracle.structure.schemas') fail('DB_ANALYZE_ORACLE_PREFLIGHT_FAILED');
+        results[query.id] = {
+          state: ['NJS-040', 'ORA-01013'].includes(error?.code) ? 'TIMEOUT' : error?.errorNum === 1031 ? 'DENIED' : 'ERROR',
+          reasonCode: oracleReasonCode(error),
+          rows: [],
+        };
+      }
+    }
+    return {schemaVersion: 'chimpmaera.db/runtime-query-results/v1', engine: 'oracle', runtimeValidated: true, results};
+  } finally {
+    if (connection) await connection.close().catch(() => {});
+    if (pool) await pool.close(0).catch(() => {});
+  }
+}
+
 function assertScope(profile, evidence) {
   const identity = evidence.extracts.find((entry) => entry.queryId === `${profile.engine}.preflight.identity`);
   if (identity?.state !== 'SUCCEEDED' || identity.rows.length === 0) fail('DB_ANALYZE_SCOPE_UNVERIFIED');
@@ -125,7 +229,9 @@ export async function runAnalyzeProfile(profileFile, options = {}) {
   auditQueryPackSafety({ manifest, sqlByQueryId: Object.fromEntries(entries) });
   const resultSets = profile.mode === 'SYNTHETIC'
     ? await readJson(path.join(path.dirname(resolvedProfile), profile.adapter.fixture))
-    : await runMssqlQueries({ profile, manifest, entries });
+    : profile.engine === 'mssql'
+      ? await runMssqlQueries({ profile, manifest, entries })
+      : await runOracleQueries({ profile, manifest, entries, driver: options.oracleDriver });
   assertActive();
   let profilingEvidence;
   if (profile.policy.profiling !== undefined) {
@@ -189,6 +295,9 @@ export async function runAnalyzeProfile(profileFile, options = {}) {
       adapter: profile.adapter.kind,
     },
   });
+  if (profile.mode === 'RUNTIME' && profile.engine === 'oracle' && !evidence.coverageLedger.allComplete) {
+    fail('DB_ANALYZE_ORACLE_DISCOVERY_INCOMPLETE');
+  }
   assertScope(profile, evidence);
   return evidence;
 }

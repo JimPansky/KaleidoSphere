@@ -1,13 +1,13 @@
 {
   "name": "chimpmaera-bi",
-  "version": "0.1.0-m0",
+  "version": "0.2.0-m1",
   "private": true,
-  "description": "Standalone Docker M0 for governed MSSQL analysis, a BI agent, and Apache Superset.",
+  "description": "Standalone Docker M1 Oracle/MSSQL runtime foundation, BI agent, and Apache Superset.",
   "license": "Apache-2.0",
   "type": "module",
   "engines": {"node": ">=24 <25"},
   "scripts": {
-    "test": "node --test tests/analyzer.test.mjs tests/security.test.mjs tests/source-map.test.mjs",
+    "test": "node --test tests/analyzer.test.mjs tests/oracle-runtime.test.mjs tests/security.test.mjs tests/source-map.test.mjs",
     "test:source": "node --test tests/source-map.test.mjs",
     "test:security": "node --test tests/security.test.mjs"
   }

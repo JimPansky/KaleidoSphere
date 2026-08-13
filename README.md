@@ -1,7 +1,7 @@
-# ChimpMaera BI — standalone Docker M0
+# ChimpMaera BI — Oracle Runtime Foundation M1
 
 Portable single-host BI stack for one bounded use case: analyze a configured
-MSSQL database with a read-only account, keep a versioned analysis receipt, and
+MSSQL or Oracle database with a read-only account, keep a versioned analysis receipt, and
 idempotently publish a managed dataset, KPI overview, and drill view into this
 repository's own Apache Superset instance.
 
@@ -39,11 +39,12 @@ CLI equivalent:
 ./bin/bi down
 ```
 
-## Configure a live MSSQL source
+## Select and configure the source engine
 
-M0 supports MSSQL only. Edit `.env`:
+Choose exactly one engine. The existing MSSQL path remains available:
 
 ```dotenv
+BI_ENGINE=mssql
 BI_SOURCE_MODE=live
 MSSQL_HOST=db.example.internal
 MSSQL_PORT=1433
@@ -61,6 +62,39 @@ uses the MSSQL driver's `readOnlyIntent`, binds the exact database/schema scope,
 and then executes only the shipped audited SELECT catalog query pack. Any
 mismatch or missing credential fails closed. Superset never receives MSSQL
 credentials and never connects directly to the source.
+
+Oracle uses `node-oracledb` 7 in Thin mode; no Oracle Client libraries are
+installed. `ORACLE_DATABASE` is the expected `DB_UNIQUE_NAME`, while
+`ORACLE_SERVICE_NAME` is the exact service/PDB and expected `CON_NAME`:
+
+```dotenv
+BI_ENGINE=oracle
+BI_SOURCE_MODE=live
+ORACLE_HOST=oracle.example.internal
+ORACLE_PORT=2484
+ORACLE_DATABASE=MYDB
+ORACLE_SERVICE_NAME=ANALYTICSPDB
+ORACLE_USER=BI_ANALYZE
+ORACLE_SCHEMAS=SALES,FINANCE
+ORACLE_PROTOCOL=tcps
+ORACLE_TLS_SERVER_DN=CN=oracle.example.internal
+ORACLE_CONNECT_TIMEOUT_MS=10000
+ORACLE_QUERY_TIMEOUT_MS=10000
+```
+
+Put only the password in `.secrets/oracle_password`, mode `0600`. The analyze
+principal must have `CREATE SESSION` and only `SELECT`/`READ` object privileges
+inside the declared schemas. The preflight verifies database, service/PDB,
+schema visibility, enabled system privileges, direct object privileges, and
+enabled-role object privileges; a known DML, DDL, administrative, or out-of-scope
+capability fails closed. Transport encryption is the Oracle equivalent of the
+MSSQL encryption options: `tcps` plus the endpoint certificate policy. Plain
+`tcp` is appropriate only for an independently trusted local/test network.
+
+Both live adapters use a bounded pool/connection lifecycle and timeouts. The
+runtime executes only the nine shipped, audited catalog `SELECT` statements,
+with schema filters compiled as driver binds. There is no raw SQL, prompt-SQL,
+source-row sampling, DML, or DDL surface.
 
 The default `BI_SOURCE_MODE=fixture` is a portable deterministic MSSQL analyzer
 fixture. It proves the agent/tool/materialization path, but it is explicitly
@@ -84,7 +118,7 @@ and unknown actions are rejected before any tool call.
 
 ## Security boundary
 
-- The source adapter is MSSQL-only and read-only; query packs contain bounded
+- Both source adapters are read-only; query packs contain bounded
   catalog SELECTs and no source row samples.
 - `bi-agent` has network access only to the public UI network and internal
   `bi-control`; it has no source-database route or Superset mutation token API.
@@ -117,6 +151,10 @@ Run local gates with `npm test`, `docker compose config --quiet`, and
 `./tests/smoke.sh` after the stack is up. Clean-room instructions and recorded
 evidence are in [docs/CLEAN_ROOM.md](docs/CLEAN_ROOM.md).
 
-This is a packaging M0, not a generic multi-database or production platform:
-no Oracle adapter, SSO, HA, Kubernetes, alerting, bundled LLM, GPU requirement,
-or production-readiness claim.
+M1 is a runtime foundation, not a complete Oracle discovery or production
+platform. Aggregate profiling and Stored Logic runtime belong to M2; semantic
+modeling, guided BI-interest interviews, and dynamic dashboards belong to
+M3–M5 and are not active. M1 also makes no SSO, HA, Kubernetes, generic
+multi-database-framework, alerting, bundled-LLM, GPU, or production-readiness
+claim. Release decision: `CLOSED_NO_RELEASE`; a release waits for a coherent
+Oracle discovery increment.

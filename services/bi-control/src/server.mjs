@@ -6,14 +6,15 @@ import { DatabaseSync } from 'node:sqlite';
 import sql from 'mssql';
 
 import { runAnalyzeProfile } from './db-analyzer/workflow.mjs';
-import { coded, exactObject, parseSchemas, validateActionRequest } from './policy.mjs';
+import { coded, exactObject, validateActionRequest } from './policy.mjs';
+import { buildLiveProfile, selectedEngine } from './runtime-config.mjs';
 
 const port = Number(process.env.PORT ?? 18089);
 const receiptDir = process.env.RECEIPT_DIR ?? '/var/lib/chimpmaera-bi/receipts';
 const projectionDb = process.env.PROJECTION_DB ?? '/var/lib/chimpmaera-bi/projection/analytics.db';
 const repositoryRoot = '/app';
 const sha256 = (value) => createHash('sha256').update(value).digest('hex');
-const canonical = (value) => `${JSON.stringify(value, Object.keys(value).sort())}\n`;
+const engine = selectedEngine();
 
 async function secret(fileVariable, code) {
   const file = process.env[fileVariable];
@@ -40,31 +41,6 @@ async function bodyJson(request) {
   }
   try { return JSON.parse(Buffer.concat(chunks).toString('utf8') || '{}'); }
   catch { throw coded('CONTROL_JSON_INVALID'); }
-}
-
-function bool(name, fallback) {
-  const value = process.env[name] ?? String(fallback);
-  if (!['true', 'false'].includes(value)) throw coded(`CONFIG_${name}_INVALID`);
-  return value === 'true';
-}
-
-function liveProfile(passwordEnv) {
-  const database = process.env.MSSQL_DATABASE ?? '';
-  const host = process.env.MSSQL_HOST ?? '';
-  const user = process.env.MSSQL_USER ?? '';
-  const dbPort = Number(process.env.MSSQL_PORT ?? 1433);
-  const timeout = Number(process.env.MSSQL_QUERY_TIMEOUT_MS ?? 10000);
-  if (!host || !user || !/^[A-Za-z0-9_.:$#-]{1,128}$/.test(database)
-    || !Number.isInteger(dbPort) || dbPort < 1 || dbPort > 65535
-    || !Number.isInteger(timeout) || timeout < 1000 || timeout > 120000) throw coded('DB_ANALYZE_CONFIG_INVALID');
-  return {
-    schemaVersion: 'chimpmaera.db/analyze-profile/v1',
-    profileId: `chimpmaera-bi-live-${sha256(`${host}:${dbPort}/${database}/${user}`).slice(0, 16)}`,
-    engine: 'mssql', mode: 'RUNTIME', queryPack: {version: 'v1'},
-    scope: {database, container: null, schemas: parseSchemas(process.env.MSSQL_SCHEMAS)},
-    policy: {access: 'READ_ONLY', allowRowSamples: false, maxQueryTimeoutMs: timeout},
-    adapter: {kind: 'mssql', host, port: dbPort, user, passwordEnv, encrypt: bool('MSSQL_ENCRYPT', true), trustServerCertificate: bool('MSSQL_TRUST_SERVER_CERTIFICATE', false)},
-  };
 }
 
 async function assertLivePrincipalReadOnly(profile, password) {
@@ -103,7 +79,7 @@ async function writeProjection(receipt) {
   try {
     db.exec(`PRAGMA journal_mode=DELETE; PRAGMA synchronous=FULL;
       CREATE TABLE bi_analysis_summary (
-        receipt_id TEXT PRIMARY KEY, source_database TEXT NOT NULL, source_mode TEXT NOT NULL,
+        receipt_id TEXT PRIMARY KEY, source_engine TEXT NOT NULL, source_database TEXT NOT NULL, source_mode TEXT NOT NULL,
         runtime_validation TEXT NOT NULL, status TEXT NOT NULL, analyzed_at TEXT NOT NULL,
         relation_count INTEGER NOT NULL, column_count INTEGER NOT NULL,
         constraint_count INTEGER NOT NULL, index_count INTEGER NOT NULL,
@@ -115,12 +91,12 @@ async function writeProjection(receipt) {
         data_type TEXT NOT NULL, ordinal_position INTEGER NOT NULL, is_nullable INTEGER NOT NULL,
         FOREIGN KEY(receipt_id) REFERENCES bi_analysis_summary(receipt_id)
       );`);
-    const relations = extractRows(receipt.analysis, 'mssql.structure.relations');
-    const columns = extractRows(receipt.analysis, 'mssql.structure.columns');
-    const constraints = extractRows(receipt.analysis, 'mssql.structure.constraints');
-    const indexes = extractRows(receipt.analysis, 'mssql.structure.indexes');
-    db.prepare(`INSERT INTO bi_analysis_summary VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
-      .run(receipt.receiptId, receipt.scope.database, receipt.sourceMode, receipt.analysis.runtimeValidation,
+    const relations = extractRows(receipt.analysis, `${receipt.engine}.structure.relations`);
+    const columns = extractRows(receipt.analysis, `${receipt.engine}.structure.columns`);
+    const constraints = extractRows(receipt.analysis, `${receipt.engine}.structure.constraints`);
+    const indexes = extractRows(receipt.analysis, `${receipt.engine}.structure.indexes`);
+    db.prepare(`INSERT INTO bi_analysis_summary VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
+      .run(receipt.receiptId, receipt.engine, receipt.scope.database, receipt.sourceMode, receipt.analysis.runtimeValidation,
         receipt.status, receipt.analyzedAt, relations.length, columns.length, constraints.length, indexes.length,
         receipt.analysis.snapshotSha256, 1);
     const relationKinds = new Map(relations.map((row) => [`${row.schema_name}.${row.relation_name}`, row.relation_kind]));
@@ -142,13 +118,18 @@ async function analyze() {
   let profileFile;
   let readOnlyEvidence;
   if (sourceMode === 'fixture') {
+    if (engine !== 'mssql') throw coded('DB_ANALYZE_SOURCE_MODE_DENIED');
     profileFile = '/app/fixtures/mssql-profile-v1.json';
     readOnlyEvidence = {database: 'CM_BI_FIXTURE', databaseUpdateability: 'FIXTURE', principalDmlDdlPermissions: false, readOnlyIntent: true};
   } else if (sourceMode === 'live') {
-    const password = await secret('MSSQL_PASSWORD_FILE', 'DB_ANALYZE_CREDENTIAL_MISSING');
-    process.env.CM_MSSQL_PASSWORD = password;
-    const profile = liveProfile('CM_MSSQL_PASSWORD');
-    readOnlyEvidence = await assertLivePrincipalReadOnly(profile, password);
+    const passwordVariable = engine === 'mssql' ? 'MSSQL_PASSWORD_FILE' : 'ORACLE_PASSWORD_FILE';
+    const passwordEnv = engine === 'mssql' ? 'CM_MSSQL_PASSWORD' : 'CM_ORACLE_PASSWORD';
+    const password = await secret(passwordVariable, 'DB_ANALYZE_CREDENTIAL_MISSING');
+    process.env[passwordEnv] = password;
+    const profile = buildLiveProfile(process.env, passwordEnv);
+    readOnlyEvidence = engine === 'mssql'
+      ? await assertLivePrincipalReadOnly(profile, password)
+      : {database: profile.scope.database, serviceName: profile.scope.container, principalDmlDdlPermissions: false, oracleThinMode: true, sourceScopeBound: true};
     profileFile = path.join(receiptDir, 'live-profile.json');
     await writeFile(profileFile, `${JSON.stringify(profile, null, 2)}\n`, {mode: 0o600});
   } else throw coded('DB_ANALYZE_SOURCE_MODE_DENIED');
@@ -156,10 +137,10 @@ async function analyze() {
   try {
     const analysis = await runAnalyzeProfile(profileFile, {repositoryRoot});
     const analyzedAt = new Date().toISOString();
-    const receiptId = `mssql-${sha256(`${analysis.snapshotSha256}:${sourceMode}:${analysis.profile.scope.database}`).slice(0, 24)}`;
+    const receiptId = `${engine}-${sha256(`${analysis.snapshotSha256}:${sourceMode}:${analysis.profile.scope.database}`).slice(0, 24)}`;
     const receipt = {
       schemaVersion: 'chimpmaera.bi/analysis-receipt/v1', receiptId, status: 'ANALYZED_READ_ONLY', analyzedAt,
-      sourceMode, engine: 'mssql', scope: analysis.profile.scope,
+      sourceMode, engine, scope: analysis.profile.scope,
       safety: {queryPackSelectOnly: true, rowSamples: false, ...readOnlyEvidence}, analysis,
     };
     const projectionSha256 = await writeProjection(receipt);
@@ -168,7 +149,10 @@ async function analyze() {
     await writeFile(path.join(receiptDir, `${receiptId}.json`), rendered, {mode: 0o600});
     await writeFile(path.join(receiptDir, 'latest.json'), rendered, {mode: 0o600});
     return receipt;
-  } finally { delete process.env.CM_MSSQL_PASSWORD; }
+  } finally {
+    delete process.env.CM_MSSQL_PASSWORD;
+    delete process.env.CM_ORACLE_PASSWORD;
+  }
 }
 
 async function latestReceipt() {
@@ -217,7 +201,7 @@ const server = http.createServer(async (request, response) => {
     if (!authorized(request, token)) throw coded('CONTROL_AUTH_DENIED');
     if (request.method === 'GET' && request.url === '/v1/status') {
       const latest = await readFile(path.join(receiptDir, 'latest.json'), 'utf8').then(JSON.parse).catch(() => null);
-      return send(response, 200, {status: 'READY', sourceMode: process.env.BI_SOURCE_MODE ?? 'fixture', latestReceiptId: latest?.receiptId ?? null});
+      return send(response, 200, {status: 'READY', engine, sourceMode: process.env.BI_SOURCE_MODE ?? 'fixture', latestReceiptId: latest?.receiptId ?? null});
     }
     if (request.method !== 'POST') throw coded('CONTROL_ROUTE_DENIED');
     const body = await bodyJson(request);
@@ -231,4 +215,3 @@ const server = http.createServer(async (request, response) => {
   }
 });
 server.listen(port, '0.0.0.0');
-
