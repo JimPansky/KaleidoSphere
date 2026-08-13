@@ -66,6 +66,27 @@ case "${1:-help}" in
       --data '{"message":"Analysiere die konfigurierte Datenbank"}' \
       "http://127.0.0.1:$(published_port bi-agent 18790)/api/chat"
     ;;
+  ask)
+    require_setup
+    [ -n "${2:-}" ] || fail 'usage: ./bin/bi ask "Largest tables by size"'
+    message="$*"
+    message="${message#ask }"
+    node -e 'process.stdout.write(JSON.stringify({message: process.argv[1]}))' "$message" | \
+      curl --fail --silent --show-error \
+        --header 'content-type: application/json' \
+        --data-binary @- \
+        "http://127.0.0.1:$(published_port bi-agent 18790)/api/chat"
+    ;;
+  search)
+    require_setup
+    [ -n "${2:-}" ] || fail 'usage: ./bin/bi search orders'
+    message="Suche ${*:2}"
+    node -e 'process.stdout.write(JSON.stringify({message: process.argv[1]}))' "$message" | \
+      curl --fail --silent --show-error \
+        --header 'content-type: application/json' \
+        --data-binary @- \
+        "http://127.0.0.1:$(published_port bi-agent 18790)/api/chat"
+    ;;
   status)
     require_setup
     compose ps
@@ -89,6 +110,6 @@ case "${1:-help}" in
     printf 'Owned runtime metadata, projections, receipts, and generated internal secrets removed. Source config and external secret files retained.\n'
     ;;
   help|*)
-    printf '%s\n' 'Usage: ./bin/bi {setup|up|analyze|status|logs [service]|down|reset --yes-i-understand}'
+    printf '%s\n' 'Usage: ./bin/bi {setup|up|analyze|ask "question"|search term|status|logs [service]|down|reset --yes-i-understand}'
     ;;
 esac

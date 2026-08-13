@@ -6,7 +6,14 @@
     "LICENSE": "835083c307550077500f6817fa1d3ecbcb5f559d41029ff34f2ccacf5c3bbe07",
     "NOTICE": "d450ed03544412c411173e098a89976228d98f9a76634b0ec09e19134382ef74",
     "THIRD_PARTY_NOTICES.md": "db2a7877c0746af81e9e09ebfcf387a7197f69833600f7b57c9600248712045b",
+    "README.md": "e9d67228e61cffbbdd15a86197469aee4fa0d7d3be158038b33bf8a00cdac171",
+    "package.json": "e64f494530529e17e483aac31b6e226ab5e09b2af8b24c9ce7b223289be7df87",
+    "bin/bi": "5caf0fc0b78b7c4971401b9c22652724090d664fcd98addf31a46754a21cc6d6",
+    "docs/evidence/M3_LOCAL_TECHNICAL_CATALOG.md": "21b2fde1667bf8470ccd491ddc0fae2e811e4ed32abaea18f1f7dc03b1ce6986",
+    "services/bi-agent/src/server.mjs": "79196872c35aec62c0db9023a488c9fc257729ec7388526c69b21e9a84170133",
+    "services/bi-control/src/catalog.mjs": "9e8096baf2959834638b182dea683e5ff39599019155d82559e181436587a950",
     "services/bi-control/src/canonical-json.js": "e0ab8804532a55b161407e59167cf3027ebceb7df72a4d1dd1a485b1db4400ec",
+    "services/bi-control/src/server.mjs": "77e6c0ac9d170000c13f1114c15d07c898b6f5e586e3f9181913e87e7c08353d",
     "services/bi-control/src/db-analyzer/core.mjs": "8f702041dfab543e6b2b3422870713aede1da9b68eaf7c81440f6e99ba36a156",
     "services/bi-control/src/db-analyzer/drift.mjs": "193f744923e8ee99bd3b23019551e97c1eeb6897c1659b0605c96c70eef39f71",
     "services/bi-control/src/db-analyzer/operation-outputs.mjs": "6d905aeca9c246cbc9b09e75951658fbe52042c75097084e004234a832d474cc",
@@ -60,7 +67,10 @@
     "services/bi-control/query-packs/db-analyzer/v1/oracle/structure-schemas.sql": "56300c22fb432be6271b7f8c7fa23c7edbb1dc9bb8e1fb1eba9c9eca507849c8",
     "services/bi-control/query-packs/db-analyzer/v1/oracle/structure-sequences.sql": "56c6511f89312e9ae12ab979a02e2799c8b2a2f4426a2f661f147aad747de3cd",
     "services/bi-control/query-packs/db-analyzer/v1/oracle/structure-synonyms.sql": "0f6c5c85ab4437fcdf2dc07b1f6b979c527a3180638fa6b7203f54584f5d7a84",
-    "services/bi-control/query-packs/db-analyzer/v1/oracle/structure-tablespaces.sql": "2d6f0f6e122e6a6cd01c05ff4506029bdf96f2b780d44f79c780517918a36541"
+    "services/bi-control/query-packs/db-analyzer/v1/oracle/structure-tablespaces.sql": "2d6f0f6e122e6a6cd01c05ff4506029bdf96f2b780d44f79c780517918a36541",
+    "services/superset/runtime/materialize.py": "67c285c62773ee9763116bcf2fddb9ea30a3d1372af8b15d8f8c9ff58e76e25c",
+    "tests/catalog.test.mjs": "c067be5bfb9d20e014d0d4cc0ea6ffee42720d869341ddd0d5054c1457c4176a",
+    "tests/smoke.sh": "7c5cb4bb1ae9ba5577293de79ffff1498ae76aaf7230ae5488bd4fe91ee646a0"
   },
   "derivedFiles": {
     "services/bi-control/src/db-analyzer/core.mjs": {"sourceCommit": "cee9fd5835ac3527af54b5974b5d53414eac88d8", "sourceSha256": "d40223306376b28001c882f42f63481cea0a0e67ca7658bd378c6673e954206b", "change": "M1 Oracle runtime adapter contract"},
