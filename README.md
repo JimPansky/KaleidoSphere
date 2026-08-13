@@ -210,6 +210,8 @@ full dynamic-SQL lineage/parser, count-all, full grant audit, AWR/ASH/performanc
 analysis, SSO, HA, Kubernetes, generic multi-database framework, bundled LLM/GPU
 operation, and production readiness belong outside M3.
 
-Release boundary: M3 is not released by merge alone. The regular GitHub release
-`v0.4.0` is the M3 delivery event and must be created from a tag that targets the
+Release boundary: M3 is not released by merge alone. Public `v0.4.0` remains a
+functional release, but is superseded for anonymous installation by the
+corrective `v0.4.1` release because `v0.4.1` includes a portable checksum asset
+and the fresh isolated Oracle-Free M3 proof. The `v0.4.1` tag targets the
 protected-main merge, with installable archive and SHA-256 checksum assets.
