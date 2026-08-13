@@ -26,20 +26,37 @@ function runGit(args, options = {}) {
   return result.stdout.trim();
 }
 
-const status = runGit(['status', '--porcelain', '--untracked-files=no']);
-if (status && process.env.CM_BI_RELEASE_ALLOW_DIRTY !== '1') {
-  throw new Error('release archive requires a clean tracked worktree; set CM_BI_RELEASE_ALLOW_DIRTY=1 only for local regression tests');
+function isGitCheckout() {
+  return spawnSync('git', ['rev-parse', '--is-inside-work-tree'], { cwd: root, encoding: 'utf8' }).status === 0;
 }
 
 await rm(outputDir, { recursive: true, force: true });
 await mkdir(outputDir, { recursive: true, mode: 0o755 });
 
-const archive = spawn('git', ['archive', '--format=tar', `--prefix=Superset_BI_Agent-v${version}/`, 'HEAD'], { cwd: root, stdio: ['ignore', 'pipe', 'inherit'] });
-const archiveClosed = new Promise((resolve) => archive.on('close', resolve));
 const gzip = createGzip({ mtime: 0, level: 9 });
-await pipeline(archive.stdout, gzip, createWriteStream(archivePath, { mode: 0o644 }));
-const exitCode = await archiveClosed;
-if (exitCode !== 0) throw new Error(`git archive exited ${exitCode}`);
+if (isGitCheckout()) {
+  const status = runGit(['status', '--porcelain', '--untracked-files=no']);
+  if (status && process.env.CM_BI_RELEASE_ALLOW_DIRTY !== '1') {
+    throw new Error('release archive requires a clean tracked worktree; set CM_BI_RELEASE_ALLOW_DIRTY=1 only for local regression tests');
+  }
+  const archive = spawn('git', ['archive', '--format=tar', `--prefix=Superset_BI_Agent-v${version}/`, 'HEAD'], { cwd: root, stdio: ['ignore', 'pipe', 'inherit'] });
+  const archiveClosed = new Promise((resolve) => archive.on('close', resolve));
+  await pipeline(archive.stdout, gzip, createWriteStream(archivePath, { mode: 0o644 }));
+  const exitCode = await archiveClosed;
+  if (exitCode !== 0) throw new Error(`git archive exited ${exitCode}`);
+} else {
+  const archive = spawn('tar', [
+    '--sort=name', '--mtime=@0', '--owner=0', '--group=0', '--numeric-owner',
+    '--exclude=./.git', '--exclude=./node_modules', '--exclude=./.env', '--exclude=./dist',
+    '--exclude=./.runtime/metadata', '--exclude=./.runtime/projection', '--exclude=./.runtime/receipts', '--exclude=./.runtime/secrets',
+    '--exclude=./.secrets/llm_api_key', '--exclude=./.secrets/mssql_password', '--exclude=./.secrets/oracle_password',
+    '--transform', `s#^\\.#Superset_BI_Agent-v${version}#`, '-cf', '-', '.',
+  ], { cwd: root, stdio: ['ignore', 'pipe', 'inherit'] });
+  const archiveClosed = new Promise((resolve) => archive.on('close', resolve));
+  await pipeline(archive.stdout, gzip, createWriteStream(archivePath, { mode: 0o644 }));
+  const exitCode = await archiveClosed;
+  if (exitCode !== 0) throw new Error(`tar archive exited ${exitCode}`);
+}
 
 const digest = createHash('sha256').update(await readFile(archivePath)).digest('hex');
 const checksumLine = `${digest}  ${archiveName}\n`;
