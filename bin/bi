@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+set -euo pipefail
+umask 077
+
+bi_here="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$bi_here"
+
+fail() { printf >&2 'ChimpMaera BI ERROR: %s\n' "$*"; exit 1; }
+compose() { docker compose --file "$bi_here/compose.yaml" "$@"; }
+require_setup() {
+  [ -f "$bi_here/.env" ] || fail 'run: cp .env.example .env'
+  [ -s "$bi_here/.runtime/secrets/control_token" ] || fail 'run: ./bin/bi setup'
+}
+create_secret() {
+  local target="$1" kind="$2"
+  [ -e "$target" ] && return 0
+  case "$kind" in
+    hex) openssl rand -hex 32 > "$target.tmp" ;;
+    base64) openssl rand -base64 32 | tr -d '\n' > "$target.tmp"; printf '\n' >> "$target.tmp" ;;
+    empty) : > "$target.tmp" ;;
+    *) fail 'internal secret kind invalid' ;;
+  esac
+  chmod 0600 "$target.tmp"
+  mv "$target.tmp" "$target"
+}
+
+case "${1:-help}" in
+  setup)
+    command -v docker >/dev/null || fail 'Docker is required'
+    command -v openssl >/dev/null || fail 'OpenSSL is required'
+    docker info >/dev/null 2>&1 || fail 'Docker daemon is unavailable'
+    docker compose version >/dev/null 2>&1 || fail 'Docker Compose v2 is required'
+    [ -f .env ] || fail 'copy .env.example to .env and review the MSSQL settings first'
+    mkdir -p .runtime/secrets .runtime/metadata .runtime/projection .runtime/receipts .secrets
+    chmod 0700 .runtime .runtime/secrets .runtime/metadata .runtime/projection .runtime/receipts .secrets
+    create_secret .runtime/secrets/superset_secret_key hex
+    create_secret .runtime/secrets/superset_admin_password base64
+    create_secret .runtime/secrets/superset_analyst_password base64
+    create_secret .runtime/secrets/control_token hex
+    create_secret .secrets/mssql_password empty
+    create_secret .secrets/llm_api_key empty
+    chmod 0600 .runtime/secrets/* .secrets/*
+    compose config --quiet
+    printf 'Setup complete. Runtime secrets stay in gitignored files.\n'
+    ;;
+  up)
+    require_setup
+    compose up --detach --build --wait
+    printf 'Superset: http://127.0.0.1:%s\nAgent: http://127.0.0.1:%s\n' "${SUPERSET_PORT:-18088}" "${AGENT_PORT:-18790}"
+    ;;
+  analyze)
+    require_setup
+    curl --fail --silent --show-error \
+      --header 'content-type: application/json' \
+      --data '{"message":"Analysiere die konfigurierte Datenbank"}' \
+      "http://127.0.0.1:${AGENT_PORT:-18790}/api/chat"
+    ;;
+  status)
+    require_setup
+    compose ps
+    ;;
+  logs)
+    require_setup
+    compose logs --tail 200 "${2:-}"
+    ;;
+  down)
+    require_setup
+    compose down --remove-orphans
+    ;;
+  reset)
+    require_setup
+    [ "${2:-}" = '--yes-i-understand' ] || fail 'reset deletes only this repo runtime state; confirm with: ./bin/bi reset --yes-i-understand'
+    compose down --remove-orphans
+    for directory in .runtime/metadata .runtime/projection .runtime/receipts .runtime/secrets; do
+      [ -d "$directory" ] || continue
+      find "$directory" -mindepth 1 -maxdepth 1 -type f -delete
+    done
+    printf 'Owned runtime metadata, projections, receipts, and generated internal secrets removed. Source config and external secret files retained.\n'
+    ;;
+  help|*)
+    printf '%s\n' 'Usage: ./bin/bi {setup|up|analyze|status|logs [service]|down|reset --yes-i-understand}'
+    ;;
+esac
