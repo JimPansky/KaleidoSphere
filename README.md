@@ -11,6 +11,8 @@ Requirements: Docker Engine with Compose v2, OpenSSL, and ports `18088` and
 `18790` free on localhost.
 
 ```bash
+git clone https://github.com/JimPansky/Superset_BI_Agent.git
+cd Superset_BI_Agent
 cp .env.example .env
 ./bin/bi setup
 ./bin/bi up
@@ -156,5 +158,9 @@ platform. Aggregate profiling and Stored Logic runtime belong to M2; semantic
 modeling, guided BI-interest interviews, and dynamic dashboards belong to
 M3–M5 and are not active. M1 also makes no SSO, HA, Kubernetes, generic
 multi-database-framework, alerting, bundled-LLM, GPU, or production-readiness
-claim. Release decision: `CLOSED_NO_RELEASE`; a release waits for a coherent
-Oracle discovery increment.
+claim.
+
+Release boundary: M1 is not released by merge alone. The regular GitHub release
+`v0.2.0` is the M1 delivery event and must be created from a tag that targets the
+protected-main merge of the release-truth correction. Until that release exists
+as `draft=false`, `prerelease=false`, and Latest, M1 remains unreleased.
