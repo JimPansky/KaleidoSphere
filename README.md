@@ -1,9 +1,19 @@
-# ChimpMaera BI — Oracle Runtime Foundation M1
+# ChimpMaera BI — Oracle Technical Inventory M2
 
 Portable single-host BI stack for one bounded use case: analyze a configured
-MSSQL or Oracle database with a read-only account, keep a versioned analysis receipt, and
-idempotently publish a managed dataset, KPI overview, and drill view into this
-repository's own Apache Superset instance.
+MSSQL or Oracle database with a read-only account, keep a versioned analysis
+receipt, and idempotently publish a managed dataset, KPI overview, and drill
+view into this repository's own Apache Superset instance.
+
+M2 expands the Oracle path from runtime foundation to technical metadata
+inventory. The Oracle analyzer collects read-only dictionary metadata for
+schemas, tables, views, materialized views, columns, comments, constraints,
+indexes, sequences, synonyms, partitions, LOBs, tablespace distribution,
+statistics freshness, labelled size/block metadata, materialized-view refresh,
+stored logic metadata, scheduler metadata, and credential-free DB-link metadata
+where visible. Coverage states are authoritative: `SUCCEEDED`, `PARTIAL`,
+`DENIED`, `TIMEOUT`, and `ERROR`/unknown are preserved per collector. A missing
+privilege is never reported as object absence.
 
 ## Quickstart
 
@@ -94,9 +104,18 @@ MSSQL encryption options: `tcps` plus the endpoint certificate policy. Plain
 `tcp` is appropriate only for an independently trusted local/test network.
 
 Both live adapters use a bounded pool/connection lifecycle and timeouts. The
-runtime executes only the nine shipped, audited catalog `SELECT` statements,
-with schema filters compiled as driver binds. There is no raw SQL, prompt-SQL,
-source-row sampling, DML, or DDL surface.
+runtime executes only shipped, audited catalog `SELECT` statements, with schema
+filters compiled as driver binds. There is no raw SQL, prompt-SQL, source-row
+sampling, DML, or DDL surface. For Oracle M2, scoped `EXECUTE` grants are
+accepted only as stored-logic metadata visibility; the analyzer never invokes
+packages, procedures, functions, triggers, scheduler programs, or database
+links.
+
+Oracle source safety: PL/SQL, view, trigger, scheduler action, compile-error
+text, comments, DB-link username/password, and DB-link raw hosts are not sent to
+the agent, Superset, public artifacts, or an LLM. Public/agent-facing metadata
+uses hashes, line counts, status, signatures, dependencies, timing/status
+fields, and explicit blind-spot labels for wrapped code and dynamic SQL.
 
 The default `BI_SOURCE_MODE=fixture` is a portable deterministic MSSQL analyzer
 fixture. It proves the agent/tool/materialization path, but it is explicitly
@@ -153,14 +172,13 @@ Run local gates with `npm test`, `docker compose config --quiet`, and
 `./tests/smoke.sh` after the stack is up. Clean-room instructions and recorded
 evidence are in [docs/CLEAN_ROOM.md](docs/CLEAN_ROOM.md).
 
-M1 is a runtime foundation, not a complete Oracle discovery or production
-platform. Aggregate profiling and Stored Logic runtime belong to M2; semantic
-modeling, guided BI-interest interviews, and dynamic dashboards belong to
-M3–M5 and are not active. M1 also makes no SSO, HA, Kubernetes, generic
-multi-database-framework, alerting, bundled-LLM, GPU, or production-readiness
-claim.
+M2 is a technical inventory increment, not a searchable knowledge catalog or
+semantic modeling platform. Guided BI-interest interviews, dynamic datasets,
+dynamic charts/dashboards, full PL/SQL parsing, dynamic-SQL lineage, count-all,
+full grant audit, AWR/ASH/performance analysis, SSO, HA, Kubernetes,
+generic multi-database framework, bundled LLM/GPU operation, and production
+readiness belong outside M2.
 
-Release boundary: M1 is not released by merge alone. The regular GitHub release
-`v0.2.0` is the M1 delivery event and must be created from a tag that targets the
-protected-main merge of the release-truth correction. Until that release exists
-as `draft=false`, `prerelease=false`, and Latest, M1 remains unreleased.
+Release boundary: M2 is not released by merge alone. The regular GitHub release
+`v0.3.0` is the M2 delivery event and must be created from a tag that targets the
+protected-main merge, with installable archive and SHA-256 checksum assets.

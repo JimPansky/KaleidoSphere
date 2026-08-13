@@ -59,10 +59,22 @@ const objectName = (category, row) => {
   if (category === 'schemas') return row.schema_name;
   if (category === 'relations') return row.relation_name;
   if (category === 'columns') return row.column_name;
+  if (category === 'comments') return row.column_name ?? row.relation_name;
   if (category === 'constraints') return row.constraint_name;
   if (category === 'indexes') return row.index_name;
   if (category === 'sequences') return row.sequence_name;
   if (category === 'synonyms') return row.synonym_name;
+  if (category === 'partitions') return row.subpartition_name ?? row.partition_name ?? row.relation_name;
+  if (category === 'lobs') return row.segment_name ?? row.column_name;
+  if (category === 'tablespaces') return row.tablespace_name;
+  if (category === 'statistics') return row.index_name ?? row.relation_name;
+  if (category === 'sizes') return row.segment_name;
+  if (category === 'stored-objects') return row.object_name;
+  if (category === 'stored-arguments') return row.argument_name ?? row.subprogram_name ?? row.object_name;
+  if (category === 'stored-errors') return row.object_name;
+  if (category === 'stored-dependencies') return row.source_object_name;
+  if (category === 'operations') return row.object_name ?? row.relation_name;
+  if (category === 'db-links') return row.db_link_name;
   return null;
 };
 

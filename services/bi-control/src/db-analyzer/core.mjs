@@ -53,7 +53,28 @@ const COVERAGE_VISIBILITY = Object.freeze({
   TIMEOUT: 'UNKNOWN',
   ERROR: 'UNKNOWN',
 });
-const QUERY_CATEGORIES = new Set(['preflight', 'schemas', 'relations', 'columns', 'constraints', 'indexes', 'sequences', 'synonyms', 'stored-objects', 'stored-dependencies']);
+const QUERY_CATEGORIES = new Set([
+  'preflight',
+  'schemas',
+  'relations',
+  'columns',
+  'comments',
+  'constraints',
+  'indexes',
+  'sequences',
+  'synonyms',
+  'partitions',
+  'lobs',
+  'tablespaces',
+  'statistics',
+  'sizes',
+  'stored-objects',
+  'stored-arguments',
+  'stored-errors',
+  'stored-dependencies',
+  'operations',
+  'db-links',
+]);
 
 const fail = (code) => {
   const error = new Error(code);
