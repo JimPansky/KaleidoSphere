@@ -5,9 +5,10 @@ const port = Number(process.env.PORT ?? 18790);
 const controlBase = process.env.CONTROL_BASE_URL;
 if (controlBase !== 'http://bi-control:18089') throw new Error('AGENT_CONTROL_ROUTE_DENIED');
 
-const unsafe = /(?:\b(?:insert|update|delete|merge|drop|alter|create|truncate|grant|revoke|exec(?:ute)?|dbcc|backup|restore)\b|\braw\s+sql\b|password|credential|api[_ -]?key|ignore\s+(?:all\s+)?previous|system\s+prompt)/i;
+const unsafe = /(?:\b(?:select|insert|update|delete|merge|drop|alter|create|truncate|grant|revoke|exec(?:ute)?|dbcc|backup|restore)\b|\braw\s+sql\b|\bsql\s*lab\b|source\s+code|pl\/sql\s+source|password|credential|secret|api[_ -]?key|ignore\s+(?:all\s+)?previous|system\s+prompt)/i;
 const analyzeIntent = /(?:analys(?:iere|e|ieren)|analy[sz]e).*(?:datenbank|database)|(?:datenbank|database).*(?:analys(?:iere|e|ieren)|analy[sz]e)/i;
 const statusIntent = /^(?:status|zustand|health|bereit)\??$/i;
+const searchIntent = /^(?:suche|search)\s+(.{2,80})$/i;
 
 async function secret() {
   const value = (await readFile(process.env.CONTROL_TOKEN_FILE, 'utf8').catch(() => '')).trim();
@@ -87,7 +88,57 @@ async function control(path, method = 'POST', action) {
   return body;
 }
 
+async function controlJson(path, body) {
+  const token = await secret();
+  const response = await fetch(`${controlBase}${path}`, {
+    method: 'POST',
+    headers: {authorization: `Bearer ${token}`, 'content-type': 'application/json'},
+    body: JSON.stringify(body),
+    signal: AbortSignal.timeout(30000),
+  });
+  const value = await response.json().catch(() => ({code: 'AGENT_CONTROL_RESPONSE_INVALID'}));
+  if (!response.ok) throw coded(value.code ?? 'AGENT_CONTROL_FAILED');
+  return value;
+}
+
+function technicalFamily(message) {
+  if (/(größte|largest|size|capacity|bytes|block|verteilung)/i.test(message)) return 'largest_tables';
+  if (/(row|zeilen|estimate|schätz|fresh|stale|statist)/i.test(message)) return 'row_estimates_freshness';
+  if (/(inventory|inventar|valid|invalid|compile|schema|object|objekt)/i.test(message)) return 'object_inventory_validity';
+  if (/(depend|abhäng|impact|uses|verwendet|nutzt|benutzt)/i.test(message)) return 'dependencies';
+  if (/(signature|signatur|argument|stored|procedure|function|package|logic|code)/i.test(message)) return 'stored_logic_signatures';
+  if (/(scheduler|job|materialized|mview|refresh|mv\b)/i.test(message)) return 'scheduler_mv_refresh';
+  if (/(coverage|blind|denied|timeout|partial|caveat|abdeckung|lücke)/i.test(message)) return 'coverage_blind_spots';
+  if (/(candidate|kandidat|bi[- ]?relev|dimension|measure|kennzahl)/i.test(message)) return 'bi_relevance_candidates';
+  return null;
+}
+
+function objectFromMessage(message) {
+  const match = /\b(?:object|objekt|table|tabelle|uses|verwendet|nutzt|impact|dependencies|abhängigkeiten|signatures?|signaturen?)\s+([A-Za-z][A-Za-z0-9_$#]*(?:\.[A-Za-z][A-Za-z0-9_$#]*)?)/i.exec(message);
+  return match ? {name: match[1]} : null;
+}
+
+function scopeFromStatus(status) {
+  const schemas = status?.scope?.schemas;
+  if (!Array.isArray(schemas) || schemas.length === 0) throw coded('AGENT_CATALOG_SCOPE_MISSING');
+  return {schemas};
+}
+
 async function execute(message) {
+  const search = searchIntent.exec(message);
+  if (search) {
+    const status = await control('/v1/status', 'GET');
+    return {intent: 'CATALOG_SEARCH', status, result: await controlJson('/v1/catalog/search', {
+      term: search[1].trim(), scope: scopeFromStatus(status), limit: 20,
+    })};
+  }
+  const family = technicalFamily(message);
+  if (family) {
+    const status = await control('/v1/status', 'GET');
+    return {intent: 'CATALOG_QUESTION', family, status, result: await controlJson('/v1/catalog/question', {
+      family, scope: scopeFromStatus(status), object: objectFromMessage(message), limit: 20,
+    })};
+  }
   const intent = await providerIntent(message);
   if (intent === 'STATUS') return {intent, status: await control('/v1/status', 'GET')};
   if (intent !== 'ANALYZE') throw coded('AGENT_UNKNOWN_ACTION_DENIED');
@@ -95,13 +146,16 @@ async function execute(message) {
   const analysis = await control('/v1/analyze', 'POST', 'analyze');
   const publication = await control('/v1/publish', 'POST', 'publish');
   const readback = await control('/v1/readback', 'POST', 'readback');
+  const catalogReadback = await controlJson('/v1/catalog/question', {
+    family: 'coverage_blind_spots', scope: {schemas: analysis.scope.schemas}, object: null, limit: 20,
+  });
   return {
     schemaVersion: 'chimpmaera.bi/agent-result/v1', intent, providerMode: process.env.LLM_MODE ?? 'stub',
-    tools: ['status', 'analyze', 'publish', 'readback'], status, analysisReceipt: {
+    tools: ['status', 'analyze', 'catalog_ingest', 'publish', 'readback', 'catalog_question'], status, analysisReceipt: {
       receiptId: analysis.receiptId, status: analysis.status, sourceMode: analysis.sourceMode,
       scope: analysis.scope, runtimeValidation: analysis.analysis.runtimeValidation,
       snapshotSha256: analysis.analysis.snapshotSha256,
-    }, publication, readback,
+    }, catalog: {status: 'INGESTED_LOCAL_TECHNICAL_CATALOG', coverageQuestion: catalogReadback}, publication, readback,
   };
 }
 
@@ -111,7 +165,7 @@ const page = `<!doctype html>
 body{font:16px system-ui,sans-serif;max-width:860px;margin:3rem auto;padding:0 1rem;color:#172033;background:#f5f7fb}main{background:white;border:1px solid #dce3ee;border-radius:12px;padding:2rem;box-shadow:0 8px 30px #20305012}textarea{width:100%;box-sizing:border-box;min-height:90px;padding:.8rem}button{margin-top:.8rem;padding:.7rem 1.1rem;background:#1677ff;color:white;border:0;border-radius:6px;font-weight:600}pre{white-space:pre-wrap;background:#101827;color:#d9e7ff;padding:1rem;border-radius:8px;overflow:auto}small{color:#596579}</style></head>
 <body><main><h1>BI Agent</h1><p>Analysiert ausschließlich die konfigurierte MSSQL- oder Oracle-Datenbank read-only und aktualisiert die verwaltete Superset-Übersicht.</p>
 <form id="f"><label for="m">Auftrag</label><textarea id="m">Analysiere die konfigurierte Datenbank</textarea><br><button>Analyse starten</button></form>
-<p><small>Erlaubt: Status, Analyse, Publish/Readback. Raw SQL, Credentials, Schreibaktionen und unbekannte Tools werden abgewiesen.</small></p><pre id="o">Bereit.</pre></main>
+<p><small>Erlaubt: Status, Analyse, lokaler technischer Katalog, Suche und evidenzgebundene technische Fragen. Raw SQL, Credentials, Rohsource, Schreibaktionen und unbekannte Tools werden abgewiesen.</small></p><pre id="o">Bereit.</pre></main>
 <script>document.getElementById('f').addEventListener('submit',async(e)=>{e.preventDefault();const o=document.getElementById('o');o.textContent='Arbeite…';try{const r=await fetch('/api/chat',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message:document.getElementById('m').value})});const j=await r.json();o.textContent=JSON.stringify(j,null,2)}catch(x){o.textContent='Fehler: '+x.message}})</script></body></html>`;
 
 function send(response, status, contentType, value) {

@@ -5,6 +5,7 @@ import path from 'node:path';
 import { DatabaseSync } from 'node:sqlite';
 import sql from 'mssql';
 
+import { answerCatalogQuestion, ingestCatalogReceipt, searchCatalog } from './catalog.mjs';
 import { runAnalyzeProfile } from './db-analyzer/workflow.mjs';
 import { coded, exactObject, validateActionRequest } from './policy.mjs';
 import { buildLiveProfile, selectedEngine } from './runtime-config.mjs';
@@ -107,6 +108,7 @@ async function writeProjection(receipt) {
         relationKinds.get(`${column.schema_name}.${column.relation_name}`) ?? column.relation_kind ?? 'UNKNOWN',
         column.column_name, column.data_type, Number(column.ordinal_position), column.is_nullable ? 1 : 0);
     }
+    ingestCatalogReceipt(db, receipt);
   } finally { db.close(); }
   await rename(temporary, projectionDb);
   return sha256(await readFile(projectionDb));
@@ -182,9 +184,30 @@ async function readback() {
   try {
     const summary = db.prepare('SELECT * FROM bi_analysis_summary WHERE receipt_id=?').get(receipt.receiptId);
     const detailCount = db.prepare('SELECT COUNT(*) AS count FROM bi_analysis_detail WHERE receipt_id=?').get(receipt.receiptId).count;
+    const catalogSnapshot = db.prepare('SELECT snapshot_sha256, receipt_id, schema_version.value AS schema_version FROM catalog_snapshots JOIN catalog_meta schema_version ON schema_version.key=? WHERE catalog_snapshots.snapshot_sha256=? AND active=1').get('schema_version', receipt.analysis.snapshotSha256);
+    const technicalOverview = {
+      systemSchemaRows: db.prepare('SELECT COUNT(*) AS count FROM technical_system_schema_overview WHERE snapshot_sha256=?').get(receipt.analysis.snapshotSha256).count,
+      tableCapacityRows: db.prepare('SELECT COUNT(*) AS count FROM technical_tables_capacity WHERE snapshot_sha256=?').get(receipt.analysis.snapshotSha256).count,
+      codeDependencyRows: db.prepare('SELECT COUNT(*) AS count FROM technical_code_dependencies WHERE snapshot_sha256=?').get(receipt.analysis.snapshotSha256).count,
+      coverageRows: db.prepare('SELECT COUNT(*) AS count FROM technical_coverage_blind_spots WHERE snapshot_sha256=?').get(receipt.analysis.snapshotSha256).count,
+      biCandidateRows: db.prepare('SELECT COUNT(*) AS count FROM technical_bi_relevance_candidates WHERE snapshot_sha256=?').get(receipt.analysis.snapshotSha256).count,
+    };
     if (!summary || summary.snapshot_sha256 !== receipt.analysis.snapshotSha256) throw coded('PROJECTION_READBACK_MISMATCH');
-    return {schemaVersion: 'chimpmaera.bi/readback/v1', receiptId: receipt.receiptId, summary, detailCount, publication};
+    if (!catalogSnapshot || catalogSnapshot.receipt_id !== receipt.receiptId) throw coded('CATALOG_READBACK_MISMATCH');
+    return {schemaVersion: 'chimpmaera.bi/readback/v1', receiptId: receipt.receiptId, summary, detailCount, catalogSnapshot, technicalOverview, publication};
   } finally { db.close(); }
+}
+
+async function catalogQuestion(body) {
+  const db = new DatabaseSync(projectionDb, {readOnly: true});
+  try { return answerCatalogQuestion(db, body); }
+  finally { db.close(); }
+}
+
+async function catalogSearch(body) {
+  const db = new DatabaseSync(projectionDb, {readOnly: true});
+  try { return searchCatalog(db, body); }
+  finally { db.close(); }
 }
 
 function send(response, status, value) {
@@ -201,13 +224,17 @@ const server = http.createServer(async (request, response) => {
     if (!authorized(request, token)) throw coded('CONTROL_AUTH_DENIED');
     if (request.method === 'GET' && request.url === '/v1/status') {
       const latest = await readFile(path.join(receiptDir, 'latest.json'), 'utf8').then(JSON.parse).catch(() => null);
-      return send(response, 200, {status: 'READY', engine, sourceMode: process.env.BI_SOURCE_MODE ?? 'fixture', latestReceiptId: latest?.receiptId ?? null});
+      return send(response, 200, {status: 'READY', engine, sourceMode: process.env.BI_SOURCE_MODE ?? 'fixture',
+        latestReceiptId: latest?.receiptId ?? null, scope: latest?.scope ?? null,
+        catalogReady: latest?.analysis?.snapshotSha256 ? true : false});
     }
     if (request.method !== 'POST') throw coded('CONTROL_ROUTE_DENIED');
     const body = await bodyJson(request);
     if (request.url === '/v1/analyze') { validateActionRequest(body, 'analyze'); return send(response, 200, await analyze()); }
     if (request.url === '/v1/publish') { validateActionRequest(body, 'publish'); return send(response, 200, await publish()); }
     if (request.url === '/v1/readback') { validateActionRequest(body, 'readback'); return send(response, 200, await readback()); }
+    if (request.url === '/v1/catalog/question') return send(response, 200, await catalogQuestion(body));
+    if (request.url === '/v1/catalog/search') return send(response, 200, await catalogSearch(body));
     exactObject(body, []); throw coded('CONTROL_ROUTE_DENIED');
   } catch (error) {
     const code = String(error.code ?? error.message ?? 'CONTROL_INTERNAL_ERROR').replace(/[^A-Z0-9_]/g, '_').slice(0, 128);

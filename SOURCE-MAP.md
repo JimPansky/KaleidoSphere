@@ -10,12 +10,18 @@ verified at that exact commit before copying; ChimpMaera was not mutated.
 
 The M0 baseline was mechanically copied byte-for-byte as recorded by its source
 hashes; files changed for M1 are explicitly listed under `derivedFiles`. M2
-extends the Oracle pack with CM-authored technical-inventory SELECTs and updated
-file hashes:
+extends the Oracle pack with CM-authored technical-inventory SELECTs. M3 adds
+repository-authored catalog, agent, Superset, tests, and evidence files with
+updated file hashes:
 
 - `LICENSE` → `LICENSE`
 - `NOTICE` → `NOTICE`
 - `THIRD_PARTY_NOTICES.md` → `THIRD_PARTY_NOTICES.md`
+- M3 authored repository files such as `README.md`, `package.json`, `bin/bi`,
+  `services/bi-control/src/catalog.mjs`, `services/bi-control/src/server.mjs`,
+  `services/bi-agent/src/server.mjs`, `services/superset/runtime/materialize.py`,
+  `tests/catalog.test.mjs`, `tests/smoke.sh`, and
+  `docs/evidence/M3_LOCAL_TECHNICAL_CATALOG.md`
 - `packages/contracts/src/canonical-json.js` →
   `services/bi-control/src/canonical-json.js`
 - `scripts/lib/db-analyzer/*.mjs` →
@@ -31,9 +37,10 @@ M1 derives the analyzer core, query-safety allowlist, and workflow for the Oracl
 Thin runtime. It derives the identity preflight for the Oracle AI Database product
 name and `oracle/preflight-rights.sql` to detect system,
 direct-object, and enabled-role object privileges before structure discovery.
-`SOURCE-MAP.json` records every repository SHA-256 plus the original SHA-256 and
-change marker for each derived file. M2 query-pack additions collect only
-technical metadata: comments/source/error text are hash-only, DB-link hosts are
-hash-only, and scheduler action text is omitted. New Compose, control, Superset
-materializer, agent UI, tests, and documentation were authored specifically for
-this repository.
+`SOURCE-MAP.json` records repository SHA-256 values plus the original SHA-256 and
+change marker for each derived file. M2/M3 query-pack and catalog additions
+collect only technical metadata: comments/source/error text are hash-only,
+DB-link hosts are hash-only, scheduler action text is omitted, and catalog Q&A is
+answered from local safe projections only. New Compose, control, catalog,
+Superset materializer, agent UI, tests, and documentation were authored
+specifically for this repository.

@@ -1,19 +1,22 @@
-# ChimpMaera BI — Oracle Technical Inventory M2
+# ChimpMaera BI — Local Technical Knowledge Catalog M3
 
 Portable single-host BI stack for one bounded use case: analyze a configured
-MSSQL or Oracle database with a read-only account, keep a versioned analysis
-receipt, and idempotently publish a managed dataset, KPI overview, and drill
-view into this repository's own Apache Superset instance.
+MSSQL or Oracle database with a read-only account, keep a versioned safe
+technical catalog, answer bounded technical database questions with evidence,
+and idempotently publish managed overview dashboards into this repository's own
+Apache Superset instance.
 
-M2 expands the Oracle path from runtime foundation to technical metadata
-inventory. The Oracle analyzer collects read-only dictionary metadata for
+M3 builds on the M2 Oracle technical inventory. The Oracle analyzer collects
+read-only dictionary metadata for
 schemas, tables, views, materialized views, columns, comments, constraints,
 indexes, sequences, synonyms, partitions, LOBs, tablespace distribution,
 statistics freshness, labelled size/block metadata, materialized-view refresh,
 stored logic metadata, scheduler metadata, and credential-free DB-link metadata
-where visible. Coverage states are authoritative: `SUCCEEDED`, `PARTIAL`,
-`DENIED`, `TIMEOUT`, and `ERROR`/unknown are preserved per collector. A missing
-privilege is never reported as object absence.
+where visible. M3 persists the safe receipt metadata into a local SQLite catalog
+and adds deterministic search and technical Q&A. Coverage states are
+authoritative: `SUCCEEDED`, `PARTIAL`, `DENIED`, `TIMEOUT`, and `ERROR`/unknown
+are preserved per collector. A missing privilege is never reported as object
+absence.
 
 ## Quickstart
 
@@ -39,17 +42,41 @@ The Superset navigation includes a visible **BI Agent** link. Sign in as
 `cm_admin`; its password is stored beside the analyst password. Password values
 are never printed by the scripts.
 
-In the Agent UI use: **Analysiere die konfigurierte Datenbank**. The agent calls
-only `status → analyze → publish → readback`. A successful response contains the
-receipt ID and the managed dashboard URL. Repeating the same flow updates the
-same two datasets, five charts, and one dashboard; it does not create duplicates.
+In the Agent UI use: **Analysiere die konfigurierte Datenbank**. The normal path
+is `status → analyze → catalog ingest → publish → readback`. A successful
+response contains the receipt ID, local catalog provenance, and managed dashboard
+URLs. Repeating the same flow updates the same fixed datasets, charts, and
+dashboards; it does not create duplicates.
 
 CLI equivalent:
 
 ```bash
 ./bin/bi analyze
+./bin/bi ask "Largest tables by size"
+./bin/bi search orders
 ./bin/bi down
 ```
+
+After a successful analysis, the Agent accepts bounded technical questions such
+as:
+
+```text
+Status
+Suche orders
+Largest tables by size
+Row estimates and stale statistics
+Object inventory and compile problems
+Dependencies object ORDERS
+Stored logic signatures
+Scheduler and MV refresh overview
+Coverage blind spots
+BI relevance candidates
+```
+
+Answers are deterministic local catalog answers. They include receipt ID,
+snapshot SHA-256, object identifiers, and collector coverage caveats. The Q&A
+path never sends free SQL to the source database and never queries the source
+database after the catalog is built.
 
 ## Select and configure the source engine
 
@@ -106,7 +133,7 @@ MSSQL encryption options: `tcps` plus the endpoint certificate policy. Plain
 Both live adapters use a bounded pool/connection lifecycle and timeouts. The
 runtime executes only shipped, audited catalog `SELECT` statements, with schema
 filters compiled as driver binds. There is no raw SQL, prompt-SQL, source-row
-sampling, DML, or DDL surface. For Oracle M2, scoped `EXECUTE` grants are
+sampling, DML, or DDL surface. For Oracle M2/M3, scoped `EXECUTE` grants are
 accepted only as stored-logic metadata visibility; the analyzer never invokes
 packages, procedures, functions, triggers, scheduler programs, or database
 links.
@@ -133,9 +160,10 @@ LLM_MODEL=provider-model-id
 ```
 
 Put the key in `.secrets/llm_api_key`. No model weights are bundled. The model
-may classify only `ANALYZE`, `STATUS`, or `DENY`; the agent itself retains the
-closed tool allowlist. Raw SQL, credentials, prompt-injection strings, writes,
-and unknown actions are rejected before any tool call.
+may classify only `ANALYZE`, `STATUS`, or `DENY`; catalog search and technical
+Q&A use deterministic local routing. The agent itself retains the closed tool
+allowlist. Raw SQL, credentials, prompt-injection strings, writes, raw source
+requests, and unknown actions are rejected before any tool call.
 
 ## Security boundary
 
@@ -148,7 +176,8 @@ and unknown actions are rejected before any tool call.
   directories.
 - Superset's managed database has `allow_dml=false` and
   `expose_in_sqllab=false`. The analyst role strips SQL Lab/database/dataset
-  write surfaces.
+  write surfaces. M3 fixed technical dashboards read only catalog/projection
+  tables, not Oracle/MSSQL source connections.
 - Containers are unprivileged, read-only, capability-dropped, have no Docker
   socket, and expose only the Superset and Agent localhost ports.
 - Secrets are Docker file secrets backed by gitignored mode-0600 files.
@@ -170,15 +199,17 @@ and internal passwords. `.env` and external source/provider secret files remain.
 
 Run local gates with `npm test`, `docker compose config --quiet`, and
 `./tests/smoke.sh` after the stack is up. Clean-room instructions and recorded
-evidence are in [docs/CLEAN_ROOM.md](docs/CLEAN_ROOM.md).
+evidence are in [docs/CLEAN_ROOM.md](docs/CLEAN_ROOM.md). M3 evidence is recorded
+in [docs/evidence/M3_LOCAL_TECHNICAL_CATALOG.md](docs/evidence/M3_LOCAL_TECHNICAL_CATALOG.md).
 
-M2 is a technical inventory increment, not a searchable knowledge catalog or
-semantic modeling platform. Guided BI-interest interviews, dynamic datasets,
-dynamic charts/dashboards, full PL/SQL parsing, dynamic-SQL lineage, count-all,
-full grant audit, AWR/ASH/performance analysis, SSO, HA, Kubernetes,
-generic multi-database framework, bundled LLM/GPU operation, and production
-readiness belong outside M2.
+M3 is a local technical knowledge catalog and fixed technical overview
+increment, not a semantic modeling platform. Guided BI-interest interviews,
+dynamic user-confirmed datasets/charts/dashboards, free prompt SQL, arbitrary
+SQL Lab, source DB query during Q&A, raw business rows, raw PL/SQL/view source,
+full dynamic-SQL lineage/parser, count-all, full grant audit, AWR/ASH/performance
+analysis, SSO, HA, Kubernetes, generic multi-database framework, bundled LLM/GPU
+operation, and production readiness belong outside M3.
 
-Release boundary: M2 is not released by merge alone. The regular GitHub release
-`v0.3.0` is the M2 delivery event and must be created from a tag that targets the
+Release boundary: M3 is not released by merge alone. The regular GitHub release
+`v0.4.0` is the M3 delivery event and must be created from a tag that targets the
 protected-main merge, with installable archive and SHA-256 checksum assets.
