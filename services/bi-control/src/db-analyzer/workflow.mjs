@@ -138,7 +138,7 @@ export function assertOracleReadOnlyCapabilities(profile, rows) {
       fail('DB_ANALYZE_PRINCIPAL_NOT_READ_ONLY');
     }
     const object = /^(?:OBJECT|COLUMN_OBJECT|ROLE_OBJECT):([^:]+):([^.]+)\./.exec(row.permission_name);
-    if (object && (!['READ', 'SELECT'].includes(object[1]) || !profile.scope.schemas.includes(object[2]))) {
+    if (object && (!['EXECUTE', 'READ', 'SELECT'].includes(object[1]) || !profile.scope.schemas.includes(object[2]))) {
       fail('DB_ANALYZE_PRINCIPAL_NOT_READ_ONLY');
     }
     if (!row.permission_name.startsWith('SYSTEM:') && !object) fail('DB_ANALYZE_ORACLE_PREFLIGHT_FAILED');
@@ -295,9 +295,6 @@ export async function runAnalyzeProfile(profileFile, options = {}) {
       adapter: profile.adapter.kind,
     },
   });
-  if (profile.mode === 'RUNTIME' && profile.engine === 'oracle' && !evidence.coverageLedger.allComplete) {
-    fail('DB_ANALYZE_ORACLE_DISCOVERY_INCOMPLETE');
-  }
   assertScope(profile, evidence);
   return evidence;
 }

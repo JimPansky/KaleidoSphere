@@ -8,5 +8,5 @@ SELECT
   status,
   temporary
 FROM all_objects
-WHERE object_type IN ('TABLE', 'VIEW')
+WHERE object_type IN ('TABLE', 'VIEW', 'MATERIALIZED VIEW')
 ORDER BY owner, object_name, object_type;

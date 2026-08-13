@@ -9,7 +9,9 @@ at commit `7a483ad9db76f6233b166874447693d28e8ac942`. The local reproduction was
 verified at that exact commit before copying; ChimpMaera was not mutated.
 
 The M0 baseline was mechanically copied byte-for-byte as recorded by its source
-hashes; files changed for M1 are now explicitly listed under `derivedFiles`:
+hashes; files changed for M1 are explicitly listed under `derivedFiles`. M2
+extends the Oracle pack with CM-authored technical-inventory SELECTs and updated
+file hashes:
 
 - `LICENSE` → `LICENSE`
 - `NOTICE` → `NOTICE`
@@ -20,7 +22,8 @@ hashes; files changed for M1 are now explicitly listed under `derivedFiles`:
   `services/bi-control/src/db-analyzer/*.mjs`
 - `query-packs/db-analyzer/v1/mssql/*` →
   `services/bi-control/query-packs/db-analyzer/v1/mssql/*`
-- the Oracle `manifest.json`, identity preflight, and seven structure SELECTs →
+- the Oracle `manifest.json`, identity preflight, seven M1 structure SELECTs,
+  and M2 technical-inventory SELECTs →
   `services/bi-control/query-packs/db-analyzer/v1/oracle/*`
 
 The copied analyzer is invoked with an explicit standalone `repositoryRoot`.
@@ -29,5 +32,8 @@ Thin runtime. It derives the identity preflight for the Oracle AI Database produ
 name and `oracle/preflight-rights.sql` to detect system,
 direct-object, and enabled-role object privileges before structure discovery.
 `SOURCE-MAP.json` records every repository SHA-256 plus the original SHA-256 and
-change marker for each derived file. New Compose, control, Superset materializer,
-agent UI, tests, and documentation were authored specifically for this repository.
+change marker for each derived file. M2 query-pack additions collect only
+technical metadata: comments/source/error text are hash-only, DB-link hosts are
+hash-only, and scheduler action text is omitted. New Compose, control, Superset
+materializer, agent UI, tests, and documentation were authored specifically for
+this repository.

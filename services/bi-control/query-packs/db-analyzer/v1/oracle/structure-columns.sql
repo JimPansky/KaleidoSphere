@@ -22,7 +22,7 @@ FROM all_tab_cols tc
 INNER JOIN all_objects ao
   ON ao.owner = tc.owner
   AND ao.object_name = tc.table_name
-  AND ao.object_type IN ('TABLE', 'VIEW')
+  AND ao.object_type IN ('TABLE', 'VIEW', 'MATERIALIZED VIEW')
 LEFT JOIN all_tab_identity_cols idc
   ON idc.owner = tc.owner
   AND idc.table_name = tc.table_name
