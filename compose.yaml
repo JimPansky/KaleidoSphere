@@ -25,7 +25,6 @@ services:
     build:
       context: .
       dockerfile: services/superset/Dockerfile
-      provenance: false
     depends_on:
       superset-init: {condition: service_completed_successfully}
     environment:
@@ -59,7 +58,6 @@ services:
     build:
       context: services/bi-control
       dockerfile: Dockerfile
-      provenance: false
     depends_on:
       superset: {condition: service_healthy}
     environment:
@@ -105,7 +103,6 @@ services:
     build:
       context: services/bi-agent
       dockerfile: Dockerfile
-      provenance: false
     depends_on:
       bi-control: {condition: service_healthy}
     environment:
