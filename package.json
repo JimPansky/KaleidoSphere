@@ -1,13 +1,14 @@
 {
   "name": "chimpmaera-bi",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "private": true,
   "description": "Standalone Docker M3 local technical knowledge catalog, BI agent, and Apache Superset.",
   "license": "Apache-2.0",
   "type": "module",
   "engines": {"node": ">=24 <25"},
   "scripts": {
-    "test": "node --test tests/analyzer.test.mjs tests/catalog.test.mjs tests/oracle-runtime.test.mjs tests/security.test.mjs tests/source-map.test.mjs",
+    "test": "node --test tests/analyzer.test.mjs tests/catalog.test.mjs tests/oracle-runtime.test.mjs tests/release.test.mjs tests/security.test.mjs tests/source-map.test.mjs",
+    "release:archive": "node scripts/build-release.mjs",
     "test:source": "node --test tests/source-map.test.mjs",
     "test:security": "node --test tests/security.test.mjs"
   }

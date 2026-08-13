@@ -65,7 +65,9 @@ Observed local result:
 
 ## Isolated runtime proof
 
-Fixture runtime proof used an isolated Compose project and non-default ports:
+Fixture runtime proof used an isolated Compose project and non-default ports.
+It proves the packaged agent/control/Superset/catalog path, but it is not a
+live Oracle-Free source proof:
 
 ```bash
 COMPOSE_PROJECT_NAME=chimpmaera-bi-m3-smoke SUPERSET_PORT=18188 AGENT_PORT=18890 ./bin/bi setup
@@ -87,6 +89,64 @@ Observed result:
 
 The default fixture is `SYNTHETIC_UNVALIDATED`; it proves the packaged
 agent/control/Superset/catalog runtime path, not live customer/source evidence.
+
+## Corrective release recovery
+
+Public `v0.4.0` is functional and its archive digest matches the public GitHub
+asset, but its checksum asset recorded an absolute local build path. It is
+therefore superseded for anonymous installation by `v0.4.1`, which must use a
+portable checksum line containing only the archive basename.
+
+M3 is not called complete from fixture/M2 reuse alone. The terminal M3 state is
+complete only after the `v0.4.1` release has a portable checksum asset and a
+fresh isolated Oracle-Free M3 E2E proof exercises live Oracle metadata through
+analyze, catalog ingest, fixed Superset publish/readback, all supported catalog
+question families, search, fail-closed probes, idempotent re-ingest, and
+teardown.
+
+## Fresh Oracle-Free M3 proof for v0.4.1
+
+Recovery proof used only disposable `sba-m3-v041-*` resources:
+
+- Oracle image: `gvenzl/oracle-free:23.26.2-slim-faststart`.
+- Oracle container/network: `sba-m3-v041-oracle-free`,
+  `sba-m3-v041-oracle-net`; initially published only on
+  `127.0.0.1:11523`, then connected to the isolated app `source_egress` network
+  for container-name access.
+- App Compose project/image tag: `sba-m3-v041-app`,
+  `m3-v041-recovery`.
+- Superset/Agent ports: `19088` / `19091`.
+- Source scope: Oracle `FREE` / `FREEPDB1`, schema `BI_DEMO`, principal
+  `BI_ANALYZE`.
+
+Observed live result:
+
+- Two full agent runs completed `status -> analyze -> catalog ingest -> publish
+  -> readback -> catalog question` against live Oracle metadata.
+- Receipt: `oracle-ff846836f1fe32bd633b2e0c`.
+- Snapshot SHA-256:
+  `5d4fbd23ad6501ea7b3d201817adefd30970cb91cc263be8cf42afc3290a783b`.
+- Runtime validation/source mode: `RUNTIME_VALIDATED` / `live`.
+- Re-ingest idempotency: repeated analyze produced the same receipt ID and
+  snapshot SHA-256.
+- Collector coverage: 24/24 succeeded, 24/24 `VISIBLE_COMPLETE`,
+  `allComplete=true`, 24 extracts.
+- Superset readback: 6 datasets, 13 charts, 5 dashboards, 17 detail rows,
+  1 system/schema row, 5 table/capacity rows, 4 code/dependency rows,
+  24 coverage rows, and 5 BI-candidate rows.
+- After the second analyze/publish/readback, the Oracle container was stopped.
+  With the source database unavailable, all eight supported catalog question
+  families and catalog search still answered from the local catalog:
+  largest tables (5 rows), row estimates/freshness (5), object inventory/validity
+  (1), dependencies (1), stored logic signatures (1), scheduler/MV refresh (2),
+  coverage blind spots (20), BI relevance candidates (5), and search (20).
+- Fail-closed probes: raw SQL/prompt-injection, unknown tool, credential request,
+  and SQL Lab/source-query prompt were denied with
+  `AGENT_UNSAFE_INPUT_DENIED` or `AGENT_UNKNOWN_ACTION_DENIED`.
+- Evidence leakage scan found only the denial-probe text and the documented
+  fallback statement that secrets/job action text are not emitted; no secret
+  values, raw business rows, raw PL/SQL/source text, scheduler action text, or
+  credentials were recorded in public-facing evidence.
 
 ## Nonclaims
 

@@ -6,10 +6,10 @@
     "LICENSE": "835083c307550077500f6817fa1d3ecbcb5f559d41029ff34f2ccacf5c3bbe07",
     "NOTICE": "d450ed03544412c411173e098a89976228d98f9a76634b0ec09e19134382ef74",
     "THIRD_PARTY_NOTICES.md": "db2a7877c0746af81e9e09ebfcf387a7197f69833600f7b57c9600248712045b",
-    "README.md": "e9d67228e61cffbbdd15a86197469aee4fa0d7d3be158038b33bf8a00cdac171",
-    "package.json": "e64f494530529e17e483aac31b6e226ab5e09b2af8b24c9ce7b223289be7df87",
+    "README.md": "14adf8c88d98fe1d8583ab2fbf05322782e1457cd0849bef0b9b9a15d09431aa",
+    "package.json": "da4992ce5a881ab22fb2107cb80c50350f36ec7a73f161d25a58e3c77e76012b",
     "bin/bi": "5caf0fc0b78b7c4971401b9c22652724090d664fcd98addf31a46754a21cc6d6",
-    "docs/evidence/M3_LOCAL_TECHNICAL_CATALOG.md": "21b2fde1667bf8470ccd491ddc0fae2e811e4ed32abaea18f1f7dc03b1ce6986",
+    "docs/evidence/M3_LOCAL_TECHNICAL_CATALOG.md": "b9bb009cdd87e1030e4730cb2c5d8ec826204ddb5b96c11f80e75ad198e9b552",
     "services/bi-agent/src/server.mjs": "79196872c35aec62c0db9023a488c9fc257729ec7388526c69b21e9a84170133",
     "services/bi-control/src/catalog.mjs": "9e8096baf2959834638b182dea683e5ff39599019155d82559e181436587a950",
     "services/bi-control/src/canonical-json.js": "e0ab8804532a55b161407e59167cf3027ebceb7df72a4d1dd1a485b1db4400ec",
@@ -70,14 +70,40 @@
     "services/bi-control/query-packs/db-analyzer/v1/oracle/structure-tablespaces.sql": "2d6f0f6e122e6a6cd01c05ff4506029bdf96f2b780d44f79c780517918a36541",
     "services/superset/runtime/materialize.py": "67c285c62773ee9763116bcf2fddb9ea30a3d1372af8b15d8f8c9ff58e76e25c",
     "tests/catalog.test.mjs": "c067be5bfb9d20e014d0d4cc0ea6ffee42720d869341ddd0d5054c1457c4176a",
-    "tests/smoke.sh": "7c5cb4bb1ae9ba5577293de79ffff1498ae76aaf7230ae5488bd4fe91ee646a0"
+    "tests/smoke.sh": "7c5cb4bb1ae9ba5577293de79ffff1498ae76aaf7230ae5488bd4fe91ee646a0",
+    "scripts/build-release.mjs": "162c7e11579fe3d3be226dcb2a69cca32c0a27262cfce924cf0434924df5c737",
+    "tests/release.test.mjs": "b01a08e9afda02eb4807890c4f4cf3470f3c0042913c613bd0961345a4236986"
   },
   "derivedFiles": {
-    "services/bi-control/src/db-analyzer/core.mjs": {"sourceCommit": "cee9fd5835ac3527af54b5974b5d53414eac88d8", "sourceSha256": "d40223306376b28001c882f42f63481cea0a0e67ca7658bd378c6673e954206b", "change": "M1 Oracle runtime adapter contract"},
-    "services/bi-control/src/db-analyzer/query-safety.mjs": {"sourceCommit": "cee9fd5835ac3527af54b5974b5d53414eac88d8", "sourceSha256": "8e5e7a769cdc647718632c8a0f738fdf5f7729f2694ea7c2502743d5835735fc", "change": "M1 Oracle privilege catalog allowlist"},
-    "services/bi-control/src/db-analyzer/workflow.mjs": {"sourceCommit": "cee9fd5835ac3527af54b5974b5d53414eac88d8", "sourceSha256": "8e3f74b8817d1df534bf2e439a1cb944aaef5b80e540763bfbae9929efbf3a1e", "change": "M1 Oracle Thin pool and scoped runtime"},
-    "services/bi-control/query-packs/db-analyzer/v1/oracle/preflight-identity.sql": {"sourceCommit": "7a483ad9db76f6233b166874447693d28e8ac942", "sourceSha256": "75d39d46bad0bc748fa8d17cdc680d5db992cf4a0c53c6e51b594bd046251900", "change": "M1 Oracle AI Database product-name compatibility"},
-    "services/bi-control/query-packs/db-analyzer/v1/oracle/preflight-rights.sql": {"sourceCommit": "7a483ad9db76f6233b166874447693d28e8ac942", "sourceSha256": "48d64cae9ab1dbf6656c3f5826f073f0b958bef3ae1b4656145806a8191e1cdc", "change": "M1 fail-closed direct and role object privilege checks"},
-    "services/bi-control/query-packs/db-analyzer/v1/oracle/structure-columns.sql": {"sourceCommit": "7a483ad9db76f6233b166874447693d28e8ac942", "sourceSha256": "12208ec8b9b1d1279202650ef3e2ddb893802c444f5e4fd7ac6f5887b83e49fc", "change": "M1 Oracle 23.26 ALL_TAB_COLS compatibility for virtual-column metadata"}
+    "services/bi-control/src/db-analyzer/core.mjs": {
+      "sourceCommit": "cee9fd5835ac3527af54b5974b5d53414eac88d8",
+      "sourceSha256": "d40223306376b28001c882f42f63481cea0a0e67ca7658bd378c6673e954206b",
+      "change": "M1 Oracle runtime adapter contract"
+    },
+    "services/bi-control/src/db-analyzer/query-safety.mjs": {
+      "sourceCommit": "cee9fd5835ac3527af54b5974b5d53414eac88d8",
+      "sourceSha256": "8e5e7a769cdc647718632c8a0f738fdf5f7729f2694ea7c2502743d5835735fc",
+      "change": "M1 Oracle privilege catalog allowlist"
+    },
+    "services/bi-control/src/db-analyzer/workflow.mjs": {
+      "sourceCommit": "cee9fd5835ac3527af54b5974b5d53414eac88d8",
+      "sourceSha256": "8e3f74b8817d1df534bf2e439a1cb944aaef5b80e540763bfbae9929efbf3a1e",
+      "change": "M1 Oracle Thin pool and scoped runtime"
+    },
+    "services/bi-control/query-packs/db-analyzer/v1/oracle/preflight-identity.sql": {
+      "sourceCommit": "7a483ad9db76f6233b166874447693d28e8ac942",
+      "sourceSha256": "75d39d46bad0bc748fa8d17cdc680d5db992cf4a0c53c6e51b594bd046251900",
+      "change": "M1 Oracle AI Database product-name compatibility"
+    },
+    "services/bi-control/query-packs/db-analyzer/v1/oracle/preflight-rights.sql": {
+      "sourceCommit": "7a483ad9db76f6233b166874447693d28e8ac942",
+      "sourceSha256": "48d64cae9ab1dbf6656c3f5826f073f0b958bef3ae1b4656145806a8191e1cdc",
+      "change": "M1 fail-closed direct and role object privilege checks"
+    },
+    "services/bi-control/query-packs/db-analyzer/v1/oracle/structure-columns.sql": {
+      "sourceCommit": "7a483ad9db76f6233b166874447693d28e8ac942",
+      "sourceSha256": "12208ec8b9b1d1279202650ef3e2ddb893802c444f5e4fd7ac6f5887b83e49fc",
+      "change": "M1 Oracle 23.26 ALL_TAB_COLS compatibility for virtual-column metadata"
+    }
   }
 }
