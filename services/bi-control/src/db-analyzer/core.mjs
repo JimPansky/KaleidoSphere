@@ -306,14 +306,21 @@ export function validateAnalyzeProfile(profile) {
   if (profile.mode === 'SYNTHETIC') {
     if (!hasExactKeys(profile.adapter, ['kind', 'fixture']) || profile.adapter.kind !== 'synthetic'
       || typeof profile.adapter.fixture !== 'string' || pathLike(profile.adapter.fixture)) fail('DB_ANALYZE_PROFILE_ADAPTER_INVALID');
-  } else if (!hasExactKeys(profile.adapter, ['kind', 'host', 'port', 'user', 'passwordEnv', 'encrypt', 'trustServerCertificate'])
-    || profile.engine !== 'mssql' || profile.adapter.kind !== 'mssql'
-    || typeof profile.adapter.host !== 'string' || profile.adapter.host.length === 0
-    || !Number.isInteger(profile.adapter.port) || profile.adapter.port < 1 || profile.adapter.port > 65535
-    || typeof profile.adapter.user !== 'string' || profile.adapter.user.length === 0
-    || typeof profile.adapter.passwordEnv !== 'string' || !/^[A-Z][A-Z0-9_]*$/.test(profile.adapter.passwordEnv)
-    || typeof profile.adapter.encrypt !== 'boolean' || typeof profile.adapter.trustServerCertificate !== 'boolean') {
-    fail('DB_ANALYZE_PROFILE_ADAPTER_INVALID');
+  } else {
+    const commonInvalid = typeof profile.adapter?.host !== 'string' || profile.adapter.host.length === 0
+      || !Number.isInteger(profile.adapter.port) || profile.adapter.port < 1 || profile.adapter.port > 65535
+      || typeof profile.adapter.user !== 'string' || profile.adapter.user.length === 0
+      || typeof profile.adapter.passwordEnv !== 'string' || !/^[A-Z][A-Z0-9_]*$/.test(profile.adapter.passwordEnv);
+    const mssqlInvalid = profile.engine === 'mssql' && (!hasExactKeys(profile.adapter, ['kind', 'host', 'port', 'user', 'passwordEnv', 'encrypt', 'trustServerCertificate'])
+      || profile.adapter.kind !== 'mssql'
+      || typeof profile.adapter.encrypt !== 'boolean' || typeof profile.adapter.trustServerCertificate !== 'boolean');
+    const oracleInvalid = profile.engine === 'oracle' && (!hasExactKeys(profile.adapter, ['kind', 'host', 'port', 'user', 'passwordEnv', 'protocol', 'serviceName', 'serverDn', 'connectTimeoutMs'])
+      || profile.adapter.kind !== 'oracle'
+      || !['tcp', 'tcps'].includes(profile.adapter.protocol)
+      || typeof profile.adapter.serviceName !== 'string' || profile.adapter.serviceName.length === 0
+      || !(profile.adapter.serverDn === null || typeof profile.adapter.serverDn === 'string')
+      || !Number.isInteger(profile.adapter.connectTimeoutMs) || profile.adapter.connectTimeoutMs < 1);
+    if (commonInvalid || mssqlInvalid || oracleInvalid) fail('DB_ANALYZE_PROFILE_ADAPTER_INVALID');
   }
   return profile;
 }

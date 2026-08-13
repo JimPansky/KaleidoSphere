@@ -1,4 +1,4 @@
-name: ${COMPOSE_PROJECT_NAME:-chimpmaera-bi-m0}
+name: ${COMPOSE_PROJECT_NAME:-chimpmaera-bi-m1}
 
 services:
   superset-init:
@@ -62,6 +62,7 @@ services:
       superset: {condition: service_healthy}
     environment:
       PORT: "18089"
+      BI_ENGINE: ${BI_ENGINE:-mssql}
       BI_SOURCE_MODE: ${BI_SOURCE_MODE:-fixture}
       MSSQL_HOST: ${MSSQL_HOST:-host.docker.internal}
       MSSQL_PORT: ${MSSQL_PORT:-1433}
@@ -72,12 +73,23 @@ services:
       MSSQL_TRUST_SERVER_CERTIFICATE: ${MSSQL_TRUST_SERVER_CERTIFICATE:-false}
       MSSQL_QUERY_TIMEOUT_MS: ${MSSQL_QUERY_TIMEOUT_MS:-10000}
       MSSQL_PASSWORD_FILE: /run/secrets/mssql_password
+      ORACLE_HOST: ${ORACLE_HOST:-host.docker.internal}
+      ORACLE_PORT: ${ORACLE_PORT:-1521}
+      ORACLE_DATABASE: ${ORACLE_DATABASE:-FREE}
+      ORACLE_SERVICE_NAME: ${ORACLE_SERVICE_NAME:-FREEPDB1}
+      ORACLE_USER: ${ORACLE_USER:-BI_ANALYZE}
+      ORACLE_SCHEMAS: ${ORACLE_SCHEMAS:-BI_DEMO}
+      ORACLE_PROTOCOL: ${ORACLE_PROTOCOL:-tcp}
+      ORACLE_TLS_SERVER_DN: ${ORACLE_TLS_SERVER_DN:-}
+      ORACLE_CONNECT_TIMEOUT_MS: ${ORACLE_CONNECT_TIMEOUT_MS:-10000}
+      ORACLE_QUERY_TIMEOUT_MS: ${ORACLE_QUERY_TIMEOUT_MS:-10000}
+      ORACLE_PASSWORD_FILE: /run/secrets/oracle_password
       CONTROL_TOKEN_FILE: /run/secrets/control_token
       SUPERSET_MATERIALIZER_URL: http://superset:8090/internal/materialize
       RECEIPT_DIR: /var/lib/chimpmaera-bi/receipts
       PROJECTION_DB: /var/lib/chimpmaera-bi/projection/analytics.db
     extra_hosts: ["host.docker.internal:host-gateway"]
-    secrets: [mssql_password, control_token]
+    secrets: [mssql_password, oracle_password, control_token]
     volumes:
       - ./.runtime/receipts:/var/lib/chimpmaera-bi/receipts
       - ./.runtime/projection:/var/lib/chimpmaera-bi/projection
@@ -138,6 +150,7 @@ secrets:
   superset_analyst_password: {file: .runtime/secrets/superset_analyst_password}
   control_token: {file: .runtime/secrets/control_token}
   mssql_password: {file: .secrets/mssql_password}
+  oracle_password: {file: .secrets/oracle_password}
   llm_api_key: {file: .secrets/llm_api_key}
 
 networks:

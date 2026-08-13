@@ -7,9 +7,19 @@ cd "$bi_here"
 
 fail() { printf >&2 'ChimpMaera BI ERROR: %s\n' "$*"; exit 1; }
 compose() { docker compose --file "$bi_here/compose.yaml" "$@"; }
+published_port() {
+  local service="$1" container_port="$2" binding
+  binding="$(compose port "$service" "$container_port" | tail -n 1)"
+  [ -n "$binding" ] || fail "no published port for $service:$container_port"
+  printf '%s\n' "${binding##*:}"
+}
 require_setup() {
   [ -f "$bi_here/.env" ] || fail 'run: cp .env.example .env'
   [ -s "$bi_here/.runtime/secrets/control_token" ] || fail 'run: ./bin/bi setup'
+  for secret_file in "$bi_here"/.runtime/secrets/* "$bi_here"/.secrets/*; do
+    [ -e "$secret_file" ] || continue
+    [ "$(stat -c '%a' "$secret_file")" = 600 ] || fail "secret file must be mode 0600: ${secret_file#$bi_here/}"
+  done
 }
 create_secret() {
   local target="$1" kind="$2"
@@ -30,7 +40,7 @@ case "${1:-help}" in
     command -v openssl >/dev/null || fail 'OpenSSL is required'
     docker info >/dev/null 2>&1 || fail 'Docker daemon is unavailable'
     docker compose version >/dev/null 2>&1 || fail 'Docker Compose v2 is required'
-    [ -f .env ] || fail 'copy .env.example to .env and review the MSSQL settings first'
+    [ -f .env ] || fail 'copy .env.example to .env and review the selected database settings first'
     mkdir -p .runtime/secrets .runtime/metadata .runtime/projection .runtime/receipts .secrets
     chmod 0700 .runtime .runtime/secrets .runtime/metadata .runtime/projection .runtime/receipts .secrets
     create_secret .runtime/secrets/superset_secret_key hex
@@ -38,6 +48,7 @@ case "${1:-help}" in
     create_secret .runtime/secrets/superset_analyst_password base64
     create_secret .runtime/secrets/control_token hex
     create_secret .secrets/mssql_password empty
+    create_secret .secrets/oracle_password empty
     create_secret .secrets/llm_api_key empty
     chmod 0600 .runtime/secrets/* .secrets/*
     compose config --quiet
@@ -46,14 +57,14 @@ case "${1:-help}" in
   up)
     require_setup
     compose up --detach --build --wait
-    printf 'Superset: http://127.0.0.1:%s\nAgent: http://127.0.0.1:%s\n' "${SUPERSET_PORT:-18088}" "${AGENT_PORT:-18790}"
+    printf 'Superset: http://127.0.0.1:%s\nAgent: http://127.0.0.1:%s\n' "$(published_port superset 8088)" "$(published_port bi-agent 18790)"
     ;;
   analyze)
     require_setup
     curl --fail --silent --show-error \
       --header 'content-type: application/json' \
       --data '{"message":"Analysiere die konfigurierte Datenbank"}' \
-      "http://127.0.0.1:${AGENT_PORT:-18790}/api/chat"
+      "http://127.0.0.1:$(published_port bi-agent 18790)/api/chat"
     ;;
   status)
     require_setup
