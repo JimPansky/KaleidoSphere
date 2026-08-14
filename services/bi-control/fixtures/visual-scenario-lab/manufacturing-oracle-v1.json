@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "chimpmaera.bi/visual-scenario-oracle/v1",
+  "fixtureId": "northstar-components-synthetic-v1",
+  "synthetic": true,
+  "company": "Northstar Components GmbH (synthetic)",
+  "asOf": "2026-07-03T08:00:00.000Z",
+  "portableEngines": ["mssql", "oracle"],
+  "dimensions": {
+    "plants": ["Werk 1", "Werk 2", "Werk 3"],
+    "lines": ["Linie A", "Linie B", "Linie C"],
+    "products": ["Atlas Drive", "Nova Pump", "Terra Valve"],
+    "customers": ["Futura Retail", "Orbit Works", "Pioneer Systems"],
+    "components": ["Rotor-7", "Seal-4", "Housing-2"],
+    "assetClasses": ["Press", "CNC", "Test Bench"]
+  },
+  "truths": {
+    "executiveQ2": {
+      "window": {"from": "2026-04-01", "to": "2026-06-30"},
+      "revenueEur": 12480000,
+      "grossMarginPct": 31.4,
+      "topProduct": "Atlas Drive",
+      "topCustomer": "Futura Retail"
+    },
+    "qualitySpike": {
+      "window": {"from": "2026-05-12", "to": "2026-05-18"},
+      "plant": "Werk 3",
+      "line": "Linie C",
+      "defectRatePct": 8.6,
+      "baselineDefectRatePct": 1.9,
+      "productionUnits": 18200,
+      "supplierBatch": "SB-X17",
+      "interpretation": "Strong association with supplier batch SB-X17; causation is not established."
+    },
+    "inventoryRisk": {
+      "plant": "Werk 2",
+      "component": "Rotor-7",
+      "coverageDays": 2.4,
+      "demandUnits": 4200,
+      "confirmedSupplyUnits": 900,
+      "risk": "stockout"
+    },
+    "maintenance": {
+      "window": {"from": "2026-04-01", "to": "2026-06-30"},
+      "assetClass": "Press",
+      "downtimeHours": 41.5,
+      "mtbfHours": 68,
+      "eventCount": 6
+    },
+    "crossDomain": {
+      "window": {"from": "2026-04-01", "to": "2026-06-30"},
+      "product": "Atlas Drive",
+      "demandChangePct": 24,
+      "productionChangePct": 9,
+      "inventoryCoverageDays": 3.1,
+      "interpretation": "Demand growth co-occurs with lower coverage; this is correlation, not proof of causation."
+    }
+  }
+}

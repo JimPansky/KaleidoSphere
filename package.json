@@ -7,7 +7,9 @@
   "type": "module",
   "engines": {"node": ">=24 <25"},
   "scripts": {
-    "test": "node --test tests/analyzer.test.mjs tests/assistant-foundation.test.mjs tests/catalog.test.mjs tests/discovery.test.mjs tests/oracle-runtime.test.mjs tests/promotion-bundle.test.mjs tests/promotion-execution.test.mjs tests/release.test.mjs tests/security.test.mjs tests/source-map.test.mjs tests/superset-fingerprint.test.mjs",
+    "test": "node --test tests/analyzer.test.mjs tests/assistant-foundation.test.mjs tests/catalog.test.mjs tests/discovery.test.mjs tests/oracle-runtime.test.mjs tests/promotion-bundle.test.mjs tests/promotion-execution.test.mjs tests/release.test.mjs tests/security.test.mjs tests/source-map.test.mjs tests/superset-fingerprint.test.mjs tests/visual-scenario-lab.test.mjs",
+    "test:visual-scenarios": "node --test tests/visual-scenario-lab.test.mjs",
+    "visual-lab": "node services/bi-control/src/visual-scenario-lab/server.mjs",
     "release:archive": "node scripts/build-release.mjs",
     "test:source": "node --test tests/source-map.test.mjs",
     "test:security": "node --test tests/security.test.mjs"

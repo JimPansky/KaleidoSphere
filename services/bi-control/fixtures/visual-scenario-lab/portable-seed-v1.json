@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "chimpmaera.bi/portable-synthetic-seed/v1",
+  "fixtureId": "northstar-components-synthetic-v1",
+  "synthetic": true,
+  "table": "scenario_oracle",
+  "columns": ["truth_key", "entity_key", "period_start", "period_end", "metric_key", "metric_value"],
+  "rows": [
+    ["executive_q2", "all", "2026-04-01", "2026-06-30", "revenue_eur", 12480000],
+    ["executive_q2", "all", "2026-04-01", "2026-06-30", "gross_margin_pct", 31.4],
+    ["quality_spike", "werk_3_linie_c", "2026-05-12", "2026-05-18", "defect_rate_pct", 8.6],
+    ["quality_spike", "werk_3_linie_c", "2026-05-12", "2026-05-18", "production_units", 18200],
+    ["inventory_risk", "werk_2_rotor_7", "2026-07-03", "2026-07-03", "coverage_days", 2.4],
+    ["inventory_risk", "werk_2_rotor_7", "2026-07-03", "2026-07-03", "demand_units", 4200],
+    ["inventory_risk", "werk_2_rotor_7", "2026-07-03", "2026-07-03", "confirmed_supply_units", 900],
+    ["maintenance_q2", "press", "2026-04-01", "2026-06-30", "downtime_hours", 41.5],
+    ["maintenance_q2", "press", "2026-04-01", "2026-06-30", "mtbf_hours", 68],
+    ["cross_domain_q2", "atlas_drive", "2026-04-01", "2026-06-30", "demand_change_pct", 24],
+    ["cross_domain_q2", "atlas_drive", "2026-04-01", "2026-06-30", "production_change_pct", 9],
+    ["cross_domain_q2", "atlas_drive", "2026-04-01", "2026-06-30", "inventory_coverage_days", 3.1]
+  ]
+}

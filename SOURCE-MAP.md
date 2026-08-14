@@ -71,3 +71,12 @@ paths listed in `docs/decisions/M6-00-CONTRACT-SECURITY-FOUNDATION.md` are
 conceptual references only. No DSH/Cordis runtime, package, schema, artifact, or
 code was copied. These files are recorded as ordinary repository-authored hashes
 under `files` in `SOURCE-MAP.json`, not as derived files.
+
+M6-01 visual-scenario-lab code, the wholly synthetic Northstar Components oracle
+and portable seed, deterministic scenario engine, loopback shell/server, browser
+evidence runner, tests, ADR, visual review, screenshots, and evidence report are
+repository-authored clean-room work. Playwright Core and Chromium were used only
+as preinstalled test tooling and are not copied or redistributed. The embedded
+shell does not contain Apache Superset source or assets and makes no live-Superset
+claim. M6-01 files are ordinary repository-authored hashes under `files`, not
+derived files.
