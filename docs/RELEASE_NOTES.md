@@ -1,6 +1,6 @@
 # Release Notes
 
-## Next - Apache Superset 6.1.0 security/runtime upgrade
+## v0.6.1 - Apache Superset 6.1.0 security/runtime upgrade
 
 The owned Superset runtime is pinned to Apache Superset 6.1.0 by immutable image
 digest. Fingerprint fixtures, compatibility bounds, OpenAPI expectations, and
