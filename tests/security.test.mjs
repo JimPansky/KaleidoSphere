@@ -38,7 +38,7 @@ test('Superset materializer initializes its application once per process', async
 });
 
 test('tracked/config source contains no obvious committed secret assignment', async () => {
-  for (const file of ['.env.example','compose.yaml','README.md','services/bi-agent/src/server.mjs','services/bi-control/src/server.mjs']) {
+  for (const file of ['.env.example','compose.yaml','README.md','services/bi-agent/src/server.mjs','services/bi-control/src/server.mjs','services/bi-control/src/discovery.mjs']) {
     const value = await readFile(file, 'utf8');
     assert.doesNotMatch(value, /(?:sk-[A-Za-z0-9]{20,}|hf_[A-Za-z0-9]{20,}|BEGIN (?:RSA |EC )?PRIVATE KEY)/, file);
   }

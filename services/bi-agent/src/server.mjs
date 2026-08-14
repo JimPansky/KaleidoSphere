@@ -9,6 +9,7 @@ const unsafe = /(?:\b(?:select|insert|update|delete|merge|drop|alter|create|trun
 const analyzeIntent = /(?:analys(?:iere|e|ieren)|analy[sz]e).*(?:datenbank|database)|(?:datenbank|database).*(?:analys(?:iere|e|ieren)|analy[sz]e)/i;
 const statusIntent = /^(?:status|zustand|health|bereit)\??$/i;
 const searchIntent = /^(?:suche|search)\s+(.{2,80})$/i;
+const discoveryIntent = /^(?:bi\s+)?discovery\s+(start|resume|status|answer|revise|confirm|export)\s+([a-z0-9][a-z0-9_-]{2,63})(?:\s+([A-Za-z][A-Za-z0-9]*)\s+([\s\S]{1,400}))?$/i;
 
 async function secret() {
   const value = (await readFile(process.env.CONTROL_TOKEN_FILE, 'utf8').catch(() => '')).trim();
@@ -101,6 +102,31 @@ async function controlJson(path, body) {
   return value;
 }
 
+function discoveryValue(raw) {
+  if (raw === undefined) return undefined;
+  const trimmed = raw.trim();
+  if (/^(?:true|false|null|".*"|\[.*\]|\{.*\})$/s.test(trimmed)) {
+    try { return JSON.parse(trimmed); }
+    catch { throw coded('AGENT_DISCOVERY_JSON_INVALID'); }
+  }
+  return trimmed;
+}
+
+function discoveryRequest(message) {
+  const match = discoveryIntent.exec(message);
+  if (!match) return null;
+  const action = match[1].toLowerCase();
+  const request = { action, sessionId: match[2] };
+  if (action === 'answer' || action === 'revise') {
+    if (!match[3] || match[4] === undefined) throw coded('AGENT_DISCOVERY_INPUT_INVALID');
+    request.field = match[3];
+    request.value = discoveryValue(match[4]);
+  } else if (match[3] || match[4] !== undefined) throw coded('AGENT_DISCOVERY_INPUT_INVALID');
+  if (action === 'confirm') request.confirmed = true;
+  if (action === 'export') request.format = 'json';
+  return request;
+}
+
 function technicalFamily(message) {
   if (/(größte|largest|size|capacity|bytes|block|verteilung)/i.test(message)) return 'largest_tables';
   if (/(row|zeilen|estimate|schätz|fresh|stale|statist)/i.test(message)) return 'row_estimates_freshness';
@@ -125,6 +151,10 @@ function scopeFromStatus(status) {
 }
 
 async function execute(message) {
+  const discovery = discoveryRequest(message);
+  if (discovery) {
+    return {intent: 'DISCOVERY', providerMode: process.env.LLM_MODE ?? 'stub', result: await controlJson('/v1/discovery', discovery)};
+  }
   const search = searchIntent.exec(message);
   if (search) {
     const status = await control('/v1/status', 'GET');
@@ -165,7 +195,7 @@ const page = `<!doctype html>
 body{font:16px system-ui,sans-serif;max-width:860px;margin:3rem auto;padding:0 1rem;color:#172033;background:#f5f7fb}main{background:white;border:1px solid #dce3ee;border-radius:12px;padding:2rem;box-shadow:0 8px 30px #20305012}textarea{width:100%;box-sizing:border-box;min-height:90px;padding:.8rem}button{margin-top:.8rem;padding:.7rem 1.1rem;background:#1677ff;color:white;border:0;border-radius:6px;font-weight:600}pre{white-space:pre-wrap;background:#101827;color:#d9e7ff;padding:1rem;border-radius:8px;overflow:auto}small{color:#596579}</style></head>
 <body><main><h1>BI Agent</h1><p>Analysiert ausschließlich die konfigurierte MSSQL- oder Oracle-Datenbank read-only und aktualisiert die verwaltete Superset-Übersicht.</p>
 <form id="f"><label for="m">Auftrag</label><textarea id="m">Analysiere die konfigurierte Datenbank</textarea><br><button>Analyse starten</button></form>
-<p><small>Erlaubt: Status, Analyse, lokaler technischer Katalog, Suche und evidenzgebundene technische Fragen. Raw SQL, Credentials, Rohsource, Schreibaktionen und unbekannte Tools werden abgewiesen.</small></p><pre id="o">Bereit.</pre></main>
+<p><small>Erlaubt: Status, Analyse, lokaler technischer Katalog, Suche, evidenzgebundene technische Fragen und geführte BI Discovery. Raw SQL, Credentials, Rohsource, Schreibaktionen und unbekannte Tools werden abgewiesen.</small></p><pre id="o">Bereit.</pre></main>
 <script>document.getElementById('f').addEventListener('submit',async(e)=>{e.preventDefault();const o=document.getElementById('o');o.textContent='Arbeite…';try{const r=await fetch('/api/chat',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message:document.getElementById('m').value})});const j=await r.json();o.textContent=JSON.stringify(j,null,2)}catch(x){o.textContent='Fehler: '+x.message}})</script></body></html>`;
 
 function send(response, status, contentType, value) {

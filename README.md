@@ -1,12 +1,22 @@
-# ChimpMaera BI — Local Technical Knowledge Catalog M3
+# ChimpMaera BI — Guided BI Discovery M4
 
 Portable single-host BI stack for one bounded use case: analyze a configured
 MSSQL or Oracle database with a read-only account, keep a versioned safe
 technical catalog, answer bounded technical database questions with evidence,
-and idempotently publish managed overview dashboards into this repository's own
-Apache Superset instance.
+guide a BI requirements discovery dialog over that catalog, and idempotently
+publish managed fixed overview dashboards into this repository's own Apache
+Superset instance.
 
-M3 builds on the M2 Oracle technical inventory. The Oracle analyzer collects
+M4 builds on the M3 local technical catalog. Discovery sessions are local,
+versioned, deterministic, auditable, and bound to the active M3 catalog snapshot.
+The dialog records audience role, business questions, confirmed KPI candidates,
+dimensions, time grain, filters/segments, drilldowns, freshness needs,
+access/confidentiality, open assumptions, and explicit confirmation state. The
+export is a human- and machine-readable BI Discovery Brief with catalog
+provenance and coverage blind spots. M4 does not generate dynamic Superset
+datasets, charts, dashboards, SQL, source queries, or source-row access.
+
+The Oracle analyzer collects
 read-only dictionary metadata for
 schemas, tables, views, materialized views, columns, comments, constraints,
 indexes, sequences, synonyms, partitions, LOBs, tablespace distribution,
@@ -54,6 +64,10 @@ CLI equivalent:
 ./bin/bi analyze
 ./bin/bi ask "Largest tables by size"
 ./bin/bi search orders
+./bin/bi discovery start sales_review
+./bin/bi discovery answer sales_review audienceRole "Sales analyst"
+./bin/bi discovery answer sales_review businessQuestions '["Which order value should be watched weekly?"]'
+./bin/bi discovery status sales_review
 ./bin/bi down
 ```
 
@@ -71,12 +85,23 @@ Stored logic signatures
 Scheduler and MV refresh overview
 Coverage blind spots
 BI relevance candidates
+Discovery start sales_review
+Discovery answer sales_review audienceRole "Sales analyst"
+Discovery confirm sales_review
+Discovery export sales_review
 ```
 
 Answers are deterministic local catalog answers. They include receipt ID,
 snapshot SHA-256, object identifiers, and collector coverage caveats. The Q&A
 path never sends free SQL to the source database and never queries the source
 database after the catalog is built.
+
+Discovery suggestions are also deterministic and catalog-bound. KPI, dimension,
+time, and drilldown candidates are derived only from local catalog rows and each
+technical reference includes receipt, snapshot, engine, database, query, category
+and object/column provenance. If a collector is denied, partial, stale, timed out
+or unknown, the exported brief carries that as a blind spot instead of inventing
+semantics.
 
 ## Select and configure the source engine
 
@@ -161,9 +186,10 @@ LLM_MODEL=provider-model-id
 
 Put the key in `.secrets/llm_api_key`. No model weights are bundled. The model
 may classify only `ANALYZE`, `STATUS`, or `DENY`; catalog search and technical
-Q&A use deterministic local routing. The agent itself retains the closed tool
-allowlist. Raw SQL, credentials, prompt-injection strings, writes, raw source
-requests, and unknown actions are rejected before any tool call.
+Q&A plus BI Discovery use deterministic local routing. The agent itself retains
+the closed tool allowlist. Raw SQL, credentials, prompt-injection strings,
+writes, raw source requests, Superset mutation requests, and unknown actions are
+rejected before any tool call.
 
 ## Security boundary
 
@@ -178,6 +204,9 @@ requests, and unknown actions are rejected before any tool call.
   `expose_in_sqllab=false`. The analyst role strips SQL Lab/database/dataset
   write surfaces. M3 fixed technical dashboards read only catalog/projection
   tables, not Oracle/MSSQL source connections.
+- M4 Discovery persists only local requirements state in the projection
+  database. It does not call Superset materialization and does not query the
+  source database after catalog ingestion.
 - Containers are unprivileged, read-only, capability-dropped, have no Docker
   socket, and expose only the Superset and Agent localhost ports.
 - Secrets are Docker file secrets backed by gitignored mode-0600 files.
@@ -193,25 +222,28 @@ local reset requires the explicit command:
 ```
 
 It removes only this repository's generated metadata, projections, receipts,
-and internal passwords. `.env` and external source/provider secret files remain.
+local Discovery sessions, and internal passwords. `.env` and external
+source/provider secret files remain.
 
 ## Evidence and limits
 
 Run local gates with `npm test`, `docker compose config --quiet`, and
 `./tests/smoke.sh` after the stack is up. Clean-room instructions and recorded
 evidence are in [docs/CLEAN_ROOM.md](docs/CLEAN_ROOM.md). M3 evidence is recorded
-in [docs/evidence/M3_LOCAL_TECHNICAL_CATALOG.md](docs/evidence/M3_LOCAL_TECHNICAL_CATALOG.md).
+in [docs/evidence/M3_LOCAL_TECHNICAL_CATALOG.md](docs/evidence/M3_LOCAL_TECHNICAL_CATALOG.md);
+M4 evidence is recorded in
+[docs/evidence/M4_GUIDED_BI_DISCOVERY.md](docs/evidence/M4_GUIDED_BI_DISCOVERY.md).
 
-M3 is a local technical knowledge catalog and fixed technical overview
-increment, not a semantic modeling platform. Guided BI-interest interviews,
-dynamic user-confirmed datasets/charts/dashboards, free prompt SQL, arbitrary
-SQL Lab, source DB query during Q&A, raw business rows, raw PL/SQL/view source,
-full dynamic-SQL lineage/parser, count-all, full grant audit, AWR/ASH/performance
-analysis, SSO, HA, Kubernetes, generic multi-database framework, bundled LLM/GPU
-operation, and production readiness belong outside M3.
+M4 is a guided BI Discovery and requirements-brief increment over the local
+technical catalog, not a semantic modeling or dashboard generation platform.
+Dynamic user-confirmed datasets/charts/dashboards, free prompt SQL, arbitrary
+SQL Lab, source DB query during Q&A or Discovery, raw business rows, raw
+PL/SQL/view source, full dynamic-SQL lineage/parser, count-all, full grant audit,
+AWR/ASH/performance analysis, SSO, HA, Kubernetes, generic multi-database
+framework, bundled LLM/GPU operation, and production readiness belong outside
+M4. The next boundary is M5: reviewed materialization from a confirmed M4 brief.
 
-Release boundary: M3 is not released by merge alone. Public `v0.4.0` remains a
-functional release, but is superseded for anonymous installation by the
-corrective `v0.4.1` release because `v0.4.1` includes a portable checksum asset
-and the fresh isolated Oracle-Free M3 proof. The `v0.4.1` tag targets the
-protected-main merge, with installable archive and SHA-256 checksum assets.
+Release boundary: M4 is released only by protected-main merge plus regular
+non-draft/non-prerelease GitHub release. The planned release is `v0.5.0`, with
+installable archive and portable SHA-256 checksum assets. Existing tags and
+assets are never replaced.

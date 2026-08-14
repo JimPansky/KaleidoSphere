@@ -6,6 +6,7 @@ import { DatabaseSync } from 'node:sqlite';
 import sql from 'mssql';
 
 import { answerCatalogQuestion, ingestCatalogReceipt, searchCatalog } from './catalog.mjs';
+import { handleDiscovery } from './discovery.mjs';
 import { runAnalyzeProfile } from './db-analyzer/workflow.mjs';
 import { coded, exactObject, validateActionRequest } from './policy.mjs';
 import { buildLiveProfile, selectedEngine } from './runtime-config.mjs';
@@ -210,6 +211,12 @@ async function catalogSearch(body) {
   finally { db.close(); }
 }
 
+async function discovery(body) {
+  const db = new DatabaseSync(projectionDb);
+  try { return handleDiscovery(db, body); }
+  finally { db.close(); }
+}
+
 function send(response, status, value) {
   const body = `${JSON.stringify(value)}\n`;
   response.writeHead(status, {'content-type': 'application/json; charset=utf-8', 'content-length': Buffer.byteLength(body), 'cache-control': 'no-store'});
@@ -235,6 +242,7 @@ const server = http.createServer(async (request, response) => {
     if (request.url === '/v1/readback') { validateActionRequest(body, 'readback'); return send(response, 200, await readback()); }
     if (request.url === '/v1/catalog/question') return send(response, 200, await catalogQuestion(body));
     if (request.url === '/v1/catalog/search') return send(response, 200, await catalogSearch(body));
+    if (request.url === '/v1/discovery') return send(response, 200, await discovery(body));
     exactObject(body, []); throw coded('CONTROL_ROUTE_DENIED');
   } catch (error) {
     const code = String(error.code ?? error.message ?? 'CONTROL_INTERNAL_ERROR').replace(/[^A-Z0-9_]/g, '_').slice(0, 128);
