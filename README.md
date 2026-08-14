@@ -1,47 +1,36 @@
-# ChimpMaera BI — Superset Fingerprint M5
+# Superset BI Agent
 
-Portable single-host BI stack for one bounded use case: analyze a configured
-MSSQL or Oracle database with a read-only account, keep a versioned safe
-technical catalog, answer bounded technical database questions with evidence,
-guide a BI requirements discovery dialog over that catalog, and idempotently
-publish managed fixed overview dashboards into this repository's own Apache
-Superset instance.
+[![CI](https://github.com/JimPansky/Superset_BI_Agent/actions/workflows/ci.yml/badge.svg)](https://github.com/JimPansky/Superset_BI_Agent/actions/workflows/ci.yml)
+[![Latest release](https://img.shields.io/github/v/release/JimPansky/Superset_BI_Agent?sort=semver)](https://github.com/JimPansky/Superset_BI_Agent/releases/latest)
+[![License](https://img.shields.io/github/license/JimPansky/Superset_BI_Agent)](LICENSE)
+[![Docker Compose](https://img.shields.io/badge/Docker%20Compose-local%20stack-2496ed)](compose.yaml)
 
-M5 adds a read-only Superset Version/OpenAPI/Feature-Flag Fingerprint over the
-M4 stack. The fingerprint records a sanitized target identity, Apache Superset
-product version, OpenAPI canonical SHA-256, security-relevant feature-flag
-capabilities, provenance, freshness, compatibility verdict, limitations, and
-nonclaims. Future write/import/export/promotion planning can use the
-fail-closed planning gate; missing, stale, incomplete, target-mismatched,
-version-incompatible, OpenAPI-drifted, or unknown-required-flag fingerprints
-block planning. M5 does not create datasets, charts, dashboards, imports,
-exports, promotions, SQL, source queries, or source-row access.
+Understand your database. Define the right dashboards. Keep SQL and credentials
+out of the model.
 
-M4 builds on the M3 local technical catalog. Discovery sessions are local,
-versioned, deterministic, auditable, and bound to the active M3 catalog snapshot.
-The dialog records audience role, business questions, confirmed KPI candidates,
-dimensions, time grain, filters/segments, drilldowns, freshness needs,
-access/confidentiality, open assumptions, and explicit confirmation state. The
-export is a human- and machine-readable BI Discovery Brief with catalog
-provenance and coverage blind spots. M4 does not generate dynamic Superset
-datasets, charts, dashboards, SQL, source queries, or source-row access.
+Superset BI Agent is a local first-pass database understanding and BI
+requirements workflow for BI, data, and platform teams. It analyzes Oracle or
+Microsoft SQL Server metadata with a read-only account, stores an
+evidence-bound technical catalog, guides dashboard requirement discovery, and
+publishes fixed managed technical overview dashboards into its own Apache
+Superset stack. Optional model use is limited to bounded intent classification.
 
-The Oracle analyzer collects
-read-only dictionary metadata for
-schemas, tables, views, materialized views, columns, comments, constraints,
-indexes, sequences, synonyms, partitions, LOBs, tablespace distribution,
-statistics freshness, labelled size/block metadata, materialized-view refresh,
-stored logic metadata, scheduler metadata, and credential-free DB-link metadata
-where visible. M3 persists the safe receipt metadata into a local SQLite catalog
-and adds deterministic search and technical Q&A. Coverage states are
-authoritative: `SUCCEEDED`, `PARTIAL`, `DENIED`, `TIMEOUT`, and `ERROR`/unknown
-are preserved per collector. A missing privilege is never reported as object
-absence.
+## What you can do
 
-## Quickstart
+- Analyze Oracle or Microsoft SQL Server metadata with audited read-only query packs.
+- Build a versioned local catalog with receipt IDs, snapshot hashes, coverage states, and blind spots.
+- Ask bounded technical questions about size, statistics, dependencies, stored logic, and coverage.
+- Run guided BI requirements discovery and export a human/machine brief with catalog provenance.
+- Open fixed managed Superset overview dashboards for system, table, code, and coverage views.
+- Collect a read-only Superset runtime fingerprint before future reviewed promotion planning.
 
-Requirements: Docker Engine with Compose v2, OpenSSL, and ports `18088` and
-`18790` free on localhost.
+## Try it in 5 minutes
+
+The default quickstart uses a deterministic synthetic fixture. It does not need
+an external database or an API key.
+
+Requirements: Docker Engine with Compose v2, OpenSSL, and free localhost ports
+`18088` and `18790`.
 
 ```bash
 git clone https://github.com/JimPansky/Superset_BI_Agent.git
@@ -49,244 +38,125 @@ cd Superset_BI_Agent
 cp .env.example .env
 ./bin/bi setup
 ./bin/bi up
-```
-
-Open:
-
-- Superset: <http://127.0.0.1:18088>
-- BI Agent: <http://127.0.0.1:18790>
-
-The Superset navigation includes a visible **BI Agent** link. Sign in as
-`analyst`; its generated local password is stored in
-`.runtime/secrets/superset_analyst_password` (mode `0600`). The admin user is
-`cm_admin`; its password is stored beside the analyst password. Password values
-are never printed by the scripts.
-
-In the Agent UI use: **Analysiere die konfigurierte Datenbank**. The normal path
-is `status → analyze → catalog ingest → publish → readback`. A successful
-response contains the receipt ID, local catalog provenance, and managed dashboard
-URLs. Repeating the same flow updates the same fixed datasets, charts, and
-dashboards; it does not create duplicates.
-
-CLI equivalent:
-
-```bash
 ./bin/bi analyze
 ./bin/bi ask "Largest tables by size"
-./bin/bi search orders
-./bin/bi discovery start sales_review
-./bin/bi discovery answer sales_review audienceRole "Sales analyst"
-./bin/bi discovery answer sales_review businessQuestions '["Which order value should be watched weekly?"]'
-./bin/bi discovery status sales_review
+./bin/bi discovery start demo
+./bin/bi discovery answer demo audienceRole "Sales analyst"
+./bin/bi discovery answer demo businessQuestions '["Which order value should be watched weekly?"]'
+./bin/bi discovery status demo
 ./bin/bi superset-fingerprint collect
-./bin/bi superset-fingerprint planning-gate "promotion zip import planning"
 ./bin/bi down
 ```
 
-After a successful analysis, the Agent accepts bounded technical questions such
-as:
+Open <http://127.0.0.1:18790> for the Agent and
+<http://127.0.0.1:18088> for Superset. The generated Superset `analyst`
+password is stored in `.runtime/secrets/superset_analyst_password` with mode
+`0600` and is not printed by the scripts.
 
-```text
-Status
-Suche orders
-Largest tables by size
-Row estimates and stale statistics
-Object inventory and compile problems
-Dependencies object ORDERS
-Stored logic signatures
-Scheduler and MV refresh overview
-Coverage blind spots
-BI relevance candidates
-Discovery start sales_review
-Discovery answer sales_review audienceRole "Sales analyst"
-Discovery confirm sales_review
-Discovery export sales_review
+## First result
+
+The fixture run returns real local evidence over synthetic metadata, not
+production evidence. A successful response includes:
+
+```json
+{
+  "intent": "ANALYZE",
+  "tools": ["status", "analyze", "catalog_ingest", "publish", "readback", "catalog_question"],
+  "analysisReceipt": {
+    "receiptId": "mssql-...",
+    "runtimeValidation": "SYNTHETIC_UNVALIDATED",
+    "snapshotSha256": "..."
+  },
+  "publication": {"status": "PUBLISHED_IDEMPOTENT", "dashboards": 5}
+}
 ```
 
-Answers are deterministic local catalog answers. They include receipt ID,
-snapshot SHA-256, object identifiers, and collector coverage caveats. The Q&A
-path never sends free SQL to the source database and never queries the source
-database after the catalog is built.
+Local catalog answers include receipt, snapshot, scope, and coverage caveats.
 
-Discovery suggestions are also deterministic and catalog-bound. KPI, dimension,
-time, and drilldown candidates are derived only from local catalog rows and each
-technical reference includes receipt, snapshot, engine, database, query, category
-and object/column provenance. If a collector is denied, partial, stale, timed out
-or unknown, the exported brief carries that as a blind spot instead of inventing
-semantics.
+## Workflow
 
-## Select and configure the source engine
-
-Choose exactly one engine. The existing MSSQL path remains available:
-
-```dotenv
-BI_ENGINE=mssql
-BI_SOURCE_MODE=live
-MSSQL_HOST=db.example.internal
-MSSQL_PORT=1433
-MSSQL_DATABASE=MyDatabase
-MSSQL_USER=chimpmaera_bi_reader
-MSSQL_SCHEMAS=dbo,sales
-MSSQL_ENCRYPT=true
-MSSQL_TRUST_SERVER_CERTIFICATE=false
+```mermaid
+flowchart LR
+  A[Oracle or MSSQL metadata] -->|audited read-only SELECTs| B[Read-only analyzer]
+  B --> C[Evidence catalog]
+  C --> D[Bounded Q&A and BI discovery]
+  C --> E[Fixed managed Superset views]
+  F[Optional LLM] -->|intent classification only| D
 ```
 
-Put only the password in `.secrets/mssql_password` and keep the file mode
-`0600`. The supplied account must have no INSERT, UPDATE, DELETE, ALTER, or
-CONTROL permission in the database. The live preflight checks those permissions,
-uses the MSSQL driver's `readOnlyIntent`, binds the exact database/schema scope,
-and then executes only the shipped audited SELECT catalog query pack. Any
-mismatch or missing credential fails closed. Superset never receives MSSQL
-credentials and never connects directly to the source.
+Superset BI Agent does not send free-form SQL to a source database, does not
+sample source rows, and does not give Superset direct source-database
+credentials.
 
-Oracle uses `node-oracledb` 7 in Thin mode; no Oracle Client libraries are
-installed. `ORACLE_DATABASE` is the expected `DB_UNIQUE_NAME`, while
-`ORACLE_SERVICE_NAME` is the exact service/PDB and expected `CON_NAME`:
+## Why teams use it
 
-```dotenv
-BI_ENGINE=oracle
-BI_SOURCE_MODE=live
-ORACLE_HOST=oracle.example.internal
-ORACLE_PORT=2484
-ORACLE_DATABASE=MYDB
-ORACLE_SERVICE_NAME=ANALYTICSPDB
-ORACLE_USER=BI_ANALYZE
-ORACLE_SCHEMAS=SALES,FINANCE
-ORACLE_PROTOCOL=tcps
-ORACLE_TLS_SERVER_DN=CN=oracle.example.internal
-ORACLE_CONNECT_TIMEOUT_MS=10000
-ORACLE_QUERY_TIMEOUT_MS=10000
-```
+Direct LLM-to-SQL workflows can blur exploration, credential-bearing access, and
+production data exposure. Superset BI Agent narrows the surface: collect safe
+metadata, preserve coverage evidence, ask deterministic catalog-bound questions,
+turn requirements into a reviewable brief, and show fixed technical dashboards
+backed by the local catalog.
 
-Put only the password in `.secrets/oracle_password`, mode `0600`. The analyze
-principal must have `CREATE SESSION` and only `SELECT`/`READ` object privileges
-inside the declared schemas. The preflight verifies database, service/PDB,
-schema visibility, enabled system privileges, direct object privileges, and
-enabled-role object privileges; a known DML, DDL, administrative, or out-of-scope
-capability fails closed. Transport encryption is the Oracle equivalent of the
-MSSQL encryption options: `tcps` plus the endpoint certificate policy. Plain
-`tcp` is appropriate only for an independently trusted local/test network.
+## Security by design
 
-Both live adapters use a bounded pool/connection lifecycle and timeouts. The
-runtime executes only shipped, audited catalog `SELECT` statements, with schema
-filters compiled as driver binds. There is no raw SQL, prompt-SQL, source-row
-sampling, DML, or DDL surface. For Oracle M2/M3, scoped `EXECUTE` grants are
-accepted only as stored-logic metadata visibility; the analyzer never invokes
-packages, procedures, functions, triggers, scheduler programs, or database
-links.
+- Source adapters use read-only metadata queries and fail closed on unsafe
+  rights or scope mismatch.
+- Source rows, raw SQL prompts, credentials, raw PL/SQL/view text, DB-link secrets, and provider keys are excluded from model input.
+- Superset connects only to the local projection database; it does not receive
+  Oracle or MSSQL credentials.
+- The default agent path runs offline with `LLM_MODE=stub`.
+- Optional OpenAI-compatible providers may classify only `ANALYZE`, `STATUS`, or `DENY`.
+- Containers are unprivileged, capability-dropped, and expose only localhost UI ports.
+- Destructive reset requires `./bin/bi reset --yes-i-understand`.
 
-Oracle source safety: PL/SQL, view, trigger, scheduler action, compile-error
-text, comments, DB-link username/password, and DB-link raw hosts are not sent to
-the agent, Superset, public artifacts, or an LLM. Public/agent-facing metadata
-uses hashes, line counts, status, signatures, dependencies, timing/status
-fields, and explicit blind-spot labels for wrapped code and dynamic SQL.
+See [docs/SECURITY.md](docs/SECURITY.md) for the full trust boundary.
 
-The default `BI_SOURCE_MODE=fixture` is a portable deterministic MSSQL analyzer
-fixture. It proves the agent/tool/materialization path, but it is explicitly
-`SYNTHETIC_UNVALIDATED` and is not live-database evidence.
+## Live database configuration
 
-## Optional OpenAI-compatible provider
+The fixture mode in `.env.example` is the portable default. To analyze a live
+database, choose exactly one engine:
 
-The containerized agent works offline with `LLM_MODE=stub` for deterministic
-tool-invocation E2E. To use an existing OpenAI-compatible service, set:
+- `BI_ENGINE=mssql` for Microsoft SQL Server metadata analysis.
+- `BI_ENGINE=oracle` for Oracle metadata analysis through `node-oracledb` Thin
+  mode.
 
-```dotenv
-LLM_MODE=openai-compatible
-LLM_BASE_URL=https://provider.example/v1
-LLM_MODEL=provider-model-id
-```
+Put source passwords only in `.secrets/mssql_password` or `.secrets/oracle_password`,
+keep the files mode `0600`, and grant the analyzer principal only the minimum
+read visibility for the declared schemas. Details are in
+[docs/CONFIGURATION.md](docs/CONFIGURATION.md).
 
-Put the key in `.secrets/llm_api_key`. No model weights are bundled. The model
-may classify only `ANALYZE`, `STATUS`, or `DENY`; catalog search and technical
-Q&A plus BI Discovery use deterministic local routing. The agent itself retains
-the closed tool allowlist. Raw SQL, credentials, prompt-injection strings,
-writes, raw source requests, Superset mutation requests, and unknown actions are
-rejected before any tool call.
+## Current capabilities and boundaries
 
-## Superset fingerprint
+Supported today:
 
-The fingerprint collector is read-only. In the local Docker stack,
-`bi-control` calls Superset's internal `GET /internal/fingerprint` bridge with
-the existing control token. The bridge reads Apache Superset runtime version,
-the Flask-AppBuilder `/api/v1/_openapi` representation, and local
-`FEATURE_FLAGS`; it does not call the materializer and does not write Superset
-metadata.
+- Oracle and Microsoft SQL Server read-only metadata analysis.
+- Versioned evidence-bound local technical catalog and bounded technical Q&A.
+- Guided BI requirements discovery with Markdown/JSON brief export.
+- Fixed managed technical overview dashboards in Apache Superset.
+- Read-only Superset 6.1.0 runtime fingerprint and fail-closed planning preflight.
 
-The contract is `chimpmaera.bi/superset-fingerprint/v1`. OpenAPI is validated,
-canonicalized with sorted-key canonical JSON, and hashed with SHA-256. The
-collector rejects userinfo URLs, query strings, fragments, auth headers, cookies,
-tokens, API keys, passwords, credential-like keys, oversized payloads,
-unexpected content types, malformed JSON/YAML, and target mismatches. HTTP is
-accepted only for localhost/internal Superset targets; non-local targets require
-HTTPS.
+Not claimed today:
 
-Apache Superset is the primary runtime evidence source. Preset-compatible
-targets are secondary and must be fingerprinted separately; this repository does
-not claim production, customer, or Preset compatibility without target-specific
-evidence.
+- Dynamic dataset, chart, or dashboard generation from a discovery brief.
+- Superset ZIP promotion, import, or export.
+- Free-form SQL, SQL Lab, row sampling, semantic-model generation, or direct production compatibility.
+- Direct Superset-to-source Oracle/MSSQL connections.
+- SSO, HA, Kubernetes, or managed multi-tenant operation.
 
-## Security boundary
+## Docs
 
-- Both source adapters are read-only; query packs contain bounded
-  catalog SELECTs and no source row samples.
-- `bi-agent` has network access only to the public UI network and internal
-  `bi-control`; it has no source-database route or Superset mutation token API.
-- `bi-control` is the only source-network member. Superset mutation crosses a
-  token-bound internal endpoint and affects only this stack's metadata/projection
-  directories.
-- Superset's managed database has `allow_dml=false` and
-  `expose_in_sqllab=false`. The analyst role strips SQL Lab/database/dataset
-  write surfaces. M3 fixed technical dashboards read only catalog/projection
-  tables, not Oracle/MSSQL source connections.
-- M4 Discovery persists only local requirements state in the projection
-  database. It does not call Superset materialization and does not query the
-  source database after catalog ingestion.
-- M5 Fingerprint collection is read-only and stores only sanitized version,
-  OpenAPI hash/representation, feature-flag capability status, provenance, and
-  nonclaims. It captures no auth headers, cookies, tokens, passwords, source
-  database credentials, or full URLs with secret-bearing query strings.
-- Containers are unprivileged, read-only, capability-dropped, have no Docker
-  socket, and expose only the Superset and Agent localhost ports.
-- Secrets are Docker file secrets backed by gitignored mode-0600 files.
+- [Architecture](docs/ARCHITECTURE.md), [Configuration](docs/CONFIGURATION.md),
+  [Security](docs/SECURITY.md), [Roadmap](docs/ROADMAP.md),
+  [Release notes](docs/RELEASE_NOTES.md), and
+  [Clean-room validation](docs/CLEAN_ROOM.md)
+- Evidence: [Oracle runtime](docs/evidence/M1_ORACLE_RUNTIME.md),
+  [Oracle technical inventory](docs/evidence/M2_ORACLE_TECHNICAL_INVENTORY.md),
+  [local catalog](docs/evidence/M3_LOCAL_TECHNICAL_CATALOG.md),
+  [BI discovery](docs/evidence/M4_GUIDED_BI_DISCOVERY.md), and
+  [Superset fingerprint](docs/evidence/M5_SUPERSET_FINGERPRINT.md)
 
-## Operations and recovery
+## Provenance
 
-`./bin/bi setup` is idempotent and preserves existing secrets. `./bin/bi down`
-stops only this Compose project and retains metadata/receipts. A destructive
-local reset requires the explicit command:
-
-```bash
-./bin/bi reset --yes-i-understand
-```
-
-It removes only this repository's generated metadata, projections, receipts,
-local Discovery sessions, and internal passwords. `.env` and external
-source/provider secret files remain.
-
-## Evidence and limits
-
-For existing 5.0.0 metadata, follow the backup, upgrade, verification, and
-restore procedure in [docs/SUPERSET_6_1_UPGRADE.md](docs/SUPERSET_6_1_UPGRADE.md).
-
-Run local gates with `npm test`, `docker compose config --quiet`, and
-`./tests/smoke.sh` after the stack is up. Clean-room instructions and recorded
-evidence are in [docs/CLEAN_ROOM.md](docs/CLEAN_ROOM.md). M3 evidence is recorded
-in [docs/evidence/M3_LOCAL_TECHNICAL_CATALOG.md](docs/evidence/M3_LOCAL_TECHNICAL_CATALOG.md);
-M4 evidence is recorded in
-[docs/evidence/M4_GUIDED_BI_DISCOVERY.md](docs/evidence/M4_GUIDED_BI_DISCOVERY.md).
-
-M5 is a Superset fingerprint and fail-closed planning-preflight increment over
-the M4 local technical catalog and guided BI Discovery. It is not a semantic
-modeling, dashboard generation, ZIP promotion, import/export, or production
-compatibility platform. Dynamic user-confirmed datasets/charts/dashboards, free
-prompt SQL, arbitrary SQL Lab, source DB query during Q&A or Discovery, raw
-business rows, raw
-PL/SQL/view source, full dynamic-SQL lineage/parser, count-all, full grant audit,
-AWR/ASH/performance analysis, SSO, HA, Kubernetes, generic multi-database
-framework, bundled LLM/GPU operation, and production readiness belong outside
-M4. The next boundary is M5: reviewed materialization from a confirmed M4 brief.
-
-Release boundary: M4 is released only by protected-main merge plus regular
-non-draft/non-prerelease GitHub release. The planned release is `v0.5.0`, with
-installable archive and portable SHA-256 checksum assets. Existing tags and
-assets are never replaced.
+Superset BI Agent is a standalone public repository with repository-authored
+runtime, catalog, discovery, Superset, fingerprint, tests, and docs. Some
+analyzer foundations were derived from the public ChimpMaera repository and are
+tracked in [SOURCE-MAP.md](SOURCE-MAP.md) and [SOURCE-MAP.json](SOURCE-MAP.json).
