@@ -6,7 +6,7 @@
   },
   "product": {
     "name": "Apache Superset",
-    "version": "5.0.0",
+    "version": "6.1.0",
     "source": {
       "kind": "apache-superset-python-package",
       "package": "apache-superset"
@@ -23,7 +23,7 @@
       "openapi": "3.0.2",
       "info": {
         "title": "Apache Superset API",
-        "version": "5.0.0"
+        "version": "6.1.0"
       },
       "paths": {
         "/api/v1/_info": {
@@ -61,7 +61,7 @@
     {
       "kind": "dockerfile",
       "path": "services/superset/Dockerfile",
-      "image": "apache/superset:5.0.0"
+      "image": "apache/superset:6.1.0"
     },
     {
       "kind": "runtime-config",

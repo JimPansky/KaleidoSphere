@@ -1,5 +1,13 @@
 # Release Notes
 
+## Next - Apache Superset 6.1.0 security/runtime upgrade
+
+The owned Superset runtime is pinned to Apache Superset 6.1.0 by immutable image
+digest. Fingerprint fixtures, compatibility bounds, OpenAPI expectations, and
+runtime smoke assertions now require 6.1.0 or a later 6.x version. The upgrade
+procedure includes a metadata backup, forward migration, fresh-install check,
+and restore rollback to the original 5.0.0 image without an in-place downgrade.
+
 ## v0.6.0 - Superset Fingerprint M5
 
 M5 adds a read-only Superset Version/OpenAPI/Feature-Flag Fingerprint contract:

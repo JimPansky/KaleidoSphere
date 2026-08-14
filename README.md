@@ -265,6 +265,9 @@ source/provider secret files remain.
 
 ## Evidence and limits
 
+For existing 5.0.0 metadata, follow the backup, upgrade, verification, and
+restore procedure in [docs/SUPERSET_6_1_UPGRADE.md](docs/SUPERSET_6_1_UPGRADE.md).
+
 Run local gates with `npm test`, `docker compose config --quiet`, and
 `./tests/smoke.sh` after the stack is up. Clean-room instructions and recorded
 evidence are in [docs/CLEAN_ROOM.md](docs/CLEAN_ROOM.md). M3 evidence is recorded

@@ -96,7 +96,7 @@ import fs from 'node:fs';
 const fingerprint = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
 if (fingerprint.contract_version !== 'chimpmaera.bi/superset-fingerprint/v1') throw new Error('fingerprint contract mismatch');
 if (fingerprint.compatibility_verdict.status !== 'compatible') throw new Error(`fingerprint incompatible: ${fingerprint.compatibility_verdict.reasons.join(',')}`);
-if (fingerprint.superset.version !== '5.0.0') throw new Error('Superset version mismatch');
+if (fingerprint.superset.version !== '6.1.0') throw new Error('Superset version mismatch');
 if (!/^[a-f0-9]{64}$/.test(fingerprint.openapi.sha256)) throw new Error('OpenAPI hash missing');
 if (fingerprint.openapi.sha256 !== fingerprint.openapi.canonicalization.sha256) throw new Error('OpenAPI canonical hash mismatch');
 if (JSON.stringify(fingerprint).match(/(?:Bearer\s+[A-Za-z0-9._~+/-]{16,}|sk-[A-Za-z0-9]{20,}|hf_[A-Za-z0-9]{20,})/i)) throw new Error('fingerprint leaked sensitive value');
