@@ -1,4 +1,4 @@
-# ChimpMaera BI — Guided BI Discovery M4
+# ChimpMaera BI — Superset Fingerprint M5
 
 Portable single-host BI stack for one bounded use case: analyze a configured
 MSSQL or Oracle database with a read-only account, keep a versioned safe
@@ -6,6 +6,16 @@ technical catalog, answer bounded technical database questions with evidence,
 guide a BI requirements discovery dialog over that catalog, and idempotently
 publish managed fixed overview dashboards into this repository's own Apache
 Superset instance.
+
+M5 adds a read-only Superset Version/OpenAPI/Feature-Flag Fingerprint over the
+M4 stack. The fingerprint records a sanitized target identity, Apache Superset
+product version, OpenAPI canonical SHA-256, security-relevant feature-flag
+capabilities, provenance, freshness, compatibility verdict, limitations, and
+nonclaims. Future write/import/export/promotion planning can use the
+fail-closed planning gate; missing, stale, incomplete, target-mismatched,
+version-incompatible, OpenAPI-drifted, or unknown-required-flag fingerprints
+block planning. M5 does not create datasets, charts, dashboards, imports,
+exports, promotions, SQL, source queries, or source-row access.
 
 M4 builds on the M3 local technical catalog. Discovery sessions are local,
 versioned, deterministic, auditable, and bound to the active M3 catalog snapshot.
@@ -68,6 +78,8 @@ CLI equivalent:
 ./bin/bi discovery answer sales_review audienceRole "Sales analyst"
 ./bin/bi discovery answer sales_review businessQuestions '["Which order value should be watched weekly?"]'
 ./bin/bi discovery status sales_review
+./bin/bi superset-fingerprint collect
+./bin/bi superset-fingerprint planning-gate "promotion zip import planning"
 ./bin/bi down
 ```
 
@@ -191,6 +203,28 @@ the closed tool allowlist. Raw SQL, credentials, prompt-injection strings,
 writes, raw source requests, Superset mutation requests, and unknown actions are
 rejected before any tool call.
 
+## Superset fingerprint
+
+The fingerprint collector is read-only. In the local Docker stack,
+`bi-control` calls Superset's internal `GET /internal/fingerprint` bridge with
+the existing control token. The bridge reads Apache Superset runtime version,
+the Flask-AppBuilder `/api/v1/_openapi` representation, and local
+`FEATURE_FLAGS`; it does not call the materializer and does not write Superset
+metadata.
+
+The contract is `chimpmaera.bi/superset-fingerprint/v1`. OpenAPI is validated,
+canonicalized with sorted-key canonical JSON, and hashed with SHA-256. The
+collector rejects userinfo URLs, query strings, fragments, auth headers, cookies,
+tokens, API keys, passwords, credential-like keys, oversized payloads,
+unexpected content types, malformed JSON/YAML, and target mismatches. HTTP is
+accepted only for localhost/internal Superset targets; non-local targets require
+HTTPS.
+
+Apache Superset is the primary runtime evidence source. Preset-compatible
+targets are secondary and must be fingerprinted separately; this repository does
+not claim production, customer, or Preset compatibility without target-specific
+evidence.
+
 ## Security boundary
 
 - Both source adapters are read-only; query packs contain bounded
@@ -207,6 +241,10 @@ rejected before any tool call.
 - M4 Discovery persists only local requirements state in the projection
   database. It does not call Superset materialization and does not query the
   source database after catalog ingestion.
+- M5 Fingerprint collection is read-only and stores only sanitized version,
+  OpenAPI hash/representation, feature-flag capability status, provenance, and
+  nonclaims. It captures no auth headers, cookies, tokens, passwords, source
+  database credentials, or full URLs with secret-bearing query strings.
 - Containers are unprivileged, read-only, capability-dropped, have no Docker
   socket, and expose only the Superset and Agent localhost ports.
 - Secrets are Docker file secrets backed by gitignored mode-0600 files.
@@ -234,10 +272,12 @@ in [docs/evidence/M3_LOCAL_TECHNICAL_CATALOG.md](docs/evidence/M3_LOCAL_TECHNICA
 M4 evidence is recorded in
 [docs/evidence/M4_GUIDED_BI_DISCOVERY.md](docs/evidence/M4_GUIDED_BI_DISCOVERY.md).
 
-M4 is a guided BI Discovery and requirements-brief increment over the local
-technical catalog, not a semantic modeling or dashboard generation platform.
-Dynamic user-confirmed datasets/charts/dashboards, free prompt SQL, arbitrary
-SQL Lab, source DB query during Q&A or Discovery, raw business rows, raw
+M5 is a Superset fingerprint and fail-closed planning-preflight increment over
+the M4 local technical catalog and guided BI Discovery. It is not a semantic
+modeling, dashboard generation, ZIP promotion, import/export, or production
+compatibility platform. Dynamic user-confirmed datasets/charts/dashboards, free
+prompt SQL, arbitrary SQL Lab, source DB query during Q&A or Discovery, raw
+business rows, raw
 PL/SQL/view source, full dynamic-SQL lineage/parser, count-all, full grant audit,
 AWR/ASH/performance analysis, SSO, HA, Kubernetes, generic multi-database
 framework, bundled LLM/GPU operation, and production readiness belong outside

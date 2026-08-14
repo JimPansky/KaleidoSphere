@@ -86,6 +86,8 @@ services:
       ORACLE_PASSWORD_FILE: /run/secrets/oracle_password
       CONTROL_TOKEN_FILE: /run/secrets/control_token
       SUPERSET_MATERIALIZER_URL: http://superset:8090/internal/materialize
+      SUPERSET_FINGERPRINT_INTERNAL_URL: http://superset:8090/internal/fingerprint
+      SUPERSET_FINGERPRINT_TARGET_URL: http://superset:8088
       RECEIPT_DIR: /var/lib/chimpmaera-bi/receipts
       PROJECTION_DB: /var/lib/chimpmaera-bi/projection/analytics.db
     extra_hosts: ["host.docker.internal:host-gateway"]

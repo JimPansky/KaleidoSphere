@@ -5,8 +5,8 @@ root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$root"
 agent="http://127.0.0.1:${AGENT_PORT:-18790}"
 superset="http://127.0.0.1:${SUPERSET_PORT:-18088}"
-first="$(mktemp)"; second="$(mktemp)"; denied="$(mktemp)"
-trap 'rm -f "$first" "$second" "$denied"' EXIT
+first="$(mktemp)"; second="$(mktemp)"; denied="$(mktemp)"; fingerprint_file="$(mktemp)"; gate_file="$(mktemp)"
+trap 'rm -f "$first" "$second" "$denied" "$fingerprint_file" "$gate_file"' EXIT
 
 curl --fail --silent --show-error --header 'content-type: application/json' \
   --data '{"message":"Analysiere die konfigurierte Datenbank"}' "$agent/api/chat" > "$first"
@@ -90,4 +90,22 @@ if curl --silent --max-time 2 http://127.0.0.1:18089/healthz >/dev/null 2>&1; th
 fi
 curl --fail --silent "$superset/health" | grep -qx OK
 curl --fail --silent "$agent/" | grep -q 'BI Agent'
-printf 'PASS agent->analyze->publish->Superset-readback twice; safety probes denied.\n'
+./bin/bi superset-fingerprint collect > "$fingerprint_file"
+node - "$fingerprint_file" <<'NODE'
+import fs from 'node:fs';
+const fingerprint = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
+if (fingerprint.contract_version !== 'chimpmaera.bi/superset-fingerprint/v1') throw new Error('fingerprint contract mismatch');
+if (fingerprint.compatibility_verdict.status !== 'compatible') throw new Error(`fingerprint incompatible: ${fingerprint.compatibility_verdict.reasons.join(',')}`);
+if (fingerprint.superset.version !== '5.0.0') throw new Error('Superset version mismatch');
+if (!/^[a-f0-9]{64}$/.test(fingerprint.openapi.sha256)) throw new Error('OpenAPI hash missing');
+if (fingerprint.openapi.sha256 !== fingerprint.openapi.canonicalization.sha256) throw new Error('OpenAPI canonical hash mismatch');
+if (JSON.stringify(fingerprint).match(/(?:Bearer\s+[A-Za-z0-9._~+/-]{16,}|sk-[A-Za-z0-9]{20,}|hf_[A-Za-z0-9]{20,})/i)) throw new Error('fingerprint leaked sensitive value');
+NODE
+./bin/bi superset-fingerprint planning-gate "promotion zip import planning" > "$gate_file"
+node - "$gate_file" <<'NODE'
+import fs from 'node:fs';
+const gate = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
+if (gate.contract_version !== 'chimpmaera.bi/superset-planning-gate/v1') throw new Error('planning gate contract mismatch');
+if (gate.status !== 'READY_FOR_REVIEW' || gate.mutation_performed !== false || gate.reasons.length !== 0) throw new Error('planning gate failed for fresh fingerprint');
+NODE
+printf 'PASS agent->analyze->publish->Superset-readback twice; Superset fingerprint/planning gate passed; safety probes denied.\n'

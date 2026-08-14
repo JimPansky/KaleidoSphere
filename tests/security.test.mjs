@@ -3,6 +3,7 @@ import { execFileSync } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
+import { buildSupersetFingerprint, evaluateSupersetPlanningGate } from '../services/bi-control/src/superset-fingerprint.mjs';
 import { parseSchemas, validateActionRequest } from '../services/bi-control/src/policy.mjs';
 
 test('control action and schema scopes are exact and closed', () => {
@@ -38,8 +39,21 @@ test('Superset materializer initializes its application once per process', async
 });
 
 test('tracked/config source contains no obvious committed secret assignment', async () => {
-  for (const file of ['.env.example','compose.yaml','README.md','services/bi-agent/src/server.mjs','services/bi-control/src/server.mjs','services/bi-control/src/discovery.mjs']) {
+  for (const file of ['.env.example','compose.yaml','README.md','services/bi-agent/src/server.mjs','services/bi-control/src/server.mjs','services/bi-control/src/discovery.mjs','services/bi-control/src/superset-fingerprint.mjs','services/bi-control/fixtures/superset-fingerprint-runtime-v1.json']) {
     const value = await readFile(file, 'utf8');
     assert.doesNotMatch(value, /(?:sk-[A-Za-z0-9]{20,}|hf_[A-Za-z0-9]{20,}|BEGIN (?:RSA |EC )?PRIVATE KEY)/, file);
   }
+});
+
+test('Superset planning gate blocks write-like work without a valid fingerprint', async () => {
+  const result = evaluateSupersetPlanningGate({ fingerprint: null, request: { action: 'promotion zip import dashboard write' } });
+  assert.equal(result.status, 'BLOCKED');
+  assert.equal(result.mutation_performed, false);
+  assert(result.reasons.includes('SUPERSET_FINGERPRINT_MISSING'));
+});
+
+test('Superset fingerprint contract rejects token-like evidence', async () => {
+  const evidence = JSON.parse(await readFile('services/bi-control/fixtures/superset-fingerprint-runtime-v1.json', 'utf8'));
+  evidence.openapi.document.paths['/api/v1/_info'].get.token = `Bearer ${'abcdefghijklmnopqrstuvwxyz'}`;
+  assert.throws(() => buildSupersetFingerprint(evidence), /SUPERSET_FINGERPRINT_SECRET_VALUE_DENIED/);
 });
