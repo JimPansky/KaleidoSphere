@@ -10,11 +10,13 @@ import { handleDiscovery } from './discovery.mjs';
 import { runAnalyzeProfile } from './db-analyzer/workflow.mjs';
 import { coded, exactObject, validateActionRequest } from './policy.mjs';
 import { buildLiveProfile, selectedEngine } from './runtime-config.mjs';
+import { collectSupersetFingerprint, evaluateSupersetPlanningGate } from './superset-fingerprint.mjs';
 
 const port = Number(process.env.PORT ?? 18089);
 const receiptDir = process.env.RECEIPT_DIR ?? '/var/lib/chimpmaera-bi/receipts';
 const projectionDb = process.env.PROJECTION_DB ?? '/var/lib/chimpmaera-bi/projection/analytics.db';
 const repositoryRoot = '/app';
+const supersetFingerprintFixture = '/app/fixtures/superset-fingerprint-runtime-v1.json';
 const sha256 = (value) => createHash('sha256').update(value).digest('hex');
 const engine = selectedEngine();
 
@@ -176,6 +178,31 @@ async function publish() {
   return result;
 }
 
+async function supersetFingerprint(body) {
+  exactObject(body, ['action', 'mode'], ['action']);
+  if (body.action !== 'collect_superset_fingerprint') throw coded('CONTROL_ACTION_DENIED');
+  const mode = body.mode ?? 'runtime';
+  if (!['runtime', 'fixture'].includes(mode)) throw coded('SUPERSET_FINGERPRINT_MODE_DENIED');
+  const token = await secret('CONTROL_TOKEN_FILE', 'CONTROL_TOKEN_MISSING');
+  const internalUrl = process.env.SUPERSET_FINGERPRINT_INTERNAL_URL
+    ?? String(process.env.SUPERSET_MATERIALIZER_URL ?? '').replace(/\/internal\/materialize$/, '/internal/fingerprint');
+  return collectSupersetFingerprint({
+    mode,
+    token,
+    internalUrl,
+    targetUrl: process.env.SUPERSET_FINGERPRINT_TARGET_URL ?? 'http://superset:8088',
+    fixturePath: supersetFingerprintFixture,
+    receiptDir,
+  });
+}
+
+async function supersetPlanningGate(body) {
+  exactObject(body, ['action', 'fingerprint', 'request'], ['action', 'request']);
+  if (body.action !== 'evaluate_superset_planning_gate') throw coded('CONTROL_ACTION_DENIED');
+  const fingerprint = body.fingerprint ?? await readFile(path.join(receiptDir, 'latest-superset-fingerprint.json'), 'utf8').then(JSON.parse).catch(() => null);
+  return evaluateSupersetPlanningGate({fingerprint, request: body.request});
+}
+
 async function readback() {
   const [receipt, publication] = await Promise.all([
     latestReceipt(),
@@ -240,6 +267,8 @@ const server = http.createServer(async (request, response) => {
     if (request.url === '/v1/analyze') { validateActionRequest(body, 'analyze'); return send(response, 200, await analyze()); }
     if (request.url === '/v1/publish') { validateActionRequest(body, 'publish'); return send(response, 200, await publish()); }
     if (request.url === '/v1/readback') { validateActionRequest(body, 'readback'); return send(response, 200, await readback()); }
+    if (request.url === '/v1/superset/fingerprint') return send(response, 200, await supersetFingerprint(body));
+    if (request.url === '/v1/superset/planning-gate') return send(response, 200, await supersetPlanningGate(body));
     if (request.url === '/v1/catalog/question') return send(response, 200, await catalogQuestion(body));
     if (request.url === '/v1/catalog/search') return send(response, 200, await catalogSearch(body));
     if (request.url === '/v1/discovery') return send(response, 200, await discovery(body));

@@ -111,6 +111,46 @@ case "${1:-help}" in
         --data-binary @- \
         "http://127.0.0.1:$(published_port bi-agent 18790)/api/chat"
     ;;
+  superset-fingerprint)
+    require_setup
+    action="${2:-collect}"
+    case "$action" in
+      collect)
+        mode="runtime"
+        [ "${3:-}" != "--fixture" ] || mode="fixture"
+        compose exec -T bi-control node -e '
+          import fs from "node:fs";
+          const token = fs.readFileSync("/run/secrets/control_token", "utf8").trim();
+          const response = await fetch("http://127.0.0.1:18089/v1/superset/fingerprint", {
+            method: "POST",
+            headers: {authorization: `Bearer ${token}`, "content-type": "application/json"},
+            body: JSON.stringify({action: "collect_superset_fingerprint", mode: process.argv[1]}),
+          });
+          const body = await response.text();
+          if (!response.ok) process.stderr.write(body);
+          process.exit(response.ok ? 0 : 1);
+        ' "$mode"
+        cat .runtime/receipts/latest-superset-fingerprint.json
+        ;;
+      planning-gate)
+        [ -n "${3:-}" ] || fail 'usage: ./bin/bi superset-fingerprint planning-gate action-name'
+        request_action="${*:3}"
+        compose exec -T bi-control node -e '
+          import fs from "node:fs";
+          const token = fs.readFileSync("/run/secrets/control_token", "utf8").trim();
+          const response = await fetch("http://127.0.0.1:18089/v1/superset/planning-gate", {
+            method: "POST",
+            headers: {authorization: `Bearer ${token}`, "content-type": "application/json"},
+            body: JSON.stringify({action: "evaluate_superset_planning_gate", request: {action: process.argv[1]}}),
+          });
+          const body = await response.text();
+          process.stdout.write(body);
+          process.exit(response.ok ? 0 : 1);
+        ' "$request_action"
+        ;;
+      *) fail 'usage: ./bin/bi superset-fingerprint {collect [--fixture]|planning-gate action-name}' ;;
+    esac
+    ;;
   status)
     require_setup
     compose ps
@@ -134,6 +174,6 @@ case "${1:-help}" in
     printf 'Owned runtime metadata, projections, receipts, and generated internal secrets removed. Source config and external secret files retained.\n'
     ;;
   help|*)
-    printf '%s\n' 'Usage: ./bin/bi {setup|up|analyze|ask "question"|search term|discovery ...|status|logs [service]|down|reset --yes-i-understand}'
+    printf '%s\n' 'Usage: ./bin/bi {setup|up|analyze|ask "question"|search term|discovery ...|superset-fingerprint ...|status|logs [service]|down|reset --yes-i-understand}'
     ;;
 esac

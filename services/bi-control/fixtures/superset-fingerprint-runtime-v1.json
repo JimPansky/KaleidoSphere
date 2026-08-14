@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "chimpmaera.bi/superset-runtime-evidence/v1",
+  "observedAt": "2026-08-14T05:29:00.000Z",
+  "target": {
+    "baseUrl": "http://superset:8088"
+  },
+  "product": {
+    "name": "Apache Superset",
+    "version": "5.0.0",
+    "source": {
+      "kind": "apache-superset-python-package",
+      "package": "apache-superset"
+    }
+  },
+  "openapi": {
+    "source": {
+      "kind": "flask-appbuilder-openapi",
+      "path": "/api/v1/_openapi",
+      "url": "http://superset:8088/api/v1/_openapi"
+    },
+    "contentType": "application/json",
+    "document": {
+      "openapi": "3.0.2",
+      "info": {
+        "title": "Apache Superset API",
+        "version": "5.0.0"
+      },
+      "paths": {
+        "/api/v1/_info": {
+          "get": {
+            "summary": "Superset runtime information"
+          }
+        },
+        "/api/v1/dashboard/": {
+          "get": {
+            "summary": "Dashboard list"
+          }
+        },
+        "/api/v1/_openapi": {
+          "get": {
+            "summary": "OpenAPI representation"
+          }
+        }
+      }
+    }
+  },
+  "featureFlags": {
+    "source": {
+      "kind": "local-superset-runtime-config",
+      "name": "FEATURE_FLAGS",
+      "path": "services/superset/runtime/superset_config.py"
+    },
+    "values": {
+      "ENABLE_TEMPLATE_PROCESSING": false,
+      "ALERT_REPORTS": false,
+      "EMBEDDED_SUPERSET": false,
+      "HORIZONTAL_FILTER_BAR": true
+    }
+  },
+  "provenance": [
+    {
+      "kind": "dockerfile",
+      "path": "services/superset/Dockerfile",
+      "image": "apache/superset:5.0.0"
+    },
+    {
+      "kind": "runtime-config",
+      "path": "services/superset/runtime/superset_config.py",
+      "field": "FEATURE_FLAGS"
+    }
+  ]
+}

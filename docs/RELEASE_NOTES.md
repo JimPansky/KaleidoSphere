@@ -1,5 +1,29 @@
 # Release Notes
 
+## v0.6.0 - Superset Fingerprint M5
+
+M5 adds a read-only Superset Version/OpenAPI/Feature-Flag Fingerprint contract:
+`chimpmaera.bi/superset-fingerprint/v1`.
+
+The local stack can collect Apache Superset runtime version, Flask-AppBuilder
+`/api/v1/_openapi` representation, canonical OpenAPI SHA-256,
+security-relevant `FEATURE_FLAGS`, sanitized target identity, provenance,
+freshness policy, compatibility verdict, limitations, and nonclaims. The
+collector rejects
+secret-like evidence, unsafe target URLs, unexpected content types, malformed
+OpenAPI payloads, oversized OpenAPI documents, target mismatch, and incompatible
+required feature flags.
+
+M5 also adds `chimpmaera.bi/superset-planning-gate/v1` for later
+write/import/export/promotion planning. The gate blocks missing, stale,
+incomplete, target-mismatched, OpenAPI-drifted, version-incompatible, or
+unknown-required-flag fingerprints and returns `mutation_performed=false`.
+
+Apache Superset runtime evidence is primary. Preset-compatible deployments are
+secondary and require target-specific fingerprints. This release does not create
+dynamic datasets, charts, dashboards, imports, exports, ZIP promotions, SQL,
+source queries, source-row samples, or production/customer evidence.
+
 ## v0.5.0 - Guided BI Discovery M4
 
 M4 adds a local, deterministic BI Discovery dialog over the M3 technical catalog.
