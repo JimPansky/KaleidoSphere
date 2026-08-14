@@ -1,6 +1,26 @@
 # Release Notes
 
-## Unreleased - Product README and docs navigation refresh
+## v0.7.0 - Promotion review bundle contract
+
+M5-02 adds `chimpmaera.bi/superset-promotion-bundle/v1`: a deterministic,
+review-only ZIP/YAML contract with repository-owned manifest and review-asset
+schemas. It binds a confirmed Discovery brief, catalog receipt/snapshot/scope/
+coverage, sanitized target identity, Superset version, fingerprint/OpenAPI/
+feature-flag freshness, stable UUID asset inventory, file hashes, disclosure,
+limitations, nonclaims, and `mutation_performed=false`.
+
+`./bin/bi promotion-bundle build|inspect|preflight` provides machine-readable
+JSON and optional human output. Mandatory SHA-256 establishes integrity; v1 is
+explicitly unsigned and makes no signer-authenticity claim. The bounded ZIP
+parser and semantic validator fail closed on traversal, archive bombs, hash and
+schema drift, stale/incompatible fingerprint evidence, UUID/reference errors,
+secrets, credentials, source rows, and raw SQL.
+
+This capability creates review evidence only. It does not emit a Superset-native
+import package, import/export assets, connect Superset to Oracle/MSSQL, access
+source rows, generate SQL, call the materializer, or mutate Superset.
+
+## 2026-08-14 - Product README and docs navigation refresh
 
 The README now presents the repository as Superset BI Agent with a compact
 product-oriented overview, fixture-first quickstart, visible workflow,

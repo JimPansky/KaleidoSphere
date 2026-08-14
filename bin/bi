@@ -151,6 +151,14 @@ case "${1:-help}" in
       *) fail 'usage: ./bin/bi superset-fingerprint {collect [--fixture]|planning-gate action-name}' ;;
     esac
     ;;
+  promotion-bundle)
+    action="${2:-}"
+    shift 2 || true
+    case "$action" in
+      build|inspect|preflight) node services/bi-control/src/promotion-cli.mjs "$action" "$@" ;;
+      *) fail 'usage: ./bin/bi promotion-bundle {build|inspect|preflight} ...' ;;
+    esac
+    ;;
   status)
     require_setup
     compose ps
@@ -174,6 +182,6 @@ case "${1:-help}" in
     printf 'Owned runtime metadata, projections, receipts, and generated internal secrets removed. Source config and external secret files retained.\n'
     ;;
   help|*)
-    printf '%s\n' 'Usage: ./bin/bi {setup|up|analyze|ask "question"|search term|discovery ...|superset-fingerprint ...|status|logs [service]|down|reset --yes-i-understand}'
+    printf '%s\n' 'Usage: ./bin/bi {setup|up|analyze|ask "question"|search term|discovery ...|superset-fingerprint ...|promotion-bundle ...|status|logs [service]|down|reset --yes-i-understand}'
     ;;
 esac

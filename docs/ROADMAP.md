@@ -48,14 +48,21 @@ verdict, limitations, and nonclaims. A fail-closed planning gate blocks future
 write/import/export/promotion planning when fingerprint evidence is missing,
 stale, incompatible, target-mismatched, or drifted.
 
+### Review-only promotion ZIP contract
+
+The repository can build, inspect, and preflight deterministic review-only ZIP
+artifacts under `chimpmaera.bi/superset-promotion-bundle/v1`. Bundles bind a
+confirmed Discovery brief, catalog provenance and coverage, a compatible fresh
+Superset fingerprint, stable UUID review assets, per-file hashes, disclosure,
+limitations, and nonclaims. This stage does not import or mutate Superset.
+
 ## Candidate next capabilities
 
 These are candidates for later reviewed work. They are not implemented claims:
 
-- Reviewed promotion ZIP contract for confirmed BI Discovery briefs.
 - Human-approved materialization from a confirmed brief into Superset assets.
-- Promotion artifact validation against the Superset fingerprint and OpenAPI
-  compatibility gate.
+- Deeper Superset-native dependency-graph validation for dataset/chart/dashboard
+  and native/cross-filter references before any later import path.
 - Additional clean-room and public-rendering validation for documentation and
   release assets.
 - Clearer product packaging and repo metadata after protected review.
@@ -66,5 +73,6 @@ These are candidates for later reviewed work. They are not implemented claims:
 - Source-row sampling, business-row export, or model access to source rows.
 - Dynamic Superset dataset/chart/dashboard generation without a reviewed
   promotion contract.
+- Superset import or promotion execution from the current review-only bundle.
 - Direct Superset-to-source Oracle or MSSQL credentials.
 - Production, customer, SSO, HA, Kubernetes, or managed multi-tenant operation.

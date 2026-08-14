@@ -12,7 +12,7 @@ is used for fixed technical overview dashboards over a local projection.
   fingerprint commands.
 - `bi-control`: internal control service. It owns source analyzer execution,
   catalog ingestion, deterministic Q&A, Discovery state, Superset publication,
-  readback, and fingerprint collection.
+  readback, fingerprint collection, and the offline promotion-bundle contract.
 - `superset`: owned Apache Superset 6.1.0 runtime with local metadata and fixed
   technical dashboards.
 - `.runtime/receipts`: local evidence receipts, including analysis receipts and
@@ -34,6 +34,9 @@ is used for fixed technical overview dashboards over a local projection.
 5. `bi-control` publishes fixed managed Superset datasets, charts, and
    dashboards over the local projection database.
 6. Superset readback verifies the managed assets and returns dashboard URLs.
+7. Independently of the materializer, a confirmed Discovery brief, catalog
+   evidence, and fresh compatible fingerprint can produce a deterministic
+   review-only ZIP for human review and fail-closed preflight.
 
 ```mermaid
 flowchart LR
@@ -42,6 +45,8 @@ flowchart LR
   R --> P[local projection catalog]
   P --> Q[bounded Q&A]
   P --> D[BI Discovery brief]
+  D --> B[review-only ZIP contract]
+  F[Superset fingerprint] --> B
   P --> V[fixed Superset technical views]
   A[bi-agent UI and CLI] --> C
   A --> Q
@@ -55,10 +60,26 @@ materializer updates the same predefined technical overview assets
 idempotently; repeated analysis does not create duplicates. The dashboards are
 backed by local projection tables, not by direct Oracle or MSSQL connections.
 
-Dynamic user-confirmed datasets, charts, dashboards, promotion ZIPs, imports,
-and exports are future reviewed capabilities. The current runtime fingerprint
-and planning gate prepare for that review path, but they do not authorize or
-perform Superset writes beyond the existing fixed managed views.
+Dynamic user-confirmed datasets, charts, dashboards, imports, exports, and
+promotion execution remain future reviewed capabilities. The current runtime
+can create only a deterministic review ZIP. That archive is not a Superset
+native import payload and cannot authorize or perform writes beyond the
+existing fixed managed views.
+
+## Review-only promotion bundle
+
+`chimpmaera.bi/superset-promotion-bundle/v1` binds the confirmed Discovery
+brief, catalog receipt/snapshot/scope/coverage, sanitized target identity,
+Superset version, fingerprint/OpenAPI/feature-flag freshness, stable UUID review
+assets, file hashes, disclosure classification, limitations, and nonclaims.
+`promotion-bundle.yaml` and review asset `.yaml` files use the JSON subset of
+YAML 1.2, eliminating ambiguous YAML types while remaining valid YAML.
+
+The offline CLI builder, inspector, and preflight code do not call the
+materializer, Superset, Oracle, or MSSQL. ZIP parsing is bounded by path,
+entry-count, per-entry, total-size, archive-size, compression-ratio, CRC, and
+path allowlist checks. Checksums prove integrity only; the contract explicitly
+marks review bundles unsigned and makes no authenticity claim.
 
 ## Superset fingerprint
 

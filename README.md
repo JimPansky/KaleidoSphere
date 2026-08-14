@@ -23,6 +23,7 @@ Superset stack. Optional model use is limited to bounded intent classification.
 - Run guided BI requirements discovery and export a human/machine brief with catalog provenance.
 - Open fixed managed Superset overview dashboards for system, table, code, and coverage views.
 - Collect a read-only Superset runtime fingerprint before future reviewed promotion planning.
+- Build, inspect, and fail-closed preflight a deterministic review-only promotion ZIP from confirmed evidence.
 
 ## Try it in 5 minutes
 
@@ -81,6 +82,8 @@ flowchart LR
   B --> C[Evidence catalog]
   C --> D[Bounded Q&A and BI discovery]
   C --> E[Fixed managed Superset views]
+  D --> G[Review-only promotion bundle]
+  H[Superset fingerprint] --> G
   F[Optional LLM] -->|intent classification only| D
 ```
 
@@ -133,11 +136,14 @@ Supported today:
 - Guided BI requirements discovery with Markdown/JSON brief export.
 - Fixed managed technical overview dashboards in Apache Superset.
 - Read-only Superset 6.1.0 runtime fingerprint and fail-closed planning preflight.
+- Deterministic `chimpmaera.bi/superset-promotion-bundle/v1` review ZIP build,
+  inspection, checksum, and fail-closed preflight.
 
 Not claimed today:
 
 - Dynamic dataset, chart, or dashboard generation from a discovery brief.
-- Superset ZIP promotion, import, or export.
+- Superset ZIP import/export, promotion execution, or dynamic asset creation;
+  the current ZIP is review evidence only.
 - Free-form SQL, SQL Lab, row sampling, semantic-model generation, or direct production compatibility.
 - Direct Superset-to-source Oracle/MSSQL connections.
 - SSO, HA, Kubernetes, or managed multi-tenant operation.
@@ -151,12 +157,13 @@ Not claimed today:
 - Evidence: [Oracle runtime](docs/evidence/M1_ORACLE_RUNTIME.md),
   [Oracle technical inventory](docs/evidence/M2_ORACLE_TECHNICAL_INVENTORY.md),
   [local catalog](docs/evidence/M3_LOCAL_TECHNICAL_CATALOG.md),
-  [BI discovery](docs/evidence/M4_GUIDED_BI_DISCOVERY.md), and
-  [Superset fingerprint](docs/evidence/M5_SUPERSET_FINGERPRINT.md)
+  [BI discovery](docs/evidence/M4_GUIDED_BI_DISCOVERY.md),
+  [Superset fingerprint](docs/evidence/M5_SUPERSET_FINGERPRINT.md), and
+  [promotion bundle contract](docs/evidence/M5_PROMOTION_BUNDLE.md)
 
 ## Provenance
 
 Superset BI Agent is a standalone public repository with repository-authored
-runtime, catalog, discovery, Superset, fingerprint, tests, and docs. Some
+runtime, catalog, discovery, Superset, fingerprint, promotion-bundle, tests, and docs. Some
 analyzer foundations were derived from the public ChimpMaera repository and are
 tracked in [SOURCE-MAP.md](SOURCE-MAP.md) and [SOURCE-MAP.json](SOURCE-MAP.json).

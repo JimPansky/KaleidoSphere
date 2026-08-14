@@ -163,6 +163,33 @@ For deterministic offline fixture collection:
 The runtime path stores `.runtime/receipts/latest-superset-fingerprint.json`.
 That file is local evidence and must not be edited by hand.
 
+## Review-only promotion bundle
+
+Prepare a JSON input containing the exact fields `discoveryBrief`,
+`catalogEvidence`, `supersetFingerprint`, `assets`, and `createdAt`. The
+Discovery brief must be an exported, confirmed
+`chimpmaera.bi/discovery-brief/v1`; the fingerprint must be fresh and compatible.
+Then run the offline control CLI:
+
+```bash
+./bin/bi promotion-bundle build --input review-input.json --output review.zip
+./bin/bi promotion-bundle inspect --bundle review.zip
+./bin/bi promotion-bundle preflight --bundle review.zip --human true
+sha256sum -c review.zip.sha256
+```
+
+Build refuses to overwrite either output file. Keep generated review bundles
+outside Git unless a deliberate disclosure review approves them. The commands
+need Node 24 but do not require the Compose stack, source credentials, or a
+Superset connection. `--now ISO-8601` exists only for deterministic fixture and
+clean-room validation; normal use should rely on the current clock.
+
+Asset specifications accept only `database`, `dataset`, `chart`, and
+`dashboard` review identities with stable UUIDs, dependencies, and a bounded
+`reviewSpec`. They are not Superset import YAML. Raw SQL, source rows,
+credentials, connection URIs, secret-like values, dangling references, and
+stale/drifted fingerprints fail closed.
+
 ## Reset
 
 `./bin/bi down` stops the stack and keeps local state. A destructive local reset
