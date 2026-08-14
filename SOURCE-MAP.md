@@ -62,3 +62,12 @@ DB-link hosts are hash-only, scheduler action text is omitted, and catalog Q&A i
 answered from local safe projections only. New Compose, control, catalog,
 Superset materializer, fingerprint, review-bundle, agent UI, tests, and documentation were
 authored specifically for this repository.
+
+M6-00 contract schemas, four assistant-foundation runtime modules, deterministic
+fixtures, tests, ADR, evidence, and documentation updates are repository-authored
+clean-room work. DeepSeek Harness commit
+`47f943859bef60e4160492346772ded9b24f765a` and the exact architecture-note
+paths listed in `docs/decisions/M6-00-CONTRACT-SECURITY-FOUNDATION.md` are
+conceptual references only. No DSH/Cordis runtime, package, schema, artifact, or
+code was copied. These files are recorded as ordinary repository-authored hashes
+under `files` in `SOURCE-MAP.json`, not as derived files.

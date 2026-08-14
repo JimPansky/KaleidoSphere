@@ -1,0 +1,28 @@
+{
+  "manifest": {
+    "schemaVersion": "chimpmaera.bi/dashboard-capability-manifest/v1",
+    "dashboardId": "dashboard-demo",
+    "stateVersion": 1,
+    "allowedActions": ["set_filter", "clear_filter", "set_time_range", "focus_chart", "open_drilldown", "compare_segments", "select_tab", "sort_table", "toggle_series", "explain_current_view"],
+    "resources": {
+      "chartIds": ["chart-sales", "chart-table"],
+      "filterKeys": ["region", "product"],
+      "tabIds": ["overview", "detail"],
+      "seriesIds": ["revenue", "margin"],
+      "dimensions": ["region", "product"],
+      "segmentIds": ["EMEA", "APAC"],
+      "tableColumns": ["revenue", "region"]
+    },
+    "persistentMutationAllowed": false,
+    "directDomControl": false
+  },
+  "request": {
+    "schemaVersion": "chimpmaera.bi/ui-action/v1",
+    "actionId": "action-0001",
+    "action": "set_filter",
+    "args": {"key": "region", "value": "EMEA"},
+    "stateVersion": 1,
+    "idempotencyKey": "idem-action-0001",
+    "preconditions": {"dashboardId": "dashboard-demo"}
+  }
+}

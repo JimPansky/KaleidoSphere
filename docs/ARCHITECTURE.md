@@ -109,3 +109,19 @@ projection database; it does not receive source database credentials.
 Containers run unprivileged, with `cap_drop: [ALL]`, read-only filesystems where
 possible, no Docker socket, bounded pids/memory, and localhost-only published
 ports.
+
+## M6-00 assistant contract foundation
+
+M6-00 adds a local, inactive contract layer for a future thin assistant overlay
+while preserving native Superset as the visualization UI. Four small
+repository-owned modules define event/evidence, static built-in capabilities,
+execution/approval, and a deterministic dashboard-state seam. Adapters are
+harness-neutral; future Claude Code, Hermes, or OpenClaw integration must enter
+through the same contracts and security review.
+
+The overlay boundary accepts typed text/voice stream events and the ten
+allowlisted `ui-action/v1` reversible session actions. It has no browser or DOM
+driver. Personal saved-view requests remain personal/non-applying; persistent
+Superset asset changes remain proposals requiring a preview/diff, trusted UI
+approval, BI-Control apply, readback, and rollback that are not implemented in
+this slice. See `docs/decisions/M6-00-CONTRACT-SECURITY-FOUNDATION.md`.

@@ -1,5 +1,17 @@
 # Release Notes
 
+## Unreleased - M6-00 local contract/security foundation
+
+Adds harness-neutral v1 contracts for typed durable/live events, static built-in
+capabilities, one-shot bound approvals, execution receipts, bounded retries,
+dashboard capabilities, voice/text streaming, and ten reversible session UI
+actions. A deterministic in-memory state adapter supplies local evidence only.
+
+This is not a runtime assistant release. It does not integrate DeepSeek Harness
+or Cordis, install plugins, connect a model/speech provider, control a browser,
+mutate Superset, apply persistent revisions, activate production behavior, or
+publish an external artifact.
+
 ## v0.7.0 - Promotion review bundle contract
 
 M5-02 adds `chimpmaera.bi/superset-promotion-bundle/v1`: a deterministic,

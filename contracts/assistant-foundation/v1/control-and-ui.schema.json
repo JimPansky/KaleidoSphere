@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.chimpmaera.local/assistant-foundation/v1/control-and-ui.schema.json",
+  "title": "Approval, execution receipt, dashboard capability and UI action v1 unions",
+  "oneOf": [
+    {"$ref": "#/$defs/approvalGrant"},
+    {"$ref": "#/$defs/executionReceipt"},
+    {"$ref": "#/$defs/retryPolicy"},
+    {"$ref": "#/$defs/dashboardManifest"},
+    {"$ref": "#/$defs/uiAction"},
+    {"$ref": "#/$defs/uiActionReceipt"},
+    {"$ref": "#/$defs/voiceEvent"},
+    {"$ref": "#/$defs/personalSavedViewRequest"},
+    {"$ref": "#/$defs/persistentRevisionProposal"}
+  ],
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "approvalGrant": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schemaVersion", "grantId", "executionId", "capabilityId", "argsDigest", "resourceDigest", "policyDigest", "issuedAt", "expiresAt", "channel", "oneShot"],
+      "properties": {
+        "schemaVersion": {"const": "chimpmaera.bi/approval-grant/v1"}, "grantId": {"type": "string", "minLength": 1}, "executionId": {"type": "string", "minLength": 1}, "capabilityId": {"type": "string", "minLength": 1},
+        "argsDigest": {"$ref": "#/$defs/digest"}, "resourceDigest": {"$ref": "#/$defs/digest"}, "policyDigest": {"$ref": "#/$defs/digest"},
+        "issuedAt": {"type": "string", "format": "date-time"}, "expiresAt": {"type": "string", "format": "date-time"}, "channel": {"const": "trusted_ui"}, "oneShot": {"const": true}
+      }
+    },
+    "executionReceipt": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schemaVersion", "executionId", "capabilityId", "status", "startedAt", "finishedAt", "argsDigest", "resourceDigest", "policyDigest", "sideEffect", "idempotencyKey", "observations", "rollback", "retryAllowed"],
+      "properties": {
+        "schemaVersion": {"const": "chimpmaera.bi/tool-execution-receipt/v1"}, "executionId": {"type": "string"}, "capabilityId": {"type": "string"}, "status": {"enum": ["succeeded", "denied", "failed", "cancelled", "outcome_unknown"]},
+        "startedAt": {"type": "string", "format": "date-time"}, "finishedAt": {"type": "string", "format": "date-time"}, "argsDigest": {"$ref": "#/$defs/digest"}, "resourceDigest": {"$ref": "#/$defs/digest"}, "policyDigest": {"$ref": "#/$defs/digest"},
+        "sideEffect": {"enum": ["none", "reversible", "persistent", "external"]}, "idempotencyKey": {"type": "string"}, "observations": {"type": "array"}, "rollback": {"type": ["object", "null"]}, "retryAllowed": {"type": "boolean"}
+      }
+    },
+    "retryPolicy": {
+      "oneOf": [
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["schemaVersion", "mode", "maxAttempts"],
+          "properties": {"schemaVersion": {"const": "chimpmaera.bi/retry-policy/v1"}, "mode": {"const": "never"}, "maxAttempts": {"const": 1}}
+        },
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["schemaVersion", "mode", "maxAttempts", "retryCodes", "idempotencyRequired", "onOutcomeUnknown"],
+          "properties": {
+            "schemaVersion": {"const": "chimpmaera.bi/retry-policy/v1"}, "mode": {"const": "bounded"}, "maxAttempts": {"type": "integer", "minimum": 1, "maximum": 3},
+            "retryCodes": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["TIMEOUT_BEFORE_DISPATCH", "RATE_LIMIT", "TRANSPORT"]}},
+            "idempotencyRequired": {"const": true}, "onOutcomeUnknown": {"const": "stop"}
+          }
+        }
+      ]
+    },
+    "dashboardManifest": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schemaVersion", "dashboardId", "stateVersion", "allowedActions", "resources", "persistentMutationAllowed", "directDomControl"],
+      "properties": {
+        "schemaVersion": {"const": "chimpmaera.bi/dashboard-capability-manifest/v1"}, "dashboardId": {"type": "string", "minLength": 1}, "stateVersion": {"type": "integer", "minimum": 1},
+        "allowedActions": {"type": "array", "items": {"enum": ["set_filter", "clear_filter", "set_time_range", "focus_chart", "open_drilldown", "compare_segments", "select_tab", "sort_table", "toggle_series", "explain_current_view"]}, "uniqueItems": true},
+        "resources": {
+          "type": "object", "additionalProperties": false,
+          "required": ["chartIds", "filterKeys", "tabIds", "seriesIds", "dimensions", "segmentIds", "tableColumns"],
+          "properties": {
+            "chartIds": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}, "filterKeys": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+            "tabIds": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}, "seriesIds": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+            "dimensions": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}, "segmentIds": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+            "tableColumns": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+          }
+        },
+        "persistentMutationAllowed": {"const": false}, "directDomControl": {"const": false}
+      }
+    },
+    "uiAction": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schemaVersion", "actionId", "action", "args", "stateVersion", "idempotencyKey", "preconditions"],
+      "properties": {
+        "schemaVersion": {"const": "chimpmaera.bi/ui-action/v1"}, "actionId": {"type": "string", "minLength": 1}, "action": {"enum": ["set_filter", "clear_filter", "set_time_range", "focus_chart", "open_drilldown", "compare_segments", "select_tab", "sort_table", "toggle_series", "explain_current_view"]}, "args": {"type": "object"}, "stateVersion": {"type": "integer", "minimum": 1}, "idempotencyKey": {"type": "string", "minLength": 1},
+        "preconditions": {"type": "object", "additionalProperties": false, "required": ["dashboardId"], "properties": {"dashboardId": {"type": "string", "minLength": 1}}}
+      }
+    },
+    "uiActionReceipt": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schemaVersion", "actionId", "action", "status", "stateVersion", "idempotencyKey", "undoToken", "sideEffect", "persistentSupersetMutation"],
+      "properties": {
+        "schemaVersion": {"const": "chimpmaera.bi/ui-action-receipt/v1"}, "actionId": {"type": ["string", "null"]}, "action": {"type": ["string", "null"]}, "status": {"enum": ["applied", "already_applied", "denied"]},
+        "previousStateVersion": {"type": "integer"}, "stateVersion": {"type": "integer", "minimum": 1}, "idempotencyKey": {"type": ["string", "null"]}, "requestDigest": {"$ref": "#/$defs/digest"},
+        "undoToken": {"oneOf": [{"$ref": "#/$defs/digest"}, {"type": "null"}]}, "denialReason": {"type": "string"}, "sideEffect": {"enum": ["none", "reversible_session"]}, "persistentSupersetMutation": {"const": false}
+      }
+    },
+    "voiceEvent": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schemaVersion", "eventType", "language", "confidence", "payload"],
+      "properties": {
+        "schemaVersion": {"const": "chimpmaera.bi/voice-stream-event/v1"}, "eventType": {"enum": ["transcript.partial", "transcript.final", "assistant.delta", "assistant.final", "ui_action.proposed", "ui_action.applied", "ui_action.denied", "interaction.interrupted", "interaction.cancelled"]},
+        "language": {"type": "string", "minLength": 2}, "confidence": {"type": "number", "minimum": 0, "maximum": 1}, "payload": {"type": "object"}
+      }
+    },
+    "personalSavedViewRequest": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schemaVersion", "requestId", "dashboardId", "stateVersion", "name", "scope", "status", "persistentSupersetMutation"],
+      "properties": {
+        "schemaVersion": {"const": "chimpmaera.bi/personal-saved-view-request/v1"}, "requestId": {"type": "string"}, "dashboardId": {"type": "string"}, "stateVersion": {"type": "integer", "minimum": 1}, "name": {"type": "string"}, "scope": {"const": "personal"}, "status": {"const": "request_only"}, "persistentSupersetMutation": {"const": false}
+      }
+    },
+    "persistentRevisionProposal": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schemaVersion", "proposalId", "dashboardId", "baseRevision", "diff", "status", "requirements", "applied"],
+      "properties": {
+        "schemaVersion": {"const": "chimpmaera.bi/persistent-asset-revision-proposal/v1"}, "proposalId": {"type": "string"}, "dashboardId": {"type": "string"}, "baseRevision": {"type": "string"}, "diff": {"type": "object"}, "status": {"const": "proposal_only"},
+        "requirements": {"const": ["preview_diff", "trusted_ui_approval", "bi_control_apply", "readback", "rollback"]}, "applied": {"const": false}
+      }
+    }
+  }
+}

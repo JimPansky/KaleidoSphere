@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "chimpmaera.bi/event-envelope/v1",
+  "eventId": "evt-0001",
+  "streamId": "session-demo",
+  "eventType": "assistant.final",
+  "channel": "durable",
+  "seq": 1,
+  "occurredAt": "2026-08-14T17:15:00.000Z",
+  "correlationId": "corr-demo",
+  "causationId": null,
+  "version": {
+    "schemaVersion": "chimpmaera.bi/version-identity/v1",
+    "contract": "assistant-stream",
+    "version": "v1",
+    "producer": {
+      "id": "deterministic-stub",
+      "version": "1.0.0",
+      "artifactDigest": "sha256:40724d3714926f5a735106dc8b904cb5782ba0a1e0ad500975f37ea454094059"
+    }
+  },
+  "sensitivity": {"dataClass": "internal", "categories": ["none"], "redaction": "none"},
+  "payload": {"text": "Ready"},
+  "payloadDigest": "sha256:df614e5c830e4de2370de9243335b7577e144b13a1dcfb11baa79d9ac0f5671d",
+  "ignorable": false
+}
