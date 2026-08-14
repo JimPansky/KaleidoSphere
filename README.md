@@ -24,6 +24,7 @@ Superset stack. Optional model use is limited to bounded intent classification.
 - Open fixed managed Superset overview dashboards for system, table, code, and coverage views.
 - Collect a read-only Superset runtime fingerprint before future reviewed promotion planning.
 - Build, inspect, and fail-closed preflight a deterministic review-only promotion ZIP from confirmed evidence.
+- Execute a human-approved bundle only against an isolated synthetic owned metadata target, with backup, UUID readback, idempotency, and restore proof.
 
 ## Try it in 5 minutes
 
@@ -142,8 +143,8 @@ Supported today:
 Not claimed today:
 
 - Dynamic dataset, chart, or dashboard generation from a discovery brief.
-- Superset ZIP import/export, promotion execution, or dynamic asset creation;
-  the current ZIP is review evidence only.
+- Production/customer promotion, Superset-native ZIP import/export, or dynamic
+  source-connected asset creation. The execution adapter is synthetic-owned and local-only.
 - Free-form SQL, SQL Lab, row sampling, semantic-model generation, or direct production compatibility.
 - Direct Superset-to-source Oracle/MSSQL connections.
 - SSO, HA, Kubernetes, or managed multi-tenant operation.
