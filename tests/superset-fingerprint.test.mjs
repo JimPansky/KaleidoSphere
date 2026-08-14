@@ -31,7 +31,7 @@ test('Superset fingerprint fixture is deterministic, sanitized, and evidence-bou
   const second = buildSupersetFingerprint(clone(evidence));
   assert.equal(first.contract_version, SUPERSET_FINGERPRINT_CONTRACT);
   assert.equal(first.target.base_url, 'http://superset:8088');
-  assert.equal(first.superset.version, '5.0.0');
+  assert.equal(first.superset.version, '6.1.0');
   assert.equal(first.openapi.sha256, second.openapi.sha256);
   assert.equal(first.openapi.sha256, first.openapi.canonicalization.sha256);
   assert.equal(first.openapi.canonicalization.algorithm, 'canonical-json/v1');
@@ -49,7 +49,7 @@ test('OpenAPI canonicalization is stable across object key order', async () => {
       '/api/v1/dashboard/': { get: { summary: 'Dashboard list' } },
       '/api/v1/_info': { get: { summary: 'Superset runtime information' } },
     },
-    info: { version: '5.0.0', title: 'Apache Superset API' },
+    info: { version: '6.1.0', title: 'Apache Superset API' },
     openapi: '3.0.2',
   };
   assert.equal(buildSupersetFingerprint(evidence).openapi.sha256, buildSupersetFingerprint(reordered).openapi.sha256);

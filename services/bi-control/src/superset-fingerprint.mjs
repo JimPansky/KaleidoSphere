@@ -163,10 +163,10 @@ function validateRuntimeEvidence(evidence) {
 
 function compatibilityForVersion(version) {
   const match = VERSION.exec(version);
-  if (!match) return { status: 'block', code: 'SUPERSET_VERSION_MALFORMED', supported_range: '>=5.0.0 <6.0.0' };
+  if (!match) return { status: 'block', code: 'SUPERSET_VERSION_MALFORMED', supported_range: '>=6.1.0 <7.0.0' };
   const major = Number(match[1]);
-  if (major !== 5) return { status: 'defer', code: 'SUPERSET_VERSION_UNVALIDATED', supported_range: '>=5.0.0 <6.0.0' };
-  return { status: 'compatible', code: 'SUPERSET_VERSION_COMPATIBLE', supported_range: '>=5.0.0 <6.0.0' };
+  if (major !== 6 || Number(match[2]) < 1) return { status: 'defer', code: 'SUPERSET_VERSION_UNVALIDATED', supported_range: '>=6.1.0 <7.0.0' };
+  return { status: 'compatible', code: 'SUPERSET_VERSION_COMPATIBLE', supported_range: '>=6.1.0 <7.0.0' };
 }
 
 function featureCapabilities(values) {

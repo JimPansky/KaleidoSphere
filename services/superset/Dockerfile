@@ -1,4 +1,4 @@
-FROM apache/superset:5.0.0@sha256:e51bbaf8b72d7c864d6e1e3e439c476db55481d0eb89e04ac411cc1c5344746c
+FROM apache/superset:6.1.0@sha256:fb3464528ec7076f91195f0ff7835755aa023e281f1bb78a84782ce7a36b3705
 LABEL org.opencontainers.image.title="ChimpMaera BI Superset M0" \
       io.chimpmaera.bi.role="owned-superset"
 USER root
