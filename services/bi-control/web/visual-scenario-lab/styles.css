@@ -57,6 +57,28 @@ button:focus-visible, [tabindex]:focus-visible, summary:focus-visible { outline:
 #active-time { font-size: 11px; }
 .undo-button { padding: 8px 10px; border: 1px solid #d0d5dd; border-radius: 7px; background: white; color: #344054; font-size: 11px; font-weight: 650; cursor: pointer; }
 .undo-button:disabled { color: #98a2b3; cursor: not-allowed; background: #f9fafb; }
+.composition-meta { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 8px; margin-top: 14px; }
+.composition-meta p { margin: 0 0 0 4px; color: var(--muted); font-size: 10px; line-height: 1.35; }
+.layout-pill, .preview-pill, .chart-type-pill { padding: 4px 7px; border-radius: 999px; font-size: 8px; font-weight: 750; text-transform: uppercase; letter-spacing: .04em; }
+.layout-pill { color: #344054; background: #e4e7ec; }.preview-pill { color: #5145cd; background: var(--accent-soft); }.chart-type-pill { color: #475467; background: #f2f4f7; }
+.visual-composition { display: grid; gap: 12px; margin-top: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.visual-composition[data-layout-id="executive-summary"] { grid-template-columns: .7fr 1.3fr; }.visual-composition[data-layout-id="executive-summary"] .viz-big_number { grid-row: span 2; }
+.visual-composition[data-layout-id="quality-investigation"] { grid-template-columns: 1.35fr .65fr; }.visual-composition[data-layout-id="quality-investigation"] .viz-time_series { grid-column: 1 / -1; }
+.visual-composition[data-layout-id="inventory-risk"] { grid-template-columns: .55fr 1.45fr; }.visual-composition[data-layout-id="inventory-risk"] .viz-stacked_bar { grid-column: 1 / -1; }
+.visual-composition[data-layout-id="maintenance-reliability"] { grid-template-columns: .55fr 1.45fr; }.visual-composition[data-layout-id="maintenance-reliability"] .viz-time_series { grid-column: 1 / -1; }
+.visual-composition[data-layout-id="cross-domain-comparison"] { grid-template-columns: 1fr 1fr; }.visual-composition[data-layout-id="cross-domain-comparison"] .viz-time_series { grid-column: 1 / -1; }
+.viz-card { min-width: 0; min-height: 186px; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: white; }
+.viz-card.focused { border-color: var(--accent); box-shadow: 0 0 0 3px #dedaff; }.viz-card header { display: flex; justify-content: space-between; gap: 8px; }.viz-card h3 { margin: 3px 0 0; font-size: 13px; }
+.viz-plot { position: relative; min-height: 112px; margin-top: 12px; border-bottom: 1px solid #d0d5dd; }
+.plot-big_number { display: grid; align-content: center; min-height: 135px; border: 0; }.plot-big_number strong { color: #4338ca; font-size: 38px; letter-spacing: -.04em; }.plot-big_number span { color: var(--muted); font-size: 10px; }
+.plot-time_series, .plot-grouped_bar, .plot-stacked_bar { display: flex; align-items: end; justify-content: space-around; gap: 9px; padding: 18px 12px 16px; background: repeating-linear-gradient(to bottom, transparent, transparent 31px, #f2f4f7 32px); }
+.series-group { display: flex; align-items: end; justify-content: center; gap: 3px; width: 25%; height: 82px; position: relative; }.series-group i { display: block; width: 32%; min-height: 8px; border-radius: 3px 3px 0 0; background: var(--accent); }.series-group .series-secondary { background: #71b7a8; }.series-group span { position: absolute; bottom: -14px; color: var(--muted); font-size: 8px; white-space: nowrap; }
+.plot-time_series .series-group i { width: 70%; border-radius: 12px 12px 2px 2px; }.plot-stacked_bar .series-group { gap: 0; flex-direction: column-reverse; }.plot-stacked_bar .series-group i { width: 58%; height: 28% !important; }
+.plot-table_conditional { display: grid; align-content: start; border: 0; }.table-line { display: flex; justify-content: space-between; padding: 9px; border-bottom: 1px solid var(--line); font-size: 9px; }.table-line.severity-0 { color: var(--danger); background: #fff1f0; }.table-line.severity-1 { color: #b54708; background: #fffaeb; }
+.plot-scatter { border-left: 1px solid #d0d5dd; }.plot-scatter i { position: absolute; width: 10px; height: 10px; border: 2px solid white; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 1px #6d5dfc; }.axis-x, .axis-y { position: absolute; color: var(--muted); font-size: 8px; }.axis-x { right: 0; bottom: 2px; }.axis-y { left: 4px; top: 2px; }
+.plot-heatmap { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; padding: 4px 4px 22px; border: 0; }.plot-heatmap i { min-height: 23px; border-radius: 3px; background: #6d5dfc; }
+.plot-treemap { display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: 1fr 1fr; gap: 4px; border: 0; }.tree-cell { display: grid; place-items: center; color: white; background: #6d5dfc; font-size: 9px; font-weight: 700; }.tree-0 { grid-row: 1 / 3; }.tree-1 { background: #4d9e91; }.tree-2 { background: #8e79dd; }
+.unit-label { position: absolute; right: 3px; bottom: 2px; color: var(--muted); font-size: 7px; }.chart-legend { display: flex; gap: 12px; margin-top: 8px; color: var(--muted); font-size: 8px; }.chart-legend span:first-child { color: #5145cd; }.chart-legend span:last-child { color: #397c71; }
 .kpi-grid { display: grid; grid-template-columns: repeat(4, minmax(110px, 1fr)); gap: 10px; margin-top: 14px; }
 .kpi-card { display: grid; gap: 4px; min-width: 0; padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: white; }
 .kpi-card span, .kpi-card small { overflow: hidden; color: var(--muted); font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
@@ -131,6 +153,7 @@ pre { max-height: 180px; margin: 4px 0 0; padding: 8px; overflow: auto; border-r
 @media (max-width: 620px) {
   .topbar h1 { font-size: 17px; }.dashboard-heading { align-items: flex-start; flex-direction: column; }.toolbar { width: 100%; overflow-x: auto; }.tool-button { flex: 1; }
   .filter-strip { grid-template-columns: 1fr auto; }.filter-strip > div:first-child { grid-column: 1 / -1; }
-  .kpi-grid { grid-template-columns: 1fr 1fr; }.chart-grid { grid-template-columns: 1fr; }.chart-card { min-height: 250px; }
+  .composition-meta { grid-template-columns: auto auto; }.composition-meta p { grid-column: 1 / -1; margin-left: 0; }
+  .visual-composition, .visual-composition[data-layout-id] { grid-template-columns: 1fr; }.visual-composition[data-layout-id] .viz-card { grid-column: auto; grid-row: auto; }.viz-card { min-height: 205px; }.viz-plot { min-height: 125px; }
   .state-columns { grid-template-columns: 1fr; }.assistant-footer { flex-direction: column; }
 }

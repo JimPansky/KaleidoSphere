@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>M6-01 Visual Scenario Lab</title>
+  <title>M6-02 Native Superset Diversity Lab</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
@@ -15,7 +15,7 @@
     </div>
     <div class="environment" aria-label="Testumgebung">
       <span class="status-dot" aria-hidden="true"></span>
-      M6-01 deterministic stub
+      M6-02 session-only composition preview
     </div>
   </header>
 
@@ -58,28 +58,8 @@
         <span id="undo-help" class="visually-hidden">Stellt den vorherigen reversiblen Sitzungszustand wieder her.</span>
       </section>
 
-      <section class="kpi-grid" aria-label="Oracle KPI cards">
-        <article class="kpi-card"><span>Q2 Umsatz</span><strong>€12,48 Mio.</strong><small>letztes abgeschlossenes Quartal</small></article>
-        <article class="kpi-card"><span>Bruttomarge</span><strong>31,4%</strong><small>synthetic oracle</small></article>
-        <article class="kpi-card warning"><span>Bestandsrisiko</span><strong>2,4 Tage</strong><small>Werk 2 · Rotor-7</small></article>
-        <article class="kpi-card"><span>Pressen-MTBF</span><strong>68 h</strong><small>Q2 2026</small></article>
-      </section>
-
-      <section class="chart-grid">
-        <article id="sales-margin" class="chart-card" tabindex="0">
-          <header><div><span class="chart-kicker">Revenue & margin</span><h3>Quarter performance</h3></div><span class="chart-menu" aria-hidden="true">•••</span></header>
-          <div class="bars" role="img" aria-label="Revenue bars from Q3 2025 to Q2 2026, highest in Q2 2026">
-            <div><span>Q3</span><i style="height:54%"></i></div><div><span>Q4</span><i style="height:67%"></i></div><div><span>Q1</span><i style="height:72%"></i></div><div class="active-bar"><span>Q2</span><i style="height:91%"></i></div>
-          </div>
-        </article>
-        <article id="inventory-table" class="chart-card table-card" tabindex="0">
-          <header><div><span class="chart-kicker">Inventory coverage</span><h3>Lowest coverage components</h3></div><span class="risk-pill">1 risk</span></header>
-          <table>
-            <thead><tr><th>Component</th><th>Plant</th><th>Coverage</th><th>Signal</th></tr></thead>
-            <tbody><tr class="risk-row"><td>Rotor-7</td><td>Werk 2</td><td>2,4 d</td><td>Stockout</td></tr><tr><td>Seal-4</td><td>Werk 1</td><td>8,6 d</td><td>Watch</td></tr><tr><td>Housing-2</td><td>Werk 3</td><td>14,2 d</td><td>Stable</td></tr></tbody>
-          </table>
-        </article>
-      </section>
+      <section id="composition-meta" class="composition-meta" aria-live="polite"></section>
+      <section id="visual-composition" class="visual-composition" aria-label="Scenario-specific native Superset composition preview"></section>
 
       <section id="conclusion-card" class="conclusion-card" hidden aria-live="polite">
         <span>Known-truth conclusion</span>

@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { resolve } from 'node:path';
+import { evaluateVisualDiversity, VISUAL_DIVERSITY_RUBRIC } from '../services/bi-control/src/visual-scenario-lab/view-compositions.mjs';
 
 const require = createRequire(import.meta.url);
 const playwrightCandidates = [
@@ -15,7 +16,7 @@ for (const candidate of playwrightCandidates) {
 if (!playwright) throw new Error('PLAYWRIGHT_CORE_UNAVAILABLE_NO_INSTALL_ATTEMPTED');
 
 const baseUrl = process.env.VISUAL_LAB_URL ?? 'http://127.0.0.1:41737';
-const evidenceRoot = resolve('docs/evidence/m6-01-visual');
+const evidenceRoot = resolve(process.env.VISUAL_EVIDENCE_ROOT ?? 'docs/evidence/m6-02-native-visual');
 const screenshotRoot = resolve(evidenceRoot, 'screenshots');
 await mkdir(screenshotRoot, { recursive: true });
 const sha256 = (buffer) => createHash('sha256').update(buffer).digest('hex');
@@ -39,6 +40,7 @@ const manifest = {
   persistentMutations: 0,
   runs: [],
   controlChecks: [],
+  visualDiversityRubric: VISUAL_DIVERSITY_RUBRIC,
 };
 
 try {
@@ -85,6 +87,12 @@ try {
         expectedState: result.expectedState,
         actualState: result.actualState,
         nativeSupersetReadback: result.nativeSupersetReadback,
+        viewSignature: result.viewComposition.viewSignature,
+        chartTypes: result.viewComposition.chartTypes,
+        layoutId: result.viewComposition.layoutId,
+        rationale: result.viewComposition.rationale,
+        compositionSelectionMode: result.viewComposition.selectionMode,
+        persistentCompositionMutation: result.viewComposition.persistentMutation,
         oracle: result.oracle,
         contractVerdict: result.verdict,
         screenshot: `screenshots/${screenshotFile}`,
@@ -124,5 +132,15 @@ try {
   await browser.close();
 }
 
+const scenarioEntries = [...new Map(manifest.runs.map((run) => [run.scenarioId, run])).values()];
+manifest.visualDiversity = evaluateVisualDiversity(scenarioEntries);
+manifest.responsiveEvidence = {
+  desktopRuns: manifest.runs.filter((run) => run.viewport.id.startsWith('desktop')).length,
+  narrowRuns: manifest.runs.filter((run) => run.viewport.id.startsWith('narrow')).length,
+  layoutStrategy: 'scenario_layout_reflows_to_single_column_with_independent_card_height_and_reading_order',
+  scaleOnly: false,
+};
+if (!manifest.visualDiversity.passed) throw new Error(`VISUAL_DIVERSITY_GATE_FAILED:${JSON.stringify(manifest.visualDiversity)}`);
+
 await writeFile(resolve(evidenceRoot, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`);
-process.stdout.write(`visual evidence: ${manifest.runs.length} captures, ${manifest.runs.filter((run) => run.measuredHorizontalOverflow).length} measured overflows\n`);
+process.stdout.write(`visual evidence: ${manifest.runs.length} captures, ${manifest.visualDiversity.distinctLayoutFamilies} layouts, ${manifest.visualDiversity.distinctChartTypes} chart types, ${manifest.runs.filter((run) => run.measuredHorizontalOverflow).length} measured overflows\n`);

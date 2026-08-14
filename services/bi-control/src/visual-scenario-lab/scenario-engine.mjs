@@ -4,6 +4,7 @@ import {
   InMemoryDashboardStateAdapter,
   createPersistentAssetRevisionProposal,
 } from '../assistant-foundation/ui-state-adapter.mjs';
+import { compositionFor } from './view-compositions.mjs';
 
 const fixtureRoot = new URL('../../fixtures/visual-scenario-lab/', import.meta.url);
 const readJson = async (name) => JSON.parse(await readFile(new URL(name, fixtureRoot), 'utf8'));
@@ -146,6 +147,7 @@ export async function runScenarioSession(scenarioId) {
 
   const actualState = adapter.read();
   const truth = oracle.truths[scenario.oracleTruth];
+  const viewComposition = compositionFor(scenario.id);
   const result = {
     schemaVersion: 'chimpmaera.bi/visual-scenario-result/v1',
     scenario: { id: scenario.id, title: scenario.title, utterance: scenario.utterance },
@@ -161,6 +163,12 @@ export async function runScenarioSession(scenarioId) {
       focusedChartId: actualState.focusedChartId,
       dashboardStillUsable: true,
     },
+    viewComposition: {
+      ...viewComposition,
+      selectionMode: 'session_only_preview',
+      persistentMutation: false,
+      trustedUiApprovalRequiredForPersistence: true,
+    },
     oracle: { truthKey: scenario.oracleTruth, values: clone(truth), conclusion: conclusionFor(scenario.oracleTruth, truth) },
     proposal,
     verdict: {
@@ -171,7 +179,7 @@ export async function runScenarioSession(scenarioId) {
       actionsAfterCancel: scenario.id === 'voice-correction-cancel' ? 0 : null,
       visualInspection: 'pending_browser_evidence',
     },
-    nonclaims: ['No real Superset runtime readback', 'No speech provider', 'No OpenClaw, Hermes, or Claude adapter quality claim'],
+    nonclaims: ['No real Superset runtime readback', 'No persistent dashboard composition applied', 'No speech provider', 'No OpenClaw, Hermes, or Claude adapter quality claim'],
   };
   return { result, adapter, lastUndoToken: priorReceipt?.undoToken ?? null };
 }

@@ -88,3 +88,70 @@ Next slice: implement one real harness adapter at a time behind the frozen plann
 and UI-action boundary. No adapter is supported until it independently passes this
 same scenario, negative, undo/cancel, and visual suite against a live Superset test
 stack; add MSSQL and Oracle live seed readbacks as adapter evidence.
+
+## M6-02 Native Superset Bridge addendum
+
+Status: local terminal candidate, pending final repository cleanup at commit time.
+Base commit: `1c056f5200eb0f6fef8e0c840271be8018da6391`.
+Branch: `m6-02-native-superset-bridge`.
+
+M6-02 replaces the M6-01 shell-only readback claim with a real isolated Apache
+Superset 6.1.0 loopback stack at `127.0.0.1:28088`. The stack uses only the
+synthetic 12-row Northstar Components projection and deterministic managed
+assets: one database, one dataset, 21 charts, and eight dashboards with stable
+UUIDs.
+
+The native bridge uses the public Superset REST API. Supported session effects
+are `set_filter`, `clear_filter`, `set_time_range`, and `explain_current_view`
+through dashboard permalink data-mask state with independent readback. Unsupported
+or unproven capabilities fail closed, including focus, drilldown, segment
+comparison, tab selection, table sorting, and series toggling. There is no free
+DOM/JavaScript action path, no raw SQL, no source credential in Superset, no
+dynamic plugin path, no voice-only persistent approval, and no fake native success.
+
+Fresh evidence run `e78-20260814T2137` completed two consecutive green native
+runs, each covering all eight Golden Scenarios with native readback, oracle
+values, action traces, denial counts, mutation counts, and persistent mutation
+count zero. The diversity gate passed with five domain layout families, eight
+meaningful chart types, rationale coverage 100%, maximum domain signature reuse
+one, and zero misleading chart types.
+
+The browser evidence contains 16 hashed Superset screenshots: each scenario at
+1440x900 desktop and 390x844 narrow. Direct pixel review passed at 8.7/10 with
+zero Severity 1/2 defects and zero measured horizontal overflow. Narrow evidence
+uses full-width native dashboard rows instead of a scale-only shrink.
+
+Machine evidence:
+
+- `docs/evidence/m6-02-native/live-manifest.json`
+- `docs/evidence/m6-02-native-visual/manifest.json`
+- `docs/evidence/m6-02-native-visual/direct-pixel-review.json`
+- `docs/evidence/m6-02-native-visual/screenshots/*.png`
+
+Binding M6-03 handoff: keep the harness and model as separate components and use
+Qwen3.6 through an OpenAI-compatible llama.cpp endpoint as the reference-model
+path. Prefer the already available Qwen3.6-28B-REAP20-A3B-Q6_K as the
+quality/stability default; Q5_K_M remains only a measured fallback/comparator.
+Because the Claude Agent SDK does not support Qwen, the first real harness must
+be local-model-capable. The M6-03 preflight must choose between Hermes ACP as the
+technically leanest initial candidate and an isolated OpenClaw product gateway by
+minimal conformance evidence. It must not modify or depend on the personal
+OpenClaw instance or existing local AI infrastructure.
+
+M6-02 remains model-free and makes no Qwen3.6, harness, or provider-quality
+claim. M6-03 must practically prove tool calling, structured output,
+streaming/cancel, context handling, malformed arguments, timeout,
+restart/reconciliation, and the Golden/Diversity suite with Qwen3.6 before any
+real-harness support claim.
+
+M6-03 must optimize a generic local-Qwen BI consultant through
+incumbent-versus-candidate replay and blind holdout databases, not overfit this
+known fixture. Its required discovery loop is: objective/risk; scope/capability
+preflight; structural inventory; entity/process/relationship graph; prioritized
+bounded profiling; anomaly/quality/cause hypotheses; targeted tests;
+evidence/confidence/blind spots; semantic/KPI model; visualization proposal; user
+correction; trusted apply/readback/rollback. Users need not know table locations.
+Holdouts must include schema/name perturbations, domain shifts, hidden oracle
+truths, and underspecified/adversarial requests. Persist auditable evidence and
+decisions, never raw chain-of-thought, and allow no production self-modification.
+These are terminal M6-03 requirements only; they do not expand or delay M6-02.

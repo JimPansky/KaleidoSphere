@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "chimpmaera.bi/native-superset-direct-pixel-review/v1",
+  "reviewedAt": "2026-08-14T19:36:21.355Z",
+  "method": "direct_pixel_review_of_all_16_full_resolution_browser_captures",
+  "visualScore": 8.7,
+  "requiredMinimum": 8.5,
+  "passed": true,
+  "severityCounts": {
+    "sev1": 0,
+    "sev2": 0,
+    "sev3": 0
+  },
+  "misleadingChartCount": 0,
+  "responsiveVerdict": "PASS_NATIVE_ROWS_RECOMPOSE_TO_FULL_WIDTH_CARDS_AT_390PX",
+  "reviewerNotes": [
+    "All desktop and narrow captures were inspected at full resolution after final chart scoping and responsive composition changes.",
+    "Sparse marks are intentional consequences of the deterministic 12-row synthetic oracle, not missing-data or query failures.",
+    "Titles and filters keep unlike units separate; the cross-domain association view explicitly rejects causal interpretation."
+  ],
+  "captures": [
+    {
+      "captureId": "e78-20260814T2137-live-2:executive-sales:desktop-1440x900",
+      "scenarioId": "executive-sales",
+      "viewport": "desktop-1440x900",
+      "screenshotSha256": "3ba1dad63ca2c003db21e26d32f05a1e193842de92eeb4730ac7b797fad939b2",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:quality-investigation:desktop-1440x900",
+      "scenarioId": "quality-investigation",
+      "viewport": "desktop-1440x900",
+      "screenshotSha256": "44e5cf4d2ba2cb62da9716b94eab2828def39fba1aeb500763cc069bc0010398",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:inventory-risk:desktop-1440x900",
+      "scenarioId": "inventory-risk",
+      "viewport": "desktop-1440x900",
+      "screenshotSha256": "63307ef1bdd2a472054fb9f5f180ff90063c14282d1fb32d308100eecc9d1bcd",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:maintenance:desktop-1440x900",
+      "scenarioId": "maintenance",
+      "viewport": "desktop-1440x900",
+      "screenshotSha256": "7105646266ec6f80313e8eadd3c39cb9fc73725953efb461f414f1685b1fa115",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:cross-domain:desktop-1440x900",
+      "scenarioId": "cross-domain",
+      "viewport": "desktop-1440x900",
+      "screenshotSha256": "076e24430fd89567d761c9a886fa35078836f23ba0cf521533ccbe74372c4017",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:voice-correction-cancel:desktop-1440x900",
+      "scenarioId": "voice-correction-cancel",
+      "viewport": "desktop-1440x900",
+      "screenshotSha256": "512b6d47e92550c9686c3a0acd2c0a3f0d732f6e5b4f59ec3e5d6d5b769540c9",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:undo-idempotency:desktop-1440x900",
+      "scenarioId": "undo-idempotency",
+      "viewport": "desktop-1440x900",
+      "screenshotSha256": "4c524b292324e817d8a0dcaf752735be14567f4cb044a3061b500120a331c772",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:persistent-request-denied:desktop-1440x900",
+      "scenarioId": "persistent-request-denied",
+      "viewport": "desktop-1440x900",
+      "screenshotSha256": "79b3adbc30b6e84ca411a7f81dd9891e6a1a1bde6432bd989275cfb5d056d666",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:executive-sales:narrow-390x844",
+      "scenarioId": "executive-sales",
+      "viewport": "narrow-390x844",
+      "screenshotSha256": "869e0ca99126c894f82561a9dfefbb49fd2d9cbc8cfe80e707b452ee590905fe",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:quality-investigation:narrow-390x844",
+      "scenarioId": "quality-investigation",
+      "viewport": "narrow-390x844",
+      "screenshotSha256": "d50470485ce73999dde94d02fcbaa89b21b2bd54aac6d3739579fcd4cdb11aad",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:inventory-risk:narrow-390x844",
+      "scenarioId": "inventory-risk",
+      "viewport": "narrow-390x844",
+      "screenshotSha256": "944c992e161ad3d655f44e5bbb900f43537607e55cd56a458c07ed1f8b6491cd",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:maintenance:narrow-390x844",
+      "scenarioId": "maintenance",
+      "viewport": "narrow-390x844",
+      "screenshotSha256": "5890c98599b02c9df2366ca40c0382d95e5acd6384b56c4c64d3759c297455dd",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:cross-domain:narrow-390x844",
+      "scenarioId": "cross-domain",
+      "viewport": "narrow-390x844",
+      "screenshotSha256": "a358a43a9ef626127549fd5529e43b49d2ac4224a8c0c29b103ba51744819714",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:voice-correction-cancel:narrow-390x844",
+      "scenarioId": "voice-correction-cancel",
+      "viewport": "narrow-390x844",
+      "screenshotSha256": "3cbcc9ff5c7b308676fd3a300826ae36bdb4fa71e1db2d7cb4dab15ca177facf",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:undo-idempotency:narrow-390x844",
+      "scenarioId": "undo-idempotency",
+      "viewport": "narrow-390x844",
+      "screenshotSha256": "45cd9d6e6ea29cd9cd8528ffebeb24f0b4f834e8ed19c40e523a5308397fc63e",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:persistent-request-denied:narrow-390x844",
+      "scenarioId": "persistent-request-denied",
+      "viewport": "narrow-390x844",
+      "screenshotSha256": "818b213c25fe276f2f83b2f87ef44757da1b7f2572219edc828b8cc5277fec2f",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    }
+  ],
+  "reviewedManifest": "docs/evidence/m6-02-native-visual/manifest.json",
+  "reviewedManifestSha256": "6957594106fcdf155ba5829f34d02e76e89ec4056a348c73e718b281c819adec"
+}

@@ -12,6 +12,12 @@ import {
 import {
   loadPortableSeed, renderPortableSeed, semanticSeedProjection,
 } from '../services/bi-control/src/visual-scenario-lab/seed-portability.mjs';
+import {
+  evaluateVisualDiversity, VISUAL_DIVERSITY_RUBRIC, VIEW_COMPOSITIONS,
+} from '../services/bi-control/src/visual-scenario-lab/view-compositions.mjs';
+import {
+  MANAGED_BY, NativeSupersetStateAdapter, SupersetPublicApiClient,
+} from '../services/bi-control/src/visual-scenario-lab/native-superset-bridge.mjs';
 
 test('M6-01 oracle is deterministic, synthetic, practical, and engine-neutral', async () => {
   const { oracle, suite } = await loadVisualScenarioFixtures();
@@ -74,7 +80,95 @@ test('M6-01 all eight golden scenarios reach exact expected state and oracle tru
     assert.equal(result.verdict.directDomOrJsActions, 0, result.scenario.id);
     assert.ok(result.oracle.conclusion.length > 30, result.scenario.id);
     assert.equal(result.nativeSupersetReadback.mode, 'faithful_embedded_shell');
+    assert.equal(result.viewComposition.selectionMode, 'session_only_preview');
+    assert.equal(result.viewComposition.persistentMutation, false);
+    assert.equal(result.viewComposition.trustedUiApprovalRequiredForPersistence, true);
   }
+});
+
+test('M6-02 visual diversity rubric requires five domain layouts and six meaningful chart types', async () => {
+  const results = await runGoldenSuite();
+  const entries = results.map((result) => ({ scenarioId: result.scenario.id, ...result.viewComposition }));
+  const verdict = evaluateVisualDiversity(entries);
+  assert.equal(VISUAL_DIVERSITY_RUBRIC.minimumDistinctLayoutFamilies, 5);
+  assert.equal(VISUAL_DIVERSITY_RUBRIC.minimumDistinctChartTypes, 6);
+  assert.equal(verdict.distinctLayoutFamilies, 5);
+  assert.ok(verdict.distinctChartTypes >= 6);
+  assert.ok(verdict.rationaleCoverage >= 0.8);
+  assert.equal(verdict.misleadingChartTypeCount, 0);
+  assert.ok(verdict.maximumDomainSignatureReuse < 3);
+  assert.equal(verdict.passed, true);
+});
+
+test('M6-02 every scenario exposes complete composition evidence and readable-unit rationale', () => {
+  assert.equal(Object.keys(VIEW_COMPOSITIONS).length, 8);
+  for (const [scenarioId, composition] of Object.entries(VIEW_COMPOSITIONS)) {
+    assert.ok(composition.viewSignature.includes('|'), scenarioId);
+    assert.ok(composition.chartTypes.length >= 2, scenarioId);
+    assert.ok(composition.layoutId.length > 5, scenarioId);
+    assert.ok(composition.rationale.length >= 40, scenarioId);
+  }
+  assert.deepEqual(VISUAL_DIVERSITY_RUBRIC.requiredEvidenceFields, ['viewSignature', 'chartTypes', 'layoutId', 'rationale']);
+});
+
+test('M6-02 diversity gate rejects misleading or repeated domain compositions', () => {
+  const invalid = VISUAL_DIVERSITY_RUBRIC.domainScenarioIds.map((scenarioId) => ({
+    scenarioId,
+    layoutId: 'same-layout',
+    viewSignature: 'same-signature',
+    chartTypes: ['pie'],
+    rationale: 'A deliberately invalid rationale long enough to isolate the structural diversity failures.',
+    misleadingChartTypes: ['pie_for_time_series'],
+  }));
+  const verdict = evaluateVisualDiversity(invalid);
+  assert.equal(verdict.passed, false);
+  assert.equal(verdict.distinctLayoutFamilies, 1);
+  assert.equal(verdict.maximumDomainSignatureReuse, 5);
+  assert.equal(verdict.misleadingChartTypeCount, 5);
+});
+
+test('M6-02 native client accepts only credential-free loopback targets', () => {
+  assert.doesNotThrow(() => new SupersetPublicApiClient({ baseUrl: 'http://127.0.0.1:28088', password: 'local-test-only' }));
+  assert.throws(() => new SupersetPublicApiClient({ baseUrl: 'https://superset.example', password: 'local-test-only' }), /SUPERSET_NATIVE_TARGET_DENIED/);
+  assert.throws(() => new SupersetPublicApiClient({ baseUrl: 'http://user:secret@127.0.0.1:28088', password: 'local-test-only' }), /SUPERSET_NATIVE_TARGET_DENIED/);
+});
+
+test('M6-02 native permalink adapter reads back supported effects and fails closed without fake mutation', async () => {
+  const values = new Map();
+  let sequence = 0;
+  const dashboard = { id: 7, uuid: 'c6020000-0000-4000-8000-000000000101', slug: 'm6-02-executive-summary' };
+  const fakeClient = {
+    async createPermalink(_dashboardId, state) {
+      const key = `key-${sequence += 1}`;
+      const dataMask = {};
+      for (const [filterKey, value] of Object.entries(state.filters)) {
+        const id = `NATIVE_FILTER-M6_02_${filterKey.toUpperCase()}`;
+        dataMask[id] = { id, extraFormData: { filters: [{ col: filterKey, op: 'IN', val: [value] }] }, filterState: { value: [value], label: value } };
+      }
+      values.set(key, { dashboardId: dashboard.uuid, state: { dataMask, urlParams: [['cm_managed_by', MANAGED_BY], ['cm_state_version', String(state.version)], ['cm_cancelled', String(state.cancelled === true)]] } });
+      return { key };
+    },
+    async readPermalink(key) { return structuredClone(values.get(key)); },
+    async getDashboard() { return { result: { ...dashboard, dashboard_title: 'M6-02 Executive Summary' } }; },
+  };
+  const adapter = new NativeSupersetStateAdapter({ client: fakeClient, dashboardRecord: dashboard });
+  await adapter.initialize();
+  const request = {
+    schemaVersion: 'chimpmaera.bi/ui-action/v1', actionId: 'native-supported-1', action: 'set_filter',
+    args: { key: 'plant', value: 'Werk 3' }, stateVersion: 1, idempotencyKey: 'native-supported-idem-1',
+    preconditions: { dashboardUuid: dashboard.uuid, dashboardSlug: dashboard.slug },
+  };
+  const applied = await adapter.apply(request);
+  assert.equal(applied.status, 'applied');
+  assert.equal((await adapter.readback()).state.filters.plant, 'Werk 3');
+  const writesAfterApply = adapter.httpMutations;
+  assert.equal((await adapter.apply(request)).status, 'already_applied');
+  assert.equal(adapter.httpMutations, writesAfterApply);
+  const unsupported = await adapter.attempt({ ...request, actionId: 'native-unsupported-1', action: 'focus_chart', stateVersion: 2, idempotencyKey: 'native-unsupported-idem-1' });
+  assert.equal(unsupported.denialReason, 'SUPERSET_PUBLIC_ACTION_UNSUPPORTED');
+  assert.equal(adapter.httpMutations, writesAfterApply);
+  await adapter.undo(applied.undoToken, 2);
+  assert.deepEqual((await adapter.readback()).state.filters, {});
 });
 
 test('M6-01 executive scenario selects the exact last completed quarter and comparison', async () => {

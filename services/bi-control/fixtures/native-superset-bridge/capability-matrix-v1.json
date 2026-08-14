@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "chimpmaera.bi/native-superset-capability-matrix/v1",
+  "observedRuntime": {
+    "product": "Apache Superset",
+    "version": "6.1.0",
+    "image": "apache/superset:6.1.0@sha256:fb3464528ec7076f91195f0ff7835755aa023e281f1bb78a84782ce7a36b3705",
+    "openapiCanonicalSha256": "1e0aea80b9f9331d83717711c577575d1f0c706f5e0e3632d403a28df0c5caa6",
+    "openapiCanonicalBytes": 452387,
+    "embeddedSupersetEnabled": false
+  },
+  "actions": {
+    "set_filter": {"status": "supported", "effect": "native_permalink_data_mask", "evidence": ["POST /api/v1/dashboard/{pk}/permalink", "GET /api/v1/dashboard/permalink/{key}"]},
+    "clear_filter": {"status": "supported", "effect": "native_permalink_data_mask", "evidence": ["POST /api/v1/dashboard/{pk}/permalink", "GET /api/v1/dashboard/permalink/{key}"]},
+    "set_time_range": {"status": "supported", "effect": "native_permalink_data_mask", "evidence": ["OpenAPI time_range_filter example", "GET /api/v1/dashboard/permalink/{key}"]},
+    "focus_chart": {"status": "unsupported", "reason": "No public REST or enabled Embedded SDK operation with independent focus readback"},
+    "open_drilldown": {"status": "unsupported", "reason": "No bounded public dashboard drilldown operation with independent readback"},
+    "compare_segments": {"status": "unsupported", "reason": "No public dashboard comparison state operation; arbitrary chart-form-data mutation is denied"},
+    "select_tab": {"status": "partial", "reason": "Tabs are publicly readable and permalink state accepts activeTabs, but this slice has no independently proven session tab activation/readback"},
+    "sort_table": {"status": "partial", "reason": "Permalink schema accepts chartStates, but native table sort application/readback is not proven"},
+    "toggle_series": {"status": "unsupported", "reason": "No public dashboard series-visibility operation with independent readback"},
+    "explain_current_view": {"status": "supported", "effect": "read_only", "evidence": ["GET /api/v1/dashboard/{id_or_slug}", "GET /api/v1/dashboard/permalink/{key}"]}
+  },
+  "failClosed": ["partial", "unsupported"],
+  "nonclaims": ["No capability is inferred from the M6-01 shell", "No Embedded SDK action capability is claimed while EMBEDDED_SUPERSET=false", "No DOM selector or injected JavaScript is a product action interface"]
+}

@@ -21,7 +21,17 @@ SQLLAB_CTAS_NO_LIMIT = False
 SQL_MAX_ROW = 1000
 UPLOAD_FOLDER = "/var/lib/chimpmaera-bi/metadata/uploads-denied"
 ALLOWED_EXTENSIONS = set()
-WTF_CSRF_EXEMPT_LIST = []
+# Preserve Superset 6.1's documented application-level exemptions.  Clearing
+# this list breaks the authenticated dashboard SPA: its own telemetry request
+# is rejected and Flask redirects the browser to login before charts render.
+# This does not disable CSRF globally and does not exempt any custom endpoint.
+WTF_CSRF_EXEMPT_LIST = [
+    "superset.charts.data.api.data",
+    "superset.dashboards.api.cache_dashboard_screenshot",
+    "superset.views.core.explore_json",
+    "superset.views.core.log",
+    "superset.views.datasource.views.samples",
+]
 FEATURE_FLAGS = {
     "ENABLE_TEMPLATE_PROCESSING": False,
     "ALERT_REPORTS": False,

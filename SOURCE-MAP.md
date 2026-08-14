@@ -80,3 +80,11 @@ as preinstalled test tooling and are not copied or redistributed. The embedded
 shell does not contain Apache Superset source or assets and makes no live-Superset
 claim. M6-01 files are ordinary repository-authored hashes under `files`, not
 derived files.
+
+M6-02 native-Superset bridge code, capability matrix, deterministic projection
+materializer, public REST API adapter, live evidence runners, direct pixel
+review, screenshots, and evidence manifests are repository-authored clean-room
+work against an isolated loopback Apache Superset 6.1.0 stack. The bridge uses
+only supported public REST endpoints and deterministic synthetic data. It does
+not copy Apache Superset source or assets, does not use source credentials, and
+does not claim unsupported native UI actions.

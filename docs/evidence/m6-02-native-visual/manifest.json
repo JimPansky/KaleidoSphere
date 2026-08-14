@@ -1,0 +1,3523 @@
+{
+  "schemaVersion": "chimpmaera.bi/native-superset-browser-evidence/v1",
+  "generatedAt": "2026-08-14T19:36:01.047Z",
+  "nativeEvidenceManifest": "docs/evidence/m6-02-native/live-manifest.json",
+  "nativeEvidenceManifestSha256": "7dbd6e1f07c0abdacd049ba9144c25204441c50753e9d5af4057a59a40b3ee65",
+  "nativeRunId": "e78-20260814T2137-live-2",
+  "baseUrl": "http://127.0.0.1:28088",
+  "browser": "148.0.7778.96",
+  "automation": "preinstalled-playwright-core-role-and-label-locators",
+  "freeDomOrInjectedJavaScriptActions": 0,
+  "persistentDashboardMutations": 0,
+  "consoleErrorPolicy": {
+    "allowedClasses": [
+      "known_superset_service_worker_404"
+    ],
+    "rawConsoleMessagesPersisted": false,
+    "unexpectedErrorsFailClosed": true
+  },
+  "captures": [
+    {
+      "captureId": "e78-20260814T2137-live-2:executive-sales:desktop-1440x900",
+      "capturedAt": "2026-08-14T19:36:03.129Z",
+      "scenarioId": "executive-sales",
+      "viewport": {
+        "id": "desktop-1440x900",
+        "width": 1440,
+        "height": 900
+      },
+      "dashboard": {
+        "id": 1,
+        "uuid": "c6020000-0000-4000-8000-000000000101",
+        "slug": "m6-02-executive-summary",
+        "title": "M6-02 Executive Summary"
+      },
+      "permalinkKey": "l4jJbWzYBGy",
+      "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
+      "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
+      "nativeReadbackDigest": "sha256:c19364daaa539dd23ecd8fb0e0d37dfbb6dc60cf0dfca621ffad2afffa27e88b",
+      "expectedState": {
+        "version": 2,
+        "filters": {},
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "actualState": {
+        "version": 2,
+        "filters": {},
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "oracle": {
+        "truthKey": "executiveQ2",
+        "values": {
+          "window": {
+            "from": "2026-04-01",
+            "to": "2026-06-30"
+          },
+          "revenueEur": 12480000,
+          "grossMarginPct": 31.4,
+          "topProduct": "Atlas Drive",
+          "topCustomer": "Futura Retail"
+        },
+        "digest": "sha256:777387fc2037f4967b2d7342226782164c0b1ccdcc0540a34ffaef1c6fb1ac1d"
+      },
+      "actionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-executive-sales-01",
+            "action": "set_time_range",
+            "args": {
+              "from": "2026-04-01",
+              "to": "2026-06-30"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-01",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000101",
+              "dashboardSlug": "m6-02-executive-summary"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-executive-sales-01",
+            "action": "set_time_range",
+            "status": "applied",
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-01",
+            "undoToken": "sha256:b552475e7eb13e503cb8d8ef15449c35a2c95c2fa1f34f1a086507daa157d1d9",
+            "sideEffect": "reversible_native_permalink_state",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "previousStateVersion": 1,
+            "requestDigest": "sha256:d3e61f098537fd91cdff3ce8966a813b49f27f9ec8cb83338e008341b0bdc947",
+            "nativeReadbackDigest": "sha256:00782a26089ef22b813578cba3dc19f788cf9ac5fe6684618a183042a47737d0"
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-executive-sales-02",
+            "action": "select_tab",
+            "args": {
+              "tabId": "executive"
+            },
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-02",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000101",
+              "dashboardSlug": "m6-02-executive-summary"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-executive-sales-02",
+            "action": "select_tab",
+            "status": "denied",
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-02",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        },
+        {
+          "sequence": 3,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-executive-sales-03",
+            "action": "focus_chart",
+            "args": {
+              "chartId": "sales-margin"
+            },
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-03",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000101",
+              "dashboardSlug": "m6-02-executive-summary"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-executive-sales-03",
+            "action": "focus_chart",
+            "status": "denied",
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-03",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        },
+        {
+          "sequence": 4,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-executive-sales-04",
+            "action": "compare_segments",
+            "args": {
+              "segments": [
+                "Atlas Drive",
+                "Futura Retail"
+              ]
+            },
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-04",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000101",
+              "dashboardSlug": "m6-02-executive-summary"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-executive-sales-04",
+            "action": "compare_segments",
+            "status": "denied",
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-04",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        }
+      ],
+      "denialCount": 3,
+      "unsupportedActionDenialCount": 3,
+      "mutationCounts": {
+        "nativeSessionStateWrites": 2,
+        "persistentDashboardWrites": 0
+      },
+      "layoutId": "executive-summary",
+      "chartTypes": [
+        "big_number",
+        "time_series",
+        "grouped_bar"
+      ],
+      "viewSignature": "executive-summary|kpi-strip+trend-wide+ranked-bars",
+      "rationale": "The big number answers the headline revenue question, while the time-series and bar encodings show the same completed-period revenue in complementary temporal and magnitude views without mixing units.",
+      "renderedChartCount": 3,
+      "screenshot": "screenshots/executive-sales--desktop-1440x900.png",
+      "screenshotSha256": "3ba1dad63ca2c003db21e26d32f05a1e193842de92eeb4730ac7b797fad939b2",
+      "measuredHorizontalOverflow": false,
+      "consoleErrorCount": 4,
+      "allowedConsoleErrorCount": 4,
+      "unexpectedConsoleErrorCount": 0,
+      "consoleErrorClasses": [
+        "known_superset_service_worker_404"
+      ],
+      "pageErrorCount": 0,
+      "visualVerdict": "approved_direct_pixel_review",
+      "defectNotes": []
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:quality-investigation:desktop-1440x900",
+      "capturedAt": "2026-08-14T19:36:04.363Z",
+      "scenarioId": "quality-investigation",
+      "viewport": {
+        "id": "desktop-1440x900",
+        "width": 1440,
+        "height": 900
+      },
+      "dashboard": {
+        "id": 2,
+        "uuid": "c6020000-0000-4000-8000-000000000102",
+        "slug": "m6-02-quality-investigation",
+        "title": "M6-02 Quality Investigation"
+      },
+      "permalinkKey": "GqyPY6Qmj3v",
+      "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
+      "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
+      "nativeReadbackDigest": "sha256:6a6d4c995fca10f2be52ea66b3f2eaffb0470536350b02cfe12a4e7f91a0b33e",
+      "expectedState": {
+        "version": 4,
+        "filters": {
+          "plant": "Werk 3",
+          "line": "Linie C"
+        },
+        "timeRange": {
+          "from": "2026-05-12",
+          "to": "2026-05-18"
+        },
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "actualState": {
+        "version": 4,
+        "filters": {
+          "plant": "Werk 3",
+          "line": "Linie C"
+        },
+        "timeRange": {
+          "from": "2026-05-12",
+          "to": "2026-05-18"
+        },
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "oracle": {
+        "truthKey": "qualitySpike",
+        "values": {
+          "window": {
+            "from": "2026-05-12",
+            "to": "2026-05-18"
+          },
+          "plant": "Werk 3",
+          "line": "Linie C",
+          "defectRatePct": 8.6,
+          "baselineDefectRatePct": 1.9,
+          "productionUnits": 18200,
+          "supplierBatch": "SB-X17",
+          "interpretation": "Strong association with supplier batch SB-X17; causation is not established."
+        },
+        "digest": "sha256:5169fa9b2f3f9c7fc4a904bfeea1b242444437aeecf548f2b6b8ac4e8edcf688"
+      },
+      "actionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-01",
+            "action": "set_filter",
+            "args": {
+              "key": "plant",
+              "value": "Werk 3"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-01",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
+              "dashboardSlug": "m6-02-quality-investigation"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-01",
+            "action": "set_filter",
+            "status": "applied",
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-01",
+            "undoToken": "sha256:51da3c0604c1b798dc2dfbd04d847ec1ae2e4c675c4c4fb3beba1fa5bfea305c",
+            "sideEffect": "reversible_native_permalink_state",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "previousStateVersion": 1,
+            "requestDigest": "sha256:d81fe8c37d868fd39803bfb84c378fe706b8bc85af4ec638bf1a46348e56eddc",
+            "nativeReadbackDigest": "sha256:37b42a4c9928580206fc7fd5696dacf2416dfcb689f284861941e29d0c87f70d"
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-02",
+            "action": "set_filter",
+            "args": {
+              "key": "line",
+              "value": "Linie C"
+            },
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-02",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
+              "dashboardSlug": "m6-02-quality-investigation"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-02",
+            "action": "set_filter",
+            "status": "denied",
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-02",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_NATIVE_APPLY_READBACK_MISMATCH"
+          }
+        },
+        {
+          "sequence": 3,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-03",
+            "action": "set_time_range",
+            "args": {
+              "from": "2026-05-12",
+              "to": "2026-05-18"
+            },
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-03",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
+              "dashboardSlug": "m6-02-quality-investigation"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-03",
+            "action": "set_time_range",
+            "status": "denied",
+            "stateVersion": 4,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-03",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_NATIVE_APPLY_READBACK_MISMATCH"
+          }
+        },
+        {
+          "sequence": 4,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-04",
+            "action": "focus_chart",
+            "args": {
+              "chartId": "quality-trend"
+            },
+            "stateVersion": 4,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-04",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
+              "dashboardSlug": "m6-02-quality-investigation"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-04",
+            "action": "focus_chart",
+            "status": "denied",
+            "stateVersion": 4,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-04",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        },
+        {
+          "sequence": 5,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-05",
+            "action": "compare_segments",
+            "args": {
+              "segments": [
+                "defect_rate",
+                "production_volume"
+              ]
+            },
+            "stateVersion": 4,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-05",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
+              "dashboardSlug": "m6-02-quality-investigation"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-05",
+            "action": "compare_segments",
+            "status": "denied",
+            "stateVersion": 4,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-05",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        },
+        {
+          "sequence": 6,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-06",
+            "action": "open_drilldown",
+            "args": {
+              "chartId": "quality-trend",
+              "dimension": "supplier_batch"
+            },
+            "stateVersion": 4,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-06",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
+              "dashboardSlug": "m6-02-quality-investigation"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-06",
+            "action": "open_drilldown",
+            "status": "denied",
+            "stateVersion": 4,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-06",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        }
+      ],
+      "denialCount": 5,
+      "unsupportedActionDenialCount": 3,
+      "mutationCounts": {
+        "nativeSessionStateWrites": 4,
+        "persistentDashboardWrites": 0
+      },
+      "layoutId": "quality-investigation",
+      "chartTypes": [
+        "time_series",
+        "scatter",
+        "table_conditional"
+      ],
+      "viewSignature": "quality-investigation|trend-wide+scatter+conditional-table",
+      "rationale": "The trend and scatter make the isolated defect-rate signal visible without implying causation, while the evidence table exposes the paired production row and supplier batch in exact synthetic values.",
+      "renderedChartCount": 3,
+      "screenshot": "screenshots/quality-investigation--desktop-1440x900.png",
+      "screenshotSha256": "44e5cf4d2ba2cb62da9716b94eab2828def39fba1aeb500763cc069bc0010398",
+      "measuredHorizontalOverflow": false,
+      "consoleErrorCount": 2,
+      "allowedConsoleErrorCount": 2,
+      "unexpectedConsoleErrorCount": 0,
+      "consoleErrorClasses": [
+        "known_superset_service_worker_404"
+      ],
+      "pageErrorCount": 0,
+      "visualVerdict": "approved_direct_pixel_review",
+      "defectNotes": []
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:inventory-risk:desktop-1440x900",
+      "capturedAt": "2026-08-14T19:36:05.512Z",
+      "scenarioId": "inventory-risk",
+      "viewport": {
+        "id": "desktop-1440x900",
+        "width": 1440,
+        "height": 900
+      },
+      "dashboard": {
+        "id": 3,
+        "uuid": "c6020000-0000-4000-8000-000000000103",
+        "slug": "m6-02-inventory-risk",
+        "title": "M6-02 Inventory Risk"
+      },
+      "permalinkKey": "B7vZbp1DOwd",
+      "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
+      "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
+      "nativeReadbackDigest": "sha256:1c8af5aabee591947774d1442c96b77d764b45122d57aa676b1e82d0fc541619",
+      "expectedState": {
+        "version": 3,
+        "filters": {
+          "plant": "Werk 2",
+          "component": "Rotor-7"
+        },
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "actualState": {
+        "version": 3,
+        "filters": {
+          "plant": "Werk 2",
+          "component": "Rotor-7"
+        },
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "oracle": {
+        "truthKey": "inventoryRisk",
+        "values": {
+          "plant": "Werk 2",
+          "component": "Rotor-7",
+          "coverageDays": 2.4,
+          "demandUnits": 4200,
+          "confirmedSupplyUnits": 900,
+          "risk": "stockout"
+        },
+        "digest": "sha256:59b38a4ea5f0b03ae7a6a7de97498c9edd3bdd2fc1ff3438a228b2d894e9c131"
+      },
+      "actionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-inventory-risk-01",
+            "action": "set_filter",
+            "args": {
+              "key": "plant",
+              "value": "Werk 2"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-01",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000103",
+              "dashboardSlug": "m6-02-inventory-risk"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-inventory-risk-01",
+            "action": "set_filter",
+            "status": "applied",
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-01",
+            "undoToken": "sha256:11041509f5ff3b15f1e3d9c1cca1f8e3a447f3a5f97a1f45e2f311116dda0015",
+            "sideEffect": "reversible_native_permalink_state",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "previousStateVersion": 1,
+            "requestDigest": "sha256:938157047c1b8e3866171acd2b27bb0d2d9243105d7c7706c4e7799f60d99ad5",
+            "nativeReadbackDigest": "sha256:a5c67acecec59db9787731139b5075897f4af4eb03f775f088c90d95448497f9"
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-inventory-risk-02",
+            "action": "set_filter",
+            "args": {
+              "key": "component",
+              "value": "Rotor-7"
+            },
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-02",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000103",
+              "dashboardSlug": "m6-02-inventory-risk"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-inventory-risk-02",
+            "action": "set_filter",
+            "status": "denied",
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-02",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_NATIVE_APPLY_READBACK_MISMATCH"
+          }
+        },
+        {
+          "sequence": 3,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-inventory-risk-03",
+            "action": "focus_chart",
+            "args": {
+              "chartId": "inventory-coverage"
+            },
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-03",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000103",
+              "dashboardSlug": "m6-02-inventory-risk"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-inventory-risk-03",
+            "action": "focus_chart",
+            "status": "denied",
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-03",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        },
+        {
+          "sequence": 4,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-inventory-risk-04",
+            "action": "sort_table",
+            "args": {
+              "chartId": "inventory-table",
+              "column": "coverage_days",
+              "direction": "asc"
+            },
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-04",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000103",
+              "dashboardSlug": "m6-02-inventory-risk"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-inventory-risk-04",
+            "action": "sort_table",
+            "status": "denied",
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-04",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        },
+        {
+          "sequence": 5,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-inventory-risk-05",
+            "action": "compare_segments",
+            "args": {
+              "segments": [
+                "demand",
+                "confirmed_supply"
+              ]
+            },
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-05",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000103",
+              "dashboardSlug": "m6-02-inventory-risk"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-inventory-risk-05",
+            "action": "compare_segments",
+            "status": "denied",
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-05",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        }
+      ],
+      "denialCount": 4,
+      "unsupportedActionDenialCount": 3,
+      "mutationCounts": {
+        "nativeSessionStateWrites": 3,
+        "persistentDashboardWrites": 0
+      },
+      "layoutId": "inventory-risk",
+      "chartTypes": [
+        "big_number",
+        "table_conditional",
+        "stacked_bar"
+      ],
+      "viewSignature": "inventory-risk|risk-kpi+conditional-table+stacked-bars",
+      "rationale": "Coverage is the urgent scalar, the conditionally formatted table ranks constrained components, and stacked bars compare demand with confirmed inbound supply in shared units.",
+      "renderedChartCount": 3,
+      "screenshot": "screenshots/inventory-risk--desktop-1440x900.png",
+      "screenshotSha256": "63307ef1bdd2a472054fb9f5f180ff90063c14282d1fb32d308100eecc9d1bcd",
+      "measuredHorizontalOverflow": false,
+      "consoleErrorCount": 2,
+      "allowedConsoleErrorCount": 2,
+      "unexpectedConsoleErrorCount": 0,
+      "consoleErrorClasses": [
+        "known_superset_service_worker_404"
+      ],
+      "pageErrorCount": 0,
+      "visualVerdict": "approved_direct_pixel_review",
+      "defectNotes": []
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:maintenance:desktop-1440x900",
+      "capturedAt": "2026-08-14T19:36:06.630Z",
+      "scenarioId": "maintenance",
+      "viewport": {
+        "id": "desktop-1440x900",
+        "width": 1440,
+        "height": 900
+      },
+      "dashboard": {
+        "id": 4,
+        "uuid": "c6020000-0000-4000-8000-000000000104",
+        "slug": "m6-02-maintenance-reliability",
+        "title": "M6-02 Maintenance Reliability"
+      },
+      "permalinkKey": "41EGmOKmkBK",
+      "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
+      "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
+      "nativeReadbackDigest": "sha256:8796df33abe69b4ac4bcca272a0d4e130a3321e7b6efec43ecab0b1c303e3e23",
+      "expectedState": {
+        "version": 3,
+        "filters": {
+          "asset_class": "Press"
+        },
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "actualState": {
+        "version": 3,
+        "filters": {
+          "asset_class": "Press"
+        },
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "oracle": {
+        "truthKey": "maintenance",
+        "values": {
+          "window": {
+            "from": "2026-04-01",
+            "to": "2026-06-30"
+          },
+          "assetClass": "Press",
+          "downtimeHours": 41.5,
+          "mtbfHours": 68,
+          "eventCount": 6
+        },
+        "digest": "sha256:9e288d434c3591ae0f61593965d815d1902cd6cae9b7183171bd65ae4e3ae59c"
+      },
+      "actionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-maintenance-01",
+            "action": "set_filter",
+            "args": {
+              "key": "asset_class",
+              "value": "Press"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-01",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000104",
+              "dashboardSlug": "m6-02-maintenance-reliability"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-maintenance-01",
+            "action": "set_filter",
+            "status": "applied",
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-01",
+            "undoToken": "sha256:49f932662a9001590be671e6c14e6a6e1539408d07b3f35a604e007eda8cff53",
+            "sideEffect": "reversible_native_permalink_state",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "previousStateVersion": 1,
+            "requestDigest": "sha256:8adf03f799b49758fa0376178d9216c7bab469c8a8ece727405317be67b87a31",
+            "nativeReadbackDigest": "sha256:d78a8abda59eadef8afd9d9d3041cd49635be39807b77788e7b29482f50ef104"
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-maintenance-02",
+            "action": "set_time_range",
+            "args": {
+              "from": "2026-04-01",
+              "to": "2026-06-30"
+            },
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-02",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000104",
+              "dashboardSlug": "m6-02-maintenance-reliability"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-maintenance-02",
+            "action": "set_time_range",
+            "status": "applied",
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-02",
+            "undoToken": "sha256:a883764c3a15c21785680cb7557dad2759c69440828f8fc9df8acc78fbc71266",
+            "sideEffect": "reversible_native_permalink_state",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "previousStateVersion": 2,
+            "requestDigest": "sha256:186d4a6822110047616b6ab01e9f4267cfd7f590c13817fff81bc2fdb9be687f",
+            "nativeReadbackDigest": "sha256:c5e6da2259dd5507d68c517820ad59b53462485aaeb7384bc264a7032f432981"
+          }
+        },
+        {
+          "sequence": 3,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-maintenance-03",
+            "action": "focus_chart",
+            "args": {
+              "chartId": "maintenance-downtime"
+            },
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-03",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000104",
+              "dashboardSlug": "m6-02-maintenance-reliability"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-maintenance-03",
+            "action": "focus_chart",
+            "status": "denied",
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-03",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        },
+        {
+          "sequence": 4,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-maintenance-04",
+            "action": "open_drilldown",
+            "args": {
+              "chartId": "maintenance-downtime",
+              "dimension": "event_type"
+            },
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-04",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000104",
+              "dashboardSlug": "m6-02-maintenance-reliability"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-maintenance-04",
+            "action": "open_drilldown",
+            "status": "denied",
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-04",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        }
+      ],
+      "denialCount": 2,
+      "unsupportedActionDenialCount": 2,
+      "mutationCounts": {
+        "nativeSessionStateWrites": 3,
+        "persistentDashboardWrites": 0
+      },
+      "layoutId": "maintenance-reliability",
+      "chartTypes": [
+        "big_number",
+        "heatmap",
+        "time_series"
+      ],
+      "viewSignature": "maintenance-reliability|reliability-kpis+heatmap+event-trend",
+      "rationale": "Downtime and MTBF are reliability KPIs, the heatmap reveals event concentration by asset and day, and the event trend preserves the requested Q2 timing.",
+      "renderedChartCount": 3,
+      "screenshot": "screenshots/maintenance--desktop-1440x900.png",
+      "screenshotSha256": "7105646266ec6f80313e8eadd3c39cb9fc73725953efb461f414f1685b1fa115",
+      "measuredHorizontalOverflow": false,
+      "consoleErrorCount": 2,
+      "allowedConsoleErrorCount": 2,
+      "unexpectedConsoleErrorCount": 0,
+      "consoleErrorClasses": [
+        "known_superset_service_worker_404"
+      ],
+      "pageErrorCount": 0,
+      "visualVerdict": "approved_direct_pixel_review",
+      "defectNotes": []
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:cross-domain:desktop-1440x900",
+      "capturedAt": "2026-08-14T19:36:07.764Z",
+      "scenarioId": "cross-domain",
+      "viewport": {
+        "id": "desktop-1440x900",
+        "width": 1440,
+        "height": 900
+      },
+      "dashboard": {
+        "id": 5,
+        "uuid": "c6020000-0000-4000-8000-000000000105",
+        "slug": "m6-02-cross-domain",
+        "title": "M6-02 Cross-domain Comparison"
+      },
+      "permalinkKey": "O59jbKRYdLM",
+      "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
+      "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
+      "nativeReadbackDigest": "sha256:c19364daaa539dd23ecd8fb0e0d37dfbb6dc60cf0dfca621ffad2afffa27e88b",
+      "expectedState": {
+        "version": 2,
+        "filters": {},
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "actualState": {
+        "version": 2,
+        "filters": {},
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "oracle": {
+        "truthKey": "crossDomain",
+        "values": {
+          "window": {
+            "from": "2026-04-01",
+            "to": "2026-06-30"
+          },
+          "product": "Atlas Drive",
+          "demandChangePct": 24,
+          "productionChangePct": 9,
+          "inventoryCoverageDays": 3.1,
+          "interpretation": "Demand growth co-occurs with lower coverage; this is correlation, not proof of causation."
+        },
+        "digest": "sha256:8325d941cc55611e4334683bee33d4454c943ac0f59644fc92732cbc244d231a"
+      },
+      "actionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-cross-domain-01",
+            "action": "select_tab",
+            "args": {
+              "tabId": "cross-domain"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-01",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000105",
+              "dashboardSlug": "m6-02-cross-domain"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-cross-domain-01",
+            "action": "select_tab",
+            "status": "denied",
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-01",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-cross-domain-02",
+            "action": "focus_chart",
+            "args": {
+              "chartId": "demand-supply"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-02",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000105",
+              "dashboardSlug": "m6-02-cross-domain"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-cross-domain-02",
+            "action": "focus_chart",
+            "status": "denied",
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-02",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        },
+        {
+          "sequence": 3,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-cross-domain-03",
+            "action": "compare_segments",
+            "args": {
+              "segments": [
+                "demand",
+                "production",
+                "inventory"
+              ]
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-03",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000105",
+              "dashboardSlug": "m6-02-cross-domain"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-cross-domain-03",
+            "action": "compare_segments",
+            "status": "denied",
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-03",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        },
+        {
+          "sequence": 4,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-cross-domain-04",
+            "action": "set_time_range",
+            "args": {
+              "from": "2026-04-01",
+              "to": "2026-06-30"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-04",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000105",
+              "dashboardSlug": "m6-02-cross-domain"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-cross-domain-04",
+            "action": "set_time_range",
+            "status": "applied",
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-04",
+            "undoToken": "sha256:dc2d03f15e30763730027c791d3117bfe90244471b61b7f78a7ef6f5e903549f",
+            "sideEffect": "reversible_native_permalink_state",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "previousStateVersion": 1,
+            "requestDigest": "sha256:444ee12ab5db0bc007d10c0e89cd923298525e7fb716a90dfa2f85ea7ff9884c",
+            "nativeReadbackDigest": "sha256:818a60222c07de8a195fda06ccb263617f4d765a40023652217b7b9cdcec5dae"
+          }
+        }
+      ],
+      "denialCount": 3,
+      "unsupportedActionDenialCount": 3,
+      "mutationCounts": {
+        "nativeSessionStateWrites": 2,
+        "persistentDashboardWrites": 0
+      },
+      "layoutId": "cross-domain-comparison",
+      "chartTypes": [
+        "time_series",
+        "grouped_bar",
+        "scatter"
+      ],
+      "viewSignature": "cross-domain-comparison|indexed-trend+grouped-bars+correlation",
+      "rationale": "The trend, grouped bars, and point view compare demand and production changes in the same percentage unit, while the annotation explicitly treats the relationship as association rather than causation.",
+      "renderedChartCount": 3,
+      "screenshot": "screenshots/cross-domain--desktop-1440x900.png",
+      "screenshotSha256": "076e24430fd89567d761c9a886fa35078836f23ba0cf521533ccbe74372c4017",
+      "measuredHorizontalOverflow": false,
+      "consoleErrorCount": 2,
+      "allowedConsoleErrorCount": 2,
+      "unexpectedConsoleErrorCount": 0,
+      "consoleErrorClasses": [
+        "known_superset_service_worker_404"
+      ],
+      "pageErrorCount": 0,
+      "visualVerdict": "approved_direct_pixel_review",
+      "defectNotes": []
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:voice-correction-cancel:desktop-1440x900",
+      "capturedAt": "2026-08-14T19:36:08.963Z",
+      "scenarioId": "voice-correction-cancel",
+      "viewport": {
+        "id": "desktop-1440x900",
+        "width": 1440,
+        "height": 900
+      },
+      "dashboard": {
+        "id": 6,
+        "uuid": "c6020000-0000-4000-8000-000000000106",
+        "slug": "m6-02-voice-correction-cancel",
+        "title": "M6-02 Corrected Quality View"
+      },
+      "permalinkKey": "8l7ADe3YdQN",
+      "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
+      "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
+      "nativeReadbackDigest": "sha256:c0913f8fc9f63ebbb77bd5ebcc7065b37bd685dcca76ecb45ac5b608539f0810",
+      "expectedState": {
+        "version": 3,
+        "filters": {
+          "plant": "Werk 3"
+        },
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": true
+      },
+      "actualState": {
+        "version": 3,
+        "filters": {
+          "plant": "Werk 3"
+        },
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": true
+      },
+      "oracle": {
+        "truthKey": "qualitySpike",
+        "values": {
+          "window": {
+            "from": "2026-05-12",
+            "to": "2026-05-18"
+          },
+          "plant": "Werk 3",
+          "line": "Linie C",
+          "defectRatePct": 8.6,
+          "baselineDefectRatePct": 1.9,
+          "productionUnits": 18200,
+          "supplierBatch": "SB-X17",
+          "interpretation": "Strong association with supplier batch SB-X17; causation is not established."
+        },
+        "digest": "sha256:5169fa9b2f3f9c7fc4a904bfeea1b242444437aeecf548f2b6b8ac4e8edcf688"
+      },
+      "actionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-voice-correction-cancel-01",
+            "action": "set_filter",
+            "args": {
+              "key": "plant",
+              "value": "Werk 3"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-voice-correction-cancel-idem-01",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000106",
+              "dashboardSlug": "m6-02-voice-correction-cancel"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-voice-correction-cancel-01",
+            "action": "set_filter",
+            "status": "applied",
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-voice-correction-cancel-idem-01",
+            "undoToken": "sha256:f8835c5677985df8ee4338b44b977706523a19fd51399a96544ffb5f586936e6",
+            "sideEffect": "reversible_native_permalink_state",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "previousStateVersion": 1,
+            "requestDigest": "sha256:fa436a1019720acf611dc0db4a7272194107d80a60d58de0a0794d74cfa81413",
+            "nativeReadbackDigest": "sha256:07d7c91a6639330a32caa15133d0cad7b7e103e6dfe296de278fc0113e7ba669"
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "superset_public_rest_v1",
+          "contract": "interaction.cancelled",
+          "request": {
+            "action": "post_cancel_probe"
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-voice-correction-cancel-post-cancel",
+            "action": "set_filter",
+            "status": "denied",
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-voice-correction-cancel-post-cancel",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "INTERACTION_CANCELLED"
+          }
+        }
+      ],
+      "denialCount": 1,
+      "unsupportedActionDenialCount": 0,
+      "mutationCounts": {
+        "nativeSessionStateWrites": 3,
+        "persistentDashboardWrites": 0
+      },
+      "layoutId": "quality-investigation-compact",
+      "chartTypes": [
+        "time_series",
+        "heatmap"
+      ],
+      "viewSignature": "quality-investigation-compact|trend+heatmap+voice-state",
+      "rationale": "The corrected plant intent uses a compact quality base view; trend and heatmap remain useful while the voice-state receipt is the primary interaction evidence.",
+      "renderedChartCount": 2,
+      "screenshot": "screenshots/voice-correction-cancel--desktop-1440x900.png",
+      "screenshotSha256": "512b6d47e92550c9686c3a0acd2c0a3f0d732f6e5b4f59ec3e5d6d5b769540c9",
+      "measuredHorizontalOverflow": false,
+      "consoleErrorCount": 2,
+      "allowedConsoleErrorCount": 2,
+      "unexpectedConsoleErrorCount": 0,
+      "consoleErrorClasses": [
+        "known_superset_service_worker_404"
+      ],
+      "pageErrorCount": 0,
+      "visualVerdict": "approved_direct_pixel_review",
+      "defectNotes": []
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:undo-idempotency:desktop-1440x900",
+      "capturedAt": "2026-08-14T19:36:10.047Z",
+      "scenarioId": "undo-idempotency",
+      "viewport": {
+        "id": "desktop-1440x900",
+        "width": 1440,
+        "height": 900
+      },
+      "dashboard": {
+        "id": 7,
+        "uuid": "c6020000-0000-4000-8000-000000000107",
+        "slug": "m6-02-undo-idempotency",
+        "title": "M6-02 Reversible Executive View"
+      },
+      "permalinkKey": "8JvaDJEbGVn",
+      "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
+      "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
+      "nativeReadbackDigest": "sha256:12ab1c2bd102bc5a5884f83849f36d12c71153e70b0c2d14fdb8789385cd24cb",
+      "expectedState": {
+        "version": 3,
+        "filters": {},
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "actualState": {
+        "version": 3,
+        "filters": {},
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "oracle": {
+        "truthKey": "executiveQ2",
+        "values": {
+          "window": {
+            "from": "2026-04-01",
+            "to": "2026-06-30"
+          },
+          "revenueEur": 12480000,
+          "grossMarginPct": 31.4,
+          "topProduct": "Atlas Drive",
+          "topCustomer": "Futura Retail"
+        },
+        "digest": "sha256:777387fc2037f4967b2d7342226782164c0b1ccdcc0540a34ffaef1c6fb1ac1d"
+      },
+      "actionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-undo-idempotency-01",
+            "action": "set_filter",
+            "args": {
+              "key": "product",
+              "value": "Atlas Drive"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-undo-idempotency-idem-01",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000107",
+              "dashboardSlug": "m6-02-undo-idempotency"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-undo-idempotency-01",
+            "action": "set_filter",
+            "status": "applied",
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-undo-idempotency-idem-01",
+            "undoToken": "sha256:3e0be34b4ab7f6eeeb96e5e995c13c345656b98067a0dd64f5ecab97717924c0",
+            "sideEffect": "reversible_native_permalink_state",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "previousStateVersion": 1,
+            "requestDigest": "sha256:6d39784c4f33c924937666fa5832cd798de283f905a32c787179828cb9e7e50f",
+            "nativeReadbackDigest": "sha256:b96bcf18480fc81e23c49ad8eb5ece1948232909dfa04a3ea33628d136bec50a"
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-undo-idempotency-01",
+            "action": "set_filter",
+            "args": {
+              "key": "product",
+              "value": "Atlas Drive"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-undo-idempotency-idem-01",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000107",
+              "dashboardSlug": "m6-02-undo-idempotency"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-undo-idempotency-01",
+            "action": "set_filter",
+            "status": "already_applied",
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-undo-idempotency-idem-01",
+            "undoToken": "sha256:3e0be34b4ab7f6eeeb96e5e995c13c345656b98067a0dd64f5ecab97717924c0",
+            "sideEffect": "reversible_native_permalink_state",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "previousStateVersion": 1,
+            "requestDigest": "sha256:6d39784c4f33c924937666fa5832cd798de283f905a32c787179828cb9e7e50f",
+            "nativeReadbackDigest": "sha256:b96bcf18480fc81e23c49ad8eb5ece1948232909dfa04a3ea33628d136bec50a"
+          },
+          "idempotencyHttpMutationDelta": 0
+        },
+        {
+          "sequence": 3,
+          "provenance": "superset_public_rest_v1",
+          "contract": "undo-bound-receipt",
+          "request": {
+            "action": "undo",
+            "undoToken": "sha256:3e0be34b4ab7f6eeeb96e5e995c13c345656b98067a0dd64f5ecab97717924c0"
+          },
+          "receipt": {
+            "status": "undone",
+            "stateVersion": 3,
+            "persistentSupersetMutation": false,
+            "nativeReadbackDigest": "sha256:b1c3c33b49ccfa2880e4c1fafa4f4e9eebe85644b587eb91c01841543e79f4f4"
+          }
+        }
+      ],
+      "denialCount": 0,
+      "unsupportedActionDenialCount": 0,
+      "mutationCounts": {
+        "nativeSessionStateWrites": 3,
+        "persistentDashboardWrites": 0
+      },
+      "layoutId": "executive-summary-reversible",
+      "chartTypes": [
+        "big_number",
+        "grouped_bar"
+      ],
+      "viewSignature": "executive-summary-reversible|kpis+ranked-bars+undo-state",
+      "rationale": "The reversible product filter is shown on a compact executive basis where KPI and rank changes are legible before and after undo.",
+      "renderedChartCount": 2,
+      "screenshot": "screenshots/undo-idempotency--desktop-1440x900.png",
+      "screenshotSha256": "4c524b292324e817d8a0dcaf752735be14567f4cb044a3061b500120a331c772",
+      "measuredHorizontalOverflow": false,
+      "consoleErrorCount": 2,
+      "allowedConsoleErrorCount": 2,
+      "unexpectedConsoleErrorCount": 0,
+      "consoleErrorClasses": [
+        "known_superset_service_worker_404"
+      ],
+      "pageErrorCount": 0,
+      "visualVerdict": "approved_direct_pixel_review",
+      "defectNotes": []
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:persistent-request-denied:desktop-1440x900",
+      "capturedAt": "2026-08-14T19:36:11.147Z",
+      "scenarioId": "persistent-request-denied",
+      "viewport": {
+        "id": "desktop-1440x900",
+        "width": 1440,
+        "height": 900
+      },
+      "dashboard": {
+        "id": 8,
+        "uuid": "c6020000-0000-4000-8000-000000000108",
+        "slug": "m6-02-persistent-request-denied",
+        "title": "M6-02 Session-only Preview"
+      },
+      "permalinkKey": "y59qD1qDPaX",
+      "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
+      "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
+      "nativeReadbackDigest": "sha256:6e154ed1356529b9c00afd50b1b04cd7bfec134e06db897f47fb1cc9e284a080",
+      "expectedState": {
+        "version": 1,
+        "filters": {},
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "actualState": {
+        "version": 1,
+        "filters": {},
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "oracle": {
+        "truthKey": "executiveQ2",
+        "values": {
+          "window": {
+            "from": "2026-04-01",
+            "to": "2026-06-30"
+          },
+          "revenueEur": 12480000,
+          "grossMarginPct": 31.4,
+          "topProduct": "Atlas Drive",
+          "topCustomer": "Futura Retail"
+        },
+        "digest": "sha256:777387fc2037f4967b2d7342226782164c0b1ccdcc0540a34ffaef1c6fb1ac1d"
+      },
+      "actionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "superset_public_rest_v1",
+          "contract": "persistent-asset-revision-proposal/v1",
+          "request": {
+            "action": "save_dashboard",
+            "actionId": "e78-20260814T2137-live-2-persistent-request-denied-persistent",
+            "idempotencyKey": "e78-20260814T2137-live-2-persistent-request-denied-persistent"
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-persistent-request-denied-persistent",
+            "action": "save_dashboard",
+            "status": "denied",
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-persistent-request-denied-persistent",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "TRUSTED_UI_APPROVAL_REQUIRED"
+          }
+        }
+      ],
+      "denialCount": 1,
+      "unsupportedActionDenialCount": 0,
+      "mutationCounts": {
+        "nativeSessionStateWrites": 1,
+        "persistentDashboardWrites": 0
+      },
+      "layoutId": "executive-preview-denial",
+      "chartTypes": [
+        "treemap",
+        "table_conditional"
+      ],
+      "viewSignature": "executive-preview-denial|treemap+preview-diff+denial-state",
+      "rationale": "A session-only treemap previews the proposed composition and a conditional diff table makes the denied persistent change reviewable without applying it.",
+      "renderedChartCount": 2,
+      "screenshot": "screenshots/persistent-request-denied--desktop-1440x900.png",
+      "screenshotSha256": "79b3adbc30b6e84ca411a7f81dd9891e6a1a1bde6432bd989275cfb5d056d666",
+      "measuredHorizontalOverflow": false,
+      "consoleErrorCount": 2,
+      "allowedConsoleErrorCount": 2,
+      "unexpectedConsoleErrorCount": 0,
+      "consoleErrorClasses": [
+        "known_superset_service_worker_404"
+      ],
+      "pageErrorCount": 0,
+      "visualVerdict": "approved_direct_pixel_review",
+      "defectNotes": []
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:executive-sales:narrow-390x844",
+      "capturedAt": "2026-08-14T19:36:13.172Z",
+      "scenarioId": "executive-sales",
+      "viewport": {
+        "id": "narrow-390x844",
+        "width": 390,
+        "height": 844
+      },
+      "dashboard": {
+        "id": 1,
+        "uuid": "c6020000-0000-4000-8000-000000000101",
+        "slug": "m6-02-executive-summary",
+        "title": "M6-02 Executive Summary"
+      },
+      "permalinkKey": "l4jJbWzYBGy",
+      "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
+      "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
+      "nativeReadbackDigest": "sha256:c19364daaa539dd23ecd8fb0e0d37dfbb6dc60cf0dfca621ffad2afffa27e88b",
+      "expectedState": {
+        "version": 2,
+        "filters": {},
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "actualState": {
+        "version": 2,
+        "filters": {},
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "oracle": {
+        "truthKey": "executiveQ2",
+        "values": {
+          "window": {
+            "from": "2026-04-01",
+            "to": "2026-06-30"
+          },
+          "revenueEur": 12480000,
+          "grossMarginPct": 31.4,
+          "topProduct": "Atlas Drive",
+          "topCustomer": "Futura Retail"
+        },
+        "digest": "sha256:777387fc2037f4967b2d7342226782164c0b1ccdcc0540a34ffaef1c6fb1ac1d"
+      },
+      "actionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-executive-sales-01",
+            "action": "set_time_range",
+            "args": {
+              "from": "2026-04-01",
+              "to": "2026-06-30"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-01",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000101",
+              "dashboardSlug": "m6-02-executive-summary"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-executive-sales-01",
+            "action": "set_time_range",
+            "status": "applied",
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-01",
+            "undoToken": "sha256:b552475e7eb13e503cb8d8ef15449c35a2c95c2fa1f34f1a086507daa157d1d9",
+            "sideEffect": "reversible_native_permalink_state",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "previousStateVersion": 1,
+            "requestDigest": "sha256:d3e61f098537fd91cdff3ce8966a813b49f27f9ec8cb83338e008341b0bdc947",
+            "nativeReadbackDigest": "sha256:00782a26089ef22b813578cba3dc19f788cf9ac5fe6684618a183042a47737d0"
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-executive-sales-02",
+            "action": "select_tab",
+            "args": {
+              "tabId": "executive"
+            },
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-02",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000101",
+              "dashboardSlug": "m6-02-executive-summary"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-executive-sales-02",
+            "action": "select_tab",
+            "status": "denied",
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-02",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        },
+        {
+          "sequence": 3,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-executive-sales-03",
+            "action": "focus_chart",
+            "args": {
+              "chartId": "sales-margin"
+            },
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-03",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000101",
+              "dashboardSlug": "m6-02-executive-summary"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-executive-sales-03",
+            "action": "focus_chart",
+            "status": "denied",
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-03",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        },
+        {
+          "sequence": 4,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-executive-sales-04",
+            "action": "compare_segments",
+            "args": {
+              "segments": [
+                "Atlas Drive",
+                "Futura Retail"
+              ]
+            },
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-04",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000101",
+              "dashboardSlug": "m6-02-executive-summary"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-executive-sales-04",
+            "action": "compare_segments",
+            "status": "denied",
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-04",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        }
+      ],
+      "denialCount": 3,
+      "unsupportedActionDenialCount": 3,
+      "mutationCounts": {
+        "nativeSessionStateWrites": 2,
+        "persistentDashboardWrites": 0
+      },
+      "layoutId": "executive-summary",
+      "chartTypes": [
+        "big_number",
+        "time_series",
+        "grouped_bar"
+      ],
+      "viewSignature": "executive-summary|kpi-strip+trend-wide+ranked-bars",
+      "rationale": "The big number answers the headline revenue question, while the time-series and bar encodings show the same completed-period revenue in complementary temporal and magnitude views without mixing units.",
+      "renderedChartCount": 3,
+      "screenshot": "screenshots/executive-sales--narrow-390x844.png",
+      "screenshotSha256": "869e0ca99126c894f82561a9dfefbb49fd2d9cbc8cfe80e707b452ee590905fe",
+      "measuredHorizontalOverflow": false,
+      "consoleErrorCount": 4,
+      "allowedConsoleErrorCount": 4,
+      "unexpectedConsoleErrorCount": 0,
+      "consoleErrorClasses": [
+        "known_superset_service_worker_404"
+      ],
+      "pageErrorCount": 0,
+      "visualVerdict": "approved_direct_pixel_review",
+      "defectNotes": []
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:quality-investigation:narrow-390x844",
+      "capturedAt": "2026-08-14T19:36:14.355Z",
+      "scenarioId": "quality-investigation",
+      "viewport": {
+        "id": "narrow-390x844",
+        "width": 390,
+        "height": 844
+      },
+      "dashboard": {
+        "id": 2,
+        "uuid": "c6020000-0000-4000-8000-000000000102",
+        "slug": "m6-02-quality-investigation",
+        "title": "M6-02 Quality Investigation"
+      },
+      "permalinkKey": "GqyPY6Qmj3v",
+      "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
+      "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
+      "nativeReadbackDigest": "sha256:6a6d4c995fca10f2be52ea66b3f2eaffb0470536350b02cfe12a4e7f91a0b33e",
+      "expectedState": {
+        "version": 4,
+        "filters": {
+          "plant": "Werk 3",
+          "line": "Linie C"
+        },
+        "timeRange": {
+          "from": "2026-05-12",
+          "to": "2026-05-18"
+        },
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "actualState": {
+        "version": 4,
+        "filters": {
+          "plant": "Werk 3",
+          "line": "Linie C"
+        },
+        "timeRange": {
+          "from": "2026-05-12",
+          "to": "2026-05-18"
+        },
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "oracle": {
+        "truthKey": "qualitySpike",
+        "values": {
+          "window": {
+            "from": "2026-05-12",
+            "to": "2026-05-18"
+          },
+          "plant": "Werk 3",
+          "line": "Linie C",
+          "defectRatePct": 8.6,
+          "baselineDefectRatePct": 1.9,
+          "productionUnits": 18200,
+          "supplierBatch": "SB-X17",
+          "interpretation": "Strong association with supplier batch SB-X17; causation is not established."
+        },
+        "digest": "sha256:5169fa9b2f3f9c7fc4a904bfeea1b242444437aeecf548f2b6b8ac4e8edcf688"
+      },
+      "actionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-01",
+            "action": "set_filter",
+            "args": {
+              "key": "plant",
+              "value": "Werk 3"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-01",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
+              "dashboardSlug": "m6-02-quality-investigation"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-01",
+            "action": "set_filter",
+            "status": "applied",
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-01",
+            "undoToken": "sha256:51da3c0604c1b798dc2dfbd04d847ec1ae2e4c675c4c4fb3beba1fa5bfea305c",
+            "sideEffect": "reversible_native_permalink_state",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "previousStateVersion": 1,
+            "requestDigest": "sha256:d81fe8c37d868fd39803bfb84c378fe706b8bc85af4ec638bf1a46348e56eddc",
+            "nativeReadbackDigest": "sha256:37b42a4c9928580206fc7fd5696dacf2416dfcb689f284861941e29d0c87f70d"
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-02",
+            "action": "set_filter",
+            "args": {
+              "key": "line",
+              "value": "Linie C"
+            },
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-02",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
+              "dashboardSlug": "m6-02-quality-investigation"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-02",
+            "action": "set_filter",
+            "status": "denied",
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-02",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_NATIVE_APPLY_READBACK_MISMATCH"
+          }
+        },
+        {
+          "sequence": 3,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-03",
+            "action": "set_time_range",
+            "args": {
+              "from": "2026-05-12",
+              "to": "2026-05-18"
+            },
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-03",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
+              "dashboardSlug": "m6-02-quality-investigation"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-03",
+            "action": "set_time_range",
+            "status": "denied",
+            "stateVersion": 4,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-03",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_NATIVE_APPLY_READBACK_MISMATCH"
+          }
+        },
+        {
+          "sequence": 4,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-04",
+            "action": "focus_chart",
+            "args": {
+              "chartId": "quality-trend"
+            },
+            "stateVersion": 4,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-04",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
+              "dashboardSlug": "m6-02-quality-investigation"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-04",
+            "action": "focus_chart",
+            "status": "denied",
+            "stateVersion": 4,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-04",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        },
+        {
+          "sequence": 5,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-05",
+            "action": "compare_segments",
+            "args": {
+              "segments": [
+                "defect_rate",
+                "production_volume"
+              ]
+            },
+            "stateVersion": 4,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-05",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
+              "dashboardSlug": "m6-02-quality-investigation"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-05",
+            "action": "compare_segments",
+            "status": "denied",
+            "stateVersion": 4,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-05",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        },
+        {
+          "sequence": 6,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-06",
+            "action": "open_drilldown",
+            "args": {
+              "chartId": "quality-trend",
+              "dimension": "supplier_batch"
+            },
+            "stateVersion": 4,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-06",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
+              "dashboardSlug": "m6-02-quality-investigation"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-quality-investigation-06",
+            "action": "open_drilldown",
+            "status": "denied",
+            "stateVersion": 4,
+            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-06",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        }
+      ],
+      "denialCount": 5,
+      "unsupportedActionDenialCount": 3,
+      "mutationCounts": {
+        "nativeSessionStateWrites": 4,
+        "persistentDashboardWrites": 0
+      },
+      "layoutId": "quality-investigation",
+      "chartTypes": [
+        "time_series",
+        "scatter",
+        "table_conditional"
+      ],
+      "viewSignature": "quality-investigation|trend-wide+scatter+conditional-table",
+      "rationale": "The trend and scatter make the isolated defect-rate signal visible without implying causation, while the evidence table exposes the paired production row and supplier batch in exact synthetic values.",
+      "renderedChartCount": 3,
+      "screenshot": "screenshots/quality-investigation--narrow-390x844.png",
+      "screenshotSha256": "d50470485ce73999dde94d02fcbaa89b21b2bd54aac6d3739579fcd4cdb11aad",
+      "measuredHorizontalOverflow": false,
+      "consoleErrorCount": 2,
+      "allowedConsoleErrorCount": 2,
+      "unexpectedConsoleErrorCount": 0,
+      "consoleErrorClasses": [
+        "known_superset_service_worker_404"
+      ],
+      "pageErrorCount": 0,
+      "visualVerdict": "approved_direct_pixel_review",
+      "defectNotes": []
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:inventory-risk:narrow-390x844",
+      "capturedAt": "2026-08-14T19:36:15.572Z",
+      "scenarioId": "inventory-risk",
+      "viewport": {
+        "id": "narrow-390x844",
+        "width": 390,
+        "height": 844
+      },
+      "dashboard": {
+        "id": 3,
+        "uuid": "c6020000-0000-4000-8000-000000000103",
+        "slug": "m6-02-inventory-risk",
+        "title": "M6-02 Inventory Risk"
+      },
+      "permalinkKey": "B7vZbp1DOwd",
+      "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
+      "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
+      "nativeReadbackDigest": "sha256:1c8af5aabee591947774d1442c96b77d764b45122d57aa676b1e82d0fc541619",
+      "expectedState": {
+        "version": 3,
+        "filters": {
+          "plant": "Werk 2",
+          "component": "Rotor-7"
+        },
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "actualState": {
+        "version": 3,
+        "filters": {
+          "plant": "Werk 2",
+          "component": "Rotor-7"
+        },
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "oracle": {
+        "truthKey": "inventoryRisk",
+        "values": {
+          "plant": "Werk 2",
+          "component": "Rotor-7",
+          "coverageDays": 2.4,
+          "demandUnits": 4200,
+          "confirmedSupplyUnits": 900,
+          "risk": "stockout"
+        },
+        "digest": "sha256:59b38a4ea5f0b03ae7a6a7de97498c9edd3bdd2fc1ff3438a228b2d894e9c131"
+      },
+      "actionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-inventory-risk-01",
+            "action": "set_filter",
+            "args": {
+              "key": "plant",
+              "value": "Werk 2"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-01",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000103",
+              "dashboardSlug": "m6-02-inventory-risk"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-inventory-risk-01",
+            "action": "set_filter",
+            "status": "applied",
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-01",
+            "undoToken": "sha256:11041509f5ff3b15f1e3d9c1cca1f8e3a447f3a5f97a1f45e2f311116dda0015",
+            "sideEffect": "reversible_native_permalink_state",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "previousStateVersion": 1,
+            "requestDigest": "sha256:938157047c1b8e3866171acd2b27bb0d2d9243105d7c7706c4e7799f60d99ad5",
+            "nativeReadbackDigest": "sha256:a5c67acecec59db9787731139b5075897f4af4eb03f775f088c90d95448497f9"
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-inventory-risk-02",
+            "action": "set_filter",
+            "args": {
+              "key": "component",
+              "value": "Rotor-7"
+            },
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-02",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000103",
+              "dashboardSlug": "m6-02-inventory-risk"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-inventory-risk-02",
+            "action": "set_filter",
+            "status": "denied",
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-02",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_NATIVE_APPLY_READBACK_MISMATCH"
+          }
+        },
+        {
+          "sequence": 3,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-inventory-risk-03",
+            "action": "focus_chart",
+            "args": {
+              "chartId": "inventory-coverage"
+            },
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-03",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000103",
+              "dashboardSlug": "m6-02-inventory-risk"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-inventory-risk-03",
+            "action": "focus_chart",
+            "status": "denied",
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-03",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        },
+        {
+          "sequence": 4,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-inventory-risk-04",
+            "action": "sort_table",
+            "args": {
+              "chartId": "inventory-table",
+              "column": "coverage_days",
+              "direction": "asc"
+            },
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-04",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000103",
+              "dashboardSlug": "m6-02-inventory-risk"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-inventory-risk-04",
+            "action": "sort_table",
+            "status": "denied",
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-04",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        },
+        {
+          "sequence": 5,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-inventory-risk-05",
+            "action": "compare_segments",
+            "args": {
+              "segments": [
+                "demand",
+                "confirmed_supply"
+              ]
+            },
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-05",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000103",
+              "dashboardSlug": "m6-02-inventory-risk"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-inventory-risk-05",
+            "action": "compare_segments",
+            "status": "denied",
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-05",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        }
+      ],
+      "denialCount": 4,
+      "unsupportedActionDenialCount": 3,
+      "mutationCounts": {
+        "nativeSessionStateWrites": 3,
+        "persistentDashboardWrites": 0
+      },
+      "layoutId": "inventory-risk",
+      "chartTypes": [
+        "big_number",
+        "table_conditional",
+        "stacked_bar"
+      ],
+      "viewSignature": "inventory-risk|risk-kpi+conditional-table+stacked-bars",
+      "rationale": "Coverage is the urgent scalar, the conditionally formatted table ranks constrained components, and stacked bars compare demand with confirmed inbound supply in shared units.",
+      "renderedChartCount": 3,
+      "screenshot": "screenshots/inventory-risk--narrow-390x844.png",
+      "screenshotSha256": "944c992e161ad3d655f44e5bbb900f43537607e55cd56a458c07ed1f8b6491cd",
+      "measuredHorizontalOverflow": false,
+      "consoleErrorCount": 2,
+      "allowedConsoleErrorCount": 2,
+      "unexpectedConsoleErrorCount": 0,
+      "consoleErrorClasses": [
+        "known_superset_service_worker_404"
+      ],
+      "pageErrorCount": 0,
+      "visualVerdict": "approved_direct_pixel_review",
+      "defectNotes": []
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:maintenance:narrow-390x844",
+      "capturedAt": "2026-08-14T19:36:16.806Z",
+      "scenarioId": "maintenance",
+      "viewport": {
+        "id": "narrow-390x844",
+        "width": 390,
+        "height": 844
+      },
+      "dashboard": {
+        "id": 4,
+        "uuid": "c6020000-0000-4000-8000-000000000104",
+        "slug": "m6-02-maintenance-reliability",
+        "title": "M6-02 Maintenance Reliability"
+      },
+      "permalinkKey": "41EGmOKmkBK",
+      "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
+      "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
+      "nativeReadbackDigest": "sha256:8796df33abe69b4ac4bcca272a0d4e130a3321e7b6efec43ecab0b1c303e3e23",
+      "expectedState": {
+        "version": 3,
+        "filters": {
+          "asset_class": "Press"
+        },
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "actualState": {
+        "version": 3,
+        "filters": {
+          "asset_class": "Press"
+        },
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "oracle": {
+        "truthKey": "maintenance",
+        "values": {
+          "window": {
+            "from": "2026-04-01",
+            "to": "2026-06-30"
+          },
+          "assetClass": "Press",
+          "downtimeHours": 41.5,
+          "mtbfHours": 68,
+          "eventCount": 6
+        },
+        "digest": "sha256:9e288d434c3591ae0f61593965d815d1902cd6cae9b7183171bd65ae4e3ae59c"
+      },
+      "actionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-maintenance-01",
+            "action": "set_filter",
+            "args": {
+              "key": "asset_class",
+              "value": "Press"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-01",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000104",
+              "dashboardSlug": "m6-02-maintenance-reliability"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-maintenance-01",
+            "action": "set_filter",
+            "status": "applied",
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-01",
+            "undoToken": "sha256:49f932662a9001590be671e6c14e6a6e1539408d07b3f35a604e007eda8cff53",
+            "sideEffect": "reversible_native_permalink_state",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "previousStateVersion": 1,
+            "requestDigest": "sha256:8adf03f799b49758fa0376178d9216c7bab469c8a8ece727405317be67b87a31",
+            "nativeReadbackDigest": "sha256:d78a8abda59eadef8afd9d9d3041cd49635be39807b77788e7b29482f50ef104"
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-maintenance-02",
+            "action": "set_time_range",
+            "args": {
+              "from": "2026-04-01",
+              "to": "2026-06-30"
+            },
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-02",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000104",
+              "dashboardSlug": "m6-02-maintenance-reliability"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-maintenance-02",
+            "action": "set_time_range",
+            "status": "applied",
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-02",
+            "undoToken": "sha256:a883764c3a15c21785680cb7557dad2759c69440828f8fc9df8acc78fbc71266",
+            "sideEffect": "reversible_native_permalink_state",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "previousStateVersion": 2,
+            "requestDigest": "sha256:186d4a6822110047616b6ab01e9f4267cfd7f590c13817fff81bc2fdb9be687f",
+            "nativeReadbackDigest": "sha256:c5e6da2259dd5507d68c517820ad59b53462485aaeb7384bc264a7032f432981"
+          }
+        },
+        {
+          "sequence": 3,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-maintenance-03",
+            "action": "focus_chart",
+            "args": {
+              "chartId": "maintenance-downtime"
+            },
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-03",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000104",
+              "dashboardSlug": "m6-02-maintenance-reliability"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-maintenance-03",
+            "action": "focus_chart",
+            "status": "denied",
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-03",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        },
+        {
+          "sequence": 4,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-maintenance-04",
+            "action": "open_drilldown",
+            "args": {
+              "chartId": "maintenance-downtime",
+              "dimension": "event_type"
+            },
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-04",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000104",
+              "dashboardSlug": "m6-02-maintenance-reliability"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-maintenance-04",
+            "action": "open_drilldown",
+            "status": "denied",
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-04",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        }
+      ],
+      "denialCount": 2,
+      "unsupportedActionDenialCount": 2,
+      "mutationCounts": {
+        "nativeSessionStateWrites": 3,
+        "persistentDashboardWrites": 0
+      },
+      "layoutId": "maintenance-reliability",
+      "chartTypes": [
+        "big_number",
+        "heatmap",
+        "time_series"
+      ],
+      "viewSignature": "maintenance-reliability|reliability-kpis+heatmap+event-trend",
+      "rationale": "Downtime and MTBF are reliability KPIs, the heatmap reveals event concentration by asset and day, and the event trend preserves the requested Q2 timing.",
+      "renderedChartCount": 3,
+      "screenshot": "screenshots/maintenance--narrow-390x844.png",
+      "screenshotSha256": "5890c98599b02c9df2366ca40c0382d95e5acd6384b56c4c64d3759c297455dd",
+      "measuredHorizontalOverflow": false,
+      "consoleErrorCount": 2,
+      "allowedConsoleErrorCount": 2,
+      "unexpectedConsoleErrorCount": 0,
+      "consoleErrorClasses": [
+        "known_superset_service_worker_404"
+      ],
+      "pageErrorCount": 0,
+      "visualVerdict": "approved_direct_pixel_review",
+      "defectNotes": []
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:cross-domain:narrow-390x844",
+      "capturedAt": "2026-08-14T19:36:18.006Z",
+      "scenarioId": "cross-domain",
+      "viewport": {
+        "id": "narrow-390x844",
+        "width": 390,
+        "height": 844
+      },
+      "dashboard": {
+        "id": 5,
+        "uuid": "c6020000-0000-4000-8000-000000000105",
+        "slug": "m6-02-cross-domain",
+        "title": "M6-02 Cross-domain Comparison"
+      },
+      "permalinkKey": "O59jbKRYdLM",
+      "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
+      "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
+      "nativeReadbackDigest": "sha256:c19364daaa539dd23ecd8fb0e0d37dfbb6dc60cf0dfca621ffad2afffa27e88b",
+      "expectedState": {
+        "version": 2,
+        "filters": {},
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "actualState": {
+        "version": 2,
+        "filters": {},
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "oracle": {
+        "truthKey": "crossDomain",
+        "values": {
+          "window": {
+            "from": "2026-04-01",
+            "to": "2026-06-30"
+          },
+          "product": "Atlas Drive",
+          "demandChangePct": 24,
+          "productionChangePct": 9,
+          "inventoryCoverageDays": 3.1,
+          "interpretation": "Demand growth co-occurs with lower coverage; this is correlation, not proof of causation."
+        },
+        "digest": "sha256:8325d941cc55611e4334683bee33d4454c943ac0f59644fc92732cbc244d231a"
+      },
+      "actionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-cross-domain-01",
+            "action": "select_tab",
+            "args": {
+              "tabId": "cross-domain"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-01",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000105",
+              "dashboardSlug": "m6-02-cross-domain"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-cross-domain-01",
+            "action": "select_tab",
+            "status": "denied",
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-01",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-cross-domain-02",
+            "action": "focus_chart",
+            "args": {
+              "chartId": "demand-supply"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-02",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000105",
+              "dashboardSlug": "m6-02-cross-domain"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-cross-domain-02",
+            "action": "focus_chart",
+            "status": "denied",
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-02",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        },
+        {
+          "sequence": 3,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-cross-domain-03",
+            "action": "compare_segments",
+            "args": {
+              "segments": [
+                "demand",
+                "production",
+                "inventory"
+              ]
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-03",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000105",
+              "dashboardSlug": "m6-02-cross-domain"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-cross-domain-03",
+            "action": "compare_segments",
+            "status": "denied",
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-03",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "SUPERSET_PUBLIC_ACTION_UNSUPPORTED"
+          }
+        },
+        {
+          "sequence": 4,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-cross-domain-04",
+            "action": "set_time_range",
+            "args": {
+              "from": "2026-04-01",
+              "to": "2026-06-30"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-04",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000105",
+              "dashboardSlug": "m6-02-cross-domain"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-cross-domain-04",
+            "action": "set_time_range",
+            "status": "applied",
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-04",
+            "undoToken": "sha256:dc2d03f15e30763730027c791d3117bfe90244471b61b7f78a7ef6f5e903549f",
+            "sideEffect": "reversible_native_permalink_state",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "previousStateVersion": 1,
+            "requestDigest": "sha256:444ee12ab5db0bc007d10c0e89cd923298525e7fb716a90dfa2f85ea7ff9884c",
+            "nativeReadbackDigest": "sha256:818a60222c07de8a195fda06ccb263617f4d765a40023652217b7b9cdcec5dae"
+          }
+        }
+      ],
+      "denialCount": 3,
+      "unsupportedActionDenialCount": 3,
+      "mutationCounts": {
+        "nativeSessionStateWrites": 2,
+        "persistentDashboardWrites": 0
+      },
+      "layoutId": "cross-domain-comparison",
+      "chartTypes": [
+        "time_series",
+        "grouped_bar",
+        "scatter"
+      ],
+      "viewSignature": "cross-domain-comparison|indexed-trend+grouped-bars+correlation",
+      "rationale": "The trend, grouped bars, and point view compare demand and production changes in the same percentage unit, while the annotation explicitly treats the relationship as association rather than causation.",
+      "renderedChartCount": 3,
+      "screenshot": "screenshots/cross-domain--narrow-390x844.png",
+      "screenshotSha256": "a358a43a9ef626127549fd5529e43b49d2ac4224a8c0c29b103ba51744819714",
+      "measuredHorizontalOverflow": false,
+      "consoleErrorCount": 2,
+      "allowedConsoleErrorCount": 2,
+      "unexpectedConsoleErrorCount": 0,
+      "consoleErrorClasses": [
+        "known_superset_service_worker_404"
+      ],
+      "pageErrorCount": 0,
+      "visualVerdict": "approved_direct_pixel_review",
+      "defectNotes": []
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:voice-correction-cancel:narrow-390x844",
+      "capturedAt": "2026-08-14T19:36:19.086Z",
+      "scenarioId": "voice-correction-cancel",
+      "viewport": {
+        "id": "narrow-390x844",
+        "width": 390,
+        "height": 844
+      },
+      "dashboard": {
+        "id": 6,
+        "uuid": "c6020000-0000-4000-8000-000000000106",
+        "slug": "m6-02-voice-correction-cancel",
+        "title": "M6-02 Corrected Quality View"
+      },
+      "permalinkKey": "8l7ADe3YdQN",
+      "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
+      "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
+      "nativeReadbackDigest": "sha256:c0913f8fc9f63ebbb77bd5ebcc7065b37bd685dcca76ecb45ac5b608539f0810",
+      "expectedState": {
+        "version": 3,
+        "filters": {
+          "plant": "Werk 3"
+        },
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": true
+      },
+      "actualState": {
+        "version": 3,
+        "filters": {
+          "plant": "Werk 3"
+        },
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": true
+      },
+      "oracle": {
+        "truthKey": "qualitySpike",
+        "values": {
+          "window": {
+            "from": "2026-05-12",
+            "to": "2026-05-18"
+          },
+          "plant": "Werk 3",
+          "line": "Linie C",
+          "defectRatePct": 8.6,
+          "baselineDefectRatePct": 1.9,
+          "productionUnits": 18200,
+          "supplierBatch": "SB-X17",
+          "interpretation": "Strong association with supplier batch SB-X17; causation is not established."
+        },
+        "digest": "sha256:5169fa9b2f3f9c7fc4a904bfeea1b242444437aeecf548f2b6b8ac4e8edcf688"
+      },
+      "actionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-voice-correction-cancel-01",
+            "action": "set_filter",
+            "args": {
+              "key": "plant",
+              "value": "Werk 3"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-voice-correction-cancel-idem-01",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000106",
+              "dashboardSlug": "m6-02-voice-correction-cancel"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-voice-correction-cancel-01",
+            "action": "set_filter",
+            "status": "applied",
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-voice-correction-cancel-idem-01",
+            "undoToken": "sha256:f8835c5677985df8ee4338b44b977706523a19fd51399a96544ffb5f586936e6",
+            "sideEffect": "reversible_native_permalink_state",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "previousStateVersion": 1,
+            "requestDigest": "sha256:fa436a1019720acf611dc0db4a7272194107d80a60d58de0a0794d74cfa81413",
+            "nativeReadbackDigest": "sha256:07d7c91a6639330a32caa15133d0cad7b7e103e6dfe296de278fc0113e7ba669"
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "superset_public_rest_v1",
+          "contract": "interaction.cancelled",
+          "request": {
+            "action": "post_cancel_probe"
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-voice-correction-cancel-post-cancel",
+            "action": "set_filter",
+            "status": "denied",
+            "stateVersion": 3,
+            "idempotencyKey": "e78-20260814T2137-live-2-voice-correction-cancel-post-cancel",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "INTERACTION_CANCELLED"
+          }
+        }
+      ],
+      "denialCount": 1,
+      "unsupportedActionDenialCount": 0,
+      "mutationCounts": {
+        "nativeSessionStateWrites": 3,
+        "persistentDashboardWrites": 0
+      },
+      "layoutId": "quality-investigation-compact",
+      "chartTypes": [
+        "time_series",
+        "heatmap"
+      ],
+      "viewSignature": "quality-investigation-compact|trend+heatmap+voice-state",
+      "rationale": "The corrected plant intent uses a compact quality base view; trend and heatmap remain useful while the voice-state receipt is the primary interaction evidence.",
+      "renderedChartCount": 2,
+      "screenshot": "screenshots/voice-correction-cancel--narrow-390x844.png",
+      "screenshotSha256": "3cbcc9ff5c7b308676fd3a300826ae36bdb4fa71e1db2d7cb4dab15ca177facf",
+      "measuredHorizontalOverflow": false,
+      "consoleErrorCount": 2,
+      "allowedConsoleErrorCount": 2,
+      "unexpectedConsoleErrorCount": 0,
+      "consoleErrorClasses": [
+        "known_superset_service_worker_404"
+      ],
+      "pageErrorCount": 0,
+      "visualVerdict": "approved_direct_pixel_review",
+      "defectNotes": []
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:undo-idempotency:narrow-390x844",
+      "capturedAt": "2026-08-14T19:36:20.186Z",
+      "scenarioId": "undo-idempotency",
+      "viewport": {
+        "id": "narrow-390x844",
+        "width": 390,
+        "height": 844
+      },
+      "dashboard": {
+        "id": 7,
+        "uuid": "c6020000-0000-4000-8000-000000000107",
+        "slug": "m6-02-undo-idempotency",
+        "title": "M6-02 Reversible Executive View"
+      },
+      "permalinkKey": "8JvaDJEbGVn",
+      "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
+      "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
+      "nativeReadbackDigest": "sha256:12ab1c2bd102bc5a5884f83849f36d12c71153e70b0c2d14fdb8789385cd24cb",
+      "expectedState": {
+        "version": 3,
+        "filters": {},
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "actualState": {
+        "version": 3,
+        "filters": {},
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "oracle": {
+        "truthKey": "executiveQ2",
+        "values": {
+          "window": {
+            "from": "2026-04-01",
+            "to": "2026-06-30"
+          },
+          "revenueEur": 12480000,
+          "grossMarginPct": 31.4,
+          "topProduct": "Atlas Drive",
+          "topCustomer": "Futura Retail"
+        },
+        "digest": "sha256:777387fc2037f4967b2d7342226782164c0b1ccdcc0540a34ffaef1c6fb1ac1d"
+      },
+      "actionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-undo-idempotency-01",
+            "action": "set_filter",
+            "args": {
+              "key": "product",
+              "value": "Atlas Drive"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-undo-idempotency-idem-01",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000107",
+              "dashboardSlug": "m6-02-undo-idempotency"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-undo-idempotency-01",
+            "action": "set_filter",
+            "status": "applied",
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-undo-idempotency-idem-01",
+            "undoToken": "sha256:3e0be34b4ab7f6eeeb96e5e995c13c345656b98067a0dd64f5ecab97717924c0",
+            "sideEffect": "reversible_native_permalink_state",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "previousStateVersion": 1,
+            "requestDigest": "sha256:6d39784c4f33c924937666fa5832cd798de283f905a32c787179828cb9e7e50f",
+            "nativeReadbackDigest": "sha256:b96bcf18480fc81e23c49ad8eb5ece1948232909dfa04a3ea33628d136bec50a"
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "superset_public_rest_v1",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "e78-20260814T2137-live-2-undo-idempotency-01",
+            "action": "set_filter",
+            "args": {
+              "key": "product",
+              "value": "Atlas Drive"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-undo-idempotency-idem-01",
+            "preconditions": {
+              "dashboardUuid": "c6020000-0000-4000-8000-000000000107",
+              "dashboardSlug": "m6-02-undo-idempotency"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-undo-idempotency-01",
+            "action": "set_filter",
+            "status": "already_applied",
+            "stateVersion": 2,
+            "idempotencyKey": "e78-20260814T2137-live-2-undo-idempotency-idem-01",
+            "undoToken": "sha256:3e0be34b4ab7f6eeeb96e5e995c13c345656b98067a0dd64f5ecab97717924c0",
+            "sideEffect": "reversible_native_permalink_state",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "previousStateVersion": 1,
+            "requestDigest": "sha256:6d39784c4f33c924937666fa5832cd798de283f905a32c787179828cb9e7e50f",
+            "nativeReadbackDigest": "sha256:b96bcf18480fc81e23c49ad8eb5ece1948232909dfa04a3ea33628d136bec50a"
+          },
+          "idempotencyHttpMutationDelta": 0
+        },
+        {
+          "sequence": 3,
+          "provenance": "superset_public_rest_v1",
+          "contract": "undo-bound-receipt",
+          "request": {
+            "action": "undo",
+            "undoToken": "sha256:3e0be34b4ab7f6eeeb96e5e995c13c345656b98067a0dd64f5ecab97717924c0"
+          },
+          "receipt": {
+            "status": "undone",
+            "stateVersion": 3,
+            "persistentSupersetMutation": false,
+            "nativeReadbackDigest": "sha256:b1c3c33b49ccfa2880e4c1fafa4f4e9eebe85644b587eb91c01841543e79f4f4"
+          }
+        }
+      ],
+      "denialCount": 0,
+      "unsupportedActionDenialCount": 0,
+      "mutationCounts": {
+        "nativeSessionStateWrites": 3,
+        "persistentDashboardWrites": 0
+      },
+      "layoutId": "executive-summary-reversible",
+      "chartTypes": [
+        "big_number",
+        "grouped_bar"
+      ],
+      "viewSignature": "executive-summary-reversible|kpis+ranked-bars+undo-state",
+      "rationale": "The reversible product filter is shown on a compact executive basis where KPI and rank changes are legible before and after undo.",
+      "renderedChartCount": 2,
+      "screenshot": "screenshots/undo-idempotency--narrow-390x844.png",
+      "screenshotSha256": "45cd9d6e6ea29cd9cd8528ffebeb24f0b4f834e8ed19c40e523a5308397fc63e",
+      "measuredHorizontalOverflow": false,
+      "consoleErrorCount": 2,
+      "allowedConsoleErrorCount": 2,
+      "unexpectedConsoleErrorCount": 0,
+      "consoleErrorClasses": [
+        "known_superset_service_worker_404"
+      ],
+      "pageErrorCount": 0,
+      "visualVerdict": "approved_direct_pixel_review",
+      "defectNotes": []
+    },
+    {
+      "captureId": "e78-20260814T2137-live-2:persistent-request-denied:narrow-390x844",
+      "capturedAt": "2026-08-14T19:36:21.253Z",
+      "scenarioId": "persistent-request-denied",
+      "viewport": {
+        "id": "narrow-390x844",
+        "width": 390,
+        "height": 844
+      },
+      "dashboard": {
+        "id": 8,
+        "uuid": "c6020000-0000-4000-8000-000000000108",
+        "slug": "m6-02-persistent-request-denied",
+        "title": "M6-02 Session-only Preview"
+      },
+      "permalinkKey": "y59qD1qDPaX",
+      "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
+      "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
+      "nativeReadbackDigest": "sha256:6e154ed1356529b9c00afd50b1b04cd7bfec134e06db897f47fb1cc9e284a080",
+      "expectedState": {
+        "version": 1,
+        "filters": {},
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "actualState": {
+        "version": 1,
+        "filters": {},
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": [],
+        "cancelled": false
+      },
+      "oracle": {
+        "truthKey": "executiveQ2",
+        "values": {
+          "window": {
+            "from": "2026-04-01",
+            "to": "2026-06-30"
+          },
+          "revenueEur": 12480000,
+          "grossMarginPct": 31.4,
+          "topProduct": "Atlas Drive",
+          "topCustomer": "Futura Retail"
+        },
+        "digest": "sha256:777387fc2037f4967b2d7342226782164c0b1ccdcc0540a34ffaef1c6fb1ac1d"
+      },
+      "actionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "superset_public_rest_v1",
+          "contract": "persistent-asset-revision-proposal/v1",
+          "request": {
+            "action": "save_dashboard",
+            "actionId": "e78-20260814T2137-live-2-persistent-request-denied-persistent",
+            "idempotencyKey": "e78-20260814T2137-live-2-persistent-request-denied-persistent"
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "e78-20260814T2137-live-2-persistent-request-denied-persistent",
+            "action": "save_dashboard",
+            "status": "denied",
+            "stateVersion": 1,
+            "idempotencyKey": "e78-20260814T2137-live-2-persistent-request-denied-persistent",
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false,
+            "nativeInterface": "Apache Superset public REST API v1",
+            "denialReason": "TRUSTED_UI_APPROVAL_REQUIRED"
+          }
+        }
+      ],
+      "denialCount": 1,
+      "unsupportedActionDenialCount": 0,
+      "mutationCounts": {
+        "nativeSessionStateWrites": 1,
+        "persistentDashboardWrites": 0
+      },
+      "layoutId": "executive-preview-denial",
+      "chartTypes": [
+        "treemap",
+        "table_conditional"
+      ],
+      "viewSignature": "executive-preview-denial|treemap+preview-diff+denial-state",
+      "rationale": "A session-only treemap previews the proposed composition and a conditional diff table makes the denied persistent change reviewable without applying it.",
+      "renderedChartCount": 2,
+      "screenshot": "screenshots/persistent-request-denied--narrow-390x844.png",
+      "screenshotSha256": "818b213c25fe276f2f83b2f87ef44757da1b7f2572219edc828b8cc5277fec2f",
+      "measuredHorizontalOverflow": false,
+      "consoleErrorCount": 2,
+      "allowedConsoleErrorCount": 2,
+      "unexpectedConsoleErrorCount": 0,
+      "consoleErrorClasses": [
+        "known_superset_service_worker_404"
+      ],
+      "pageErrorCount": 0,
+      "visualVerdict": "approved_direct_pixel_review",
+      "defectNotes": []
+    }
+  ],
+  "responsiveEvidence": {
+    "desktopCaptures": 8,
+    "narrowCaptures": 8,
+    "strategy": "native_superset_grid_recomposes_cards_and_filters_for_narrow_viewport",
+    "scaleOnly": false
+  },
+  "directPixelReview": {
+    "schemaVersion": "chimpmaera.bi/native-superset-direct-pixel-review/v1",
+    "reviewedAt": "2026-08-14T19:36:21.355Z",
+    "method": "direct_pixel_review_of_all_16_full_resolution_browser_captures",
+    "visualScore": 8.7,
+    "requiredMinimum": 8.5,
+    "passed": true,
+    "severityCounts": {
+      "sev1": 0,
+      "sev2": 0,
+      "sev3": 0
+    },
+    "misleadingChartCount": 0,
+    "responsiveVerdict": "PASS_NATIVE_ROWS_RECOMPOSE_TO_FULL_WIDTH_CARDS_AT_390PX",
+    "reviewerNotes": [
+      "All desktop and narrow captures were inspected at full resolution after final chart scoping and responsive composition changes.",
+      "Sparse marks are intentional consequences of the deterministic 12-row synthetic oracle, not missing-data or query failures.",
+      "Titles and filters keep unlike units separate; the cross-domain association view explicitly rejects causal interpretation."
+    ],
+    "captures": [
+      {
+        "captureId": "e78-20260814T2137-live-2:executive-sales:desktop-1440x900",
+        "scenarioId": "executive-sales",
+        "viewport": "desktop-1440x900",
+        "screenshotSha256": "3ba1dad63ca2c003db21e26d32f05a1e193842de92eeb4730ac7b797fad939b2",
+        "verdict": "PASS_NO_SEV1_OR_SEV2"
+      },
+      {
+        "captureId": "e78-20260814T2137-live-2:quality-investigation:desktop-1440x900",
+        "scenarioId": "quality-investigation",
+        "viewport": "desktop-1440x900",
+        "screenshotSha256": "44e5cf4d2ba2cb62da9716b94eab2828def39fba1aeb500763cc069bc0010398",
+        "verdict": "PASS_NO_SEV1_OR_SEV2"
+      },
+      {
+        "captureId": "e78-20260814T2137-live-2:inventory-risk:desktop-1440x900",
+        "scenarioId": "inventory-risk",
+        "viewport": "desktop-1440x900",
+        "screenshotSha256": "63307ef1bdd2a472054fb9f5f180ff90063c14282d1fb32d308100eecc9d1bcd",
+        "verdict": "PASS_NO_SEV1_OR_SEV2"
+      },
+      {
+        "captureId": "e78-20260814T2137-live-2:maintenance:desktop-1440x900",
+        "scenarioId": "maintenance",
+        "viewport": "desktop-1440x900",
+        "screenshotSha256": "7105646266ec6f80313e8eadd3c39cb9fc73725953efb461f414f1685b1fa115",
+        "verdict": "PASS_NO_SEV1_OR_SEV2"
+      },
+      {
+        "captureId": "e78-20260814T2137-live-2:cross-domain:desktop-1440x900",
+        "scenarioId": "cross-domain",
+        "viewport": "desktop-1440x900",
+        "screenshotSha256": "076e24430fd89567d761c9a886fa35078836f23ba0cf521533ccbe74372c4017",
+        "verdict": "PASS_NO_SEV1_OR_SEV2"
+      },
+      {
+        "captureId": "e78-20260814T2137-live-2:voice-correction-cancel:desktop-1440x900",
+        "scenarioId": "voice-correction-cancel",
+        "viewport": "desktop-1440x900",
+        "screenshotSha256": "512b6d47e92550c9686c3a0acd2c0a3f0d732f6e5b4f59ec3e5d6d5b769540c9",
+        "verdict": "PASS_NO_SEV1_OR_SEV2"
+      },
+      {
+        "captureId": "e78-20260814T2137-live-2:undo-idempotency:desktop-1440x900",
+        "scenarioId": "undo-idempotency",
+        "viewport": "desktop-1440x900",
+        "screenshotSha256": "4c524b292324e817d8a0dcaf752735be14567f4cb044a3061b500120a331c772",
+        "verdict": "PASS_NO_SEV1_OR_SEV2"
+      },
+      {
+        "captureId": "e78-20260814T2137-live-2:persistent-request-denied:desktop-1440x900",
+        "scenarioId": "persistent-request-denied",
+        "viewport": "desktop-1440x900",
+        "screenshotSha256": "79b3adbc30b6e84ca411a7f81dd9891e6a1a1bde6432bd989275cfb5d056d666",
+        "verdict": "PASS_NO_SEV1_OR_SEV2"
+      },
+      {
+        "captureId": "e78-20260814T2137-live-2:executive-sales:narrow-390x844",
+        "scenarioId": "executive-sales",
+        "viewport": "narrow-390x844",
+        "screenshotSha256": "869e0ca99126c894f82561a9dfefbb49fd2d9cbc8cfe80e707b452ee590905fe",
+        "verdict": "PASS_NO_SEV1_OR_SEV2"
+      },
+      {
+        "captureId": "e78-20260814T2137-live-2:quality-investigation:narrow-390x844",
+        "scenarioId": "quality-investigation",
+        "viewport": "narrow-390x844",
+        "screenshotSha256": "d50470485ce73999dde94d02fcbaa89b21b2bd54aac6d3739579fcd4cdb11aad",
+        "verdict": "PASS_NO_SEV1_OR_SEV2"
+      },
+      {
+        "captureId": "e78-20260814T2137-live-2:inventory-risk:narrow-390x844",
+        "scenarioId": "inventory-risk",
+        "viewport": "narrow-390x844",
+        "screenshotSha256": "944c992e161ad3d655f44e5bbb900f43537607e55cd56a458c07ed1f8b6491cd",
+        "verdict": "PASS_NO_SEV1_OR_SEV2"
+      },
+      {
+        "captureId": "e78-20260814T2137-live-2:maintenance:narrow-390x844",
+        "scenarioId": "maintenance",
+        "viewport": "narrow-390x844",
+        "screenshotSha256": "5890c98599b02c9df2366ca40c0382d95e5acd6384b56c4c64d3759c297455dd",
+        "verdict": "PASS_NO_SEV1_OR_SEV2"
+      },
+      {
+        "captureId": "e78-20260814T2137-live-2:cross-domain:narrow-390x844",
+        "scenarioId": "cross-domain",
+        "viewport": "narrow-390x844",
+        "screenshotSha256": "a358a43a9ef626127549fd5529e43b49d2ac4224a8c0c29b103ba51744819714",
+        "verdict": "PASS_NO_SEV1_OR_SEV2"
+      },
+      {
+        "captureId": "e78-20260814T2137-live-2:voice-correction-cancel:narrow-390x844",
+        "scenarioId": "voice-correction-cancel",
+        "viewport": "narrow-390x844",
+        "screenshotSha256": "3cbcc9ff5c7b308676fd3a300826ae36bdb4fa71e1db2d7cb4dab15ca177facf",
+        "verdict": "PASS_NO_SEV1_OR_SEV2"
+      },
+      {
+        "captureId": "e78-20260814T2137-live-2:undo-idempotency:narrow-390x844",
+        "scenarioId": "undo-idempotency",
+        "viewport": "narrow-390x844",
+        "screenshotSha256": "45cd9d6e6ea29cd9cd8528ffebeb24f0b4f834e8ed19c40e523a5308397fc63e",
+        "verdict": "PASS_NO_SEV1_OR_SEV2"
+      },
+      {
+        "captureId": "e78-20260814T2137-live-2:persistent-request-denied:narrow-390x844",
+        "scenarioId": "persistent-request-denied",
+        "viewport": "narrow-390x844",
+        "screenshotSha256": "818b213c25fe276f2f83b2f87ef44757da1b7f2572219edc828b8cc5277fec2f",
+        "verdict": "PASS_NO_SEV1_OR_SEV2"
+      }
+    ]
+  }
+}
