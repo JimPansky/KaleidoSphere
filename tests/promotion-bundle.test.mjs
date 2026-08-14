@@ -21,6 +21,7 @@ import {
   ZIP_LIMITS,
 } from '../services/bi-control/src/promotion-bundle.mjs';
 import { buildSupersetFingerprint } from '../services/bi-control/src/superset-fingerprint.mjs';
+import { executeSyntheticPromotion, readbackSyntheticPromotion, restoreSyntheticPromotion } from '../services/bi-control/src/synthetic-promotion.mjs';
 
 const sha256 = (value) => createHash('sha256').update(value).digest('hex');
 const jsonBytes = (value) => Buffer.from(`${canonicalJson(value)}\n`);
@@ -158,6 +159,43 @@ test('promotion review bundle is deterministic, inspectable, checksum-bound, and
   assert.equal(first.inspection.status, 'VALID_REVIEW_ARTIFACT');
   assert.equal(preflightPromotionBundle(first.archive, { now: fixedNow }).status, 'PASS_REVIEW_ONLY');
   assert.doesNotMatch(first.archive.toString('latin1'), /(?:password|Bearer |BEGIN PRIVATE KEY|SELECT\s+.+FROM)/i);
+});
+
+test('human-approved synthetic execution is fingerprint-bound, idempotent, UUID-readable, and exactly rollbackable', async () => {
+  const directory = await mkdtemp(path.join(tmpdir(), 'sba-synthetic-promotion-'));
+  const metadataPath = path.join(directory, 'metadata.json');
+  const backupPath = path.join(directory, 'metadata.backup.json');
+  const target = { identity: 'chimpmaera-owned-disposable-superset', local_only: true, synthetic_owned: true, production: false, customer: false, source_connectivity: 'NONE' };
+  const initial = { contract_version: 'chimpmaera.bi/synthetic-superset-promotion/v1', target: target.identity, assets: {} };
+  await writeFile(metadataPath, `${canonicalJson(initial)}\n`);
+  const built = await build();
+  const expectedFingerprintSha256 = built.inspection.target.identity_sha256;
+  const request = { bundle: built.archive, metadataPath, backupPath, approval: 'APPROVE_SYNTHETIC_PROMOTION', target, expectedBundleSha256: built.sha256, expectedFingerprintSha256, now: fixedNow };
+  const first = await executeSyntheticPromotion(request);
+  assert.equal(first.status, 'IMPORTED');
+  const uuid = first.asset_uuids.at(-1);
+  assert.equal((await readbackSyntheticPromotion({ metadataPath, uuid, target })).uuid, uuid);
+  await assert.rejects(readbackSyntheticPromotion({ metadataPath, uuid: '99999999-9999-4999-8999-999999999999', target }), { code: 'PROMOTION_UUID_NOT_FOUND' });
+  const second = await executeSyntheticPromotion({ ...request, backupPath: path.join(directory, 'second.backup.json') });
+  assert.equal(second.status, 'IDEMPOTENT_NO_CHANGE');
+  const rollback = await restoreSyntheticPromotion({ metadataPath, backupPath, target, expectedBackupSha256: first.backup_sha256 });
+  assert.equal(rollback.status, 'RESTORED_EXACT');
+  assert.deepEqual(JSON.parse(await readFile(metadataPath)), initial);
+});
+
+test('synthetic execution denies missing approval, bad bundle/fingerprint, production-like targets, source connectivity, and stale fingerprints', async () => {
+  const directory = await mkdtemp(path.join(tmpdir(), 'sba-synthetic-denials-'));
+  const metadataPath = path.join(directory, 'metadata.json');
+  const target = { identity: 'chimpmaera-owned-disposable-superset', local_only: true, synthetic_owned: true, production: false, customer: false, source_connectivity: 'NONE' };
+  await writeFile(metadataPath, `${canonicalJson({ contract_version: 'chimpmaera.bi/synthetic-superset-promotion/v1', target: target.identity, assets: {} })}\n`);
+  const built = await build();
+  const base = { bundle: built.archive, metadataPath, backupPath: path.join(directory, 'backup.json'), approval: 'APPROVE_SYNTHETIC_PROMOTION', target, expectedBundleSha256: built.sha256, expectedFingerprintSha256: built.inspection.target.identity_sha256, now: fixedNow };
+  await assert.rejects(executeSyntheticPromotion({ ...base, approval: 'yes' }), { code: 'PROMOTION_HUMAN_APPROVAL_REQUIRED' });
+  await assert.rejects(executeSyntheticPromotion({ ...base, expectedBundleSha256: 'f'.repeat(64) }), { code: 'PROMOTION_BUNDLE_DIGEST_MISMATCH' });
+  await assert.rejects(executeSyntheticPromotion({ ...base, expectedFingerprintSha256: 'f'.repeat(64) }), { code: 'PROMOTION_FINGERPRINT_EXPECTATION_MISMATCH' });
+  await assert.rejects(executeSyntheticPromotion({ ...base, target: { ...target, production: true } }), { code: 'PROMOTION_TARGET_NOT_SYNTHETIC' });
+  await assert.rejects(executeSyntheticPromotion({ ...base, target: { ...target, source_connectivity: 'MSSQL' } }), { code: 'PROMOTION_TARGET_NOT_SYNTHETIC' });
+  await assert.rejects(executeSyntheticPromotion({ ...base, now: new Date('2026-08-16T08:30:00.000Z') }), { code: 'SUPERSET_FINGERPRINT_STALE' });
 });
 
 test('promotion CLI builds, inspects, and preflights with machine and human output', async () => {

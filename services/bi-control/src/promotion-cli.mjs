@@ -3,6 +3,9 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { buildPromotionBundle, inspectPromotionBundle, preflightPromotionBundle, writePromotionBundle } from './promotion-bundle.mjs';
+import { executeSyntheticPromotion, readbackSyntheticPromotion, restoreSyntheticPromotion } from './synthetic-promotion.mjs';
+
+const syntheticTarget = { identity: 'chimpmaera-owned-disposable-superset', local_only: true, synthetic_owned: true, production: false, customer: false, source_connectivity: 'NONE' };
 
 function fail(message) {
   process.stderr.write(`ChimpMaera BI promotion bundle ERROR: ${message}\n`);
@@ -55,4 +58,14 @@ if (command === 'build') {
   const report = command === 'inspect' ? inspectPromotionBundle(archive, { now }) : preflightPromotionBundle(archive, { now });
   process.stdout.write(render(report, human));
   if (report.status === 'BLOCKED') process.exitCode = 2;
-} else fail('usage: promotion-bundle {build|inspect|preflight} ...');
+} else if (command === 'execute-synthetic') {
+  if (!parsed.bundle || !parsed.metadata || !parsed.backup || !parsed.approval || !parsed['bundle-sha256'] || !parsed['fingerprint-sha256']) fail('usage: promotion-bundle execute-synthetic --bundle REVIEW.zip --metadata STATE.json --backup BACKUP.json --approval APPROVE_SYNTHETIC_PROMOTION --bundle-sha256 SHA256 --fingerprint-sha256 SHA256 [--now ISO]');
+  const report = await executeSyntheticPromotion({ bundle: await readFile(parsed.bundle), metadataPath: parsed.metadata, backupPath: parsed.backup, approval: parsed.approval, target: syntheticTarget, expectedBundleSha256: parsed['bundle-sha256'], expectedFingerprintSha256: parsed['fingerprint-sha256'], now });
+  process.stdout.write(`${JSON.stringify(report, null, 2)}\n`);
+} else if (command === 'readback-synthetic') {
+  if (!parsed.metadata || !parsed.uuid) fail('usage: promotion-bundle readback-synthetic --metadata STATE.json --uuid UUID');
+  process.stdout.write(`${JSON.stringify(await readbackSyntheticPromotion({ metadataPath: parsed.metadata, uuid: parsed.uuid, target: syntheticTarget }), null, 2)}\n`);
+} else if (command === 'restore-synthetic') {
+  if (!parsed.metadata || !parsed.backup || !parsed['backup-sha256']) fail('usage: promotion-bundle restore-synthetic --metadata STATE.json --backup BACKUP.json --backup-sha256 SHA256');
+  process.stdout.write(`${JSON.stringify(await restoreSyntheticPromotion({ metadataPath: parsed.metadata, backupPath: parsed.backup, target: syntheticTarget, expectedBackupSha256: parsed['backup-sha256'] }), null, 2)}\n`);
+} else fail('usage: promotion-bundle {build|inspect|preflight|execute-synthetic|readback-synthetic|restore-synthetic} ...');

@@ -155,8 +155,8 @@ case "${1:-help}" in
     action="${2:-}"
     shift 2 || true
     case "$action" in
-      build|inspect|preflight) node services/bi-control/src/promotion-cli.mjs "$action" "$@" ;;
-      *) fail 'usage: ./bin/bi promotion-bundle {build|inspect|preflight} ...' ;;
+      build|inspect|preflight|execute-synthetic|readback-synthetic|restore-synthetic) node services/bi-control/src/promotion-cli.mjs "$action" "$@" ;;
+      *) fail 'usage: ./bin/bi promotion-bundle {build|inspect|preflight|execute-synthetic|readback-synthetic|restore-synthetic} ...' ;;
     esac
     ;;
   status)

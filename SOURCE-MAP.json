@@ -8,7 +8,7 @@
     "THIRD_PARTY_NOTICES.md": "db2a7877c0746af81e9e09ebfcf387a7197f69833600f7b57c9600248712045b",
     "README.md": "6a108f9df72b2c1e9cbe3047309e67c568627fb6bca838acd561b427949815e5",
     "package.json": "dc1cecd23baff3e601a1c725c6fca1a1c670afacb7704c9a647c6762136410da",
-    "bin/bi": "a12c9699c19fd0df61173e3b94a46b7ef0e3127b2a3f6ff2a5916fb759b95c02",
+    "bin/bi": "c7fddc7fb97df94f5c6b2c273de951ae953962a829b0c401d9e77078ed903336",
     "docs/evidence/M3_LOCAL_TECHNICAL_CATALOG.md": "b9bb009cdd87e1030e4730cb2c5d8ec826204ddb5b96c11f80e75ad198e9b552",
     "services/bi-agent/src/server.mjs": "7d6552a0bd67efa3dfdfc6066458fb648dea138829b9c310afbcf900670f8be4",
     "services/bi-control/src/catalog.mjs": "9e8096baf2959834638b182dea683e5ff39599019155d82559e181436587a950",
@@ -94,8 +94,10 @@
     "contracts/superset-promotion-bundle/v1/promotion-bundle.schema.json": "949735fe8f818a968c3f5a56e723337b3d84d221e7850b82d55f7ccba912ba91",
     "contracts/superset-promotion-bundle/v1/review-asset.schema.json": "e96631587158f614c1b57fdece79df0a9a52c117a6c5b589870c3226b0ecf859",
     "services/bi-control/src/promotion-bundle.mjs": "82dac4aa57268eefddce5f828dacfd80d27b77f60855845d1975908c995c88df",
-    "services/bi-control/src/promotion-cli.mjs": "733f5308fada13a851ae2a9e049e11f2f69f005cc573c909f082ab932f1d37ed",
-    "tests/promotion-bundle.test.mjs": "41b646bd06843caba97dc5fe7a205cdd5993ede94333b73016e558c4a3d58db1"
+    "services/bi-control/src/promotion-cli.mjs": "70aa909ed0a56894840d6ba2630deb50faaaf98fae72fd626f0c06d66ca5fa4a",
+    "tests/promotion-bundle.test.mjs": "71e6c931c58b0742362b2792a4e683d2b1dc9330a19997cd23734fb37bc514e9",
+    "services/bi-control/src/synthetic-promotion.mjs": "7c46127b9787cd61c2e6fa68fe72d907cd39ab42f9712edc27c84d9263a61503",
+    "docs/evidence/M5_SYNTHETIC_PROMOTION.md": "5b982fd791e86e4de315351f5056b6b0f7e6dd00b2d01a7e7346ec0cc97ddfc4"
   },
   "derivedFiles": {
     "services/bi-control/src/db-analyzer/core.mjs": {
