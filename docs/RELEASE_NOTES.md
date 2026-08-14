@@ -1,5 +1,15 @@
 # Release Notes
 
+## Unreleased - Product README and docs navigation refresh
+
+The README now presents the repository as Superset BI Agent with a compact
+product-oriented overview, fixture-first quickstart, visible workflow,
+security-by-design summary, and explicit current boundaries. Operational detail
+was moved into dedicated Architecture, Configuration, Security, and Roadmap
+documents. This is documentation-only maintenance; no runtime behavior,
+container configuration, query pack, Superset materializer, release asset, tag,
+or version change is included.
+
 ## v0.6.1 - Apache Superset 6.1.0 security/runtime upgrade
 
 The owned Superset runtime is pinned to Apache Superset 6.1.0 by immutable image

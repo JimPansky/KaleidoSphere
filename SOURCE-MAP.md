@@ -9,7 +9,9 @@ at commit `7a483ad9db76f6233b166874447693d28e8ac942`. The local reproduction was
 verified at that exact commit before copying; ChimpMaera was not mutated.
 M5 does not copy new ChimpMaera code. The Superset fingerprint contract,
 collector, fail-closed planning gate, tests, and evidence documentation are
-repository-authored for this public Superset_BI_Agent release slice.
+repository-authored for this public Superset_BI_Agent release slice. The product
+README refresh and Architecture, Configuration, Security, and Roadmap documents
+are also repository-authored documentation.
 
 The M0 baseline was mechanically copied byte-for-byte as recorded by its source
 hashes; files changed for M1 are explicitly listed under `derivedFiles`. M2
@@ -30,6 +32,8 @@ updated file hashes:
   `services/bi-control/fixtures/superset-fingerprint-runtime-v1.json`,
   `tests/superset-fingerprint.test.mjs`, and
   `docs/evidence/M5_SUPERSET_FINGERPRINT.md`
+- product documentation such as `docs/ARCHITECTURE.md`,
+  `docs/CONFIGURATION.md`, `docs/SECURITY.md`, and `docs/ROADMAP.md`
 - `packages/contracts/src/canonical-json.js` →
   `services/bi-control/src/canonical-json.js`
 - `scripts/lib/db-analyzer/*.mjs` →

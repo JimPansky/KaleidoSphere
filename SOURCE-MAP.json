@@ -6,7 +6,7 @@
     "LICENSE": "835083c307550077500f6817fa1d3ecbcb5f559d41029ff34f2ccacf5c3bbe07",
     "NOTICE": "d450ed03544412c411173e098a89976228d98f9a76634b0ec09e19134382ef74",
     "THIRD_PARTY_NOTICES.md": "db2a7877c0746af81e9e09ebfcf387a7197f69833600f7b57c9600248712045b",
-    "README.md": "e498f91a5589163a85c5a0cde68a17d628139e8e0bc762e1d4224accbddfefdc",
+    "README.md": "5daf7802e7a6a1948cf9cdd22b7996ef0c68c629de95a9e54944d130041dae99",
     "package.json": "f65009ce1ae41f3ac9e128972a5394b2d7666a83fdf1a4fbed0d1e93d95fb9f9",
     "bin/bi": "66871659acbc6f0c4263e79202ea8c875edde180ecafc337f6f61e16da591b9e",
     "docs/evidence/M3_LOCAL_TECHNICAL_CATALOG.md": "b9bb009cdd87e1030e4730cb2c5d8ec826204ddb5b96c11f80e75ad198e9b552",
@@ -74,7 +74,7 @@
     "scripts/build-release.mjs": "c658f7f7ae08a67cbe06f7c39eb328aba17ae20dd2dc14bad00534ecb5fa97c3",
     "tests/release.test.mjs": "9fe5fd3dee7d77ca9a07c7180df3293600117de7641519c64c4dab9523225e2e",
     "docs/CLEAN_ROOM.md": "d15f6d4040086e8d38b510872fe15809cb36144cdbb89e08f7a002e20b1ddeb9",
-    "docs/RELEASE_NOTES.md": "820ba57882dc32aac78d6af32f1c49ea30964b1110f2322fd62f133f03ecb28d",
+    "docs/RELEASE_NOTES.md": "5589a80a5e464e5cf519048770221c39579eacda3b27d42ba1e7225ae0c7ee9c",
     "docs/SUPERSET_6_1_UPGRADE.md": "603e85e4f26ccc7f40c9014f900d074f2b80e288e98cc31d6e0bd42049af8958",
     "docs/evidence/M4_GUIDED_BI_DISCOVERY.md": "5e6ce8723223a22147b182ed9feb950d98828d5e57e212bdf7c1436ffa2d6fae",
     "services/bi-control/src/discovery.mjs": "8f0149ac53d459463e402894a32d3d35fda4440eda831fcfc3cad8788ea6de41",
@@ -85,7 +85,11 @@
     "services/bi-control/src/superset-fingerprint.mjs": "5af298de81428b21c0bda7f44171ac9dc5ef7437d7f19eb907060ce6809a7c8e",
     "tests/superset-fingerprint.test.mjs": "93bfb34d07cde1e58a980e48113435a8076acf4f531f4ab0e2c374fe61095c3e",
     "services/superset/runtime/materializer_server.py": "b807692e11cac198c2168a991f80b2e91b1e503a6f5b8fd9e07f480e92ce4694",
-    "SOURCE-MAP.md": "e08bd824ca0fedf68271a7ff3063ec564821b3e2b427ac58af9ef2eddb7ffdd3"
+    "SOURCE-MAP.md": "fb4226c106968ae0d64c1b7398ae45ceaadb323229b0828739d94da582bbcb52",
+    "docs/ARCHITECTURE.md": "f393c31094193cf5f08db9f2292cab18e25c4fae1cc7a5f86009bb134bb6a020",
+    "docs/CONFIGURATION.md": "b41299fd0cad7bfa0ae371ce28dba72c6c915a1336c33b92416e414952f5340c",
+    "docs/SECURITY.md": "10393220a15c66d6a032253e59d4684afd65649071415e772e16a3ae5a71ed7e",
+    "docs/ROADMAP.md": "b4e00dfcdb7438ac7a5dcdf3729808be7db7ecb866eab9923f92e6126e7224b3"
   },
   "derivedFiles": {
     "services/bi-control/src/db-analyzer/core.mjs": {
