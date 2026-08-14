@@ -7,9 +7,10 @@ at commit `cee9fd5835ac3527af54b5974b5d53414eac88d8`.
 The M1 Oracle query pack was read-only sourced from the same public repository
 at commit `7a483ad9db76f6233b166874447693d28e8ac942`. The local reproduction was
 verified at that exact commit before copying; ChimpMaera was not mutated.
-M5 does not copy new ChimpMaera code. The Superset fingerprint contract,
-collector, fail-closed planning gate, tests, and evidence documentation are
-repository-authored for this public Superset_BI_Agent release slice. The product
+M5 does not copy new ChimpMaera code. The Superset fingerprint and promotion
+bundle contracts, collector/builder/inspector, fail-closed gates, tests, and
+evidence documentation are repository-authored for this public
+Superset_BI_Agent release slice. The product
 README refresh and Architecture, Configuration, Security, and Roadmap documents
 are also repository-authored documentation.
 
@@ -29,9 +30,14 @@ updated file hashes:
   `docs/evidence/M3_LOCAL_TECHNICAL_CATALOG.md`
 - M5 authored repository files such as
   `services/bi-control/src/superset-fingerprint.mjs`,
+  `services/bi-control/src/promotion-bundle.mjs`,
+  `services/bi-control/src/promotion-cli.mjs`,
+  `contracts/superset-promotion-bundle/v1/*`,
   `services/bi-control/fixtures/superset-fingerprint-runtime-v1.json`,
-  `tests/superset-fingerprint.test.mjs`, and
-  `docs/evidence/M5_SUPERSET_FINGERPRINT.md`
+  `tests/superset-fingerprint.test.mjs`,
+  `tests/promotion-bundle.test.mjs`,
+  `docs/evidence/M5_SUPERSET_FINGERPRINT.md`, and
+  `docs/evidence/M5_PROMOTION_BUNDLE.md`
 - product documentation such as `docs/ARCHITECTURE.md`,
   `docs/CONFIGURATION.md`, `docs/SECURITY.md`, and `docs/ROADMAP.md`
 - `packages/contracts/src/canonical-json.js` →
@@ -54,5 +60,5 @@ change marker for each derived file. M2/M3 query-pack and catalog additions
 collect only technical metadata: comments/source/error text are hash-only,
 DB-link hosts are hash-only, scheduler action text is omitted, and catalog Q&A is
 answered from local safe projections only. New Compose, control, catalog,
-Superset materializer, fingerprint, agent UI, tests, and documentation were
+Superset materializer, fingerprint, review-bundle, agent UI, tests, and documentation were
 authored specifically for this repository.

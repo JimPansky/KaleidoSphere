@@ -52,8 +52,8 @@ requests, credentials, prompt-injection text, and Superset mutation requests are
 rejected before tool calls.
 
 Catalog search, technical Q&A, BI Discovery suggestions, brief export,
-publication, readback, and Superset fingerprint logic are deterministic local
-code paths.
+publication, readback, Superset fingerprint logic, and promotion-bundle
+build/inspect/preflight are deterministic local code paths.
 
 ## Superset boundary
 
@@ -61,15 +61,26 @@ Superset reads only the local projection database. It does not receive Oracle or
 MSSQL credentials and does not connect directly to source databases.
 
 Current publication is fixed and managed. The materializer updates predefined
-technical overview assets over local projection tables. Dynamic datasets,
-charts, dashboards, ZIP imports/exports, and promotion workflows are future
-reviewed capabilities, not current behavior.
+technical overview assets over local projection tables. The promotion-bundle
+CLI produces an offline, review-only ZIP and never calls that materializer.
+Dynamic datasets, charts, dashboards, ZIP imports/exports, and promotion
+execution are future reviewed capabilities, not current behavior.
 
 The Superset runtime fingerprint is read-only. It records sanitized target
 identity, runtime version, OpenAPI canonical hash, feature-flag capability
 status, provenance, freshness, compatibility verdict, limitations, and
 nonclaims. Fingerprint collection does not call the materializer or write
 Superset metadata.
+
+Promotion ZIP inspection rejects traversal, absolute/backslash paths, duplicate
+paths, symlinks, multidisk/trailing archives, unsupported encodings, overlapping
+entries, invalid local/central headers, CRC mismatch, excess archive/entry/count/
+ratio limits, unlisted files, missing required files, noncanonical JSON/YAML,
+hash drift, UUID/reference drift, stale/incompatible fingerprints, raw SQL,
+source rows, credentials, connection URIs, and secret-like values. Mandatory
+SHA-256 checksums establish integrity, not signer authenticity; v1 is explicitly
+unsigned. Every inspection and preflight result reports
+`mutation_performed=false`.
 
 ## Network and container controls
 

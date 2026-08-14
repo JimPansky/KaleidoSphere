@@ -27,3 +27,19 @@ regression never substitutes for live Oracle evidence.
 M4 Discovery clean-room proof must also confirm and export a brief from the local
 catalog while the source database is not queried after catalog ingestion. It must
 not create dynamic Superset datasets, charts, dashboards, or SQL.
+
+M5-02 clean-room proof additionally runs:
+
+```bash
+node --test tests/promotion-bundle.test.mjs
+node scripts/build-release.mjs /tmp/sba-release
+cd /tmp/sba-release
+sha256sum -c Superset_BI_Agent-v0.7.0.tar.gz.sha256
+```
+
+Build the release archive twice from the same clean tree and compare bytes and
+SHA-256. Extract the archive into a second verifier directory, confirm it has no
+`.git`, `.env`, generated `.runtime`, `.secrets`, `node_modules`, or generated
+review ZIP, then rerun `npm test`, Compose config, and the promotion malicious-
+bundle probes. This proves only portable offline/fixture behavior, not customer
+or production promotion compatibility.

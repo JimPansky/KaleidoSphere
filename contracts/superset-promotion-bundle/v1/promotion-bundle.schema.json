@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chimpmaera.invalid/contracts/superset-promotion-bundle/v1/promotion-bundle.schema.json",
+  "title": "ChimpMaera Superset review promotion bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "bundle_id", "artifact_mode", "created_at", "mutation_performed", "discovery", "catalog", "target", "superset", "fingerprint", "assets", "files", "disclosure", "limitations", "nonclaims", "integrity"],
+  "properties": {
+    "contract_version": {"const": "chimpmaera.bi/superset-promotion-bundle/v1"},
+    "bundle_id": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "artifact_mode": {"const": "REVIEW_ONLY"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "mutation_performed": {"const": false},
+    "discovery": {"type": "object"},
+    "catalog": {"type": "object"},
+    "target": {"type": "object"},
+    "superset": {"type": "object"},
+    "fingerprint": {"type": "object"},
+    "assets": {"type": "array", "minItems": 1, "items": {"type": "object"}},
+    "files": {"type": "array", "minItems": 5, "items": {"type": "object"}},
+    "disclosure": {"type": "object"},
+    "limitations": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "nonclaims": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "integrity": {"type": "object"}
+  }
+}

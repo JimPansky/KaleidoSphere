@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chimpmaera.invalid/contracts/superset-promotion-bundle/v1/review-asset.schema.json",
+  "title": "ChimpMaera Superset review-only asset specification",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "kind", "uuid", "title", "depends_on", "review_spec", "mutation_performed"],
+  "properties": {
+    "schema_version": {"const": "chimpmaera.bi/superset-review-asset/v1"},
+    "kind": {"enum": ["database", "dataset", "chart", "dashboard"]},
+    "uuid": {"type": "string", "format": "uuid"},
+    "title": {"type": "string", "minLength": 1, "maxLength": 160},
+    "depends_on": {"type": "array", "uniqueItems": true, "items": {"type": "string", "format": "uuid"}},
+    "review_spec": {"type": "object"},
+    "mutation_performed": {"const": false}
+  }
+}
