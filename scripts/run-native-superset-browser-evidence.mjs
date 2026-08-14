@@ -22,6 +22,15 @@ const liveRun = nativeEvidence.runs.at(-1);
 if (!liveRun.allPassed || liveRun.scenarios.length !== 8) throw new Error('NATIVE_VISUAL_LIVE_RUN_INVALID');
 const baseUrl = new URL(nativeEvidence.runtime.baseUrl);
 if (!['127.0.0.1', 'localhost', '::1'].includes(baseUrl.hostname)) throw new Error('NATIVE_VISUAL_TARGET_DENIED');
+const cacheSettleMinimumMs = Number(process.env.NATIVE_ASSET_CACHE_SETTLE_MS ?? 22_000);
+const evidenceGeneratedAtMs = Date.parse(nativeEvidence.generatedAt);
+if (!Number.isInteger(cacheSettleMinimumMs) || cacheSettleMinimumMs < 0 || cacheSettleMinimumMs > 30_000 || Number.isNaN(evidenceGeneratedAtMs)) {
+  throw new Error('NATIVE_CACHE_SETTLE_POLICY_INVALID');
+}
+const cacheSettleWaitMs = Math.max(0, cacheSettleMinimumMs - (Date.now() - evidenceGeneratedAtMs));
+if (cacheSettleWaitMs > 0) await new Promise((resolveWait) => setTimeout(resolveWait, cacheSettleWaitMs));
+const cacheSettleAgeMs = Date.now() - evidenceGeneratedAtMs;
+if (cacheSettleAgeMs < cacheSettleMinimumMs) throw new Error('NATIVE_CACHE_SETTLE_PRECONDITION_FAILED');
 
 await mkdir(screenshotRoot, { recursive: true });
 const sha256 = (value) => createHash('sha256').update(value).digest('hex');
@@ -53,6 +62,13 @@ const manifest = {
   automation: 'preinstalled-playwright-core-role-and-label-locators',
   freeDomOrInjectedJavaScriptActions: 0,
   persistentDashboardMutations: 0,
+  cacheStability: {
+    nativeEvidenceGeneratedAt: nativeEvidence.generatedAt,
+    minimumAssetAgeMs: cacheSettleMinimumMs,
+    waitAppliedMs: cacheSettleWaitMs,
+    observedAssetAgeMs: cacheSettleAgeMs,
+    stalePostProvisionCaptureFailsClosed: true,
+  },
   consoleErrorPolicy: {
     allowedClasses: ['known_superset_service_worker_404'],
     rawConsoleMessagesPersisted: false,
@@ -64,22 +80,22 @@ const manifest = {
 try {
   for (const viewport of viewports) {
     const context = await browser.newContext({ viewport: { width: viewport.width, height: viewport.height }, reducedMotion: 'reduce' });
-    const page = await context.newPage();
-    const consoleErrors = [];
-    const pageErrors = [];
-    page.on('console', (message) => { if (message.type() === 'error') consoleErrors.push(message.text()); });
-    page.on('pageerror', (error) => pageErrors.push(error.message));
-    await page.goto(`${baseUrl.origin}/login/`, { waitUntil: 'domcontentloaded' });
-    await page.getByLabel('Username').fill('cm_admin');
-    await page.getByLabel('Password').fill(password);
+    const loginPage = await context.newPage();
+    await loginPage.goto(`${baseUrl.origin}/login/`, { waitUntil: 'domcontentloaded' });
+    await loginPage.getByLabel('Username').fill('cm_admin');
+    await loginPage.getByLabel('Password').fill(password);
     await Promise.all([
-      page.waitForURL((url) => !url.pathname.startsWith('/login'), { timeout: 30_000 }),
-      page.getByRole('button', { name: /sign in/i }).click(),
+      loginPage.waitForURL((url) => !url.pathname.startsWith('/login'), { timeout: 30_000 }),
+      loginPage.getByRole('button', { name: /sign in/i }).click(),
     ]);
+    await loginPage.close();
 
     for (const scenario of liveRun.scenarios) {
-      const errorOffset = consoleErrors.length;
-      const pageErrorOffset = pageErrors.length;
+      const page = await context.newPage();
+      const consoleErrors = [];
+      const pageErrors = [];
+      page.on('console', (message) => { if (message.type() === 'error') consoleErrors.push(message.text()); });
+      page.on('pageerror', (error) => pageErrors.push(error.message));
       const expectedCharts = [...(nativeEvidence.stableAssets.dashboardCharts?.[scenario.dashboard.uuid] ?? [])]
         .sort((left, right) => left.id - right.id);
       if (expectedCharts.length !== scenario.chartTypes.length) throw new Error(`NATIVE_CHART_ASSOCIATION_MISMATCH:${scenario.scenarioId}`);
@@ -104,8 +120,15 @@ try {
         await page.screenshot({ path: `/tmp/m6-02-native-timeout-${scenario.scenarioId}-${viewport.id}.png`, fullPage: true });
         throw new Error(`NATIVE_CHART_RESPONSE_TIMEOUT:${scenario.scenarioId}:${chartPayloads.length}/${expectedCharts.length}`);
       }
-      await page.mouse.wheel(0, -100_000);
-      await page.waitForTimeout(250);
+      await page.mouse.wheel(-100_000, -100_000);
+      await page.waitForTimeout(1_000);
+      const dashboardHeader = page.getByText(new RegExp(`^${escapeRegex(scenario.dashboard.title)}`, 'i')).first();
+      await dashboardHeader.waitFor({ state: 'visible', timeout: 10_000 });
+      const dashboardHeaderBounds = await dashboardHeader.boundingBox();
+      if (!dashboardHeaderBounds || dashboardHeaderBounds.x < 0
+        || dashboardHeaderBounds.x + dashboardHeaderBounds.width > viewport.width) {
+        throw new Error(`NATIVE_DASHBOARD_BOUNDS_INVALID:${scenario.scenarioId}:${viewport.id}`);
+      }
       const failedChartResponses = chartPayloads.filter(({ ok, body }) => !ok || !body || body.errors?.length > 0 || body.message || body.result?.some((item) => item.error || item.status === 'failed')).length;
       if (failedChartResponses > 0) throw new Error(`NATIVE_CHART_QUERY_FAILED:${scenario.scenarioId}:${failedChartResponses}`);
       for (const chart of expectedCharts) {
@@ -119,10 +142,10 @@ try {
       if (visibleErrors > 0) throw new Error(`NATIVE_DASHBOARD_VISIBLE_ERROR:${scenario.scenarioId}`);
       const screenshotFile = `${scenario.scenarioId}--${viewport.id}.png`;
       const screenshotPath = resolve(screenshotRoot, screenshotFile);
-      await page.screenshot({ path: screenshotPath, fullPage: viewport.fullPage });
+      await page.screenshot({ path: screenshotPath, fullPage: viewport.fullPage, animations: 'disabled' });
       const screenshot = await readFile(screenshotPath);
       const horizontalOverflow = screenshot.readUInt32BE(16) !== viewport.width;
-      const captureConsoleErrors = consoleErrors.slice(errorOffset).map(classifyConsoleError);
+      const captureConsoleErrors = consoleErrors.map(classifyConsoleError);
       manifest.captures.push({
         captureId: `${liveRun.runId}:${scenario.scenarioId}:${viewport.id}`,
         capturedAt: new Date().toISOString(),
@@ -145,6 +168,10 @@ try {
         viewSignature: scenario.viewSignature,
         rationale: scenario.rationale,
         renderedChartCount: chartCount,
+        dashboardHeaderBounds: {
+          x: Math.round(dashboardHeaderBounds.x), y: Math.round(dashboardHeaderBounds.y),
+          width: Math.round(dashboardHeaderBounds.width), height: Math.round(dashboardHeaderBounds.height),
+        },
         screenshot: `screenshots/${screenshotFile}`,
         screenshotSha256: sha256(screenshot),
         measuredHorizontalOverflow: horizontalOverflow,
@@ -152,10 +179,11 @@ try {
         allowedConsoleErrorCount: captureConsoleErrors.filter((kind) => kind !== 'unexpected').length,
         unexpectedConsoleErrorCount: captureConsoleErrors.filter((kind) => kind === 'unexpected').length,
         consoleErrorClasses: [...new Set(captureConsoleErrors)],
-        pageErrorCount: pageErrors.length - pageErrorOffset,
+        pageErrorCount: pageErrors.length,
         visualVerdict: 'pending_direct_pixel_review',
         defectNotes: [],
       });
+      await page.close();
     }
     await context.close();
   }

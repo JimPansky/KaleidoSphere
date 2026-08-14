@@ -1,14 +1,21 @@
 {
   "schemaVersion": "chimpmaera.bi/native-superset-browser-evidence/v1",
-  "generatedAt": "2026-08-14T19:36:01.047Z",
+  "generatedAt": "2026-08-14T20:10:33.283Z",
   "nativeEvidenceManifest": "docs/evidence/m6-02-native/live-manifest.json",
-  "nativeEvidenceManifestSha256": "7dbd6e1f07c0abdacd049ba9144c25204441c50753e9d5af4057a59a40b3ee65",
-  "nativeRunId": "e78-20260814T2137-live-2",
+  "nativeEvidenceManifestSha256": "673fa9b6e3f21a55c1e6255e549c955cc050c051cc222dfdfafd87f749071d1e",
+  "nativeRunId": "recovery-v4-live-m-20260814T2214-live-2",
   "baseUrl": "http://127.0.0.1:28088",
   "browser": "148.0.7778.96",
   "automation": "preinstalled-playwright-core-role-and-label-locators",
   "freeDomOrInjectedJavaScriptActions": 0,
   "persistentDashboardMutations": 0,
+  "cacheStability": {
+    "nativeEvidenceGeneratedAt": "2026-08-14T20:10:11.176Z",
+    "minimumAssetAgeMs": 22000,
+    "waitAppliedMs": 21844,
+    "observedAssetAgeMs": 22028,
+    "stalePostProvisionCaptureFailsClosed": true
+  },
   "consoleErrorPolicy": {
     "allowedClasses": [
       "known_superset_service_worker_404"
@@ -18,8 +25,8 @@
   },
   "captures": [
     {
-      "captureId": "e78-20260814T2137-live-2:executive-sales:desktop-1440x900",
-      "capturedAt": "2026-08-14T19:36:03.129Z",
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:executive-sales:desktop-1440x900",
+      "capturedAt": "2026-08-14T20:10:36.083Z",
       "scenarioId": "executive-sales",
       "viewport": {
         "id": "desktop-1440x900",
@@ -32,7 +39,7 @@
         "slug": "m6-02-executive-summary",
         "title": "M6-02 Executive Summary"
       },
-      "permalinkKey": "l4jJbWzYBGy",
+      "permalinkKey": "2qVkL1Ob5zW",
       "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
       "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
       "nativeReadbackDigest": "sha256:c19364daaa539dd23ecd8fb0e0d37dfbb6dc60cf0dfca621ffad2afffa27e88b",
@@ -87,14 +94,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-executive-sales-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-01",
             "action": "set_time_range",
             "args": {
               "from": "2026-04-01",
               "to": "2026-06-30"
             },
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-01",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-idem-01",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000101",
               "dashboardSlug": "m6-02-executive-summary"
@@ -102,18 +109,18 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-executive-sales-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-01",
             "action": "set_time_range",
             "status": "applied",
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-01",
-            "undoToken": "sha256:b552475e7eb13e503cb8d8ef15449c35a2c95c2fa1f34f1a086507daa157d1d9",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-idem-01",
+            "undoToken": "sha256:64b3fb83abc7e4b690bf4f5f145ad59cc84936b55a772202861c277e0ef92d2c",
             "sideEffect": "reversible_native_permalink_state",
             "persistentSupersetMutation": false,
             "nativeInterface": "Apache Superset public REST API v1",
             "previousStateVersion": 1,
-            "requestDigest": "sha256:d3e61f098537fd91cdff3ce8966a813b49f27f9ec8cb83338e008341b0bdc947",
-            "nativeReadbackDigest": "sha256:00782a26089ef22b813578cba3dc19f788cf9ac5fe6684618a183042a47737d0"
+            "requestDigest": "sha256:6bf4f93c83520014f2b632d3d44f620aee1db86b0e486b015543db5e56c029b4",
+            "nativeReadbackDigest": "sha256:bae1a66377d2ad5eecc6f754eea8fc003f8efb35d5982807588056414fb28f2a"
           }
         },
         {
@@ -122,13 +129,13 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-executive-sales-02",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-02",
             "action": "select_tab",
             "args": {
               "tabId": "executive"
             },
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-02",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-idem-02",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000101",
               "dashboardSlug": "m6-02-executive-summary"
@@ -136,11 +143,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-executive-sales-02",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-02",
             "action": "select_tab",
             "status": "denied",
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-02",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-idem-02",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -154,13 +161,13 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-executive-sales-03",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-03",
             "action": "focus_chart",
             "args": {
               "chartId": "sales-margin"
             },
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-03",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-idem-03",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000101",
               "dashboardSlug": "m6-02-executive-summary"
@@ -168,11 +175,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-executive-sales-03",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-03",
             "action": "focus_chart",
             "status": "denied",
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-03",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-idem-03",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -186,7 +193,7 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-executive-sales-04",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-04",
             "action": "compare_segments",
             "args": {
               "segments": [
@@ -195,7 +202,7 @@
               ]
             },
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-04",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-idem-04",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000101",
               "dashboardSlug": "m6-02-executive-summary"
@@ -203,11 +210,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-executive-sales-04",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-04",
             "action": "compare_segments",
             "status": "denied",
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-04",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-idem-04",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -231,22 +238,30 @@
       "viewSignature": "executive-summary|kpi-strip+trend-wide+ranked-bars",
       "rationale": "The big number answers the headline revenue question, while the time-series and bar encodings show the same completed-period revenue in complementary temporal and magnitude views without mixing units.",
       "renderedChartCount": 3,
+      "dashboardHeaderBounds": {
+        "x": 16,
+        "y": 41,
+        "width": 419,
+        "height": 20
+      },
       "screenshot": "screenshots/executive-sales--desktop-1440x900.png",
-      "screenshotSha256": "3ba1dad63ca2c003db21e26d32f05a1e193842de92eeb4730ac7b797fad939b2",
+      "screenshotSha256": "96c8a62c1fe67fe5b7fa0dd927336812a4b003c49dec8a5e649f06c82e6ffba9",
       "measuredHorizontalOverflow": false,
-      "consoleErrorCount": 4,
-      "allowedConsoleErrorCount": 4,
+      "consoleErrorCount": 2,
+      "allowedConsoleErrorCount": 2,
       "unexpectedConsoleErrorCount": 0,
       "consoleErrorClasses": [
         "known_superset_service_worker_404"
       ],
       "pageErrorCount": 0,
       "visualVerdict": "approved_direct_pixel_review",
-      "defectNotes": []
+      "defectNotes": [
+        "Sev3: the deterministic synthetic oracle leaves one-period or single-point plots visually sparse."
+      ]
     },
     {
-      "captureId": "e78-20260814T2137-live-2:quality-investigation:desktop-1440x900",
-      "capturedAt": "2026-08-14T19:36:04.363Z",
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:quality-investigation:desktop-1440x900",
+      "capturedAt": "2026-08-14T20:10:38.199Z",
       "scenarioId": "quality-investigation",
       "viewport": {
         "id": "desktop-1440x900",
@@ -259,7 +274,7 @@
         "slug": "m6-02-quality-investigation",
         "title": "M6-02 Quality Investigation"
       },
-      "permalinkKey": "GqyPY6Qmj3v",
+      "permalinkKey": "Z5qdLAd3MPv",
       "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
       "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
       "nativeReadbackDigest": "sha256:6a6d4c995fca10f2be52ea66b3f2eaffb0470536350b02cfe12a4e7f91a0b33e",
@@ -323,14 +338,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-01",
             "action": "set_filter",
             "args": {
               "key": "plant",
               "value": "Werk 3"
             },
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-01",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-01",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
               "dashboardSlug": "m6-02-quality-investigation"
@@ -338,18 +353,18 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-01",
             "action": "set_filter",
             "status": "applied",
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-01",
-            "undoToken": "sha256:51da3c0604c1b798dc2dfbd04d847ec1ae2e4c675c4c4fb3beba1fa5bfea305c",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-01",
+            "undoToken": "sha256:be6ebeb71f40b6081fc66abd5508c2e6f2b6ee168527767c3a3aaee73a1b949d",
             "sideEffect": "reversible_native_permalink_state",
             "persistentSupersetMutation": false,
             "nativeInterface": "Apache Superset public REST API v1",
             "previousStateVersion": 1,
-            "requestDigest": "sha256:d81fe8c37d868fd39803bfb84c378fe706b8bc85af4ec638bf1a46348e56eddc",
-            "nativeReadbackDigest": "sha256:37b42a4c9928580206fc7fd5696dacf2416dfcb689f284861941e29d0c87f70d"
+            "requestDigest": "sha256:60a6eb75daf785f1c7db6f02fcef7a6a7e441e6d9e35b9f69a9c93eb8e0843ae",
+            "nativeReadbackDigest": "sha256:0a39f75053fe7b09a56925b14a0d48aa2bb1067bd1a00abfdfc76fc87572982a"
           }
         },
         {
@@ -358,14 +373,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-02",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-02",
             "action": "set_filter",
             "args": {
               "key": "line",
               "value": "Linie C"
             },
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-02",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-02",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
               "dashboardSlug": "m6-02-quality-investigation"
@@ -373,11 +388,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-02",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-02",
             "action": "set_filter",
             "status": "denied",
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-02",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-02",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -391,14 +406,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-03",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-03",
             "action": "set_time_range",
             "args": {
               "from": "2026-05-12",
               "to": "2026-05-18"
             },
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-03",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-03",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
               "dashboardSlug": "m6-02-quality-investigation"
@@ -406,11 +421,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-03",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-03",
             "action": "set_time_range",
             "status": "denied",
             "stateVersion": 4,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-03",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-03",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -424,13 +439,13 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-04",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-04",
             "action": "focus_chart",
             "args": {
               "chartId": "quality-trend"
             },
             "stateVersion": 4,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-04",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-04",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
               "dashboardSlug": "m6-02-quality-investigation"
@@ -438,11 +453,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-04",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-04",
             "action": "focus_chart",
             "status": "denied",
             "stateVersion": 4,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-04",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-04",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -456,7 +471,7 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-05",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-05",
             "action": "compare_segments",
             "args": {
               "segments": [
@@ -465,7 +480,7 @@
               ]
             },
             "stateVersion": 4,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-05",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-05",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
               "dashboardSlug": "m6-02-quality-investigation"
@@ -473,11 +488,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-05",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-05",
             "action": "compare_segments",
             "status": "denied",
             "stateVersion": 4,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-05",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-05",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -491,14 +506,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-06",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-06",
             "action": "open_drilldown",
             "args": {
               "chartId": "quality-trend",
               "dimension": "supplier_batch"
             },
             "stateVersion": 4,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-06",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-06",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
               "dashboardSlug": "m6-02-quality-investigation"
@@ -506,11 +521,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-06",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-06",
             "action": "open_drilldown",
             "status": "denied",
             "stateVersion": 4,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-06",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-06",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -534,8 +549,14 @@
       "viewSignature": "quality-investigation|trend-wide+scatter+conditional-table",
       "rationale": "The trend and scatter make the isolated defect-rate signal visible without implying causation, while the evidence table exposes the paired production row and supplier batch in exact synthetic values.",
       "renderedChartCount": 3,
+      "dashboardHeaderBounds": {
+        "x": 16,
+        "y": 41,
+        "width": 424,
+        "height": 20
+      },
       "screenshot": "screenshots/quality-investigation--desktop-1440x900.png",
-      "screenshotSha256": "44e5cf4d2ba2cb62da9716b94eab2828def39fba1aeb500763cc069bc0010398",
+      "screenshotSha256": "805b24c3739c2ac43c23adbc03f55d0096749e3e120599c3b99646be067a3675",
       "measuredHorizontalOverflow": false,
       "consoleErrorCount": 2,
       "allowedConsoleErrorCount": 2,
@@ -545,11 +566,13 @@
       ],
       "pageErrorCount": 0,
       "visualVerdict": "approved_direct_pixel_review",
-      "defectNotes": []
+      "defectNotes": [
+        "Sev3: the deterministic synthetic oracle leaves one-period or single-point plots visually sparse."
+      ]
     },
     {
-      "captureId": "e78-20260814T2137-live-2:inventory-risk:desktop-1440x900",
-      "capturedAt": "2026-08-14T19:36:05.512Z",
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:inventory-risk:desktop-1440x900",
+      "capturedAt": "2026-08-14T20:10:40.279Z",
       "scenarioId": "inventory-risk",
       "viewport": {
         "id": "desktop-1440x900",
@@ -562,7 +585,7 @@
         "slug": "m6-02-inventory-risk",
         "title": "M6-02 Inventory Risk"
       },
-      "permalinkKey": "B7vZbp1DOwd",
+      "permalinkKey": "0WYoLBWGOmA",
       "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
       "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
       "nativeReadbackDigest": "sha256:1c8af5aabee591947774d1442c96b77d764b45122d57aa676b1e82d0fc541619",
@@ -615,14 +638,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-inventory-risk-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-01",
             "action": "set_filter",
             "args": {
               "key": "plant",
               "value": "Werk 2"
             },
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-01",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-idem-01",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000103",
               "dashboardSlug": "m6-02-inventory-risk"
@@ -630,18 +653,18 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-inventory-risk-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-01",
             "action": "set_filter",
             "status": "applied",
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-01",
-            "undoToken": "sha256:11041509f5ff3b15f1e3d9c1cca1f8e3a447f3a5f97a1f45e2f311116dda0015",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-idem-01",
+            "undoToken": "sha256:7d0a28e9b4cbec1d95f9942094b4dd92eb7596d7b755bdc575a956d4005fe77e",
             "sideEffect": "reversible_native_permalink_state",
             "persistentSupersetMutation": false,
             "nativeInterface": "Apache Superset public REST API v1",
             "previousStateVersion": 1,
-            "requestDigest": "sha256:938157047c1b8e3866171acd2b27bb0d2d9243105d7c7706c4e7799f60d99ad5",
-            "nativeReadbackDigest": "sha256:a5c67acecec59db9787731139b5075897f4af4eb03f775f088c90d95448497f9"
+            "requestDigest": "sha256:415df1bdbb2e58dab12bd61dea16f981431d381f72d15dcd6ea6ca352c286e1b",
+            "nativeReadbackDigest": "sha256:a0f2086570ed24b70f11489396af0947825c67e464e6445dfd8be4be47d9a36c"
           }
         },
         {
@@ -650,14 +673,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-inventory-risk-02",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-02",
             "action": "set_filter",
             "args": {
               "key": "component",
               "value": "Rotor-7"
             },
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-02",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-idem-02",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000103",
               "dashboardSlug": "m6-02-inventory-risk"
@@ -665,11 +688,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-inventory-risk-02",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-02",
             "action": "set_filter",
             "status": "denied",
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-02",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-idem-02",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -683,13 +706,13 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-inventory-risk-03",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-03",
             "action": "focus_chart",
             "args": {
               "chartId": "inventory-coverage"
             },
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-03",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-idem-03",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000103",
               "dashboardSlug": "m6-02-inventory-risk"
@@ -697,11 +720,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-inventory-risk-03",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-03",
             "action": "focus_chart",
             "status": "denied",
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-03",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-idem-03",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -715,7 +738,7 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-inventory-risk-04",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-04",
             "action": "sort_table",
             "args": {
               "chartId": "inventory-table",
@@ -723,7 +746,7 @@
               "direction": "asc"
             },
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-04",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-idem-04",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000103",
               "dashboardSlug": "m6-02-inventory-risk"
@@ -731,11 +754,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-inventory-risk-04",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-04",
             "action": "sort_table",
             "status": "denied",
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-04",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-idem-04",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -749,7 +772,7 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-inventory-risk-05",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-05",
             "action": "compare_segments",
             "args": {
               "segments": [
@@ -758,7 +781,7 @@
               ]
             },
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-05",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-idem-05",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000103",
               "dashboardSlug": "m6-02-inventory-risk"
@@ -766,11 +789,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-inventory-risk-05",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-05",
             "action": "compare_segments",
             "status": "denied",
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-05",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-idem-05",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -794,8 +817,14 @@
       "viewSignature": "inventory-risk|risk-kpi+conditional-table+stacked-bars",
       "rationale": "Coverage is the urgent scalar, the conditionally formatted table ranks constrained components, and stacked bars compare demand with confirmed inbound supply in shared units.",
       "renderedChartCount": 3,
+      "dashboardHeaderBounds": {
+        "x": 16,
+        "y": 41,
+        "width": 376,
+        "height": 20
+      },
       "screenshot": "screenshots/inventory-risk--desktop-1440x900.png",
-      "screenshotSha256": "63307ef1bdd2a472054fb9f5f180ff90063c14282d1fb32d308100eecc9d1bcd",
+      "screenshotSha256": "4f7618b1ef04a013bf9892e02afcc155d84bf0995e641387d66c939806b25156",
       "measuredHorizontalOverflow": false,
       "consoleErrorCount": 2,
       "allowedConsoleErrorCount": 2,
@@ -808,8 +837,8 @@
       "defectNotes": []
     },
     {
-      "captureId": "e78-20260814T2137-live-2:maintenance:desktop-1440x900",
-      "capturedAt": "2026-08-14T19:36:06.630Z",
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:maintenance:desktop-1440x900",
+      "capturedAt": "2026-08-14T20:10:42.363Z",
       "scenarioId": "maintenance",
       "viewport": {
         "id": "desktop-1440x900",
@@ -822,7 +851,7 @@
         "slug": "m6-02-maintenance-reliability",
         "title": "M6-02 Maintenance Reliability"
       },
-      "permalinkKey": "41EGmOKmkBK",
+      "permalinkKey": "R8jB3VN3X1l",
       "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
       "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
       "nativeReadbackDigest": "sha256:8796df33abe69b4ac4bcca272a0d4e130a3321e7b6efec43ecab0b1c303e3e23",
@@ -881,14 +910,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-maintenance-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-maintenance-01",
             "action": "set_filter",
             "args": {
               "key": "asset_class",
               "value": "Press"
             },
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-01",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-maintenance-idem-01",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000104",
               "dashboardSlug": "m6-02-maintenance-reliability"
@@ -896,18 +925,18 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-maintenance-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-maintenance-01",
             "action": "set_filter",
             "status": "applied",
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-01",
-            "undoToken": "sha256:49f932662a9001590be671e6c14e6a6e1539408d07b3f35a604e007eda8cff53",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-maintenance-idem-01",
+            "undoToken": "sha256:98a88c67507bd046895604d24542770c892abd250edbf6730f97a94fbb31c327",
             "sideEffect": "reversible_native_permalink_state",
             "persistentSupersetMutation": false,
             "nativeInterface": "Apache Superset public REST API v1",
             "previousStateVersion": 1,
-            "requestDigest": "sha256:8adf03f799b49758fa0376178d9216c7bab469c8a8ece727405317be67b87a31",
-            "nativeReadbackDigest": "sha256:d78a8abda59eadef8afd9d9d3041cd49635be39807b77788e7b29482f50ef104"
+            "requestDigest": "sha256:bd3ba00047ff27f46937fb1cfd8290e97672e15e4e96a69d5f3682f7b9569ab2",
+            "nativeReadbackDigest": "sha256:aee101536bf99138e1bd1913043f84a9bed8844630bbd50261c7b186e542fbba"
           }
         },
         {
@@ -916,14 +945,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-maintenance-02",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-maintenance-02",
             "action": "set_time_range",
             "args": {
               "from": "2026-04-01",
               "to": "2026-06-30"
             },
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-02",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-maintenance-idem-02",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000104",
               "dashboardSlug": "m6-02-maintenance-reliability"
@@ -931,18 +960,18 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-maintenance-02",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-maintenance-02",
             "action": "set_time_range",
             "status": "applied",
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-02",
-            "undoToken": "sha256:a883764c3a15c21785680cb7557dad2759c69440828f8fc9df8acc78fbc71266",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-maintenance-idem-02",
+            "undoToken": "sha256:fcb026b6d03411f0cbf45cb8b24ccc557aa7b3de4594304457fb42b5a5dce56d",
             "sideEffect": "reversible_native_permalink_state",
             "persistentSupersetMutation": false,
             "nativeInterface": "Apache Superset public REST API v1",
             "previousStateVersion": 2,
-            "requestDigest": "sha256:186d4a6822110047616b6ab01e9f4267cfd7f590c13817fff81bc2fdb9be687f",
-            "nativeReadbackDigest": "sha256:c5e6da2259dd5507d68c517820ad59b53462485aaeb7384bc264a7032f432981"
+            "requestDigest": "sha256:c1d446c5091095f16818b016a021628f174f76702427dd439523f5d788c4b3a3",
+            "nativeReadbackDigest": "sha256:9f4b49547ff8c4f707e722a547a6d0a978e8a072fef3966592f0040b3810d8aa"
           }
         },
         {
@@ -951,13 +980,13 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-maintenance-03",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-maintenance-03",
             "action": "focus_chart",
             "args": {
               "chartId": "maintenance-downtime"
             },
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-03",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-maintenance-idem-03",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000104",
               "dashboardSlug": "m6-02-maintenance-reliability"
@@ -965,11 +994,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-maintenance-03",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-maintenance-03",
             "action": "focus_chart",
             "status": "denied",
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-03",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-maintenance-idem-03",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -983,14 +1012,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-maintenance-04",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-maintenance-04",
             "action": "open_drilldown",
             "args": {
               "chartId": "maintenance-downtime",
               "dimension": "event_type"
             },
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-04",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-maintenance-idem-04",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000104",
               "dashboardSlug": "m6-02-maintenance-reliability"
@@ -998,11 +1027,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-maintenance-04",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-maintenance-04",
             "action": "open_drilldown",
             "status": "denied",
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-04",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-maintenance-idem-04",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -1026,8 +1055,14 @@
       "viewSignature": "maintenance-reliability|reliability-kpis+heatmap+event-trend",
       "rationale": "Downtime and MTBF are reliability KPIs, the heatmap reveals event concentration by asset and day, and the event trend preserves the requested Q2 timing.",
       "renderedChartCount": 3,
+      "dashboardHeaderBounds": {
+        "x": 16,
+        "y": 41,
+        "width": 445,
+        "height": 20
+      },
       "screenshot": "screenshots/maintenance--desktop-1440x900.png",
-      "screenshotSha256": "7105646266ec6f80313e8eadd3c39cb9fc73725953efb461f414f1685b1fa115",
+      "screenshotSha256": "3ae49071d80b44cdb1458d7b7acb6974b1d12a930c20b94a58f633a3ddc76b9d",
       "measuredHorizontalOverflow": false,
       "consoleErrorCount": 2,
       "allowedConsoleErrorCount": 2,
@@ -1037,11 +1072,13 @@
       ],
       "pageErrorCount": 0,
       "visualVerdict": "approved_direct_pixel_review",
-      "defectNotes": []
+      "defectNotes": [
+        "Sev3: the deterministic synthetic oracle leaves one-period or single-point plots visually sparse."
+      ]
     },
     {
-      "captureId": "e78-20260814T2137-live-2:cross-domain:desktop-1440x900",
-      "capturedAt": "2026-08-14T19:36:07.764Z",
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:cross-domain:desktop-1440x900",
+      "capturedAt": "2026-08-14T20:10:44.449Z",
       "scenarioId": "cross-domain",
       "viewport": {
         "id": "desktop-1440x900",
@@ -1054,7 +1091,7 @@
         "slug": "m6-02-cross-domain",
         "title": "M6-02 Cross-domain Comparison"
       },
-      "permalinkKey": "O59jbKRYdLM",
+      "permalinkKey": "X2p13P036Ao",
       "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
       "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
       "nativeReadbackDigest": "sha256:c19364daaa539dd23ecd8fb0e0d37dfbb6dc60cf0dfca621ffad2afffa27e88b",
@@ -1110,13 +1147,13 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-cross-domain-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-01",
             "action": "select_tab",
             "args": {
               "tabId": "cross-domain"
             },
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-01",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-idem-01",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000105",
               "dashboardSlug": "m6-02-cross-domain"
@@ -1124,11 +1161,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-cross-domain-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-01",
             "action": "select_tab",
             "status": "denied",
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-01",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-idem-01",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -1142,13 +1179,13 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-cross-domain-02",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-02",
             "action": "focus_chart",
             "args": {
               "chartId": "demand-supply"
             },
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-02",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-idem-02",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000105",
               "dashboardSlug": "m6-02-cross-domain"
@@ -1156,11 +1193,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-cross-domain-02",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-02",
             "action": "focus_chart",
             "status": "denied",
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-02",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-idem-02",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -1174,7 +1211,7 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-cross-domain-03",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-03",
             "action": "compare_segments",
             "args": {
               "segments": [
@@ -1184,7 +1221,7 @@
               ]
             },
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-03",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-idem-03",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000105",
               "dashboardSlug": "m6-02-cross-domain"
@@ -1192,11 +1229,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-cross-domain-03",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-03",
             "action": "compare_segments",
             "status": "denied",
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-03",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-idem-03",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -1210,14 +1247,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-cross-domain-04",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-04",
             "action": "set_time_range",
             "args": {
               "from": "2026-04-01",
               "to": "2026-06-30"
             },
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-04",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-idem-04",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000105",
               "dashboardSlug": "m6-02-cross-domain"
@@ -1225,18 +1262,18 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-cross-domain-04",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-04",
             "action": "set_time_range",
             "status": "applied",
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-04",
-            "undoToken": "sha256:dc2d03f15e30763730027c791d3117bfe90244471b61b7f78a7ef6f5e903549f",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-idem-04",
+            "undoToken": "sha256:83a98363534f6bb121841aa0c0e6beae4eaa4d7b65ecbe53a61f8b36e8452028",
             "sideEffect": "reversible_native_permalink_state",
             "persistentSupersetMutation": false,
             "nativeInterface": "Apache Superset public REST API v1",
             "previousStateVersion": 1,
-            "requestDigest": "sha256:444ee12ab5db0bc007d10c0e89cd923298525e7fb716a90dfa2f85ea7ff9884c",
-            "nativeReadbackDigest": "sha256:818a60222c07de8a195fda06ccb263617f4d765a40023652217b7b9cdcec5dae"
+            "requestDigest": "sha256:16e7478bbe634cda7a6f6f582db1b190b6a99ba36dae3ce643eb8f46486ac0e9",
+            "nativeReadbackDigest": "sha256:c767417f365980871940bf00d1266cd793b0b5456a23de705d4cb8b9e17da430"
           }
         }
       ],
@@ -1255,8 +1292,14 @@
       "viewSignature": "cross-domain-comparison|indexed-trend+grouped-bars+correlation",
       "rationale": "The trend, grouped bars, and point view compare demand and production changes in the same percentage unit, while the annotation explicitly treats the relationship as association rather than causation.",
       "renderedChartCount": 3,
+      "dashboardHeaderBounds": {
+        "x": 16,
+        "y": 41,
+        "width": 473,
+        "height": 20
+      },
       "screenshot": "screenshots/cross-domain--desktop-1440x900.png",
-      "screenshotSha256": "076e24430fd89567d761c9a886fa35078836f23ba0cf521533ccbe74372c4017",
+      "screenshotSha256": "9e445b07ab7d019013ea975e44219626cbb762b3623af67f5aadd133c7987c07",
       "measuredHorizontalOverflow": false,
       "consoleErrorCount": 2,
       "allowedConsoleErrorCount": 2,
@@ -1266,11 +1309,13 @@
       ],
       "pageErrorCount": 0,
       "visualVerdict": "approved_direct_pixel_review",
-      "defectNotes": []
+      "defectNotes": [
+        "Sev3: the deterministic synthetic oracle leaves one-period or single-point plots visually sparse."
+      ]
     },
     {
-      "captureId": "e78-20260814T2137-live-2:voice-correction-cancel:desktop-1440x900",
-      "capturedAt": "2026-08-14T19:36:08.963Z",
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:voice-correction-cancel:desktop-1440x900",
+      "capturedAt": "2026-08-14T20:10:46.530Z",
       "scenarioId": "voice-correction-cancel",
       "viewport": {
         "id": "desktop-1440x900",
@@ -1283,7 +1328,7 @@
         "slug": "m6-02-voice-correction-cancel",
         "title": "M6-02 Corrected Quality View"
       },
-      "permalinkKey": "8l7ADe3YdQN",
+      "permalinkKey": "BYy1LN13g0Z",
       "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
       "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
       "nativeReadbackDigest": "sha256:c0913f8fc9f63ebbb77bd5ebcc7065b37bd685dcca76ecb45ac5b608539f0810",
@@ -1339,14 +1384,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-voice-correction-cancel-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-voice-correction-cancel-01",
             "action": "set_filter",
             "args": {
               "key": "plant",
               "value": "Werk 3"
             },
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-voice-correction-cancel-idem-01",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-voice-correction-cancel-idem-01",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000106",
               "dashboardSlug": "m6-02-voice-correction-cancel"
@@ -1354,18 +1399,18 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-voice-correction-cancel-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-voice-correction-cancel-01",
             "action": "set_filter",
             "status": "applied",
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-voice-correction-cancel-idem-01",
-            "undoToken": "sha256:f8835c5677985df8ee4338b44b977706523a19fd51399a96544ffb5f586936e6",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-voice-correction-cancel-idem-01",
+            "undoToken": "sha256:25758171bc56ff1c4b4a0b44ba25a1fccd65e952f3345073ac458c5a1df8287d",
             "sideEffect": "reversible_native_permalink_state",
             "persistentSupersetMutation": false,
             "nativeInterface": "Apache Superset public REST API v1",
             "previousStateVersion": 1,
-            "requestDigest": "sha256:fa436a1019720acf611dc0db4a7272194107d80a60d58de0a0794d74cfa81413",
-            "nativeReadbackDigest": "sha256:07d7c91a6639330a32caa15133d0cad7b7e103e6dfe296de278fc0113e7ba669"
+            "requestDigest": "sha256:8ef992568c232871cadb20b8ec9b1c6f8627e550fd8e69dcf0381ff83da705de",
+            "nativeReadbackDigest": "sha256:72dea655f5756f36e1736dae8f89a3feab870010340485ff0639ccb37f19dd73"
           }
         },
         {
@@ -1377,11 +1422,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-voice-correction-cancel-post-cancel",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-voice-correction-cancel-post-cancel",
             "action": "set_filter",
             "status": "denied",
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-voice-correction-cancel-post-cancel",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-voice-correction-cancel-post-cancel",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -1404,8 +1449,14 @@
       "viewSignature": "quality-investigation-compact|trend+heatmap+voice-state",
       "rationale": "The corrected plant intent uses a compact quality base view; trend and heatmap remain useful while the voice-state receipt is the primary interaction evidence.",
       "renderedChartCount": 2,
+      "dashboardHeaderBounds": {
+        "x": 16,
+        "y": 41,
+        "width": 445,
+        "height": 20
+      },
       "screenshot": "screenshots/voice-correction-cancel--desktop-1440x900.png",
-      "screenshotSha256": "512b6d47e92550c9686c3a0acd2c0a3f0d732f6e5b4f59ec3e5d6d5b769540c9",
+      "screenshotSha256": "42992b5dd0ed561b972728041b5ec2c1a109b6fd0dc340602560f00f1718d84c",
       "measuredHorizontalOverflow": false,
       "consoleErrorCount": 2,
       "allowedConsoleErrorCount": 2,
@@ -1415,11 +1466,13 @@
       ],
       "pageErrorCount": 0,
       "visualVerdict": "approved_direct_pixel_review",
-      "defectNotes": []
+      "defectNotes": [
+        "Sev3: the deterministic synthetic oracle leaves one-period or single-point plots visually sparse."
+      ]
     },
     {
-      "captureId": "e78-20260814T2137-live-2:undo-idempotency:desktop-1440x900",
-      "capturedAt": "2026-08-14T19:36:10.047Z",
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:undo-idempotency:desktop-1440x900",
+      "capturedAt": "2026-08-14T20:10:48.613Z",
       "scenarioId": "undo-idempotency",
       "viewport": {
         "id": "desktop-1440x900",
@@ -1432,7 +1485,7 @@
         "slug": "m6-02-undo-idempotency",
         "title": "M6-02 Reversible Executive View"
       },
-      "permalinkKey": "8JvaDJEbGVn",
+      "permalinkKey": "7d5gG85bnMw",
       "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
       "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
       "nativeReadbackDigest": "sha256:12ab1c2bd102bc5a5884f83849f36d12c71153e70b0c2d14fdb8789385cd24cb",
@@ -1481,14 +1534,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-undo-idempotency-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-undo-idempotency-01",
             "action": "set_filter",
             "args": {
               "key": "product",
               "value": "Atlas Drive"
             },
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-undo-idempotency-idem-01",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-undo-idempotency-idem-01",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000107",
               "dashboardSlug": "m6-02-undo-idempotency"
@@ -1496,18 +1549,18 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-undo-idempotency-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-undo-idempotency-01",
             "action": "set_filter",
             "status": "applied",
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-undo-idempotency-idem-01",
-            "undoToken": "sha256:3e0be34b4ab7f6eeeb96e5e995c13c345656b98067a0dd64f5ecab97717924c0",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-undo-idempotency-idem-01",
+            "undoToken": "sha256:089142a02e611f507e224ead2c64e95eb1fd539fd69e8aead63b9fe66881fd79",
             "sideEffect": "reversible_native_permalink_state",
             "persistentSupersetMutation": false,
             "nativeInterface": "Apache Superset public REST API v1",
             "previousStateVersion": 1,
-            "requestDigest": "sha256:6d39784c4f33c924937666fa5832cd798de283f905a32c787179828cb9e7e50f",
-            "nativeReadbackDigest": "sha256:b96bcf18480fc81e23c49ad8eb5ece1948232909dfa04a3ea33628d136bec50a"
+            "requestDigest": "sha256:c2c5323646510d2a1e7b818899e55804afc2e94fac9efb519fbf2f0a11b7b6eb",
+            "nativeReadbackDigest": "sha256:73251be5b74ab51861c93f886fe0c2a8f7cf40cbabe5cf071d57ca173f1e5d2b"
           }
         },
         {
@@ -1516,14 +1569,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-undo-idempotency-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-undo-idempotency-01",
             "action": "set_filter",
             "args": {
               "key": "product",
               "value": "Atlas Drive"
             },
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-undo-idempotency-idem-01",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-undo-idempotency-idem-01",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000107",
               "dashboardSlug": "m6-02-undo-idempotency"
@@ -1531,18 +1584,18 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-undo-idempotency-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-undo-idempotency-01",
             "action": "set_filter",
             "status": "already_applied",
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-undo-idempotency-idem-01",
-            "undoToken": "sha256:3e0be34b4ab7f6eeeb96e5e995c13c345656b98067a0dd64f5ecab97717924c0",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-undo-idempotency-idem-01",
+            "undoToken": "sha256:089142a02e611f507e224ead2c64e95eb1fd539fd69e8aead63b9fe66881fd79",
             "sideEffect": "reversible_native_permalink_state",
             "persistentSupersetMutation": false,
             "nativeInterface": "Apache Superset public REST API v1",
             "previousStateVersion": 1,
-            "requestDigest": "sha256:6d39784c4f33c924937666fa5832cd798de283f905a32c787179828cb9e7e50f",
-            "nativeReadbackDigest": "sha256:b96bcf18480fc81e23c49ad8eb5ece1948232909dfa04a3ea33628d136bec50a"
+            "requestDigest": "sha256:c2c5323646510d2a1e7b818899e55804afc2e94fac9efb519fbf2f0a11b7b6eb",
+            "nativeReadbackDigest": "sha256:73251be5b74ab51861c93f886fe0c2a8f7cf40cbabe5cf071d57ca173f1e5d2b"
           },
           "idempotencyHttpMutationDelta": 0
         },
@@ -1552,13 +1605,13 @@
           "contract": "undo-bound-receipt",
           "request": {
             "action": "undo",
-            "undoToken": "sha256:3e0be34b4ab7f6eeeb96e5e995c13c345656b98067a0dd64f5ecab97717924c0"
+            "undoToken": "sha256:089142a02e611f507e224ead2c64e95eb1fd539fd69e8aead63b9fe66881fd79"
           },
           "receipt": {
             "status": "undone",
             "stateVersion": 3,
             "persistentSupersetMutation": false,
-            "nativeReadbackDigest": "sha256:b1c3c33b49ccfa2880e4c1fafa4f4e9eebe85644b587eb91c01841543e79f4f4"
+            "nativeReadbackDigest": "sha256:9419bc1f5afab01055821d0190a03a902c3a35388f688e360dc8cec2dd113dc4"
           }
         }
       ],
@@ -1576,8 +1629,14 @@
       "viewSignature": "executive-summary-reversible|kpis+ranked-bars+undo-state",
       "rationale": "The reversible product filter is shown on a compact executive basis where KPI and rank changes are legible before and after undo.",
       "renderedChartCount": 2,
+      "dashboardHeaderBounds": {
+        "x": 16,
+        "y": 41,
+        "width": 468,
+        "height": 20
+      },
       "screenshot": "screenshots/undo-idempotency--desktop-1440x900.png",
-      "screenshotSha256": "4c524b292324e817d8a0dcaf752735be14567f4cb044a3061b500120a331c772",
+      "screenshotSha256": "cc7a4eeb245e9ab18982196682fa511eb85d9fba8ff888cef70e6814bff2f416",
       "measuredHorizontalOverflow": false,
       "consoleErrorCount": 2,
       "allowedConsoleErrorCount": 2,
@@ -1590,8 +1649,8 @@
       "defectNotes": []
     },
     {
-      "captureId": "e78-20260814T2137-live-2:persistent-request-denied:desktop-1440x900",
-      "capturedAt": "2026-08-14T19:36:11.147Z",
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:persistent-request-denied:desktop-1440x900",
+      "capturedAt": "2026-08-14T20:10:50.681Z",
       "scenarioId": "persistent-request-denied",
       "viewport": {
         "id": "desktop-1440x900",
@@ -1604,7 +1663,7 @@
         "slug": "m6-02-persistent-request-denied",
         "title": "M6-02 Session-only Preview"
       },
-      "permalinkKey": "y59qD1qDPaX",
+      "permalinkKey": "dp7OLroGoRX",
       "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
       "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
       "nativeReadbackDigest": "sha256:6e154ed1356529b9c00afd50b1b04cd7bfec134e06db897f47fb1cc9e284a080",
@@ -1653,16 +1712,16 @@
           "contract": "persistent-asset-revision-proposal/v1",
           "request": {
             "action": "save_dashboard",
-            "actionId": "e78-20260814T2137-live-2-persistent-request-denied-persistent",
-            "idempotencyKey": "e78-20260814T2137-live-2-persistent-request-denied-persistent"
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-persistent-request-denied-persistent",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-persistent-request-denied-persistent"
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-persistent-request-denied-persistent",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-persistent-request-denied-persistent",
             "action": "save_dashboard",
             "status": "denied",
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-persistent-request-denied-persistent",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-persistent-request-denied-persistent",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -1685,8 +1744,14 @@
       "viewSignature": "executive-preview-denial|treemap+preview-diff+denial-state",
       "rationale": "A session-only treemap previews the proposed composition and a conditional diff table makes the denied persistent change reviewable without applying it.",
       "renderedChartCount": 2,
+      "dashboardHeaderBounds": {
+        "x": 16,
+        "y": 41,
+        "width": 433,
+        "height": 20
+      },
       "screenshot": "screenshots/persistent-request-denied--desktop-1440x900.png",
-      "screenshotSha256": "79b3adbc30b6e84ca411a7f81dd9891e6a1a1bde6432bd989275cfb5d056d666",
+      "screenshotSha256": "43a0dd1fb5a5ea3b789f06c15a28e94d48b5462640ca2be8160c6955d31f6cc4",
       "measuredHorizontalOverflow": false,
       "consoleErrorCount": 2,
       "allowedConsoleErrorCount": 2,
@@ -1699,8 +1764,8 @@
       "defectNotes": []
     },
     {
-      "captureId": "e78-20260814T2137-live-2:executive-sales:narrow-390x844",
-      "capturedAt": "2026-08-14T19:36:13.172Z",
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:executive-sales:narrow-390x844",
+      "capturedAt": "2026-08-14T20:10:53.421Z",
       "scenarioId": "executive-sales",
       "viewport": {
         "id": "narrow-390x844",
@@ -1713,7 +1778,7 @@
         "slug": "m6-02-executive-summary",
         "title": "M6-02 Executive Summary"
       },
-      "permalinkKey": "l4jJbWzYBGy",
+      "permalinkKey": "2qVkL1Ob5zW",
       "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
       "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
       "nativeReadbackDigest": "sha256:c19364daaa539dd23ecd8fb0e0d37dfbb6dc60cf0dfca621ffad2afffa27e88b",
@@ -1768,14 +1833,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-executive-sales-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-01",
             "action": "set_time_range",
             "args": {
               "from": "2026-04-01",
               "to": "2026-06-30"
             },
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-01",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-idem-01",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000101",
               "dashboardSlug": "m6-02-executive-summary"
@@ -1783,18 +1848,18 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-executive-sales-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-01",
             "action": "set_time_range",
             "status": "applied",
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-01",
-            "undoToken": "sha256:b552475e7eb13e503cb8d8ef15449c35a2c95c2fa1f34f1a086507daa157d1d9",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-idem-01",
+            "undoToken": "sha256:64b3fb83abc7e4b690bf4f5f145ad59cc84936b55a772202861c277e0ef92d2c",
             "sideEffect": "reversible_native_permalink_state",
             "persistentSupersetMutation": false,
             "nativeInterface": "Apache Superset public REST API v1",
             "previousStateVersion": 1,
-            "requestDigest": "sha256:d3e61f098537fd91cdff3ce8966a813b49f27f9ec8cb83338e008341b0bdc947",
-            "nativeReadbackDigest": "sha256:00782a26089ef22b813578cba3dc19f788cf9ac5fe6684618a183042a47737d0"
+            "requestDigest": "sha256:6bf4f93c83520014f2b632d3d44f620aee1db86b0e486b015543db5e56c029b4",
+            "nativeReadbackDigest": "sha256:bae1a66377d2ad5eecc6f754eea8fc003f8efb35d5982807588056414fb28f2a"
           }
         },
         {
@@ -1803,13 +1868,13 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-executive-sales-02",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-02",
             "action": "select_tab",
             "args": {
               "tabId": "executive"
             },
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-02",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-idem-02",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000101",
               "dashboardSlug": "m6-02-executive-summary"
@@ -1817,11 +1882,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-executive-sales-02",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-02",
             "action": "select_tab",
             "status": "denied",
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-02",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-idem-02",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -1835,13 +1900,13 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-executive-sales-03",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-03",
             "action": "focus_chart",
             "args": {
               "chartId": "sales-margin"
             },
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-03",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-idem-03",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000101",
               "dashboardSlug": "m6-02-executive-summary"
@@ -1849,11 +1914,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-executive-sales-03",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-03",
             "action": "focus_chart",
             "status": "denied",
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-03",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-idem-03",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -1867,7 +1932,7 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-executive-sales-04",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-04",
             "action": "compare_segments",
             "args": {
               "segments": [
@@ -1876,7 +1941,7 @@
               ]
             },
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-04",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-idem-04",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000101",
               "dashboardSlug": "m6-02-executive-summary"
@@ -1884,11 +1949,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-executive-sales-04",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-04",
             "action": "compare_segments",
             "status": "denied",
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-executive-sales-idem-04",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-executive-sales-idem-04",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -1912,22 +1977,30 @@
       "viewSignature": "executive-summary|kpi-strip+trend-wide+ranked-bars",
       "rationale": "The big number answers the headline revenue question, while the time-series and bar encodings show the same completed-period revenue in complementary temporal and magnitude views without mixing units.",
       "renderedChartCount": 3,
+      "dashboardHeaderBounds": {
+        "x": 16,
+        "y": 34,
+        "width": 316,
+        "height": 52
+      },
       "screenshot": "screenshots/executive-sales--narrow-390x844.png",
-      "screenshotSha256": "869e0ca99126c894f82561a9dfefbb49fd2d9cbc8cfe80e707b452ee590905fe",
+      "screenshotSha256": "7d2b6cbcd98681a6e159473e739f437dd6e05df92733ff8c29f30399dc6fe990",
       "measuredHorizontalOverflow": false,
-      "consoleErrorCount": 4,
-      "allowedConsoleErrorCount": 4,
+      "consoleErrorCount": 2,
+      "allowedConsoleErrorCount": 2,
       "unexpectedConsoleErrorCount": 0,
       "consoleErrorClasses": [
         "known_superset_service_worker_404"
       ],
       "pageErrorCount": 0,
       "visualVerdict": "approved_direct_pixel_review",
-      "defectNotes": []
+      "defectNotes": [
+        "Sev3: the deterministic synthetic oracle leaves one-period or single-point plots visually sparse."
+      ]
     },
     {
-      "captureId": "e78-20260814T2137-live-2:quality-investigation:narrow-390x844",
-      "capturedAt": "2026-08-14T19:36:14.355Z",
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:quality-investigation:narrow-390x844",
+      "capturedAt": "2026-08-14T20:10:55.622Z",
       "scenarioId": "quality-investigation",
       "viewport": {
         "id": "narrow-390x844",
@@ -1940,7 +2013,7 @@
         "slug": "m6-02-quality-investigation",
         "title": "M6-02 Quality Investigation"
       },
-      "permalinkKey": "GqyPY6Qmj3v",
+      "permalinkKey": "Z5qdLAd3MPv",
       "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
       "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
       "nativeReadbackDigest": "sha256:6a6d4c995fca10f2be52ea66b3f2eaffb0470536350b02cfe12a4e7f91a0b33e",
@@ -2004,14 +2077,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-01",
             "action": "set_filter",
             "args": {
               "key": "plant",
               "value": "Werk 3"
             },
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-01",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-01",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
               "dashboardSlug": "m6-02-quality-investigation"
@@ -2019,18 +2092,18 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-01",
             "action": "set_filter",
             "status": "applied",
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-01",
-            "undoToken": "sha256:51da3c0604c1b798dc2dfbd04d847ec1ae2e4c675c4c4fb3beba1fa5bfea305c",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-01",
+            "undoToken": "sha256:be6ebeb71f40b6081fc66abd5508c2e6f2b6ee168527767c3a3aaee73a1b949d",
             "sideEffect": "reversible_native_permalink_state",
             "persistentSupersetMutation": false,
             "nativeInterface": "Apache Superset public REST API v1",
             "previousStateVersion": 1,
-            "requestDigest": "sha256:d81fe8c37d868fd39803bfb84c378fe706b8bc85af4ec638bf1a46348e56eddc",
-            "nativeReadbackDigest": "sha256:37b42a4c9928580206fc7fd5696dacf2416dfcb689f284861941e29d0c87f70d"
+            "requestDigest": "sha256:60a6eb75daf785f1c7db6f02fcef7a6a7e441e6d9e35b9f69a9c93eb8e0843ae",
+            "nativeReadbackDigest": "sha256:0a39f75053fe7b09a56925b14a0d48aa2bb1067bd1a00abfdfc76fc87572982a"
           }
         },
         {
@@ -2039,14 +2112,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-02",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-02",
             "action": "set_filter",
             "args": {
               "key": "line",
               "value": "Linie C"
             },
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-02",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-02",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
               "dashboardSlug": "m6-02-quality-investigation"
@@ -2054,11 +2127,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-02",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-02",
             "action": "set_filter",
             "status": "denied",
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-02",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-02",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -2072,14 +2145,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-03",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-03",
             "action": "set_time_range",
             "args": {
               "from": "2026-05-12",
               "to": "2026-05-18"
             },
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-03",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-03",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
               "dashboardSlug": "m6-02-quality-investigation"
@@ -2087,11 +2160,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-03",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-03",
             "action": "set_time_range",
             "status": "denied",
             "stateVersion": 4,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-03",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-03",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -2105,13 +2178,13 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-04",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-04",
             "action": "focus_chart",
             "args": {
               "chartId": "quality-trend"
             },
             "stateVersion": 4,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-04",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-04",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
               "dashboardSlug": "m6-02-quality-investigation"
@@ -2119,11 +2192,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-04",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-04",
             "action": "focus_chart",
             "status": "denied",
             "stateVersion": 4,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-04",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-04",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -2137,7 +2210,7 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-05",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-05",
             "action": "compare_segments",
             "args": {
               "segments": [
@@ -2146,7 +2219,7 @@
               ]
             },
             "stateVersion": 4,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-05",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-05",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
               "dashboardSlug": "m6-02-quality-investigation"
@@ -2154,11 +2227,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-05",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-05",
             "action": "compare_segments",
             "status": "denied",
             "stateVersion": 4,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-05",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-05",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -2172,14 +2245,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-06",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-06",
             "action": "open_drilldown",
             "args": {
               "chartId": "quality-trend",
               "dimension": "supplier_batch"
             },
             "stateVersion": 4,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-06",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-06",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000102",
               "dashboardSlug": "m6-02-quality-investigation"
@@ -2187,11 +2260,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-quality-investigation-06",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-06",
             "action": "open_drilldown",
             "status": "denied",
             "stateVersion": 4,
-            "idempotencyKey": "e78-20260814T2137-live-2-quality-investigation-idem-06",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-quality-investigation-idem-06",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -2215,8 +2288,14 @@
       "viewSignature": "quality-investigation|trend-wide+scatter+conditional-table",
       "rationale": "The trend and scatter make the isolated defect-rate signal visible without implying causation, while the evidence table exposes the paired production row and supplier batch in exact synthetic values.",
       "renderedChartCount": 3,
+      "dashboardHeaderBounds": {
+        "x": 16,
+        "y": 34,
+        "width": 321,
+        "height": 52
+      },
       "screenshot": "screenshots/quality-investigation--narrow-390x844.png",
-      "screenshotSha256": "d50470485ce73999dde94d02fcbaa89b21b2bd54aac6d3739579fcd4cdb11aad",
+      "screenshotSha256": "50c791f61338af4c72fc21f6d02580641ba5ca5847bde9d4424b543bf591f52a",
       "measuredHorizontalOverflow": false,
       "consoleErrorCount": 2,
       "allowedConsoleErrorCount": 2,
@@ -2226,11 +2305,13 @@
       ],
       "pageErrorCount": 0,
       "visualVerdict": "approved_direct_pixel_review",
-      "defectNotes": []
+      "defectNotes": [
+        "Sev3: the deterministic synthetic oracle leaves one-period or single-point plots visually sparse."
+      ]
     },
     {
-      "captureId": "e78-20260814T2137-live-2:inventory-risk:narrow-390x844",
-      "capturedAt": "2026-08-14T19:36:15.572Z",
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:inventory-risk:narrow-390x844",
+      "capturedAt": "2026-08-14T20:10:57.756Z",
       "scenarioId": "inventory-risk",
       "viewport": {
         "id": "narrow-390x844",
@@ -2243,7 +2324,7 @@
         "slug": "m6-02-inventory-risk",
         "title": "M6-02 Inventory Risk"
       },
-      "permalinkKey": "B7vZbp1DOwd",
+      "permalinkKey": "0WYoLBWGOmA",
       "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
       "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
       "nativeReadbackDigest": "sha256:1c8af5aabee591947774d1442c96b77d764b45122d57aa676b1e82d0fc541619",
@@ -2296,14 +2377,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-inventory-risk-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-01",
             "action": "set_filter",
             "args": {
               "key": "plant",
               "value": "Werk 2"
             },
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-01",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-idem-01",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000103",
               "dashboardSlug": "m6-02-inventory-risk"
@@ -2311,18 +2392,18 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-inventory-risk-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-01",
             "action": "set_filter",
             "status": "applied",
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-01",
-            "undoToken": "sha256:11041509f5ff3b15f1e3d9c1cca1f8e3a447f3a5f97a1f45e2f311116dda0015",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-idem-01",
+            "undoToken": "sha256:7d0a28e9b4cbec1d95f9942094b4dd92eb7596d7b755bdc575a956d4005fe77e",
             "sideEffect": "reversible_native_permalink_state",
             "persistentSupersetMutation": false,
             "nativeInterface": "Apache Superset public REST API v1",
             "previousStateVersion": 1,
-            "requestDigest": "sha256:938157047c1b8e3866171acd2b27bb0d2d9243105d7c7706c4e7799f60d99ad5",
-            "nativeReadbackDigest": "sha256:a5c67acecec59db9787731139b5075897f4af4eb03f775f088c90d95448497f9"
+            "requestDigest": "sha256:415df1bdbb2e58dab12bd61dea16f981431d381f72d15dcd6ea6ca352c286e1b",
+            "nativeReadbackDigest": "sha256:a0f2086570ed24b70f11489396af0947825c67e464e6445dfd8be4be47d9a36c"
           }
         },
         {
@@ -2331,14 +2412,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-inventory-risk-02",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-02",
             "action": "set_filter",
             "args": {
               "key": "component",
               "value": "Rotor-7"
             },
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-02",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-idem-02",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000103",
               "dashboardSlug": "m6-02-inventory-risk"
@@ -2346,11 +2427,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-inventory-risk-02",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-02",
             "action": "set_filter",
             "status": "denied",
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-02",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-idem-02",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -2364,13 +2445,13 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-inventory-risk-03",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-03",
             "action": "focus_chart",
             "args": {
               "chartId": "inventory-coverage"
             },
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-03",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-idem-03",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000103",
               "dashboardSlug": "m6-02-inventory-risk"
@@ -2378,11 +2459,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-inventory-risk-03",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-03",
             "action": "focus_chart",
             "status": "denied",
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-03",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-idem-03",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -2396,7 +2477,7 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-inventory-risk-04",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-04",
             "action": "sort_table",
             "args": {
               "chartId": "inventory-table",
@@ -2404,7 +2485,7 @@
               "direction": "asc"
             },
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-04",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-idem-04",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000103",
               "dashboardSlug": "m6-02-inventory-risk"
@@ -2412,11 +2493,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-inventory-risk-04",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-04",
             "action": "sort_table",
             "status": "denied",
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-04",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-idem-04",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -2430,7 +2511,7 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-inventory-risk-05",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-05",
             "action": "compare_segments",
             "args": {
               "segments": [
@@ -2439,7 +2520,7 @@
               ]
             },
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-05",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-idem-05",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000103",
               "dashboardSlug": "m6-02-inventory-risk"
@@ -2447,11 +2528,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-inventory-risk-05",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-05",
             "action": "compare_segments",
             "status": "denied",
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-inventory-risk-idem-05",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-inventory-risk-idem-05",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -2475,8 +2556,14 @@
       "viewSignature": "inventory-risk|risk-kpi+conditional-table+stacked-bars",
       "rationale": "Coverage is the urgent scalar, the conditionally formatted table ranks constrained components, and stacked bars compare demand with confirmed inbound supply in shared units.",
       "renderedChartCount": 3,
+      "dashboardHeaderBounds": {
+        "x": 16,
+        "y": 34,
+        "width": 327,
+        "height": 52
+      },
       "screenshot": "screenshots/inventory-risk--narrow-390x844.png",
-      "screenshotSha256": "944c992e161ad3d655f44e5bbb900f43537607e55cd56a458c07ed1f8b6491cd",
+      "screenshotSha256": "6a367a653606a2c22e1d3145d479150da830c883f2231d5cdd4242e9038275b9",
       "measuredHorizontalOverflow": false,
       "consoleErrorCount": 2,
       "allowedConsoleErrorCount": 2,
@@ -2489,8 +2576,8 @@
       "defectNotes": []
     },
     {
-      "captureId": "e78-20260814T2137-live-2:maintenance:narrow-390x844",
-      "capturedAt": "2026-08-14T19:36:16.806Z",
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:maintenance:narrow-390x844",
+      "capturedAt": "2026-08-14T20:10:59.923Z",
       "scenarioId": "maintenance",
       "viewport": {
         "id": "narrow-390x844",
@@ -2503,7 +2590,7 @@
         "slug": "m6-02-maintenance-reliability",
         "title": "M6-02 Maintenance Reliability"
       },
-      "permalinkKey": "41EGmOKmkBK",
+      "permalinkKey": "R8jB3VN3X1l",
       "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
       "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
       "nativeReadbackDigest": "sha256:8796df33abe69b4ac4bcca272a0d4e130a3321e7b6efec43ecab0b1c303e3e23",
@@ -2562,14 +2649,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-maintenance-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-maintenance-01",
             "action": "set_filter",
             "args": {
               "key": "asset_class",
               "value": "Press"
             },
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-01",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-maintenance-idem-01",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000104",
               "dashboardSlug": "m6-02-maintenance-reliability"
@@ -2577,18 +2664,18 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-maintenance-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-maintenance-01",
             "action": "set_filter",
             "status": "applied",
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-01",
-            "undoToken": "sha256:49f932662a9001590be671e6c14e6a6e1539408d07b3f35a604e007eda8cff53",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-maintenance-idem-01",
+            "undoToken": "sha256:98a88c67507bd046895604d24542770c892abd250edbf6730f97a94fbb31c327",
             "sideEffect": "reversible_native_permalink_state",
             "persistentSupersetMutation": false,
             "nativeInterface": "Apache Superset public REST API v1",
             "previousStateVersion": 1,
-            "requestDigest": "sha256:8adf03f799b49758fa0376178d9216c7bab469c8a8ece727405317be67b87a31",
-            "nativeReadbackDigest": "sha256:d78a8abda59eadef8afd9d9d3041cd49635be39807b77788e7b29482f50ef104"
+            "requestDigest": "sha256:bd3ba00047ff27f46937fb1cfd8290e97672e15e4e96a69d5f3682f7b9569ab2",
+            "nativeReadbackDigest": "sha256:aee101536bf99138e1bd1913043f84a9bed8844630bbd50261c7b186e542fbba"
           }
         },
         {
@@ -2597,14 +2684,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-maintenance-02",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-maintenance-02",
             "action": "set_time_range",
             "args": {
               "from": "2026-04-01",
               "to": "2026-06-30"
             },
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-02",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-maintenance-idem-02",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000104",
               "dashboardSlug": "m6-02-maintenance-reliability"
@@ -2612,18 +2699,18 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-maintenance-02",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-maintenance-02",
             "action": "set_time_range",
             "status": "applied",
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-02",
-            "undoToken": "sha256:a883764c3a15c21785680cb7557dad2759c69440828f8fc9df8acc78fbc71266",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-maintenance-idem-02",
+            "undoToken": "sha256:fcb026b6d03411f0cbf45cb8b24ccc557aa7b3de4594304457fb42b5a5dce56d",
             "sideEffect": "reversible_native_permalink_state",
             "persistentSupersetMutation": false,
             "nativeInterface": "Apache Superset public REST API v1",
             "previousStateVersion": 2,
-            "requestDigest": "sha256:186d4a6822110047616b6ab01e9f4267cfd7f590c13817fff81bc2fdb9be687f",
-            "nativeReadbackDigest": "sha256:c5e6da2259dd5507d68c517820ad59b53462485aaeb7384bc264a7032f432981"
+            "requestDigest": "sha256:c1d446c5091095f16818b016a021628f174f76702427dd439523f5d788c4b3a3",
+            "nativeReadbackDigest": "sha256:9f4b49547ff8c4f707e722a547a6d0a978e8a072fef3966592f0040b3810d8aa"
           }
         },
         {
@@ -2632,13 +2719,13 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-maintenance-03",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-maintenance-03",
             "action": "focus_chart",
             "args": {
               "chartId": "maintenance-downtime"
             },
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-03",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-maintenance-idem-03",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000104",
               "dashboardSlug": "m6-02-maintenance-reliability"
@@ -2646,11 +2733,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-maintenance-03",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-maintenance-03",
             "action": "focus_chart",
             "status": "denied",
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-03",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-maintenance-idem-03",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -2664,14 +2751,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-maintenance-04",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-maintenance-04",
             "action": "open_drilldown",
             "args": {
               "chartId": "maintenance-downtime",
               "dimension": "event_type"
             },
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-04",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-maintenance-idem-04",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000104",
               "dashboardSlug": "m6-02-maintenance-reliability"
@@ -2679,11 +2766,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-maintenance-04",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-maintenance-04",
             "action": "open_drilldown",
             "status": "denied",
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-maintenance-idem-04",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-maintenance-idem-04",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -2707,8 +2794,14 @@
       "viewSignature": "maintenance-reliability|reliability-kpis+heatmap+event-trend",
       "rationale": "Downtime and MTBF are reliability KPIs, the heatmap reveals event concentration by asset and day, and the event trend preserves the requested Q2 timing.",
       "renderedChartCount": 3,
+      "dashboardHeaderBounds": {
+        "x": 16,
+        "y": 34,
+        "width": 341,
+        "height": 52
+      },
       "screenshot": "screenshots/maintenance--narrow-390x844.png",
-      "screenshotSha256": "5890c98599b02c9df2366ca40c0382d95e5acd6384b56c4c64d3759c297455dd",
+      "screenshotSha256": "fc8d047eeecc0e25da2ce52de948e1ceeb28cfa77e69da67025f32762e2ab530",
       "measuredHorizontalOverflow": false,
       "consoleErrorCount": 2,
       "allowedConsoleErrorCount": 2,
@@ -2718,11 +2811,13 @@
       ],
       "pageErrorCount": 0,
       "visualVerdict": "approved_direct_pixel_review",
-      "defectNotes": []
+      "defectNotes": [
+        "Sev3: the deterministic synthetic oracle leaves one-period or single-point plots visually sparse."
+      ]
     },
     {
-      "captureId": "e78-20260814T2137-live-2:cross-domain:narrow-390x844",
-      "capturedAt": "2026-08-14T19:36:18.006Z",
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:cross-domain:narrow-390x844",
+      "capturedAt": "2026-08-14T20:11:02.023Z",
       "scenarioId": "cross-domain",
       "viewport": {
         "id": "narrow-390x844",
@@ -2735,7 +2830,7 @@
         "slug": "m6-02-cross-domain",
         "title": "M6-02 Cross-domain Comparison"
       },
-      "permalinkKey": "O59jbKRYdLM",
+      "permalinkKey": "X2p13P036Ao",
       "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
       "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
       "nativeReadbackDigest": "sha256:c19364daaa539dd23ecd8fb0e0d37dfbb6dc60cf0dfca621ffad2afffa27e88b",
@@ -2791,13 +2886,13 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-cross-domain-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-01",
             "action": "select_tab",
             "args": {
               "tabId": "cross-domain"
             },
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-01",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-idem-01",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000105",
               "dashboardSlug": "m6-02-cross-domain"
@@ -2805,11 +2900,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-cross-domain-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-01",
             "action": "select_tab",
             "status": "denied",
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-01",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-idem-01",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -2823,13 +2918,13 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-cross-domain-02",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-02",
             "action": "focus_chart",
             "args": {
               "chartId": "demand-supply"
             },
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-02",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-idem-02",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000105",
               "dashboardSlug": "m6-02-cross-domain"
@@ -2837,11 +2932,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-cross-domain-02",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-02",
             "action": "focus_chart",
             "status": "denied",
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-02",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-idem-02",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -2855,7 +2950,7 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-cross-domain-03",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-03",
             "action": "compare_segments",
             "args": {
               "segments": [
@@ -2865,7 +2960,7 @@
               ]
             },
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-03",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-idem-03",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000105",
               "dashboardSlug": "m6-02-cross-domain"
@@ -2873,11 +2968,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-cross-domain-03",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-03",
             "action": "compare_segments",
             "status": "denied",
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-03",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-idem-03",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -2891,14 +2986,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-cross-domain-04",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-04",
             "action": "set_time_range",
             "args": {
               "from": "2026-04-01",
               "to": "2026-06-30"
             },
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-04",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-idem-04",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000105",
               "dashboardSlug": "m6-02-cross-domain"
@@ -2906,18 +3001,18 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-cross-domain-04",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-04",
             "action": "set_time_range",
             "status": "applied",
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-cross-domain-idem-04",
-            "undoToken": "sha256:dc2d03f15e30763730027c791d3117bfe90244471b61b7f78a7ef6f5e903549f",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-cross-domain-idem-04",
+            "undoToken": "sha256:83a98363534f6bb121841aa0c0e6beae4eaa4d7b65ecbe53a61f8b36e8452028",
             "sideEffect": "reversible_native_permalink_state",
             "persistentSupersetMutation": false,
             "nativeInterface": "Apache Superset public REST API v1",
             "previousStateVersion": 1,
-            "requestDigest": "sha256:444ee12ab5db0bc007d10c0e89cd923298525e7fb716a90dfa2f85ea7ff9884c",
-            "nativeReadbackDigest": "sha256:818a60222c07de8a195fda06ccb263617f4d765a40023652217b7b9cdcec5dae"
+            "requestDigest": "sha256:16e7478bbe634cda7a6f6f582db1b190b6a99ba36dae3ce643eb8f46486ac0e9",
+            "nativeReadbackDigest": "sha256:c767417f365980871940bf00d1266cd793b0b5456a23de705d4cb8b9e17da430"
           }
         }
       ],
@@ -2936,8 +3031,14 @@
       "viewSignature": "cross-domain-comparison|indexed-trend+grouped-bars+correlation",
       "rationale": "The trend, grouped bars, and point view compare demand and production changes in the same percentage unit, while the annotation explicitly treats the relationship as association rather than causation.",
       "renderedChartCount": 3,
+      "dashboardHeaderBounds": {
+        "x": 16,
+        "y": 34,
+        "width": 342,
+        "height": 52
+      },
       "screenshot": "screenshots/cross-domain--narrow-390x844.png",
-      "screenshotSha256": "a358a43a9ef626127549fd5529e43b49d2ac4224a8c0c29b103ba51744819714",
+      "screenshotSha256": "adaa6f4fddc295f278d56b4ca707d8de5adeb312e7177f6c03c980f79ef13325",
       "measuredHorizontalOverflow": false,
       "consoleErrorCount": 2,
       "allowedConsoleErrorCount": 2,
@@ -2947,11 +3048,13 @@
       ],
       "pageErrorCount": 0,
       "visualVerdict": "approved_direct_pixel_review",
-      "defectNotes": []
+      "defectNotes": [
+        "Sev3: the deterministic synthetic oracle leaves one-period or single-point plots visually sparse."
+      ]
     },
     {
-      "captureId": "e78-20260814T2137-live-2:voice-correction-cancel:narrow-390x844",
-      "capturedAt": "2026-08-14T19:36:19.086Z",
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:voice-correction-cancel:narrow-390x844",
+      "capturedAt": "2026-08-14T20:11:04.086Z",
       "scenarioId": "voice-correction-cancel",
       "viewport": {
         "id": "narrow-390x844",
@@ -2964,7 +3067,7 @@
         "slug": "m6-02-voice-correction-cancel",
         "title": "M6-02 Corrected Quality View"
       },
-      "permalinkKey": "8l7ADe3YdQN",
+      "permalinkKey": "BYy1LN13g0Z",
       "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
       "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
       "nativeReadbackDigest": "sha256:c0913f8fc9f63ebbb77bd5ebcc7065b37bd685dcca76ecb45ac5b608539f0810",
@@ -3020,14 +3123,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-voice-correction-cancel-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-voice-correction-cancel-01",
             "action": "set_filter",
             "args": {
               "key": "plant",
               "value": "Werk 3"
             },
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-voice-correction-cancel-idem-01",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-voice-correction-cancel-idem-01",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000106",
               "dashboardSlug": "m6-02-voice-correction-cancel"
@@ -3035,18 +3138,18 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-voice-correction-cancel-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-voice-correction-cancel-01",
             "action": "set_filter",
             "status": "applied",
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-voice-correction-cancel-idem-01",
-            "undoToken": "sha256:f8835c5677985df8ee4338b44b977706523a19fd51399a96544ffb5f586936e6",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-voice-correction-cancel-idem-01",
+            "undoToken": "sha256:25758171bc56ff1c4b4a0b44ba25a1fccd65e952f3345073ac458c5a1df8287d",
             "sideEffect": "reversible_native_permalink_state",
             "persistentSupersetMutation": false,
             "nativeInterface": "Apache Superset public REST API v1",
             "previousStateVersion": 1,
-            "requestDigest": "sha256:fa436a1019720acf611dc0db4a7272194107d80a60d58de0a0794d74cfa81413",
-            "nativeReadbackDigest": "sha256:07d7c91a6639330a32caa15133d0cad7b7e103e6dfe296de278fc0113e7ba669"
+            "requestDigest": "sha256:8ef992568c232871cadb20b8ec9b1c6f8627e550fd8e69dcf0381ff83da705de",
+            "nativeReadbackDigest": "sha256:72dea655f5756f36e1736dae8f89a3feab870010340485ff0639ccb37f19dd73"
           }
         },
         {
@@ -3058,11 +3161,11 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-voice-correction-cancel-post-cancel",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-voice-correction-cancel-post-cancel",
             "action": "set_filter",
             "status": "denied",
             "stateVersion": 3,
-            "idempotencyKey": "e78-20260814T2137-live-2-voice-correction-cancel-post-cancel",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-voice-correction-cancel-post-cancel",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -3085,8 +3188,14 @@
       "viewSignature": "quality-investigation-compact|trend+heatmap+voice-state",
       "rationale": "The corrected plant intent uses a compact quality base view; trend and heatmap remain useful while the voice-state receipt is the primary interaction evidence.",
       "renderedChartCount": 2,
+      "dashboardHeaderBounds": {
+        "x": 16,
+        "y": 34,
+        "width": 342,
+        "height": 52
+      },
       "screenshot": "screenshots/voice-correction-cancel--narrow-390x844.png",
-      "screenshotSha256": "3cbcc9ff5c7b308676fd3a300826ae36bdb4fa71e1db2d7cb4dab15ca177facf",
+      "screenshotSha256": "509d7d61847224d5eff607dbfd81c9e2083a83602aeb67290fa72b13677ad3b1",
       "measuredHorizontalOverflow": false,
       "consoleErrorCount": 2,
       "allowedConsoleErrorCount": 2,
@@ -3096,11 +3205,13 @@
       ],
       "pageErrorCount": 0,
       "visualVerdict": "approved_direct_pixel_review",
-      "defectNotes": []
+      "defectNotes": [
+        "Sev3: the deterministic synthetic oracle leaves one-period or single-point plots visually sparse."
+      ]
     },
     {
-      "captureId": "e78-20260814T2137-live-2:undo-idempotency:narrow-390x844",
-      "capturedAt": "2026-08-14T19:36:20.186Z",
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:undo-idempotency:narrow-390x844",
+      "capturedAt": "2026-08-14T20:11:06.119Z",
       "scenarioId": "undo-idempotency",
       "viewport": {
         "id": "narrow-390x844",
@@ -3113,7 +3224,7 @@
         "slug": "m6-02-undo-idempotency",
         "title": "M6-02 Reversible Executive View"
       },
-      "permalinkKey": "8JvaDJEbGVn",
+      "permalinkKey": "7d5gG85bnMw",
       "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
       "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
       "nativeReadbackDigest": "sha256:12ab1c2bd102bc5a5884f83849f36d12c71153e70b0c2d14fdb8789385cd24cb",
@@ -3162,14 +3273,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-undo-idempotency-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-undo-idempotency-01",
             "action": "set_filter",
             "args": {
               "key": "product",
               "value": "Atlas Drive"
             },
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-undo-idempotency-idem-01",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-undo-idempotency-idem-01",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000107",
               "dashboardSlug": "m6-02-undo-idempotency"
@@ -3177,18 +3288,18 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-undo-idempotency-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-undo-idempotency-01",
             "action": "set_filter",
             "status": "applied",
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-undo-idempotency-idem-01",
-            "undoToken": "sha256:3e0be34b4ab7f6eeeb96e5e995c13c345656b98067a0dd64f5ecab97717924c0",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-undo-idempotency-idem-01",
+            "undoToken": "sha256:089142a02e611f507e224ead2c64e95eb1fd539fd69e8aead63b9fe66881fd79",
             "sideEffect": "reversible_native_permalink_state",
             "persistentSupersetMutation": false,
             "nativeInterface": "Apache Superset public REST API v1",
             "previousStateVersion": 1,
-            "requestDigest": "sha256:6d39784c4f33c924937666fa5832cd798de283f905a32c787179828cb9e7e50f",
-            "nativeReadbackDigest": "sha256:b96bcf18480fc81e23c49ad8eb5ece1948232909dfa04a3ea33628d136bec50a"
+            "requestDigest": "sha256:c2c5323646510d2a1e7b818899e55804afc2e94fac9efb519fbf2f0a11b7b6eb",
+            "nativeReadbackDigest": "sha256:73251be5b74ab51861c93f886fe0c2a8f7cf40cbabe5cf071d57ca173f1e5d2b"
           }
         },
         {
@@ -3197,14 +3308,14 @@
           "contract": "chimpmaera.bi/ui-action/v1",
           "request": {
             "schemaVersion": "chimpmaera.bi/ui-action/v1",
-            "actionId": "e78-20260814T2137-live-2-undo-idempotency-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-undo-idempotency-01",
             "action": "set_filter",
             "args": {
               "key": "product",
               "value": "Atlas Drive"
             },
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-undo-idempotency-idem-01",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-undo-idempotency-idem-01",
             "preconditions": {
               "dashboardUuid": "c6020000-0000-4000-8000-000000000107",
               "dashboardSlug": "m6-02-undo-idempotency"
@@ -3212,18 +3323,18 @@
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-undo-idempotency-01",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-undo-idempotency-01",
             "action": "set_filter",
             "status": "already_applied",
             "stateVersion": 2,
-            "idempotencyKey": "e78-20260814T2137-live-2-undo-idempotency-idem-01",
-            "undoToken": "sha256:3e0be34b4ab7f6eeeb96e5e995c13c345656b98067a0dd64f5ecab97717924c0",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-undo-idempotency-idem-01",
+            "undoToken": "sha256:089142a02e611f507e224ead2c64e95eb1fd539fd69e8aead63b9fe66881fd79",
             "sideEffect": "reversible_native_permalink_state",
             "persistentSupersetMutation": false,
             "nativeInterface": "Apache Superset public REST API v1",
             "previousStateVersion": 1,
-            "requestDigest": "sha256:6d39784c4f33c924937666fa5832cd798de283f905a32c787179828cb9e7e50f",
-            "nativeReadbackDigest": "sha256:b96bcf18480fc81e23c49ad8eb5ece1948232909dfa04a3ea33628d136bec50a"
+            "requestDigest": "sha256:c2c5323646510d2a1e7b818899e55804afc2e94fac9efb519fbf2f0a11b7b6eb",
+            "nativeReadbackDigest": "sha256:73251be5b74ab51861c93f886fe0c2a8f7cf40cbabe5cf071d57ca173f1e5d2b"
           },
           "idempotencyHttpMutationDelta": 0
         },
@@ -3233,13 +3344,13 @@
           "contract": "undo-bound-receipt",
           "request": {
             "action": "undo",
-            "undoToken": "sha256:3e0be34b4ab7f6eeeb96e5e995c13c345656b98067a0dd64f5ecab97717924c0"
+            "undoToken": "sha256:089142a02e611f507e224ead2c64e95eb1fd539fd69e8aead63b9fe66881fd79"
           },
           "receipt": {
             "status": "undone",
             "stateVersion": 3,
             "persistentSupersetMutation": false,
-            "nativeReadbackDigest": "sha256:b1c3c33b49ccfa2880e4c1fafa4f4e9eebe85644b587eb91c01841543e79f4f4"
+            "nativeReadbackDigest": "sha256:9419bc1f5afab01055821d0190a03a902c3a35388f688e360dc8cec2dd113dc4"
           }
         }
       ],
@@ -3257,8 +3368,14 @@
       "viewSignature": "executive-summary-reversible|kpis+ranked-bars+undo-state",
       "rationale": "The reversible product filter is shown on a compact executive basis where KPI and rank changes are legible before and after undo.",
       "renderedChartCount": 2,
+      "dashboardHeaderBounds": {
+        "x": 16,
+        "y": 34,
+        "width": 337,
+        "height": 52
+      },
       "screenshot": "screenshots/undo-idempotency--narrow-390x844.png",
-      "screenshotSha256": "45cd9d6e6ea29cd9cd8528ffebeb24f0b4f834e8ed19c40e523a5308397fc63e",
+      "screenshotSha256": "02eb18086840761186a1ec0e3f9875f30a6f1f949ea5306b12c6d73985cc9c59",
       "measuredHorizontalOverflow": false,
       "consoleErrorCount": 2,
       "allowedConsoleErrorCount": 2,
@@ -3271,8 +3388,8 @@
       "defectNotes": []
     },
     {
-      "captureId": "e78-20260814T2137-live-2:persistent-request-denied:narrow-390x844",
-      "capturedAt": "2026-08-14T19:36:21.253Z",
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:persistent-request-denied:narrow-390x844",
+      "capturedAt": "2026-08-14T20:11:08.119Z",
       "scenarioId": "persistent-request-denied",
       "viewport": {
         "id": "narrow-390x844",
@@ -3285,7 +3402,7 @@
         "slug": "m6-02-persistent-request-denied",
         "title": "M6-02 Session-only Preview"
       },
-      "permalinkKey": "y59qD1qDPaX",
+      "permalinkKey": "dp7OLroGoRX",
       "screenshotNavigationMode": "direct_stable_uuid_standalone_public_view_after_independent_permalink_readback",
       "nativeReadbackMode": "public_rest_permalink_data_mask_v1",
       "nativeReadbackDigest": "sha256:6e154ed1356529b9c00afd50b1b04cd7bfec134e06db897f47fb1cc9e284a080",
@@ -3334,16 +3451,16 @@
           "contract": "persistent-asset-revision-proposal/v1",
           "request": {
             "action": "save_dashboard",
-            "actionId": "e78-20260814T2137-live-2-persistent-request-denied-persistent",
-            "idempotencyKey": "e78-20260814T2137-live-2-persistent-request-denied-persistent"
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-persistent-request-denied-persistent",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-persistent-request-denied-persistent"
           },
           "receipt": {
             "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
-            "actionId": "e78-20260814T2137-live-2-persistent-request-denied-persistent",
+            "actionId": "recovery-v4-live-m-20260814T2214-live-2-persistent-request-denied-persistent",
             "action": "save_dashboard",
             "status": "denied",
             "stateVersion": 1,
-            "idempotencyKey": "e78-20260814T2137-live-2-persistent-request-denied-persistent",
+            "idempotencyKey": "recovery-v4-live-m-20260814T2214-live-2-persistent-request-denied-persistent",
             "undoToken": null,
             "sideEffect": "none",
             "persistentSupersetMutation": false,
@@ -3366,8 +3483,14 @@
       "viewSignature": "executive-preview-denial|treemap+preview-diff+denial-state",
       "rationale": "A session-only treemap previews the proposed composition and a conditional diff table makes the denied persistent change reviewable without applying it.",
       "renderedChartCount": 2,
+      "dashboardHeaderBounds": {
+        "x": 16,
+        "y": 34,
+        "width": 330,
+        "height": 52
+      },
       "screenshot": "screenshots/persistent-request-denied--narrow-390x844.png",
-      "screenshotSha256": "818b213c25fe276f2f83b2f87ef44757da1b7f2572219edc828b8cc5277fec2f",
+      "screenshotSha256": "0702da7eef2631215998c9933e9c137cdb6ce8dae40a681da5baad06339f43f4",
       "measuredHorizontalOverflow": false,
       "consoleErrorCount": 2,
       "allowedConsoleErrorCount": 2,
@@ -3388,134 +3511,134 @@
   },
   "directPixelReview": {
     "schemaVersion": "chimpmaera.bi/native-superset-direct-pixel-review/v1",
-    "reviewedAt": "2026-08-14T19:36:21.355Z",
+    "reviewedAt": "2026-08-14T20:13:54.953Z",
     "method": "direct_pixel_review_of_all_16_full_resolution_browser_captures",
-    "visualScore": 8.7,
+    "visualScore": 8.5,
     "requiredMinimum": 8.5,
     "passed": true,
     "severityCounts": {
       "sev1": 0,
       "sev2": 0,
-      "sev3": 0
+      "sev3": 1
     },
     "misleadingChartCount": 0,
     "responsiveVerdict": "PASS_NATIVE_ROWS_RECOMPOSE_TO_FULL_WIDTH_CARDS_AT_390PX",
     "reviewerNotes": [
       "All desktop and narrow captures were inspected at full resolution after final chart scoping and responsive composition changes.",
-      "Sparse marks are intentional consequences of the deterministic 12-row synthetic oracle, not missing-data or query failures.",
+      "One Sev3 class records visually sparse one-period or single-point plots caused by the deterministic 12-row synthetic oracle; browser response and chart-render gates still prove successful queries.",
       "Titles and filters keep unlike units separate; the cross-domain association view explicitly rejects causal interpretation."
     ],
     "captures": [
       {
-        "captureId": "e78-20260814T2137-live-2:executive-sales:desktop-1440x900",
+        "captureId": "recovery-v4-live-m-20260814T2214-live-2:executive-sales:desktop-1440x900",
         "scenarioId": "executive-sales",
         "viewport": "desktop-1440x900",
-        "screenshotSha256": "3ba1dad63ca2c003db21e26d32f05a1e193842de92eeb4730ac7b797fad939b2",
+        "screenshotSha256": "96c8a62c1fe67fe5b7fa0dd927336812a4b003c49dec8a5e649f06c82e6ffba9",
         "verdict": "PASS_NO_SEV1_OR_SEV2"
       },
       {
-        "captureId": "e78-20260814T2137-live-2:quality-investigation:desktop-1440x900",
+        "captureId": "recovery-v4-live-m-20260814T2214-live-2:quality-investigation:desktop-1440x900",
         "scenarioId": "quality-investigation",
         "viewport": "desktop-1440x900",
-        "screenshotSha256": "44e5cf4d2ba2cb62da9716b94eab2828def39fba1aeb500763cc069bc0010398",
+        "screenshotSha256": "805b24c3739c2ac43c23adbc03f55d0096749e3e120599c3b99646be067a3675",
         "verdict": "PASS_NO_SEV1_OR_SEV2"
       },
       {
-        "captureId": "e78-20260814T2137-live-2:inventory-risk:desktop-1440x900",
+        "captureId": "recovery-v4-live-m-20260814T2214-live-2:inventory-risk:desktop-1440x900",
         "scenarioId": "inventory-risk",
         "viewport": "desktop-1440x900",
-        "screenshotSha256": "63307ef1bdd2a472054fb9f5f180ff90063c14282d1fb32d308100eecc9d1bcd",
+        "screenshotSha256": "4f7618b1ef04a013bf9892e02afcc155d84bf0995e641387d66c939806b25156",
         "verdict": "PASS_NO_SEV1_OR_SEV2"
       },
       {
-        "captureId": "e78-20260814T2137-live-2:maintenance:desktop-1440x900",
+        "captureId": "recovery-v4-live-m-20260814T2214-live-2:maintenance:desktop-1440x900",
         "scenarioId": "maintenance",
         "viewport": "desktop-1440x900",
-        "screenshotSha256": "7105646266ec6f80313e8eadd3c39cb9fc73725953efb461f414f1685b1fa115",
+        "screenshotSha256": "3ae49071d80b44cdb1458d7b7acb6974b1d12a930c20b94a58f633a3ddc76b9d",
         "verdict": "PASS_NO_SEV1_OR_SEV2"
       },
       {
-        "captureId": "e78-20260814T2137-live-2:cross-domain:desktop-1440x900",
+        "captureId": "recovery-v4-live-m-20260814T2214-live-2:cross-domain:desktop-1440x900",
         "scenarioId": "cross-domain",
         "viewport": "desktop-1440x900",
-        "screenshotSha256": "076e24430fd89567d761c9a886fa35078836f23ba0cf521533ccbe74372c4017",
+        "screenshotSha256": "9e445b07ab7d019013ea975e44219626cbb762b3623af67f5aadd133c7987c07",
         "verdict": "PASS_NO_SEV1_OR_SEV2"
       },
       {
-        "captureId": "e78-20260814T2137-live-2:voice-correction-cancel:desktop-1440x900",
+        "captureId": "recovery-v4-live-m-20260814T2214-live-2:voice-correction-cancel:desktop-1440x900",
         "scenarioId": "voice-correction-cancel",
         "viewport": "desktop-1440x900",
-        "screenshotSha256": "512b6d47e92550c9686c3a0acd2c0a3f0d732f6e5b4f59ec3e5d6d5b769540c9",
+        "screenshotSha256": "42992b5dd0ed561b972728041b5ec2c1a109b6fd0dc340602560f00f1718d84c",
         "verdict": "PASS_NO_SEV1_OR_SEV2"
       },
       {
-        "captureId": "e78-20260814T2137-live-2:undo-idempotency:desktop-1440x900",
+        "captureId": "recovery-v4-live-m-20260814T2214-live-2:undo-idempotency:desktop-1440x900",
         "scenarioId": "undo-idempotency",
         "viewport": "desktop-1440x900",
-        "screenshotSha256": "4c524b292324e817d8a0dcaf752735be14567f4cb044a3061b500120a331c772",
+        "screenshotSha256": "cc7a4eeb245e9ab18982196682fa511eb85d9fba8ff888cef70e6814bff2f416",
         "verdict": "PASS_NO_SEV1_OR_SEV2"
       },
       {
-        "captureId": "e78-20260814T2137-live-2:persistent-request-denied:desktop-1440x900",
+        "captureId": "recovery-v4-live-m-20260814T2214-live-2:persistent-request-denied:desktop-1440x900",
         "scenarioId": "persistent-request-denied",
         "viewport": "desktop-1440x900",
-        "screenshotSha256": "79b3adbc30b6e84ca411a7f81dd9891e6a1a1bde6432bd989275cfb5d056d666",
+        "screenshotSha256": "43a0dd1fb5a5ea3b789f06c15a28e94d48b5462640ca2be8160c6955d31f6cc4",
         "verdict": "PASS_NO_SEV1_OR_SEV2"
       },
       {
-        "captureId": "e78-20260814T2137-live-2:executive-sales:narrow-390x844",
+        "captureId": "recovery-v4-live-m-20260814T2214-live-2:executive-sales:narrow-390x844",
         "scenarioId": "executive-sales",
         "viewport": "narrow-390x844",
-        "screenshotSha256": "869e0ca99126c894f82561a9dfefbb49fd2d9cbc8cfe80e707b452ee590905fe",
+        "screenshotSha256": "7d2b6cbcd98681a6e159473e739f437dd6e05df92733ff8c29f30399dc6fe990",
         "verdict": "PASS_NO_SEV1_OR_SEV2"
       },
       {
-        "captureId": "e78-20260814T2137-live-2:quality-investigation:narrow-390x844",
+        "captureId": "recovery-v4-live-m-20260814T2214-live-2:quality-investigation:narrow-390x844",
         "scenarioId": "quality-investigation",
         "viewport": "narrow-390x844",
-        "screenshotSha256": "d50470485ce73999dde94d02fcbaa89b21b2bd54aac6d3739579fcd4cdb11aad",
+        "screenshotSha256": "50c791f61338af4c72fc21f6d02580641ba5ca5847bde9d4424b543bf591f52a",
         "verdict": "PASS_NO_SEV1_OR_SEV2"
       },
       {
-        "captureId": "e78-20260814T2137-live-2:inventory-risk:narrow-390x844",
+        "captureId": "recovery-v4-live-m-20260814T2214-live-2:inventory-risk:narrow-390x844",
         "scenarioId": "inventory-risk",
         "viewport": "narrow-390x844",
-        "screenshotSha256": "944c992e161ad3d655f44e5bbb900f43537607e55cd56a458c07ed1f8b6491cd",
+        "screenshotSha256": "6a367a653606a2c22e1d3145d479150da830c883f2231d5cdd4242e9038275b9",
         "verdict": "PASS_NO_SEV1_OR_SEV2"
       },
       {
-        "captureId": "e78-20260814T2137-live-2:maintenance:narrow-390x844",
+        "captureId": "recovery-v4-live-m-20260814T2214-live-2:maintenance:narrow-390x844",
         "scenarioId": "maintenance",
         "viewport": "narrow-390x844",
-        "screenshotSha256": "5890c98599b02c9df2366ca40c0382d95e5acd6384b56c4c64d3759c297455dd",
+        "screenshotSha256": "fc8d047eeecc0e25da2ce52de948e1ceeb28cfa77e69da67025f32762e2ab530",
         "verdict": "PASS_NO_SEV1_OR_SEV2"
       },
       {
-        "captureId": "e78-20260814T2137-live-2:cross-domain:narrow-390x844",
+        "captureId": "recovery-v4-live-m-20260814T2214-live-2:cross-domain:narrow-390x844",
         "scenarioId": "cross-domain",
         "viewport": "narrow-390x844",
-        "screenshotSha256": "a358a43a9ef626127549fd5529e43b49d2ac4224a8c0c29b103ba51744819714",
+        "screenshotSha256": "adaa6f4fddc295f278d56b4ca707d8de5adeb312e7177f6c03c980f79ef13325",
         "verdict": "PASS_NO_SEV1_OR_SEV2"
       },
       {
-        "captureId": "e78-20260814T2137-live-2:voice-correction-cancel:narrow-390x844",
+        "captureId": "recovery-v4-live-m-20260814T2214-live-2:voice-correction-cancel:narrow-390x844",
         "scenarioId": "voice-correction-cancel",
         "viewport": "narrow-390x844",
-        "screenshotSha256": "3cbcc9ff5c7b308676fd3a300826ae36bdb4fa71e1db2d7cb4dab15ca177facf",
+        "screenshotSha256": "509d7d61847224d5eff607dbfd81c9e2083a83602aeb67290fa72b13677ad3b1",
         "verdict": "PASS_NO_SEV1_OR_SEV2"
       },
       {
-        "captureId": "e78-20260814T2137-live-2:undo-idempotency:narrow-390x844",
+        "captureId": "recovery-v4-live-m-20260814T2214-live-2:undo-idempotency:narrow-390x844",
         "scenarioId": "undo-idempotency",
         "viewport": "narrow-390x844",
-        "screenshotSha256": "45cd9d6e6ea29cd9cd8528ffebeb24f0b4f834e8ed19c40e523a5308397fc63e",
+        "screenshotSha256": "02eb18086840761186a1ec0e3f9875f30a6f1f949ea5306b12c6d73985cc9c59",
         "verdict": "PASS_NO_SEV1_OR_SEV2"
       },
       {
-        "captureId": "e78-20260814T2137-live-2:persistent-request-denied:narrow-390x844",
+        "captureId": "recovery-v4-live-m-20260814T2214-live-2:persistent-request-denied:narrow-390x844",
         "scenarioId": "persistent-request-denied",
         "viewport": "narrow-390x844",
-        "screenshotSha256": "818b213c25fe276f2f83b2f87ef44757da1b7f2572219edc828b8cc5277fec2f",
+        "screenshotSha256": "0702da7eef2631215998c9933e9c137cdb6ce8dae40a681da5baad06339f43f4",
         "verdict": "PASS_NO_SEV1_OR_SEV2"
       }
     ]

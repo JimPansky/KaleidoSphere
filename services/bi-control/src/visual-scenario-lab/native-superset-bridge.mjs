@@ -70,19 +70,13 @@ const TRUTH_KEY_BY_ASSET = Object.freeze({
 
 const CHART_TITLES = Object.freeze({
   executive: ['Revenue · EUR', 'Q2 revenue signal', 'Revenue by period'],
-  quality: ['Defect-rate timing', 'Defect-rate signal', 'Supplier-batch evidence'],
+  quality: ['Defect-rate timing', 'Defect-rate signal', 'Quality metric evidence'],
   inventory: ['Coverage · days', 'Constraint evidence', 'Demand vs confirmed supply'],
   maintenance: ['Downtime · hours', 'Reliability concentration', 'Q2 downtime timing'],
   crossDomain: ['Demand vs production change · %', 'Domain change gap · %', 'Change association · not causation'],
   voiceCorrection: ['Corrected plant defect trend', 'Corrected-plant concentration'],
   undoIdempotency: ['Reversible revenue KPI', 'Reversible revenue view'],
   persistentDenied: ['Session-only change preview', 'Denied-change evidence'],
-});
-
-const TABLE_COLUMNS_BY_TRUTH = Object.freeze({
-  quality_spike: ['metric_key', 'metric_value', 'entity_key'],
-  inventory_risk: ['metric_key', 'metric_value', 'entity_key'],
-  cross_domain_q2: ['metric_key', 'metric_value', 'entity_key'],
 });
 
 const RESPONSIVE_DASHBOARD_CSS = `
@@ -311,7 +305,7 @@ function chartParams(vizType, datasetId, chartType, metricColumn, { truthKey, me
   if (metricKeys?.length) adhocFilters.push({ clause: 'WHERE', comparator: metricKeys, expressionType: 'SIMPLE', operator: 'IN', sqlExpression: null, subject: 'metric_key' });
   const common = { datasource: `${datasetId}__table`, viz_type: vizType, adhoc_filters: adhocFilters, row_limit: 1000, time_range: 'No filter' };
   if (chartType === 'big_number') return { ...common, metric, x_axis: 'period_start', subheader: 'Synthetic oracle · stated unit' };
-  if (chartType === 'table_conditional') return { ...common, all_columns: TABLE_COLUMNS_BY_TRUTH[truthKey] ?? ['metric_key', 'metric_value', 'entity_key'], order_by_cols: [], page_length: 10, server_pagination: false };
+  if (chartType === 'table_conditional') return { ...common, groupby: ['metric_key'], metrics: [metric], order_by_cols: [], page_length: 10, server_pagination: false };
   if (chartType === 'heatmap') return { ...common, x_axis: 'period_start', groupby: 'metric_key', metric, linear_color_scheme: 'blue_white_yellow', normalize_across: 'heatmap_v2', show_legend: true, show_values: true };
   if (chartType === 'treemap') return { ...common, groupby: ['entity_key'], metric, show_legend: true };
   return {

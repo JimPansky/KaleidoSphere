@@ -91,7 +91,7 @@ stack; add MSSQL and Oracle live seed readbacks as adapter evidence.
 
 ## M6-02 Native Superset Bridge addendum
 
-Status: local terminal candidate, pending final repository cleanup at commit time.
+Status: Recovery-v4 terminal; G1-G7 verified locally.
 Base commit: `1c056f5200eb0f6fef8e0c840271be8018da6391`.
 Branch: `m6-02-native-superset-bridge`.
 
@@ -109,17 +109,46 @@ comparison, tab selection, table sorting, and series toggling. There is no free
 DOM/JavaScript action path, no raw SQL, no source credential in Superset, no
 dynamic plugin path, no voice-only persistent approval, and no fake native success.
 
-Fresh evidence run `e78-20260814T2137` completed two consecutive green native
-runs, each covering all eight Golden Scenarios with native readback, oracle
-values, action traces, denial counts, mutation counts, and persistent mutation
-count zero. The diversity gate passed with five domain layout families, eight
-meaningful chart types, rationale coverage 100%, maximum domain signature reuse
-one, and zero misleading chart types.
+Recovery-v4 produced two complete consecutive final-code live sequences. The
+independent retained sequence uses
+`recovery-v4-live-l-20260814T2212-live-{1,2}`; the committed evidence sequence
+uses `recovery-v4-live-m-20260814T2214-live-{1,2}`. Every run covers all eight
+Golden Scenarios with native Superset readback, exact oracle values, fail-closed
+capability boundaries, action traces, denial counts, idempotency, mutation
+counts, and persistent mutation count zero. The diversity gate passed with five
+domain layout families, eight meaningful chart types, rationale coverage 100%,
+maximum domain signature reuse one, and zero misleading chart types. Aggregate
+evidence tables expose only synthetic metric keys and values, not source rows.
 
 The browser evidence contains 16 hashed Superset screenshots: each scenario at
-1440x900 desktop and 390x844 narrow. Direct pixel review passed at 8.7/10 with
-zero Severity 1/2 defects and zero measured horizontal overflow. Narrow evidence
-uses full-width native dashboard rows instead of a scale-only shrink.
+1440x900 desktop and 390x844 narrow. Every image was inspected directly at full
+resolution. Direct pixel review passed at the required 8.5/10 with zero
+Severity 1/2 defects, one Severity 3 class for visually sparse one-period or
+single-point synthetic plots, and zero measured horizontal overflow. Narrow
+evidence uses full-width native dashboard rows instead of a scale-only shrink.
+The browser runner also fails closed on stale post-provision cache age,
+unexpected console errors, page errors, header clipping, chart-count mismatch,
+and horizontal overflow. The only allowed console error is the known Superset
+`/static/service-worker.js` 404, recorded by category and count without raw
+console payloads.
+
+Recovery-v4 traced the prior browser failure to three bounded causes: native
+asset queries were captured before Superset's cache had settled, a reused page
+carried horizontal scroll state between scenarios, and raw table chart params
+could expose synthetic source rows. The minimal fixes add a 22-second cache-age
+gate, create a fresh page per scenario inside the authenticated context, and
+aggregate table evidence by metric key. A misleading quality-table title was
+also corrected to `Quality metric evidence`.
+
+Final regression passed Node syntax checks, the focused visual-scenario suite
+16/16, and the complete suite 100/100 after the final Source-Map refresh. The
+isolated metadata and projection backup was restored byte-for-byte: both the
+baseline tar and the terminal restored tar hash to
+`46f578f2392d3c35a697f92ba3d2ad6a727b31fe219f1f5d995b994c616fb262`.
+A clean restart returned `OK` and identified Apache Superset 6.1.0. The restored
+bytes were then applied once more after stopping the service. Final teardown
+removed only Compose project `sba-m6-02-20260814-2002`; matching containers,
+networks, and the `127.0.0.1:28088` listener are all zero.
 
 Machine evidence:
 
