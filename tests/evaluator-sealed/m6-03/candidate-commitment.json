@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "chimpmaera.bi/m6-03-candidate-commitment/v1",
+  "committedAt": "2026-08-15T06:21:58+02:00",
+  "baseCommit": "76f0bd3f1b06aa14960cdee5b304f94a98e20ae7",
+  "candidateBundleDigest": "efe9b747afbcfc0e8ea7fa957546a872bbc0b001e10a5ea0a1c65b664ab72672",
+  "digestRule": "sha256 of lexicographically sorted path:sha256 lines, each newline-terminated",
+  "files": {
+    "services/bi-control/src/bi-specialist/local-openai-adapter.mjs": "f8b884bad7ad7455e6be3abbd5f1cf22aa670975ed8feef2fbfe69730fbd9994",
+    "services/bi-control/src/bi-specialist/optimization-gate.mjs": "4543407b9ec9992f78cd57a04fcba6b2620578fae2eadad320af3e3ba8b96b05",
+    "services/bi-control/src/bi-specialist/planning-policy.mjs": "c3893e269c219d3ee53aef3adcb58b642ccfd0fe9603f30795cf5bdb2021df67",
+    "services/bi-control/src/bi-specialist/progressive-discovery.mjs": "727fd54d3663c5d5e512db7d03b007616cddd0251695d970b427143fdb3ef98b",
+    "services/bi-control/src/bi-specialist/specialist-agent.mjs": "46dd9aa00e40518fef45c56386475be36dae0e6f2d6fb810e6c06b67e659ba0f"
+  },
+  "boundary": {
+    "sealedCasesCreatedAfterCommitment": true,
+    "candidateReceivesOnly": ["databasePath", "objective", "underspecified", "adversarial", "runId"],
+    "oracleRemainsEvaluatorOnly": true,
+    "singleUseEvaluation": true,
+    "intermediateFeedbackAllowed": false
+  },
+  "preExecutionCorrection": "The first runner invocation stopped at bundle verification before case materialization or candidate execution. The aggregate digest was corrected from hash-sorted to the documented path-sorted rule; all five precommitted per-file hashes remain unchanged.",
+  "assumption": "The committed candidate modules are frozen before any sealed case SQL, oracle, neutral case identifier, or database digest is authored.",
+  "risk": "A repository-local evaluator is not organizationally independent; the claim is limited to process-separated local blind evaluation, not third-party validation.",
+  "fallback": "If bundle verification or any leakage/hard gate fails, do not credit G4 and retain the development fixtures only as regression evidence.",
+  "reviewRollback": "The sealed result is immutable first-run evidence; later reruns are regression-only and cannot replace a failed first run."
+}

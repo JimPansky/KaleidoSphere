@@ -14,8 +14,8 @@ const candidateRoot = resolve(fixtureRoot, 'candidate');
 const evidenceRoot = resolve(root, 'docs/evidence/m6-03-bi-specialist');
 const specs = JSON.parse(await readFile(resolve(fixtureRoot, 'fixture-specs-v1.json'), 'utf8'));
 const provenance = JSON.parse(await readFile(resolve(fixtureRoot, 'fixture-provenance-v1.json'), 'utf8'));
-const hiddenBytes = await readFile(resolve(root, 'tests/fixtures/bi-specialist-hidden-oracles-v1.json'));
-const hidden = JSON.parse(hiddenBytes);
+const developmentOracleBytes = await readFile(resolve(root, 'tests/fixtures/bi-specialist-development-oracles-v1.json'));
+const developmentOracle = JSON.parse(developmentOracleBytes);
 
 function stableObservable(value) {
   if (Array.isArray(value)) return value.map(stableObservable);
@@ -60,7 +60,7 @@ for (const fixture of specs.fixtures) {
   };
   const first = await agent.investigate(input);
   const second = await agent.investigate({ ...input, runId: `${fixture.id}-repeat` });
-  const oracle = hidden.oracles[fixture.id];
+  const oracle = developmentOracle.oracles[fixture.id];
   const evaluation = evaluate(first.discovery, oracle);
   const incumbentDiscovery = discoverDatabase({ databasePath: input.databasePath, objective: input.objective, maxTables: 3, maxQueries: 64, maxRowsPerQuery: 64 });
   const incumbentEvaluation = evaluate(incumbentDiscovery, oracle);
@@ -72,7 +72,7 @@ for (const fixture of specs.fixtures) {
     domain: fixture.domain,
     databaseSha256: provenance.fixtures.find((item) => item.id === fixture.id).databaseSha256,
     oracleDigest: sha256(JSON.stringify(oracle)),
-    oracleNotCandidateInput: true,
+    developmentOracleNotCandidateInput: true,
     evaluation,
     incumbentEvaluation,
     inventoryCount: first.discovery.structuralInventory.length,
@@ -113,8 +113,10 @@ const rejected = immutableGeneration({ id: 'm6-03-negative-candidate-v1', policy
 const manifest = {
   schemaVersion: 'chimpmaera.bi/m6-03-core-evidence/v1',
   generatedAt: new Date().toISOString(),
-  candidateInputs: { fixtureProvenanceDigest: sha256(JSON.stringify(provenance)), hiddenOracleDigest: sha256(hiddenBytes), hiddenOraclePathOutsideCandidateTree: true },
-  coverage: { fixtures: cases.length, training: cases.filter((item) => item.lane === 'training').length, holdout: cases.filter((item) => item.lane === 'holdout').length,
+  candidateInputs: { fixtureProvenanceDigest: sha256(JSON.stringify(provenance)), developmentOracleDigest: sha256(developmentOracleBytes),
+    developmentOraclePathOutsideCandidateTree: true, blindEvaluationManifest: 'docs/evidence/m6-03-bi-specialist/sealed-blind-v2-manifest.json' },
+  coverage: { fixtures: cases.length, training: cases.filter((item) => item.lane === 'training').length,
+    development: cases.filter((item) => item.lane === 'development').length, blind: 0,
     schemaPerturbation: true, domainShift: true, underspecified: true, adversarialBoundaryCoveredByTests: true },
   cases,
   policyGuide: planningPolicyGuide(),
@@ -129,11 +131,11 @@ const manifest = {
   },
   optimizationInterpretation: {
     acceptedCandidateClaim: 'measured local improvement over the explicitly bounded three-table incumbent',
-    improvementClaimScope: 'five local synthetic fixtures only',
-    comparisonType: 'paired-fixture incumbent-versus-candidate',
+    improvementClaimScope: 'five visible local synthetic development/regression fixtures only',
+    comparisonType: 'paired-development-fixture incumbent-versus-candidate',
     negativeProbe: 'the privacy-unsafe oracle-regressing ablation is rejected and the incumbent is retained',
   },
-  nonclaims: ['No production/customer database evidence', 'No causal proof from correlation', 'No native Superset apply', 'No cross-hardware determinism claim'],
+  nonclaims: ['This visible corpus is not blind evidence', 'No production/customer database evidence', 'No causal proof from correlation', 'No native Superset apply', 'No cross-hardware determinism claim'],
 };
 await atomicJson(resolve(evidenceRoot, 'core-manifest.json'), manifest);
 console.log(JSON.stringify({ output: 'docs/evidence/m6-03-bi-specialist/core-manifest.json', coverage: manifest.coverage, aggregate: manifest.aggregate,

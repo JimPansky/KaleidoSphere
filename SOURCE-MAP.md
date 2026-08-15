@@ -90,9 +90,11 @@ not copy Apache Superset source or assets, does not use source credentials, and
 does not claim unsupported native UI actions.
 
 M6-03 real-BI-specialist adapter/core, progressive read-only discovery, task-adaptive
-planning/sampling policy, incumbent-selection gate, synthetic SQLite training/holdout corpus,
-hidden evaluator oracles, local Qwen conformance/evaluation scripts, tests, decision record and
-evidence manifests are repository-authored clean-room work. They use built-in Node facilities
+planning/sampling policy, incumbent-selection gate, visible synthetic SQLite development corpus,
+process-separated sealed evaluator packs and commitments, local Qwen conformance/evaluation
+scripts, tests, decision record and evidence manifests are repository-authored clean-room work.
+The first sealed result is retained as negative evidence; blind credit comes only from a wholly
+new pack authored after the corrected candidate commitment. They use built-in Node facilities
 and an externally installed local llama.cpp/Qwen runtime only for isolated evaluation; no
 llama.cpp, Qwen, DeepSeek Harness, Hermes or OpenClaw runtime code/artifact is copied or
 redistributed. M6-03 files are ordinary repository-authored hashes under `files`, not derived

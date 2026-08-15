@@ -9,7 +9,7 @@ The specialist is a harness-neutral core with an optional loopback-only OpenAI-c
 model adapter. The database discovery core is read-only, bounded by tables, queries, rows,
 duration, steps, context, response tokens, retries, and explicit task policies. Model output
 may summarize already collected evidence or propose typed read-only tool calls; it cannot
-authorize or execute persistence. Model, adapter, discovery core, evaluator, and hidden oracle
+authorize or execute persistence. Model, adapter, discovery core, development evaluator, and sealed evaluator
 are independently replaceable.
 
 Only structured observable records are durable: `plan_summary`, `decision_record`,
@@ -32,9 +32,12 @@ private data and unrestricted prompts/responses are excluded.
 11. user correction;
 12. trusted preview/apply/readback/rollback boundary.
 
-The user supplies an objective and database, not table or column names. Candidate tools see
-only candidate SQLite files. Hidden oracle JSON is evaluator-only and is kept outside the
-candidate fixture tree. Training and holdout provenance plus SHA-256 digests are mandatory.
+The user supplies an objective and database, not table or column names. The visible corpus is
+explicitly development/adversarial regression data and makes no blind claim. Blind credit
+requires a candidate-source commitment before any new neutral case identifier, database SQL,
+oracle or digest is authored; process-separated candidate execution receives only the database
+path and objective envelope. The immutable first result, including failure, cannot be replaced
+by a rerun. Candidate, pack and evaluator SHA-256 digests are mandatory.
 
 ## Fail-closed rules
 
@@ -47,6 +50,9 @@ candidate fixture tree. Training and holdout provenance plus SHA-256 digests are
   readback and rollback point.
 - A candidate can replace the incumbent only with zero hard failures, green privacy/safety,
   and no discovery, oracle, citation or tool-correctness regression.
+- Sealed scoring hard-fails path/oracle/case leakage, raw-row or prompt-injection leakage,
+  mutation, budget overrun, missing evidence receipts, raw reasoning, unbounded KPI grain, or
+  implied causality.
 
 ## Local Qwen reference configuration
 
@@ -67,4 +73,5 @@ Rollback is the retained incumbent generation, trusted semantic rollback point, 
 only the uniquely named transient Qwen service/listener, or a local Git revert after commit.
 There is no push, PR, tag, release, deployment, production/customer access, external write,
 native Superset apply, local-Qwen general support, cross-hardware determinism, or visual UI
-acceptance claim in this contract.
+acceptance claim in this contract. Repository-local process separation is not claimed as
+organizationally independent or third-party validation.

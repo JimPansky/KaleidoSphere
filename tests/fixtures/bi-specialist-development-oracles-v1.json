@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "chimpmaera.bi/bi-specialist-hidden-oracles/v1",
-  "separationRule": "Never provide this file or its digest map to the candidate agent/model.",
+  "schemaVersion": "chimpmaera.bi/bi-specialist-development-oracles/v1",
+  "classification": "Evaluator-side regression oracle for visible development fixtures; no blind-generalization claim.",
   "oracles": {
     "training-order-to-cash": {
       "minimumTables": 5,

@@ -132,7 +132,7 @@ function semanticModel(inventory, profiles) {
     if (family === 'numeric' && !/(^id$|_id$)/i.test(column.name)) measures.push({ table: table.name, column: column.name, aggregation: 'sum-or-average-after-grain-check' });
     else if (family === 'text' || family === 'temporal') dimensions.push({ table: table.name, column: column.name });
     if (/(amount|revenue|cost|price|total)/i.test(column.name)) kpis.push({ id: `${table.name}.${column.name}.sum`, label: `Total ${column.name}`, expression: `SUM(${column.name})`, validation: 'grain-and-null-check-required' });
-    if (/(delay|late|lead_time|duration)/i.test(column.name)) kpis.push({ id: `${table.name}.${column.name}.avg`, label: `Average ${column.name}`, expression: `AVG(${column.name})`, validation: 'unit-and-outlier-check-required' });
+    if (/(delay|late|lead_time|duration)/i.test(column.name)) kpis.push({ id: `${table.name}.${column.name}.avg`, label: `Average ${column.name}`, expression: `AVG(${column.name})`, validation: 'unit-grain-and-outlier-check-required' });
   }
   return { dimensions: dimensions.slice(0, 24), measures: measures.slice(0, 24), kpis: kpis.slice(0, 16), confidence: kpis.length ? 0.78 : 0.55 };
 }

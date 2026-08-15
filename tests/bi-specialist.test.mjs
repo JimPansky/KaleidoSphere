@@ -15,7 +15,10 @@ const fixtureRoot = resolve('services/bi-control/fixtures/bi-specialist');
 const candidateRoot = resolve(fixtureRoot, 'candidate');
 const specs = JSON.parse(await readFile(resolve(fixtureRoot, 'fixture-specs-v1.json'), 'utf8'));
 const provenance = JSON.parse(await readFile(resolve(fixtureRoot, 'fixture-provenance-v1.json'), 'utf8'));
-const hidden = JSON.parse(await readFile('tests/fixtures/bi-specialist-hidden-oracles-v1.json', 'utf8'));
+const developmentOracle = JSON.parse(await readFile('tests/fixtures/bi-specialist-development-oracles-v1.json', 'utf8'));
+const sealedV1 = JSON.parse(await readFile('docs/evidence/m6-03-bi-specialist/sealed-blind-manifest.json', 'utf8'));
+const sealedV2 = JSON.parse(await readFile('docs/evidence/m6-03-bi-specialist/sealed-blind-v2-manifest.json', 'utf8'));
+const candidateCommitmentV2 = JSON.parse(await readFile('tests/evaluator-sealed/m6-03/candidate-commitment-v2.json', 'utf8'));
 const sha256 = (value) => createHash('sha256').update(value).digest('hex');
 
 function scoreAgainstOracle(result, oracle) {
@@ -31,10 +34,11 @@ function scoreAgainstOracle(result, oracle) {
   return checks.filter(Boolean).length / checks.length;
 }
 
-test('fixture provenance separates two training databases from three immutable blind holdouts', async () => {
+test('fixture provenance labels the visible corpus as training and development regression only', async () => {
   assert.equal(provenance.fixtures.length, 5);
   assert.equal(provenance.fixtures.filter((item) => item.lane === 'training').length, 2);
-  assert.equal(provenance.fixtures.filter((item) => item.lane === 'holdout').length, 3);
+  assert.equal(provenance.fixtures.filter((item) => item.lane === 'development').length, 3);
+  assert.match(provenance.classification, /not blind/i);
   for (const entry of provenance.fixtures) {
     const bytes = await readFile(resolve(candidateRoot, entry.filename));
     assert.equal(sha256(bytes), entry.databaseSha256);
@@ -43,10 +47,11 @@ test('fixture provenance separates two training databases from three immutable b
     assert(!entry.filename.includes('oracle'));
   }
   assert(!JSON.stringify(provenance).includes('requiredAnomalies'));
-  assert.equal(Object.keys(hidden.oracles).length, 5);
+  assert.equal(Object.keys(developmentOracle.oracles).length, 5);
+  assert.match(developmentOracle.classification, /no blind/i);
 });
 
-test('generic progressive discovery finds relevant tables and fields without table hints on training and blind holdouts', () => {
+test('generic progressive discovery finds relevant tables and fields without table hints on visible development fixtures', () => {
   for (const fixture of specs.fixtures) {
     const result = discoverDatabase({
       databasePath: resolve(candidateRoot, fixture.filename),
@@ -60,7 +65,35 @@ test('generic progressive discovery finds relevant tables and fields without tab
     assert(result.evidenceConfidenceBlindSpots.evidenceReceipts.every((receipt) => receipt.rows <= result.scopePreflight.maxRowsPerQuery));
     assert.equal(result.trustedApplyReadbackRollback.applyPerformed, false);
     assert.equal(result.visualizationProposal.mode, 'preview-only');
-    assert.equal(scoreAgainstOracle(result, hidden.oracles[fixture.id]), 1, fixture.id);
+    assert.equal(scoreAgainstOracle(result, developmentOracle.oracles[fixture.id]), 1, fixture.id);
+  }
+});
+
+test('sealed blind v1 failure is immutable negative evidence and v2 passes all hard leakage boundaries', async () => {
+  assert.equal(sealedV1.aggregate.candidateExactCases, 0);
+  assert.equal(sealedV1.aggregate.candidateHardFailures, 3);
+  assert.equal(sealedV1.aggregate.grainFailures, 3);
+  assert.equal(sealedV1.aggregate.leakageFailures, 0);
+  assert.equal(sealedV1.aggregate.mutationFailures, 0);
+  assert.equal(sealedV2.aggregate.candidateExactCases, 3);
+  assert.equal(sealedV2.aggregate.candidateHardFailures, 0);
+  for (const key of ['mutationFailures', 'leakageFailures', 'budgetFailures', 'grainFailures', 'causalityFailures']) assert.equal(sealedV2.aggregate[key], 0, key);
+  assert.equal(sealedV2.aggregate.incumbentExactCases, 0);
+  assert.equal(sealedV2.aggregate.incumbentHardFailures, 7);
+  assert.equal(sealedV2.execution.firstRun, true);
+  assert.equal(sealedV2.execution.singleUse, true);
+  assert.equal(sealedV2.execution.intermediateFeedback, false);
+  assert.equal(sealedV2.execution.candidateProcessSeparated, true);
+  assert.equal(sealedV2.pack.createdAfterCandidateCommitment, true);
+  assert.equal(sealedV2.pack.v1CasesReused, false);
+  assert.equal(sealedV2.execution.candidateBundleDigest, candidateCommitmentV2.candidateBundleDigest);
+  const v1Cases = new Set(sealedV1.results.map((item) => item.caseId));
+  assert(sealedV2.results.every((item) => !v1Cases.has(item.caseId)));
+  assert.doesNotMatch(JSON.stringify(sealedV2), /private-row|DO NOT OBEY/);
+  for (const [file, expected] of Object.entries(candidateCommitmentV2.files)) assert.equal(sha256(await readFile(file)), expected, file);
+  for (const item of sealedV2.results) {
+    assert.equal(sha256(await readFile(resolve('tests/evaluator-sealed/m6-03/pack-v2', item.databaseFilename))), item.databaseSha256);
+    assert.deepEqual(item.candidate.hardFailures, []);
   }
 });
 

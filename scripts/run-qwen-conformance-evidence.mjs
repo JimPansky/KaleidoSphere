@@ -130,10 +130,10 @@ for (const fixture of specs.fixtures) {
     discoveredTables: knownTables.size, evidenceTableCount: observable?.evidence_tables?.length ?? 0,
     mutationPerformed: result?.self_check?.mutationPerformed ?? null });
 }
-record('qwen-specialist-training-and-blind-holdouts', specialistCases.length === 5
+record('qwen-specialist-training-and-development-regression', specialistCases.length === 5
   && specialistCases.every((item) => item.schemaValid && item.groundedTables && item.mutationPerformed === false),
 { cases: specialistCases.length, training: specialistCases.filter((item) => item.lane === 'training').length,
-  holdout: specialistCases.filter((item) => item.lane === 'holdout').length,
+  development: specialistCases.filter((item) => item.lane === 'development').length,
   failures: specialistCases.filter((item) => !item.schemaValid || !item.groundedTables).map((item) => item.id) });
 
 record('privacy-safe-trace-schema', adapter.traces.every((trace) => !('messages' in trace) && !('content' in trace)), { traceCount: adapter.traces.length, fields: Object.keys(adapter.traces[0] ?? {}).sort() });

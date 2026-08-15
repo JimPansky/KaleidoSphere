@@ -1,15 +1,17 @@
 {
   "schemaVersion": "chimpmaera.bi/m6-03-core-evidence/v1",
-  "generatedAt": "2026-08-15T04:16:33.920Z",
+  "generatedAt": "2026-08-15T04:29:55.940Z",
   "candidateInputs": {
-    "fixtureProvenanceDigest": "fb2b6f5a4fea1b41e96b18d80b7e62d66bc64c34aaee092470341f558459d352",
-    "hiddenOracleDigest": "b734ac450a63d9e1c068755d61594c357aac9eca8a802029af1ab3ed58227372",
-    "hiddenOraclePathOutsideCandidateTree": true
+    "fixtureProvenanceDigest": "37cf3b57a48dbd8bb5d17f800104f7d2b51334600c62c5bf76aa211e0f15916a",
+    "developmentOracleDigest": "847d907018fe38b8ffe5d6510f70a08b0acd9c0af1d6368cca9977e7e0966c66",
+    "developmentOraclePathOutsideCandidateTree": true,
+    "blindEvaluationManifest": "docs/evidence/m6-03-bi-specialist/sealed-blind-v2-manifest.json"
   },
   "coverage": {
     "fixtures": 5,
     "training": 2,
-    "holdout": 3,
+    "development": 3,
+    "blind": 0,
     "schemaPerturbation": true,
     "domainShift": true,
     "underspecified": true,
@@ -22,7 +24,7 @@
       "domain": "order-to-cash/customer/dealer",
       "databaseSha256": "72f507a16c78fa4938c86b0035f34a7e9a8e44995450c973e99fbfc500510ab6",
       "oracleDigest": "2acfd3b625a5152692113412e206b1c44ad7b0c700eb747ffd2d6ca6e8318945",
-      "oracleNotCandidateInput": true,
+      "developmentOracleNotCandidateInput": true,
       "evaluation": {
         "checks": {
           "inventory": true,
@@ -81,7 +83,7 @@
       "domain": "supplier/production-cost/flow/quality",
       "databaseSha256": "ba5a2ac094b04f3af9b5c7e14fc7398b4e2f1b6786a409b11d5e46af097a25ed",
       "oracleDigest": "4ae3bc98199fb089559121b4792fce89dd0556163475774fda4857c290467e4f",
-      "oracleNotCandidateInput": true,
+      "developmentOracleNotCandidateInput": true,
       "evaluation": {
         "checks": {
           "inventory": true,
@@ -137,11 +139,11 @@
     },
     {
       "id": "holdout-channel-perturbed",
-      "lane": "holdout",
+      "lane": "development",
       "domain": "channel/customer-360 with schema perturbation",
       "databaseSha256": "9419708619c34f72ff651a25eb034389f5d3a8bee1788e88bb57d23ca74e99d2",
       "oracleDigest": "c13c37da2b2fc8013ae42279f368adcc0424fb897d1d1d8f17c2435d4d97b1c0",
-      "oracleNotCandidateInput": true,
+      "developmentOracleNotCandidateInput": true,
       "evaluation": {
         "checks": {
           "inventory": true,
@@ -196,11 +198,11 @@
     },
     {
       "id": "holdout-clinical-domain-shift",
-      "lane": "holdout",
+      "lane": "development",
       "domain": "clinical domain shift",
       "databaseSha256": "dc6f52cb6199b02111158d1741bc1537bf59aa822c5cd7f958101da69c251939",
       "oracleDigest": "788cf28cae1ede0df1d0d8fddccf96715512900e16e3d8097e07e23046d0f680",
-      "oracleNotCandidateInput": true,
+      "developmentOracleNotCandidateInput": true,
       "evaluation": {
         "checks": {
           "inventory": true,
@@ -251,11 +253,11 @@
     },
     {
       "id": "holdout-underspecified-adversarial",
-      "lane": "holdout",
+      "lane": "development",
       "domain": "underspecified/adversarial boundary",
       "databaseSha256": "835ad550dc6259596cc97070468feb6c9faf87eeff5f2d06da9be9470470bbce",
       "oracleDigest": "f486464ec9716dc32f744b19058000dafd58f967ef71a03b6680f8f03fcea6e4",
-      "oracleNotCandidateInput": true,
+      "developmentOracleNotCandidateInput": true,
       "evaluation": {
         "checks": {
           "inventory": true,
@@ -894,11 +896,12 @@
   },
   "optimizationInterpretation": {
     "acceptedCandidateClaim": "measured local improvement over the explicitly bounded three-table incumbent",
-    "improvementClaimScope": "five local synthetic fixtures only",
-    "comparisonType": "paired-fixture incumbent-versus-candidate",
+    "improvementClaimScope": "five visible local synthetic development/regression fixtures only",
+    "comparisonType": "paired-development-fixture incumbent-versus-candidate",
     "negativeProbe": "the privacy-unsafe oracle-regressing ablation is rejected and the incumbent is retained"
   },
   "nonclaims": [
+    "This visible corpus is not blind evidence",
     "No production/customer database evidence",
     "No causal proof from correlation",
     "No native Superset apply",

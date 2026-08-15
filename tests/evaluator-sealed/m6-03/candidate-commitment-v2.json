@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "chimpmaera.bi/m6-03-candidate-commitment/v2",
+  "committedAt": "2026-08-15T06:26:00+02:00",
+  "baseCommit": "76f0bd3f1b06aa14960cdee5b304f94a98e20ae7",
+  "candidateBundleDigest": "68bdb2f6fcee2d194736afdde9ea0bc84dc420b49e86664082801946324bf353",
+  "digestRule": "sha256 of lexicographically sorted path:sha256 lines, each newline-terminated",
+  "files": {
+    "services/bi-control/src/bi-specialist/local-openai-adapter.mjs": "f8b884bad7ad7455e6be3abbd5f1cf22aa670975ed8feef2fbfe69730fbd9994",
+    "services/bi-control/src/bi-specialist/optimization-gate.mjs": "4543407b9ec9992f78cd57a04fcba6b2620578fae2eadad320af3e3ba8b96b05",
+    "services/bi-control/src/bi-specialist/planning-policy.mjs": "c3893e269c219d3ee53aef3adcb58b642ccfd0fe9603f30795cf5bdb2021df67",
+    "services/bi-control/src/bi-specialist/progressive-discovery.mjs": "e44005b67721401e3cc2a33ed22925f07d87a8c0b10782ec18e4bcbd3c8fd24e",
+    "services/bi-control/src/bi-specialist/specialist-agent.mjs": "46dd9aa00e40518fef45c56386475be36dae0e6f2d6fb810e6c06b67e659ba0f"
+  },
+  "changeFromV1": {
+    "reason": "The immutable first sealed pack exposed a general semantic invariant: duration KPIs declared unit/outlier checks but omitted explicit grain validation.",
+    "change": "Duration KPI validation now requires unit, grain, and outlier checks.",
+    "sourceFilesChanged": ["services/bi-control/src/bi-specialist/progressive-discovery.mjs"],
+    "v1EvidencePreserved": "docs/evidence/m6-03-bi-specialist/sealed-blind-manifest.json"
+  },
+  "boundary": {
+    "v2CasesAuthoredAfterThisCommitment": true,
+    "v1CasesForbidden": true,
+    "candidateReceivesOnly": ["databasePath", "objective", "underspecified", "adversarial", "runId"],
+    "oracleRemainsEvaluatorOnly": true,
+    "singleUseEvaluation": true,
+    "intermediateFeedbackAllowed": false
+  },
+  "assumption": "The five candidate modules are frozen before any v2 case SQL, oracle, neutral identifier, filename, or digest is authored.",
+  "risk": "The process is evaluator-separated but repository-local, so it is not organizationally independent validation.",
+  "fallback": "A v2 hard/leakage/mutation/causality/budget failure leaves G4 uncredited; v1 and v2 remain immutable negative evidence.",
+  "reviewRollback": "A later rerun is regression-only and cannot replace the single recorded v2 outcome."
+}

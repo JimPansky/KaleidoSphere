@@ -1,10 +1,11 @@
 {
   "schemaVersion": "chimpmaera.bi/bi-specialist-fixture-provenance/v1",
   "generatedBy": "scripts/materialize-bi-specialist-fixtures.mjs",
+  "classification": "visible development/adversarial regression corpus; not blind evaluation",
   "fixtures": [
     {
       "id": "holdout-channel-perturbed",
-      "lane": "holdout",
+      "lane": "development",
       "domain": "channel/customer-360 with schema perturbation",
       "filename": "holdout-channel-perturbed.sqlite",
       "databaseSha256": "9419708619c34f72ff651a25eb034389f5d3a8bee1788e88bb57d23ca74e99d2",
@@ -13,7 +14,7 @@
     },
     {
       "id": "holdout-clinical-domain-shift",
-      "lane": "holdout",
+      "lane": "development",
       "domain": "clinical domain shift",
       "filename": "holdout-clinical-domain-shift.sqlite",
       "databaseSha256": "dc6f52cb6199b02111158d1741bc1537bf59aa822c5cd7f958101da69c251939",
@@ -22,7 +23,7 @@
     },
     {
       "id": "holdout-underspecified-adversarial",
-      "lane": "holdout",
+      "lane": "development",
       "domain": "underspecified/adversarial boundary",
       "filename": "holdout-underspecified-adversarial.sqlite",
       "databaseSha256": "835ad550dc6259596cc97070468feb6c9faf87eeff5f2d06da9be9470470bbce",

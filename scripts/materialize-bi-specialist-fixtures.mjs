@@ -9,7 +9,8 @@ const specs = JSON.parse(await readFile(resolve(root, 'fixture-specs-v1.json'), 
 const digestFile = async (path) => createHash('sha256').update(await readFile(path)).digest('hex');
 await mkdir(candidateRoot, { recursive: true });
 
-const manifest = { schemaVersion: 'chimpmaera.bi/bi-specialist-fixture-provenance/v1', generatedBy: 'scripts/materialize-bi-specialist-fixtures.mjs', fixtures: [] };
+const manifest = { schemaVersion: 'chimpmaera.bi/bi-specialist-fixture-provenance/v1', generatedBy: 'scripts/materialize-bi-specialist-fixtures.mjs',
+  classification: 'visible development/adversarial regression corpus; not blind evaluation', fixtures: [] };
 for (const fixture of specs.fixtures) {
   const target = resolve(candidateRoot, fixture.filename);
   try {
@@ -33,4 +34,4 @@ for (const fixture of specs.fixtures) {
 manifest.fixtures.sort((a, b) => a.id.localeCompare(b.id));
 await writeFile(resolve(root, 'fixture-provenance-v1.json'), `${JSON.stringify(manifest, null, 2)}\n`, { flag: 'w' });
 console.log(JSON.stringify({ fixtures: manifest.fixtures.length, training: manifest.fixtures.filter((item) => item.lane === 'training').length,
-  holdout: manifest.fixtures.filter((item) => item.lane === 'holdout').length }, null, 2));
+  development: manifest.fixtures.filter((item) => item.lane === 'development').length }, null, 2));
