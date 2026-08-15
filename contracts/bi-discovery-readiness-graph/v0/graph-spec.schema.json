@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "chimpmaera.bi/discovery-readiness-graph/v0/graph-spec.schema.json",
+  "title": "BI Discovery-to-Readiness Graph Spec v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "graphId", "graphVersion", "owners", "privacy", "budgets", "nodes", "edges", "dynamicSubgraphs", "migration"],
+  "properties": {
+    "schemaVersion": { "const": "chimpmaera.bi/discovery-readiness-graph/v0" },
+    "graphId": { "type": "string", "pattern": "^superset-bi\\.discovery-readiness\\.v0$" },
+    "graphVersion": { "type": "string", "pattern": "^0\\.[0-9]+\\.[0-9]+$" },
+    "owners": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["domain", "writer", "mutationAuthority"],
+      "properties": {
+        "domain": { "const": "superset-bi-agent" },
+        "writer": { "type": "string", "minLength": 1 },
+        "mutationAuthority": { "const": false }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dataClasses", "forbiddenPersistedFields", "sourceRowsPersisted"],
+      "properties": {
+        "dataClasses": { "type": "array", "items": { "type": "string" } },
+        "forbiddenPersistedFields": { "type": "array", "items": { "type": "string" } },
+        "sourceRowsPersisted": { "const": false }
+      }
+    },
+    "budgets": { "$ref": "#/$defs/budgets" },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/node" }
+    },
+    "edges": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/edge" }
+    },
+    "dynamicSubgraphs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/dynamicSubgraph" }
+    },
+    "migration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fromVersions", "strategy", "failClosedOnUnknown"],
+      "properties": {
+        "fromVersions": { "type": "array", "items": { "type": "string" } },
+        "strategy": { "enum": ["none", "explicit-map"] },
+        "failClosedOnUnknown": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "budgets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["maxWallMs", "maxNodes", "maxRetries", "maxExplorationSteps", "maxModelTokens", "maxToolCalls", "maxPersistedBytes"],
+      "properties": {
+        "maxWallMs": { "type": "integer", "minimum": 1 },
+        "maxNodes": { "type": "integer", "minimum": 1 },
+        "maxRetries": { "type": "integer", "minimum": 0 },
+        "maxExplorationSteps": { "type": "integer", "minimum": 1 },
+        "maxModelTokens": { "type": "integer", "minimum": 0 },
+        "maxToolCalls": { "type": "integer", "minimum": 0 },
+        "maxPersistedBytes": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "gate", "kind", "deterministicCredit", "modelBoundary", "preconditions", "postconditions", "evidence", "retry", "onFailure", "sideEffects", "parallelSafe"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^BI-G[0-7]_[a-z0-9_]+$" },
+        "gate": { "enum": ["BI-G0", "BI-G1", "BI-G2", "BI-G3", "BI-G4", "BI-G5", "BI-G6", "BI-G7"] },
+        "kind": { "enum": ["deterministic", "model_owned_candidate", "contract_only"] },
+        "deterministicCredit": { "const": true },
+        "modelBoundary": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["modelMayPropose", "modelMayApprove", "modelMayMutate", "selfCreditDenied"],
+          "properties": {
+            "modelMayPropose": { "type": "boolean" },
+            "modelMayApprove": { "const": false },
+            "modelMayMutate": { "const": false },
+            "selfCreditDenied": { "const": true }
+          }
+        },
+        "preconditions": { "type": "array", "items": { "type": "string" } },
+        "postconditions": { "type": "array", "items": { "type": "string" } },
+        "evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["required", "forbidden"],
+          "properties": {
+            "required": { "type": "array", "items": { "type": "string" } },
+            "forbidden": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "retry": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["maxAttempts", "idempotencyRequired", "compensation"],
+          "properties": {
+            "maxAttempts": { "type": "integer", "minimum": 1 },
+            "idempotencyRequired": { "const": true },
+            "compensation": { "enum": ["none", "readback-required", "rollback-reference-only"] }
+          }
+        },
+        "onFailure": { "enum": ["fail_closed", "pause_for_review"] },
+        "sideEffects": { "const": "none" },
+        "parallelSafe": { "type": "boolean" }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "to", "guard", "onFailure"],
+      "properties": {
+        "from": { "type": "string" },
+        "to": { "type": "string" },
+        "guard": { "type": "string", "minLength": 1 },
+        "onFailure": { "enum": ["fail_closed", "pause_for_review"] }
+      }
+    },
+    "dynamicSubgraph": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "templateNodeId", "itemSource", "maxItems", "fanInNodeId", "budgetGuard"],
+      "properties": {
+        "id": { "type": "string" },
+        "templateNodeId": { "type": "string" },
+        "itemSource": { "type": "string" },
+        "maxItems": { "type": "integer", "minimum": 1 },
+        "fanInNodeId": { "type": "string" },
+        "budgetGuard": { "const": "maxExplorationSteps" }
+      }
+    }
+  }
+}

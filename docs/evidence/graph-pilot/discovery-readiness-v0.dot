@@ -1,0 +1,21 @@
+digraph superset_bi_discovery_readiness {
+  "BI-G0_risk_preflight" [label="BI-G0 deterministic"];
+  "BI-G1_discovery_core" [label="BI-G1 deterministic"];
+  "BI-G1_reference_evidence" [label="BI-G1 deterministic"];
+  "BI-G2_readiness_assembly" [label="BI-G2 model_owned_candidate"];
+  "BI-G3_approval_contract" [label="BI-G3 contract_only"];
+  "BI-G4_trusted_apply_boundary" [label="BI-G4 contract_only"];
+  "BI-G5_reconciliation_boundary" [label="BI-G5 contract_only"];
+  "BI-G6_cost_quality_routing" [label="BI-G6 deterministic"];
+  "BI-G7_terminal_manifest_contract" [label="BI-G7 contract_only"];
+  "BI-G0_risk_preflight" -> "BI-G1_discovery_core" [label="BI-G0_risk_preflight.complete"];
+  "BI-G0_risk_preflight" -> "BI-G1_reference_evidence" [label="BI-G0_risk_preflight.complete"];
+  "BI-G1_discovery_core" -> "BI-G2_readiness_assembly" [label="BI-G1_discovery_core.complete"];
+  "BI-G1_reference_evidence" -> "BI-G2_readiness_assembly" [label="BI-G1_reference_evidence.complete"];
+  "BI-G2_readiness_assembly" -> "BI-G3_approval_contract" [label="BI-G2_readiness_assembly.complete"];
+  "BI-G3_approval_contract" -> "BI-G4_trusted_apply_boundary" [label="BI-G3_approval_contract.complete"];
+  "BI-G4_trusted_apply_boundary" -> "BI-G5_reconciliation_boundary" [label="BI-G4_trusted_apply_boundary.complete"];
+  "BI-G2_readiness_assembly" -> "BI-G6_cost_quality_routing" [label="BI-G2_readiness_assembly.complete"];
+  "BI-G5_reconciliation_boundary" -> "BI-G7_terminal_manifest_contract" [label="BI-G5_reconciliation_boundary.complete"];
+  "BI-G6_cost_quality_routing" -> "BI-G7_terminal_manifest_contract" [label="BI-G6_cost_quality_routing.complete"];
+}
