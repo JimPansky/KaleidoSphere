@@ -1,0 +1,12 @@
+flowchart TD
+  BI-G2_adaptive_contracts[BI-G2 contract]
+  BI-G3_profile_ledger[BI-G3 deterministic]
+  BI-G4_hypothesis_graph[BI-G4 model_owned_candidate]
+  BI-G5_targeted_probe_policy[BI-G5 deterministic]
+  BI-G6_static_vs_adaptive_compare[BI-G6 deterministic_judge]
+  BI-G7_terminal_manifest[BI-G7 deterministic_judge]
+  BI-G2_adaptive_contracts -->|BI-G2_adaptive_contracts.complete| BI-G3_profile_ledger
+  BI-G3_profile_ledger -->|BI-G3_profile_ledger.complete| BI-G4_hypothesis_graph
+  BI-G4_hypothesis_graph -->|BI-G4_hypothesis_graph.complete| BI-G5_targeted_probe_policy
+  BI-G5_targeted_probe_policy -->|BI-G5_targeted_probe_policy.complete| BI-G6_static_vs_adaptive_compare
+  BI-G6_static_vs_adaptive_compare -->|BI-G6_static_vs_adaptive_compare.complete| BI-G7_terminal_manifest

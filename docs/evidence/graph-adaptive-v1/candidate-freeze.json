@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "chimpmaera.bi/adaptive-investigation-candidate-freeze/v1",
+  "frozenBeforeSealedRun": true,
+  "baseCommit": "626fb43f7a8a684527db8921fa757e6bc195388d",
+  "modelRoute": "offline-deterministic-fixtures",
+  "liveModelUsed": false,
+  "implementationDigest": "e79c7ae174f2c1a7e4d199740a9ff20889c506c993f953cf414eb10e1af4b7e0",
+  "nonclaims": [
+    "no live Qwen run",
+    "no production/customer generalization",
+    "no raw-row evidence"
+  ],
+  "sha256": "a72dba3d22e15e8ea6111b94742c3097d77771282d01fcee4161bbabc039bd48"
+}

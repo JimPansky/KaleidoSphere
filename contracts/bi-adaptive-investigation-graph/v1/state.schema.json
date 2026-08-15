@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "chimpmaera.bi/adaptive-investigation-graph/v1/state.schema.json",
+  "title": "BI Adaptive Investigation Canonical State v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "graphId", "runId", "status", "sourceRefs", "sealedInputs", "nodeOutputs", "receipts", "budgetUsage", "privacy", "verdict"],
+  "properties": {
+    "schemaVersion": { "const": "chimpmaera.bi/adaptive-investigation-state/v1" },
+    "graphId": { "const": "superset-bi.adaptive-investigation.v1" },
+    "runId": { "type": "string" },
+    "status": { "enum": ["created", "running", "paused", "failed", "complete"] },
+    "sourceRefs": { "type": "array", "items": { "$ref": "#/$defs/ref" } },
+    "sealedInputs": { "type": "array", "items": { "type": "object" } },
+    "pausedBefore": { "type": "string" },
+    "nodeOutputs": { "type": "object" },
+    "receipts": { "type": "array", "items": { "type": "object" } },
+    "budgetUsage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodes", "branches", "probes", "modelTokens", "toolCalls", "persistedBytes", "mutations"],
+      "properties": {
+        "nodes": { "type": "integer", "minimum": 0 },
+        "branches": { "type": "integer", "minimum": 0 },
+        "probes": { "type": "integer", "minimum": 0 },
+        "modelTokens": { "type": "integer", "minimum": 0 },
+        "toolCalls": { "type": "integer", "minimum": 0 },
+        "persistedBytes": { "type": "integer", "minimum": 0 },
+        "mutations": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceRowsPersisted", "secretsPersisted", "rawPromptsPersisted", "chainOfThoughtPersisted", "sampleValuesPersisted"],
+      "properties": {
+        "sourceRowsPersisted": { "const": false },
+        "secretsPersisted": { "const": false },
+        "rawPromptsPersisted": { "const": false },
+        "chainOfThoughtPersisted": { "const": false },
+        "sampleValuesPersisted": { "const": false }
+      }
+    },
+    "verdict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "promotionAllowed", "nonclaims"],
+      "properties": {
+        "status": { "enum": ["unknown", "accepted", "partial", "negative"] },
+        "promotionAllowed": { "const": false },
+        "nonclaims": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  },
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "path", "sha256", "classification"],
+      "properties": {
+        "id": { "type": "string" },
+        "path": { "type": "string" },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "classification": { "enum": ["contract", "code", "sealed", "evidence", "candidate_freeze"] }
+      }
+    }
+  }
+}

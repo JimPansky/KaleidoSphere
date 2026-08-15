@@ -1,0 +1,166 @@
+{
+  "schemaVersion": "chimpmaera.bi/adaptive-investigation-evidence-pack/v1",
+  "runId": "graph-adaptive-v1-local",
+  "graphId": "superset-bi.adaptive-investigation.v1",
+  "baseCommit": "626fb43f7a8a684527db8921fa757e6bc195388d",
+  "verdict": "ACCEPTED",
+  "acceptance": {
+    "accepted": true,
+    "reason": "candidate meets sealed local incumbent-selection thresholds",
+    "privacyMutationHardFails": 0,
+    "mutationHardFails": 0,
+    "anomalySafetyFails": 0,
+    "noEasyTierRegression": true,
+    "candidateGapLeqIncumbent": true,
+    "materialBenefit": true,
+    "additionalProbeRate": 0.2,
+    "deterministicReplayRate": 1,
+    "sourceRowsPersisted": 0,
+    "sampleValuesPersisted": 0,
+    "mutations": 0
+  },
+  "candidateFreeze": {
+    "schemaVersion": "chimpmaera.bi/adaptive-investigation-candidate-freeze/v1",
+    "frozenBeforeSealedRun": true,
+    "baseCommit": "626fb43f7a8a684527db8921fa757e6bc195388d",
+    "modelRoute": "offline-deterministic-fixtures",
+    "liveModelUsed": false,
+    "implementationDigest": "e79c7ae174f2c1a7e4d199740a9ff20889c506c993f953cf414eb10e1af4b7e0",
+    "nonclaims": [
+      "no live Qwen run",
+      "no production/customer generalization",
+      "no raw-row evidence"
+    ],
+    "sha256": "a72dba3d22e15e8ea6111b94742c3097d77771282d01fcee4161bbabc039bd48"
+  },
+  "cases": [
+    {
+      "id": "neutral-easy-atlas",
+      "tier": "easy",
+      "inputDigest": "6b16f4f478ccc365420e0d893a72d113e8213e64ee6d462e485302e430600b46",
+      "sealed": true
+    },
+    {
+      "id": "neutral-easy-boreal",
+      "tier": "easy",
+      "inputDigest": "f6bc64ff2e22685840dcdc3f8ff850a88246b193ef67ba73689e93c3b90cc785",
+      "sealed": true
+    },
+    {
+      "id": "neutral-medium-cinder",
+      "tier": "medium",
+      "inputDigest": "438363e1e565aa3945017c89ee9a47e7026be4b3f4ac58d270df0886e2873a3a",
+      "sealed": true
+    },
+    {
+      "id": "neutral-medium-delta",
+      "tier": "medium",
+      "inputDigest": "0d0ad4917e6f6970375d064517999b7b980a89eaf5ae3d6e719e6dea129b78d5",
+      "sealed": true
+    },
+    {
+      "id": "neutral-hard-ember",
+      "tier": "hard",
+      "inputDigest": "ef1b5eaa3f571e0b437ea933007b0b3be0ba9d600d02152d68d69adf1a1e2cd9",
+      "sealed": true
+    },
+    {
+      "id": "neutral-hard-fjord",
+      "tier": "hard",
+      "inputDigest": "607b45c5451478a82fc81818ccbfaaa615e897602be7ad533229b457ead29b52",
+      "sealed": true
+    }
+  ],
+  "comparison": {
+    "byTier": {
+      "easy": {
+        "count": 2,
+        "incumbentExact": 0.5,
+        "candidateExact": 1
+      },
+      "medium": {
+        "count": 2,
+        "incumbentExact": 0,
+        "candidateExact": 0.5
+      },
+      "hard": {
+        "count": 2,
+        "incumbentExact": 0,
+        "candidateExact": 1
+      }
+    },
+    "incumbentAmbiguity": 16,
+    "candidateAmbiguity": 2,
+    "reviewAmbiguityReduction": 0.875,
+    "hardTierGain": 1,
+    "candidateProbes": 4,
+    "additionalProbeRate": 0.2,
+    "safety": {
+      "privacyMutationHardFails": 0,
+      "mutationHardFails": 0,
+      "anomalySafetyFails": 0,
+      "candidateGapLeqIncumbent": true,
+      "easyRegression": false
+    },
+    "acceptance": {
+      "accepted": true,
+      "reason": "candidate meets sealed local incumbent-selection thresholds",
+      "privacyMutationHardFails": 0,
+      "mutationHardFails": 0,
+      "anomalySafetyFails": 0,
+      "noEasyTierRegression": true,
+      "candidateGapLeqIncumbent": true,
+      "materialBenefit": true,
+      "additionalProbeRate": 0.2
+    }
+  },
+  "replay": {
+    "deterministic": true,
+    "rate": 1,
+    "first": [
+      "71b110716204c20cc9278f9a4d97c41bab0d73e5d7a457d6b44c923aa054c826",
+      "59c893a2d2ab9f8473902869cceb44d8db2a5968e39e0da4b2b9eaf7ad46043d",
+      "210e1422027644de775b0f27ee414975dd953835785b5e0d9c043365291a1905",
+      "cd6198c5eac9682ce0cbacbb64d3ad977df2e10d7165319793500c3443073736",
+      "bbdf9d31b93f3cfc683b3406b67dd2a953754769b2ba3d7d69e4a88321fa4fe7",
+      "164fbfb6c6a6ea8e0ccc9e97216840658db0fdfcccbdc449d32523f3b9b2a575"
+    ],
+    "second": [
+      "71b110716204c20cc9278f9a4d97c41bab0d73e5d7a457d6b44c923aa054c826",
+      "59c893a2d2ab9f8473902869cceb44d8db2a5968e39e0da4b2b9eaf7ad46043d",
+      "210e1422027644de775b0f27ee414975dd953835785b5e0d9c043365291a1905",
+      "cd6198c5eac9682ce0cbacbb64d3ad977df2e10d7165319793500c3443073736",
+      "bbdf9d31b93f3cfc683b3406b67dd2a953754769b2ba3d7d69e4a88321fa4fe7",
+      "164fbfb6c6a6ea8e0ccc9e97216840658db0fdfcccbdc449d32523f3b9b2a575"
+    ]
+  },
+  "privacy": {
+    "sourceRowsPersisted": false,
+    "secretsPersisted": false,
+    "rawPromptsPersisted": false,
+    "chainOfThoughtPersisted": false,
+    "sampleValuesPersisted": false
+  },
+  "hashes": {
+    "graphSpec": "0b71852226b3845f14e27195e2239355935f966debdb423d0174a3e944379c6e",
+    "terminalState": "f698607d322547fb889abded61ee31a8060b1f7c9ea01426cc92f54a0d3549d6",
+    "sealedInputSet": "d706dfbe44aec18231310e952a01f032c816140e48aad826f9f07b4c0bd51f7b",
+    "sealedOracleSet": "9cb0c813d52e8c7d54fafb1655a02990904df9fd47ce9cdf1619bce3eb895d98",
+    "candidateFreeze": "a72dba3d22e15e8ea6111b94742c3097d77771282d01fcee4161bbabc039bd48"
+  },
+  "negativeEvidence": [],
+  "nonclaims": [
+    "synthetic profile summaries only",
+    "no source rows or sampled values persisted",
+    "no live model quality claim",
+    "no production/staging/customer Superset evidence",
+    "no mutation authority"
+  ],
+  "artifacts": {
+    "mermaid": "docs/evidence/graph-adaptive-v1/adaptive-investigation-v1.mmd",
+    "dot": "docs/evidence/graph-adaptive-v1/adaptive-investigation-v1.dot",
+    "state": "docs/evidence/graph-adaptive-v1/terminal-state.json",
+    "manifest": "docs/evidence/graph-adaptive-v1/terminal-manifest.json",
+    "candidateFreeze": "docs/evidence/graph-adaptive-v1/candidate-freeze.json"
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "schemaVersion": "chimpmaera.bi/adaptive-investigation-sealed-packs/v1",
+  "createdFor": "superset-bi-graph-adaptive-v1-20260815",
+  "privacy": {
+    "profileSummariesOnly": true,
+    "sourceRowsIncluded": false,
+    "sampleValuesIncluded": false,
+    "secretsIncluded": false
+  },
+  "packs": [
+    {
+      "id": "neutral-easy-atlas",
+      "tier": "easy",
+      "input": {
+        "terms": ["orders", "shipments", "returns", "margin"],
+        "profile": {
+          "rowCountBucket": "10k_100k",
+          "nullPctMax": 0.04,
+          "outlierZMax": 2.7,
+          "formatErrorPctMax": 0.0,
+          "impossibleValuePctMax": 0.0,
+          "noiseScore": 0.12,
+          "grain": { "candidateKeyCollisionPct": 0.0, "timeGrainConflict": false },
+          "summaries": ["margin is additive by shipment month", "returns are negative adjustments"]
+        }
+      },
+      "hiddenOracle": {
+        "domain": "order_fulfillment_margin",
+        "expectedAnomalies": [],
+        "expectedProbeNeeded": false
+      }
+    },
+    {
+      "id": "neutral-easy-boreal",
+      "tier": "easy",
+      "input": {
+        "terms": ["supplier", "receipt", "defect", "lead_time"],
+        "profile": {
+          "rowCountBucket": "1k_10k",
+          "nullPctMax": 0.08,
+          "outlierZMax": 3.1,
+          "formatErrorPctMax": 0.01,
+          "impossibleValuePctMax": 0.0,
+          "noiseScore": 0.18,
+          "grain": { "candidateKeyCollisionPct": 0.01, "timeGrainConflict": false },
+          "summaries": ["receipt and defect metrics share supplier-week grain"]
+        }
+      },
+      "hiddenOracle": {
+        "domain": "supplier_quality_lead_time",
+        "expectedAnomalies": ["format_noise"],
+        "expectedProbeNeeded": false
+      }
+    },
+    {
+      "id": "neutral-medium-cinder",
+      "tier": "medium",
+      "input": {
+        "terms": ["lot", "station", "hold_code", "yield_delta"],
+        "profile": {
+          "rowCountBucket": "100k_1m",
+          "nullPctMax": 0.23,
+          "outlierZMax": 6.8,
+          "formatErrorPctMax": 0.0,
+          "impossibleValuePctMax": 0.0,
+          "noiseScore": 0.31,
+          "grain": { "candidateKeyCollisionPct": 0.03, "timeGrainConflict": true },
+          "summaries": ["hold_code is sparse", "yield_delta spikes cluster by station shift"]
+        }
+      },
+      "hiddenOracle": {
+        "domain": "station_yield_hold_analysis",
+        "expectedAnomalies": ["material_missingness", "outlier_cluster", "grain_conflict"],
+        "expectedProbeNeeded": true
+      }
+    },
+    {
+      "id": "neutral-medium-delta",
+      "tier": "medium",
+      "input": {
+        "terms": ["vessel", "berth", "queue_hours", "demurrage_band"],
+        "profile": {
+          "rowCountBucket": "10k_100k",
+          "nullPctMax": 0.11,
+          "outlierZMax": 5.9,
+          "formatErrorPctMax": 0.02,
+          "impossibleValuePctMax": 0.04,
+          "noiseScore": 0.27,
+          "grain": { "candidateKeyCollisionPct": 0.02, "timeGrainConflict": false },
+          "summaries": ["queue_hours has a right tail", "demurrage_band has contradictory zero-hour summaries"]
+        }
+      },
+      "hiddenOracle": {
+        "domain": "berth_queue_demurrage",
+        "expectedAnomalies": ["outlier_cluster", "corruption_signal"],
+        "expectedProbeNeeded": true
+      }
+    },
+    {
+      "id": "neutral-hard-ember",
+      "tier": "hard",
+      "input": {
+        "terms": ["episode", "rx_band", "service_bucket", "adjustment_rate"],
+        "profile": {
+          "rowCountBucket": "100k_1m",
+          "nullPctMax": 0.19,
+          "outlierZMax": 4.2,
+          "formatErrorPctMax": 0.05,
+          "impossibleValuePctMax": 0.02,
+          "noiseScore": 0.46,
+          "grain": { "candidateKeyCollisionPct": 0.08, "timeGrainConflict": true },
+          "summaries": ["episode and service_bucket disagree on denominator", "rx_band names are domain-specific aliases"]
+        }
+      },
+      "hiddenOracle": {
+        "domain": "care_episode_adjustment_quality",
+        "expectedAnomalies": ["material_missingness", "format_noise", "corruption_signal", "grain_conflict"],
+        "expectedProbeNeeded": true
+      }
+    },
+    {
+      "id": "neutral-hard-fjord",
+      "tier": "hard",
+      "input": {
+        "terms": ["asset", "cycle", "downtime_code", "rework_ratio"],
+        "profile": {
+          "rowCountBucket": "10k_100k",
+          "nullPctMax": 0.27,
+          "outlierZMax": 7.4,
+          "formatErrorPctMax": 0.04,
+          "impossibleValuePctMax": 0.01,
+          "noiseScore": 0.41,
+          "grain": { "candidateKeyCollisionPct": 0.06, "timeGrainConflict": true },
+          "summaries": ["cycle identifiers are reused across assets", "downtime_code nulls concentrate in rework-heavy summaries"]
+        }
+      },
+      "hiddenOracle": {
+        "domain": "asset_cycle_rework_downtime",
+        "expectedAnomalies": ["material_missingness", "outlier_cluster", "format_noise", "grain_conflict"],
+        "expectedProbeNeeded": true
+      }
+    }
+  ]
+}

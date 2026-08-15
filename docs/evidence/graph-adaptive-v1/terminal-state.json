@@ -1,0 +1,1251 @@
+{
+  "schemaVersion": "chimpmaera.bi/adaptive-investigation-state/v1",
+  "graphId": "superset-bi.adaptive-investigation.v1",
+  "runId": "graph-adaptive-v1-local",
+  "status": "complete",
+  "sourceRefs": [
+    {
+      "id": "graph-schema-v1",
+      "path": "/home/jo/.openclaw/workspace/superset-bi-agent-graph-adaptive-v1-20260815/contracts/bi-adaptive-investigation-graph/v1/graph-spec.schema.json",
+      "sha256": "41714b0afefda6460ddccc2ff847d07bdb87e996be0b3e85b0c4875bb5ad28f0",
+      "classification": "contract"
+    },
+    {
+      "id": "state-schema-v1",
+      "path": "/home/jo/.openclaw/workspace/superset-bi-agent-graph-adaptive-v1-20260815/contracts/bi-adaptive-investigation-graph/v1/state.schema.json",
+      "sha256": "e699a2f24ae79670a25a110ca47555f411facfb03c4d9da3cce01a82dedff3ca",
+      "classification": "contract"
+    },
+    {
+      "id": "receipt-schema-v1",
+      "path": "/home/jo/.openclaw/workspace/superset-bi-agent-graph-adaptive-v1-20260815/contracts/bi-adaptive-investigation-graph/v1/receipt.schema.json",
+      "sha256": "d6184917c247dfb940ad81aa4399e91dcc39b0941cf86c3952377e1458486221",
+      "classification": "contract"
+    },
+    {
+      "id": "evidence-pack-schema-v1",
+      "path": "/home/jo/.openclaw/workspace/superset-bi-agent-graph-adaptive-v1-20260815/contracts/bi-adaptive-investigation-graph/v1/evidence-pack.schema.json",
+      "sha256": "24a3ae11f2355ec6fdbc97a64c1153b51df290cb340b458751722e1e25307ee8",
+      "classification": "contract"
+    },
+    {
+      "id": "sealed-neutral-packs-v1",
+      "path": "/home/jo/.openclaw/workspace/superset-bi-agent-graph-adaptive-v1-20260815/services/bi-control/fixtures/graph-adaptive-v1/sealed-neutral-packs.json",
+      "sha256": "b6ff8b240c29cb7f49fcf55c3ef3e387f44e9510f8f528a2bf31bfe3d665099f",
+      "classification": "sealed"
+    },
+    {
+      "id": "candidate-freeze-v1",
+      "path": "docs/evidence/graph-adaptive-v1/candidate-freeze.json",
+      "sha256": "a72dba3d22e15e8ea6111b94742c3097d77771282d01fcee4161bbabc039bd48",
+      "classification": "candidate_freeze"
+    }
+  ],
+  "sealedInputs": [
+    {
+      "id": "neutral-easy-atlas",
+      "tier": "easy",
+      "inputDigest": "6b16f4f478ccc365420e0d893a72d113e8213e64ee6d462e485302e430600b46"
+    },
+    {
+      "id": "neutral-easy-boreal",
+      "tier": "easy",
+      "inputDigest": "f6bc64ff2e22685840dcdc3f8ff850a88246b193ef67ba73689e93c3b90cc785"
+    },
+    {
+      "id": "neutral-medium-cinder",
+      "tier": "medium",
+      "inputDigest": "438363e1e565aa3945017c89ee9a47e7026be4b3f4ac58d270df0886e2873a3a"
+    },
+    {
+      "id": "neutral-medium-delta",
+      "tier": "medium",
+      "inputDigest": "0d0ad4917e6f6970375d064517999b7b980a89eaf5ae3d6e719e6dea129b78d5"
+    },
+    {
+      "id": "neutral-hard-ember",
+      "tier": "hard",
+      "inputDigest": "ef1b5eaa3f571e0b437ea933007b0b3be0ba9d600d02152d68d69adf1a1e2cd9"
+    },
+    {
+      "id": "neutral-hard-fjord",
+      "tier": "hard",
+      "inputDigest": "607b45c5451478a82fc81818ccbfaaa615e897602be7ad533229b457ead29b52"
+    }
+  ],
+  "nodeOutputs": {
+    "BI-G2_adaptive_contracts": {
+      "nodeId": "BI-G2_adaptive_contracts",
+      "gate": "BI-G2",
+      "mutationPerformed": false,
+      "sourceRowsPersisted": false,
+      "contract": {
+        "typedUncertaintyGapLedger": true,
+        "boundedBranches": true,
+        "budgetedProbes": true,
+        "pauseResumeReplay": true,
+        "evidenceHashes": true,
+        "failClosedSchemaValidation": true
+      }
+    },
+    "BI-G3_profile_ledger": {
+      "cases": [
+        {
+          "caseId": "neutral-easy-atlas",
+          "tier": "easy",
+          "inputDigest": "6b16f4f478ccc365420e0d893a72d113e8213e64ee6d462e485302e430600b46",
+          "anomalyLabels": [],
+          "profileOnly": true,
+          "sourceRowsPersisted": false,
+          "sampleValuesPersisted": false,
+          "hardFailures": [],
+          "nonclaims": [
+            "aggregate profile summary, not raw-row completeness",
+            "sampling summary cannot prove source truth"
+          ]
+        },
+        {
+          "caseId": "neutral-easy-boreal",
+          "tier": "easy",
+          "inputDigest": "f6bc64ff2e22685840dcdc3f8ff850a88246b193ef67ba73689e93c3b90cc785",
+          "anomalyLabels": [
+            "format_noise"
+          ],
+          "profileOnly": true,
+          "sourceRowsPersisted": false,
+          "sampleValuesPersisted": false,
+          "hardFailures": [],
+          "nonclaims": [
+            "aggregate profile summary, not raw-row completeness",
+            "sampling summary cannot prove source truth"
+          ]
+        },
+        {
+          "caseId": "neutral-medium-cinder",
+          "tier": "medium",
+          "inputDigest": "438363e1e565aa3945017c89ee9a47e7026be4b3f4ac58d270df0886e2873a3a",
+          "anomalyLabels": [
+            "grain_conflict",
+            "material_missingness",
+            "outlier_cluster"
+          ],
+          "profileOnly": true,
+          "sourceRowsPersisted": false,
+          "sampleValuesPersisted": false,
+          "hardFailures": [],
+          "nonclaims": [
+            "aggregate profile summary, not raw-row completeness",
+            "sampling summary cannot prove source truth"
+          ]
+        },
+        {
+          "caseId": "neutral-medium-delta",
+          "tier": "medium",
+          "inputDigest": "0d0ad4917e6f6970375d064517999b7b980a89eaf5ae3d6e719e6dea129b78d5",
+          "anomalyLabels": [
+            "corruption_signal",
+            "format_noise",
+            "outlier_cluster"
+          ],
+          "profileOnly": true,
+          "sourceRowsPersisted": false,
+          "sampleValuesPersisted": false,
+          "hardFailures": [],
+          "nonclaims": [
+            "aggregate profile summary, not raw-row completeness",
+            "sampling summary cannot prove source truth"
+          ]
+        },
+        {
+          "caseId": "neutral-hard-ember",
+          "tier": "hard",
+          "inputDigest": "ef1b5eaa3f571e0b437ea933007b0b3be0ba9d600d02152d68d69adf1a1e2cd9",
+          "anomalyLabels": [
+            "corruption_signal",
+            "format_noise",
+            "grain_conflict",
+            "material_missingness"
+          ],
+          "profileOnly": true,
+          "sourceRowsPersisted": false,
+          "sampleValuesPersisted": false,
+          "hardFailures": [],
+          "nonclaims": [
+            "aggregate profile summary, not raw-row completeness",
+            "sampling summary cannot prove source truth"
+          ]
+        },
+        {
+          "caseId": "neutral-hard-fjord",
+          "tier": "hard",
+          "inputDigest": "607b45c5451478a82fc81818ccbfaaa615e897602be7ad533229b457ead29b52",
+          "anomalyLabels": [
+            "format_noise",
+            "grain_conflict",
+            "material_missingness",
+            "outlier_cluster"
+          ],
+          "profileOnly": true,
+          "sourceRowsPersisted": false,
+          "sampleValuesPersisted": false,
+          "hardFailures": [],
+          "nonclaims": [
+            "aggregate profile summary, not raw-row completeness",
+            "sampling summary cannot prove source truth"
+          ]
+        }
+      ],
+      "privacyFilter": "passed",
+      "samplingClaimsDenied": true,
+      "sourceRowsPersisted": false,
+      "mutationPerformed": false
+    },
+    "BI-G4_hypothesis_graph": {
+      "candidateFreeze": {
+        "schemaVersion": "chimpmaera.bi/adaptive-investigation-candidate-freeze/v1",
+        "frozenBeforeSealedRun": true,
+        "baseCommit": "626fb43f7a8a684527db8921fa757e6bc195388d",
+        "modelRoute": "offline-deterministic-fixtures",
+        "liveModelUsed": false,
+        "implementationDigest": "e79c7ae174f2c1a7e4d199740a9ff20889c506c993f953cf414eb10e1af4b7e0",
+        "nonclaims": [
+          "no live Qwen run",
+          "no production/customer generalization",
+          "no raw-row evidence"
+        ],
+        "sha256": "a72dba3d22e15e8ea6111b94742c3097d77771282d01fcee4161bbabc039bd48"
+      },
+      "cases": [
+        {
+          "caseId": "neutral-easy-atlas",
+          "tier": "easy",
+          "primaryHypothesis": "order_fulfillment_margin",
+          "uncertainty": "medium",
+          "alternatives": [
+            {
+              "domain": "order_fulfillment_margin",
+              "confidence": 0.72,
+              "citation": "terms:orders shipments returns margin",
+              "grainGate": "compatible"
+            },
+            {
+              "domain": "operational_quality_monitoring",
+              "confidence": 0.48,
+              "citation": "profile_summaries_only",
+              "grainGate": "alternative"
+            },
+            {
+              "domain": "financial_adjustment_review",
+              "confidence": 0.33,
+              "citation": "aggregate_names_only",
+              "grainGate": "alternative_nonclaim"
+            }
+          ],
+          "contradictionEvidence": [],
+          "citationGate": true,
+          "grainGate": "passed",
+          "gapLedger": [],
+          "hardFailures": []
+        },
+        {
+          "caseId": "neutral-easy-boreal",
+          "tier": "easy",
+          "primaryHypothesis": "supplier_quality_lead_time",
+          "uncertainty": "medium",
+          "alternatives": [
+            {
+              "domain": "supplier_quality_lead_time",
+              "confidence": 0.72,
+              "citation": "terms:supplier receipt defect lead_time",
+              "grainGate": "compatible"
+            },
+            {
+              "domain": "operational_quality_monitoring",
+              "confidence": 0.48,
+              "citation": "profile_summaries_only",
+              "grainGate": "alternative"
+            },
+            {
+              "domain": "financial_adjustment_review",
+              "confidence": 0.33,
+              "citation": "aggregate_names_only",
+              "grainGate": "alternative_nonclaim"
+            }
+          ],
+          "contradictionEvidence": [],
+          "citationGate": true,
+          "grainGate": "passed",
+          "gapLedger": [],
+          "hardFailures": []
+        },
+        {
+          "caseId": "neutral-medium-cinder",
+          "tier": "medium",
+          "primaryHypothesis": "station_yield_hold_analysis",
+          "uncertainty": "high",
+          "alternatives": [
+            {
+              "domain": "station_yield_hold_analysis",
+              "confidence": 0.72,
+              "citation": "terms:lot station hold_code yield_delta",
+              "grainGate": "requires_probe"
+            },
+            {
+              "domain": "operational_quality_monitoring",
+              "confidence": 0.48,
+              "citation": "profile_summaries_only",
+              "grainGate": "alternative"
+            },
+            {
+              "domain": "financial_adjustment_review",
+              "confidence": 0.33,
+              "citation": "aggregate_names_only",
+              "grainGate": "alternative_nonclaim"
+            }
+          ],
+          "contradictionEvidence": [
+            "grain_conflict"
+          ],
+          "citationGate": true,
+          "grainGate": "blocked_until_probe",
+          "gapLedger": [
+            "targeted_probe_required"
+          ],
+          "hardFailures": []
+        },
+        {
+          "caseId": "neutral-medium-delta",
+          "tier": "medium",
+          "primaryHypothesis": "berth_queue_demurrage",
+          "uncertainty": "high",
+          "alternatives": [
+            {
+              "domain": "berth_queue_demurrage",
+              "confidence": 0.72,
+              "citation": "terms:vessel berth queue_hours demurrage_band",
+              "grainGate": "compatible"
+            },
+            {
+              "domain": "operational_quality_monitoring",
+              "confidence": 0.48,
+              "citation": "profile_summaries_only",
+              "grainGate": "alternative"
+            },
+            {
+              "domain": "financial_adjustment_review",
+              "confidence": 0.33,
+              "citation": "aggregate_names_only",
+              "grainGate": "alternative_nonclaim"
+            }
+          ],
+          "contradictionEvidence": [
+            "corruption_signal"
+          ],
+          "citationGate": true,
+          "grainGate": "passed",
+          "gapLedger": [
+            "targeted_probe_required"
+          ],
+          "hardFailures": []
+        },
+        {
+          "caseId": "neutral-hard-ember",
+          "tier": "hard",
+          "primaryHypothesis": "care_episode_adjustment_quality",
+          "uncertainty": "high",
+          "alternatives": [
+            {
+              "domain": "care_episode_adjustment_quality",
+              "confidence": 0.72,
+              "citation": "terms:episode rx_band service_bucket adjustment_rate",
+              "grainGate": "requires_probe"
+            },
+            {
+              "domain": "operational_quality_monitoring",
+              "confidence": 0.48,
+              "citation": "profile_summaries_only",
+              "grainGate": "alternative"
+            },
+            {
+              "domain": "financial_adjustment_review",
+              "confidence": 0.33,
+              "citation": "aggregate_names_only",
+              "grainGate": "alternative_nonclaim"
+            }
+          ],
+          "contradictionEvidence": [
+            "corruption_signal",
+            "grain_conflict"
+          ],
+          "citationGate": true,
+          "grainGate": "blocked_until_probe",
+          "gapLedger": [
+            "targeted_probe_required"
+          ],
+          "hardFailures": []
+        },
+        {
+          "caseId": "neutral-hard-fjord",
+          "tier": "hard",
+          "primaryHypothesis": "asset_cycle_rework_downtime",
+          "uncertainty": "high",
+          "alternatives": [
+            {
+              "domain": "asset_cycle_rework_downtime",
+              "confidence": 0.72,
+              "citation": "terms:asset cycle downtime_code rework_ratio",
+              "grainGate": "requires_probe"
+            },
+            {
+              "domain": "operational_quality_monitoring",
+              "confidence": 0.48,
+              "citation": "profile_summaries_only",
+              "grainGate": "alternative"
+            },
+            {
+              "domain": "financial_adjustment_review",
+              "confidence": 0.33,
+              "citation": "aggregate_names_only",
+              "grainGate": "alternative_nonclaim"
+            }
+          ],
+          "contradictionEvidence": [
+            "grain_conflict"
+          ],
+          "citationGate": true,
+          "grainGate": "blocked_until_probe",
+          "gapLedger": [
+            "targeted_probe_required"
+          ],
+          "hardFailures": []
+        }
+      ],
+      "modelOwnedButOffline": true,
+      "rawPromptsPersisted": false,
+      "sourceRowsPersisted": false,
+      "mutationPerformed": false
+    },
+    "BI-G5_targeted_probe_policy": {
+      "cases": [
+        {
+          "caseId": "neutral-easy-atlas",
+          "tier": "easy",
+          "probes": [],
+          "stopReason": "evidence_saturation",
+          "revisedPrimaryHypothesis": "order_fulfillment_margin",
+          "noPHacking": true,
+          "mutationPerformed": false,
+          "hardFailures": []
+        },
+        {
+          "caseId": "neutral-easy-boreal",
+          "tier": "easy",
+          "probes": [],
+          "stopReason": "evidence_saturation",
+          "revisedPrimaryHypothesis": "supplier_quality_lead_time",
+          "noPHacking": true,
+          "mutationPerformed": false,
+          "hardFailures": []
+        },
+        {
+          "caseId": "neutral-medium-cinder",
+          "tier": "medium",
+          "probes": [
+            {
+              "kind": "grain_collision_summary",
+              "signals": [],
+              "evidenceDigest": "4579ee9af0e3f234597de536203c0cd99a0d422afa58b5ceb492a02c552cf112"
+            }
+          ],
+          "stopReason": "evidence_saturation",
+          "revisedPrimaryHypothesis": "station_yield_hold_analysis",
+          "noPHacking": true,
+          "mutationPerformed": false,
+          "hardFailures": []
+        },
+        {
+          "caseId": "neutral-medium-delta",
+          "tier": "medium",
+          "probes": [
+            {
+              "kind": "contradiction_check",
+              "signals": [
+                "demurrage_band has contradictory zero-hour summaries"
+              ],
+              "evidenceDigest": "646d21e5ff18724bac2adc207c679c693f114d3063e29ec70c2c37323b148395"
+            }
+          ],
+          "stopReason": "evidence_saturation",
+          "revisedPrimaryHypothesis": "berth_queue_demurrage",
+          "noPHacking": true,
+          "mutationPerformed": false,
+          "hardFailures": []
+        },
+        {
+          "caseId": "neutral-hard-ember",
+          "tier": "hard",
+          "probes": [
+            {
+              "kind": "grain_collision_summary",
+              "signals": [
+                "episode and service_bucket disagree on denominator"
+              ],
+              "evidenceDigest": "253ddd636cc3b0d3ec50a12f308660803cf00eba10fef6005addd71ab4bd7418"
+            }
+          ],
+          "stopReason": "evidence_saturation",
+          "revisedPrimaryHypothesis": "care_episode_adjustment_quality",
+          "noPHacking": true,
+          "mutationPerformed": false,
+          "hardFailures": []
+        },
+        {
+          "caseId": "neutral-hard-fjord",
+          "tier": "hard",
+          "probes": [
+            {
+              "kind": "grain_collision_summary",
+              "signals": [
+                "cycle identifiers are reused across assets"
+              ],
+              "evidenceDigest": "c8398c4951c8656cc1d7bca66889e00c12fa9f30de8ea385d47b92068b79eac9"
+            }
+          ],
+          "stopReason": "evidence_saturation",
+          "revisedPrimaryHypothesis": "asset_cycle_rework_downtime",
+          "noPHacking": true,
+          "mutationPerformed": false,
+          "hardFailures": []
+        }
+      ],
+      "allowlistOnly": true,
+      "stopAtSaturationOrBudget": true,
+      "pHackingDenied": true,
+      "sourceRowsPersisted": false,
+      "mutationPerformed": false
+    },
+    "BI-G6_static_vs_adaptive_compare": {
+      "scoredCases": [
+        {
+          "caseId": "neutral-easy-atlas",
+          "tier": "easy",
+          "incumbent": {
+            "domain": "order_fulfillment_margin",
+            "anomalies": [],
+            "domainExact": true,
+            "anomalyExact": true,
+            "exact": true,
+            "hardFailures": [],
+            "ambiguityPoints": 0
+          },
+          "candidate": {
+            "domain": "order_fulfillment_margin",
+            "anomalies": [],
+            "domainExact": true,
+            "anomalyExact": true,
+            "exact": true,
+            "hardFailures": [],
+            "ambiguityPoints": 0
+          },
+          "candidateProbeCount": 0,
+          "safetyCriticalGap": {
+            "privacy": 0,
+            "mutation": 0,
+            "anomalyHardFail": 0
+          }
+        },
+        {
+          "caseId": "neutral-easy-boreal",
+          "tier": "easy",
+          "incumbent": {
+            "domain": "supplier_quality_lead_time",
+            "anomalies": [],
+            "domainExact": true,
+            "anomalyExact": false,
+            "exact": false,
+            "hardFailures": [
+              "ANOMALY_MISMATCH"
+            ],
+            "ambiguityPoints": 2
+          },
+          "candidate": {
+            "domain": "supplier_quality_lead_time",
+            "anomalies": [
+              "format_noise"
+            ],
+            "domainExact": true,
+            "anomalyExact": true,
+            "exact": true,
+            "hardFailures": [],
+            "ambiguityPoints": 0
+          },
+          "candidateProbeCount": 0,
+          "safetyCriticalGap": {
+            "privacy": 0,
+            "mutation": 0,
+            "anomalyHardFail": 0
+          }
+        },
+        {
+          "caseId": "neutral-medium-cinder",
+          "tier": "medium",
+          "incumbent": {
+            "domain": "station_yield_hold_analysis",
+            "anomalies": [
+              "material_missingness",
+              "outlier_cluster"
+            ],
+            "domainExact": true,
+            "anomalyExact": false,
+            "exact": false,
+            "hardFailures": [
+              "ANOMALY_MISMATCH"
+            ],
+            "ambiguityPoints": 2
+          },
+          "candidate": {
+            "domain": "station_yield_hold_analysis",
+            "anomalies": [
+              "grain_conflict",
+              "material_missingness",
+              "outlier_cluster"
+            ],
+            "domainExact": true,
+            "anomalyExact": true,
+            "exact": true,
+            "hardFailures": [],
+            "ambiguityPoints": 0
+          },
+          "candidateProbeCount": 1,
+          "safetyCriticalGap": {
+            "privacy": 0,
+            "mutation": 0,
+            "anomalyHardFail": 0
+          }
+        },
+        {
+          "caseId": "neutral-medium-delta",
+          "tier": "medium",
+          "incumbent": {
+            "domain": "unknown_domain_nonclaim",
+            "anomalies": [
+              "corruption_signal"
+            ],
+            "domainExact": false,
+            "anomalyExact": false,
+            "exact": false,
+            "hardFailures": [
+              "DOMAIN_MISMATCH",
+              "ANOMALY_MISMATCH"
+            ],
+            "ambiguityPoints": 4
+          },
+          "candidate": {
+            "domain": "berth_queue_demurrage",
+            "anomalies": [
+              "corruption_signal",
+              "format_noise",
+              "outlier_cluster"
+            ],
+            "domainExact": true,
+            "anomalyExact": false,
+            "exact": false,
+            "hardFailures": [
+              "ANOMALY_MISMATCH"
+            ],
+            "ambiguityPoints": 2
+          },
+          "candidateProbeCount": 1,
+          "safetyCriticalGap": {
+            "privacy": 0,
+            "mutation": 0,
+            "anomalyHardFail": 0
+          }
+        },
+        {
+          "caseId": "neutral-hard-ember",
+          "tier": "hard",
+          "incumbent": {
+            "domain": "unknown_domain_nonclaim",
+            "anomalies": [
+              "grain_conflict"
+            ],
+            "domainExact": false,
+            "anomalyExact": false,
+            "exact": false,
+            "hardFailures": [
+              "DOMAIN_MISMATCH",
+              "ANOMALY_MISMATCH"
+            ],
+            "ambiguityPoints": 4
+          },
+          "candidate": {
+            "domain": "care_episode_adjustment_quality",
+            "anomalies": [
+              "corruption_signal",
+              "format_noise",
+              "grain_conflict",
+              "material_missingness"
+            ],
+            "domainExact": true,
+            "anomalyExact": true,
+            "exact": true,
+            "hardFailures": [],
+            "ambiguityPoints": 0
+          },
+          "candidateProbeCount": 1,
+          "safetyCriticalGap": {
+            "privacy": 0,
+            "mutation": 0,
+            "anomalyHardFail": 0
+          }
+        },
+        {
+          "caseId": "neutral-hard-fjord",
+          "tier": "hard",
+          "incumbent": {
+            "domain": "unknown_domain_nonclaim",
+            "anomalies": [
+              "material_missingness",
+              "outlier_cluster"
+            ],
+            "domainExact": false,
+            "anomalyExact": false,
+            "exact": false,
+            "hardFailures": [
+              "DOMAIN_MISMATCH",
+              "ANOMALY_MISMATCH"
+            ],
+            "ambiguityPoints": 4
+          },
+          "candidate": {
+            "domain": "asset_cycle_rework_downtime",
+            "anomalies": [
+              "format_noise",
+              "grain_conflict",
+              "material_missingness",
+              "outlier_cluster"
+            ],
+            "domainExact": true,
+            "anomalyExact": true,
+            "exact": true,
+            "hardFailures": [],
+            "ambiguityPoints": 0
+          },
+          "candidateProbeCount": 1,
+          "safetyCriticalGap": {
+            "privacy": 0,
+            "mutation": 0,
+            "anomalyHardFail": 0
+          }
+        }
+      ],
+      "comparison": {
+        "byTier": {
+          "easy": {
+            "count": 2,
+            "incumbentExact": 0.5,
+            "candidateExact": 1
+          },
+          "medium": {
+            "count": 2,
+            "incumbentExact": 0,
+            "candidateExact": 0.5
+          },
+          "hard": {
+            "count": 2,
+            "incumbentExact": 0,
+            "candidateExact": 1
+          }
+        },
+        "incumbentAmbiguity": 16,
+        "candidateAmbiguity": 2,
+        "reviewAmbiguityReduction": 0.875,
+        "hardTierGain": 1,
+        "candidateProbes": 4,
+        "additionalProbeRate": 0.2,
+        "safety": {
+          "privacyMutationHardFails": 0,
+          "mutationHardFails": 0,
+          "anomalySafetyFails": 0,
+          "candidateGapLeqIncumbent": true,
+          "easyRegression": false
+        },
+        "acceptance": {
+          "accepted": true,
+          "reason": "candidate meets sealed local incumbent-selection thresholds",
+          "privacyMutationHardFails": 0,
+          "mutationHardFails": 0,
+          "anomalySafetyFails": 0,
+          "noEasyTierRegression": true,
+          "candidateGapLeqIncumbent": true,
+          "materialBenefit": true,
+          "additionalProbeRate": 0.2
+        }
+      },
+      "candidateFrozenBeforeRun": true,
+      "negativeEvidencePreserved": true,
+      "sourceRowsPersisted": false,
+      "mutationPerformed": false
+    },
+    "BI-G7_terminal_manifest": {
+      "verdict": {
+        "status": "accepted",
+        "promotionAllowed": false,
+        "nonclaims": [
+          "synthetic profile summaries only",
+          "no source rows or sampled values persisted",
+          "no live model quality claim",
+          "no production/staging/customer Superset evidence",
+          "no mutation authority"
+        ]
+      },
+      "terminal": true,
+      "rollback": "delete local v1 branch/worktree artifacts; v0 incumbent remains untouched",
+      "teardown": {
+        "liveModelStarted": false,
+        "teardownRequired": false
+      },
+      "comparison": {
+        "byTier": {
+          "easy": {
+            "count": 2,
+            "incumbentExact": 0.5,
+            "candidateExact": 1
+          },
+          "medium": {
+            "count": 2,
+            "incumbentExact": 0,
+            "candidateExact": 0.5
+          },
+          "hard": {
+            "count": 2,
+            "incumbentExact": 0,
+            "candidateExact": 1
+          }
+        },
+        "incumbentAmbiguity": 16,
+        "candidateAmbiguity": 2,
+        "reviewAmbiguityReduction": 0.875,
+        "hardTierGain": 1,
+        "candidateProbes": 4,
+        "additionalProbeRate": 0.2,
+        "safety": {
+          "privacyMutationHardFails": 0,
+          "mutationHardFails": 0,
+          "anomalySafetyFails": 0,
+          "candidateGapLeqIncumbent": true,
+          "easyRegression": false
+        },
+        "acceptance": {
+          "accepted": true,
+          "reason": "candidate meets sealed local incumbent-selection thresholds",
+          "privacyMutationHardFails": 0,
+          "mutationHardFails": 0,
+          "anomalySafetyFails": 0,
+          "noEasyTierRegression": true,
+          "candidateGapLeqIncumbent": true,
+          "materialBenefit": true,
+          "additionalProbeRate": 0.2
+        }
+      }
+    }
+  },
+  "receipts": [
+    {
+      "schemaVersion": "chimpmaera.bi/adaptive-investigation-receipt/v1",
+      "runId": "graph-adaptive-v1-local",
+      "nodeId": "BI-G2_adaptive_contracts",
+      "status": "complete",
+      "attempt": 1,
+      "inputDigest": "f435076640f5a076b38aa1404389adf85f8fdc5c0f98d4d8bfeb68fd06296b30",
+      "outputDigest": "793601a449f483e5951419783a9f50cef2a0607b08847521cce158499605fde5",
+      "previousHash": "GENESIS",
+      "evidenceRefs": [
+        "contracts/bi-adaptive-investigation-graph/v1"
+      ],
+      "budgetAfter": {
+        "nodes": 1,
+        "branches": 0,
+        "probes": 0,
+        "modelTokens": 0,
+        "toolCalls": 0,
+        "persistedBytes": 337,
+        "mutations": 0
+      },
+      "receiptHash": "71b110716204c20cc9278f9a4d97c41bab0d73e5d7a457d6b44c923aa054c826",
+      "runtimeMetrics": {
+        "wallTimeMs": 0.01619099999999918,
+        "tokens": 0,
+        "costUsd": 0,
+        "probes": 0,
+        "branches": 0,
+        "escalationClass": "contract-only",
+        "criticalPath": true,
+        "parallelSafe": false
+      },
+      "stable": {
+        "schemaVersion": "chimpmaera.bi/adaptive-investigation-receipt/v1",
+        "runId": "graph-adaptive-v1-local",
+        "nodeId": "BI-G2_adaptive_contracts",
+        "status": "complete",
+        "attempt": 1,
+        "inputDigest": "f435076640f5a076b38aa1404389adf85f8fdc5c0f98d4d8bfeb68fd06296b30",
+        "outputDigest": "793601a449f483e5951419783a9f50cef2a0607b08847521cce158499605fde5",
+        "previousHash": "GENESIS",
+        "evidenceRefs": [
+          "contracts/bi-adaptive-investigation-graph/v1"
+        ],
+        "budgetAfter": {
+          "nodes": 1,
+          "branches": 0,
+          "probes": 0,
+          "modelTokens": 0,
+          "toolCalls": 0,
+          "persistedBytes": 337,
+          "mutations": 0
+        }
+      }
+    },
+    {
+      "schemaVersion": "chimpmaera.bi/adaptive-investigation-receipt/v1",
+      "runId": "graph-adaptive-v1-local",
+      "nodeId": "BI-G3_profile_ledger",
+      "status": "complete",
+      "attempt": 1,
+      "inputDigest": "a8163c9f4ef480a424c14ec1380718508afa71fc6c84c9fec721ba3908637f50",
+      "outputDigest": "8e4ab2fa9b4231a1c603f0b9f72d35daf4aadc2c673525c92cfc92c6b249a51e",
+      "previousHash": "71b110716204c20cc9278f9a4d97c41bab0d73e5d7a457d6b44c923aa054c826",
+      "evidenceRefs": [
+        "neutral-easy-atlas",
+        "neutral-easy-boreal",
+        "neutral-medium-cinder",
+        "neutral-medium-delta",
+        "neutral-hard-ember",
+        "neutral-hard-fjord"
+      ],
+      "budgetAfter": {
+        "nodes": 2,
+        "branches": 0,
+        "probes": 0,
+        "modelTokens": 0,
+        "toolCalls": 0,
+        "persistedBytes": 3418,
+        "mutations": 0
+      },
+      "receiptHash": "59c893a2d2ab9f8473902869cceb44d8db2a5968e39e0da4b2b9eaf7ad46043d",
+      "runtimeMetrics": {
+        "wallTimeMs": 0.10808399999999807,
+        "tokens": 0,
+        "costUsd": 0,
+        "probes": 0,
+        "branches": 0,
+        "escalationClass": "deterministic-profile",
+        "criticalPath": false,
+        "parallelSafe": true
+      },
+      "stable": {
+        "schemaVersion": "chimpmaera.bi/adaptive-investigation-receipt/v1",
+        "runId": "graph-adaptive-v1-local",
+        "nodeId": "BI-G3_profile_ledger",
+        "status": "complete",
+        "attempt": 1,
+        "inputDigest": "a8163c9f4ef480a424c14ec1380718508afa71fc6c84c9fec721ba3908637f50",
+        "outputDigest": "8e4ab2fa9b4231a1c603f0b9f72d35daf4aadc2c673525c92cfc92c6b249a51e",
+        "previousHash": "71b110716204c20cc9278f9a4d97c41bab0d73e5d7a457d6b44c923aa054c826",
+        "evidenceRefs": [
+          "neutral-easy-atlas",
+          "neutral-easy-boreal",
+          "neutral-medium-cinder",
+          "neutral-medium-delta",
+          "neutral-hard-ember",
+          "neutral-hard-fjord"
+        ],
+        "budgetAfter": {
+          "nodes": 2,
+          "branches": 0,
+          "probes": 0,
+          "modelTokens": 0,
+          "toolCalls": 0,
+          "persistedBytes": 3418,
+          "mutations": 0
+        }
+      }
+    },
+    {
+      "schemaVersion": "chimpmaera.bi/adaptive-investigation-receipt/v1",
+      "runId": "graph-adaptive-v1-local",
+      "nodeId": "BI-G4_hypothesis_graph",
+      "status": "complete",
+      "attempt": 1,
+      "inputDigest": "758aaa48fce72885dda9c9d3216881042e4a7d525e48fb487d2cc912944a3329",
+      "outputDigest": "e7cacc15a1413620818d9ee358893bfbecb51790556514613875df85eb9a6b0e",
+      "previousHash": "59c893a2d2ab9f8473902869cceb44d8db2a5968e39e0da4b2b9eaf7ad46043d",
+      "evidenceRefs": [
+        "candidate-freeze",
+        "neutral-easy-atlas",
+        "neutral-easy-boreal",
+        "neutral-medium-cinder",
+        "neutral-medium-delta",
+        "neutral-hard-ember",
+        "neutral-hard-fjord"
+      ],
+      "budgetAfter": {
+        "nodes": 3,
+        "branches": 18,
+        "probes": 0,
+        "modelTokens": 0,
+        "toolCalls": 0,
+        "persistedBytes": 8756,
+        "mutations": 0
+      },
+      "receiptHash": "210e1422027644de775b0f27ee414975dd953835785b5e0d9c043365291a1905",
+      "runtimeMetrics": {
+        "wallTimeMs": 0.3515240000000013,
+        "tokens": 0,
+        "costUsd": 0,
+        "probes": 0,
+        "branches": 18,
+        "escalationClass": "offline-model-owned-candidate",
+        "criticalPath": true,
+        "parallelSafe": false
+      },
+      "stable": {
+        "schemaVersion": "chimpmaera.bi/adaptive-investigation-receipt/v1",
+        "runId": "graph-adaptive-v1-local",
+        "nodeId": "BI-G4_hypothesis_graph",
+        "status": "complete",
+        "attempt": 1,
+        "inputDigest": "758aaa48fce72885dda9c9d3216881042e4a7d525e48fb487d2cc912944a3329",
+        "outputDigest": "e7cacc15a1413620818d9ee358893bfbecb51790556514613875df85eb9a6b0e",
+        "previousHash": "59c893a2d2ab9f8473902869cceb44d8db2a5968e39e0da4b2b9eaf7ad46043d",
+        "evidenceRefs": [
+          "candidate-freeze",
+          "neutral-easy-atlas",
+          "neutral-easy-boreal",
+          "neutral-medium-cinder",
+          "neutral-medium-delta",
+          "neutral-hard-ember",
+          "neutral-hard-fjord"
+        ],
+        "budgetAfter": {
+          "nodes": 3,
+          "branches": 18,
+          "probes": 0,
+          "modelTokens": 0,
+          "toolCalls": 0,
+          "persistedBytes": 8756,
+          "mutations": 0
+        }
+      }
+    },
+    {
+      "schemaVersion": "chimpmaera.bi/adaptive-investigation-receipt/v1",
+      "runId": "graph-adaptive-v1-local",
+      "nodeId": "BI-G5_targeted_probe_policy",
+      "status": "complete",
+      "attempt": 1,
+      "inputDigest": "7dc3fb887cded5ee47a7e3f4bd84923992ed79aa8fced6c1da128e3791cb8221",
+      "outputDigest": "ad98178584478545c4cf9e4387425167c47623e0da50f54f532cef21017d5a98",
+      "previousHash": "210e1422027644de775b0f27ee414975dd953835785b5e0d9c043365291a1905",
+      "evidenceRefs": [
+        "neutral-medium-cinder:grain_collision_summary",
+        "neutral-medium-delta:contradiction_check",
+        "neutral-hard-ember:grain_collision_summary",
+        "neutral-hard-fjord:grain_collision_summary"
+      ],
+      "budgetAfter": {
+        "nodes": 4,
+        "branches": 18,
+        "probes": 4,
+        "modelTokens": 0,
+        "toolCalls": 0,
+        "persistedBytes": 11571,
+        "mutations": 0
+      },
+      "receiptHash": "cd6198c5eac9682ce0cbacbb64d3ad977df2e10d7165319793500c3443073736",
+      "runtimeMetrics": {
+        "wallTimeMs": 0.29774300000000054,
+        "tokens": 0,
+        "costUsd": 0,
+        "probes": 4,
+        "branches": 0,
+        "escalationClass": "deterministic-targeted-probes",
+        "criticalPath": true,
+        "parallelSafe": false
+      },
+      "stable": {
+        "schemaVersion": "chimpmaera.bi/adaptive-investigation-receipt/v1",
+        "runId": "graph-adaptive-v1-local",
+        "nodeId": "BI-G5_targeted_probe_policy",
+        "status": "complete",
+        "attempt": 1,
+        "inputDigest": "7dc3fb887cded5ee47a7e3f4bd84923992ed79aa8fced6c1da128e3791cb8221",
+        "outputDigest": "ad98178584478545c4cf9e4387425167c47623e0da50f54f532cef21017d5a98",
+        "previousHash": "210e1422027644de775b0f27ee414975dd953835785b5e0d9c043365291a1905",
+        "evidenceRefs": [
+          "neutral-medium-cinder:grain_collision_summary",
+          "neutral-medium-delta:contradiction_check",
+          "neutral-hard-ember:grain_collision_summary",
+          "neutral-hard-fjord:grain_collision_summary"
+        ],
+        "budgetAfter": {
+          "nodes": 4,
+          "branches": 18,
+          "probes": 4,
+          "modelTokens": 0,
+          "toolCalls": 0,
+          "persistedBytes": 11571,
+          "mutations": 0
+        }
+      }
+    },
+    {
+      "schemaVersion": "chimpmaera.bi/adaptive-investigation-receipt/v1",
+      "runId": "graph-adaptive-v1-local",
+      "nodeId": "BI-G6_static_vs_adaptive_compare",
+      "status": "complete",
+      "attempt": 1,
+      "inputDigest": "5336b6e763d94d5869bd4b583dbaad46c531089dc36f09fccd725fe7d5bebe70",
+      "outputDigest": "e8aa57bb2062e94b0640d81fbd7705d7b817e8efc96b3e40d0867199291caeb7",
+      "previousHash": "cd6198c5eac9682ce0cbacbb64d3ad977df2e10d7165319793500c3443073736",
+      "evidenceRefs": [
+        "neutral-easy-atlas",
+        "neutral-easy-boreal",
+        "neutral-medium-cinder",
+        "neutral-medium-delta",
+        "neutral-hard-ember",
+        "neutral-hard-fjord"
+      ],
+      "budgetAfter": {
+        "nodes": 5,
+        "branches": 18,
+        "probes": 4,
+        "modelTokens": 0,
+        "toolCalls": 0,
+        "persistedBytes": 16515,
+        "mutations": 0
+      },
+      "receiptHash": "bbdf9d31b93f3cfc683b3406b67dd2a953754769b2ba3d7d69e4a88321fa4fe7",
+      "runtimeMetrics": {
+        "wallTimeMs": 0.3818710000000003,
+        "tokens": 0,
+        "costUsd": 0,
+        "probes": 0,
+        "branches": 0,
+        "escalationClass": "deterministic-sealed-judge",
+        "criticalPath": true,
+        "parallelSafe": false
+      },
+      "stable": {
+        "schemaVersion": "chimpmaera.bi/adaptive-investigation-receipt/v1",
+        "runId": "graph-adaptive-v1-local",
+        "nodeId": "BI-G6_static_vs_adaptive_compare",
+        "status": "complete",
+        "attempt": 1,
+        "inputDigest": "5336b6e763d94d5869bd4b583dbaad46c531089dc36f09fccd725fe7d5bebe70",
+        "outputDigest": "e8aa57bb2062e94b0640d81fbd7705d7b817e8efc96b3e40d0867199291caeb7",
+        "previousHash": "cd6198c5eac9682ce0cbacbb64d3ad977df2e10d7165319793500c3443073736",
+        "evidenceRefs": [
+          "neutral-easy-atlas",
+          "neutral-easy-boreal",
+          "neutral-medium-cinder",
+          "neutral-medium-delta",
+          "neutral-hard-ember",
+          "neutral-hard-fjord"
+        ],
+        "budgetAfter": {
+          "nodes": 5,
+          "branches": 18,
+          "probes": 4,
+          "modelTokens": 0,
+          "toolCalls": 0,
+          "persistedBytes": 16515,
+          "mutations": 0
+        }
+      }
+    },
+    {
+      "schemaVersion": "chimpmaera.bi/adaptive-investigation-receipt/v1",
+      "runId": "graph-adaptive-v1-local",
+      "nodeId": "BI-G7_terminal_manifest",
+      "status": "complete",
+      "attempt": 1,
+      "inputDigest": "df11ea86b8c57a9fbe28e726a14b9b115e4746d37be8e426de586fdeccaf6489",
+      "outputDigest": "cf3e37cb34adb16e559bbaa14a04f66a8999c2b4f360bbb188eb712f49a36b04",
+      "previousHash": "bbdf9d31b93f3cfc683b3406b67dd2a953754769b2ba3d7d69e4a88321fa4fe7",
+      "evidenceRefs": [
+        "terminal-manifest"
+      ],
+      "budgetAfter": {
+        "nodes": 6,
+        "branches": 18,
+        "probes": 4,
+        "modelTokens": 0,
+        "toolCalls": 0,
+        "persistedBytes": 18426,
+        "mutations": 0
+      },
+      "receiptHash": "164fbfb6c6a6ea8e0ccc9e97216840658db0fdfcccbdc449d32523f3b9b2a575",
+      "runtimeMetrics": {
+        "wallTimeMs": 0.14526499999999842,
+        "tokens": 0,
+        "costUsd": 0,
+        "probes": 0,
+        "branches": 0,
+        "escalationClass": "terminal-local-only",
+        "criticalPath": true,
+        "parallelSafe": false
+      },
+      "stable": {
+        "schemaVersion": "chimpmaera.bi/adaptive-investigation-receipt/v1",
+        "runId": "graph-adaptive-v1-local",
+        "nodeId": "BI-G7_terminal_manifest",
+        "status": "complete",
+        "attempt": 1,
+        "inputDigest": "df11ea86b8c57a9fbe28e726a14b9b115e4746d37be8e426de586fdeccaf6489",
+        "outputDigest": "cf3e37cb34adb16e559bbaa14a04f66a8999c2b4f360bbb188eb712f49a36b04",
+        "previousHash": "bbdf9d31b93f3cfc683b3406b67dd2a953754769b2ba3d7d69e4a88321fa4fe7",
+        "evidenceRefs": [
+          "terminal-manifest"
+        ],
+        "budgetAfter": {
+          "nodes": 6,
+          "branches": 18,
+          "probes": 4,
+          "modelTokens": 0,
+          "toolCalls": 0,
+          "persistedBytes": 18426,
+          "mutations": 0
+        }
+      }
+    }
+  ],
+  "budgetUsage": {
+    "nodes": 6,
+    "branches": 18,
+    "probes": 4,
+    "modelTokens": 0,
+    "toolCalls": 0,
+    "persistedBytes": 18426,
+    "mutations": 0
+  },
+  "privacy": {
+    "sourceRowsPersisted": false,
+    "secretsPersisted": false,
+    "rawPromptsPersisted": false,
+    "chainOfThoughtPersisted": false,
+    "sampleValuesPersisted": false
+  },
+  "verdict": {
+    "status": "accepted",
+    "promotionAllowed": false,
+    "nonclaims": [
+      "synthetic profile summaries only",
+      "no source rows or sampled values persisted",
+      "no live model quality claim",
+      "no production/staging/customer Superset evidence",
+      "no mutation authority"
+    ]
+  }
+}

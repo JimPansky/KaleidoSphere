@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "chimpmaera.bi/adaptive-investigation-graph/v1/evidence-pack.schema.json",
+  "title": "BI Adaptive Investigation Evidence Pack v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "runId", "graphId", "baseCommit", "verdict", "acceptance", "candidateFreeze", "cases", "comparison", "replay", "privacy", "hashes", "negativeEvidence", "nonclaims", "artifacts"],
+  "properties": {
+    "schemaVersion": { "const": "chimpmaera.bi/adaptive-investigation-evidence-pack/v1" },
+    "runId": { "type": "string" },
+    "graphId": { "const": "superset-bi.adaptive-investigation.v1" },
+    "baseCommit": { "const": "626fb43f7a8a684527db8921fa757e6bc195388d" },
+    "verdict": { "enum": ["ACCEPTED", "PARTIAL", "NEGATIVE"] },
+    "acceptance": { "type": "object" },
+    "candidateFreeze": { "type": "object" },
+    "cases": { "type": "array", "items": { "type": "object" } },
+    "comparison": { "type": "object" },
+    "replay": { "type": "object" },
+    "privacy": { "type": "object" },
+    "hashes": { "type": "object" },
+    "negativeEvidence": { "type": "array", "items": { "type": "string" } },
+    "nonclaims": { "type": "array", "items": { "type": "string" } },
+    "artifacts": { "type": "object" }
+  }
+}
