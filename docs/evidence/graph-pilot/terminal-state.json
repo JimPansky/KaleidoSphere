@@ -6,37 +6,37 @@
   "sourceRefs": [
     {
       "id": "known_schema_order_to_cash",
-      "path": "/home/jo/.openclaw/workspace/superset-bi-agent-graph-pilot-20260815/services/bi-control/fixtures/bi-specialist/candidate/training-order-to-cash.sqlite",
+      "path": "services/bi-control/fixtures/bi-specialist/candidate/training-order-to-cash.sqlite",
       "sha256": "72f507a16c78fa4938c86b0035f34a7e9a8e44995450c973e99fbfc500510ab6",
       "classification": "fixture_visible"
     },
     {
       "id": "unknown_schema_supplier",
-      "path": "/home/jo/.openclaw/workspace/superset-bi-agent-graph-pilot-20260815/services/bi-control/fixtures/bi-specialist/candidate/training-production-supplier.sqlite",
+      "path": "services/bi-control/fixtures/bi-specialist/candidate/training-production-supplier.sqlite",
       "sha256": "ba5a2ac094b04f3af9b5c7e14fc7398b4e2f1b6786a409b11d5e46af097a25ed",
       "classification": "fixture_visible"
     },
     {
       "id": "ambiguous_grain_adversarial",
-      "path": "/home/jo/.openclaw/workspace/superset-bi-agent-graph-pilot-20260815/services/bi-control/fixtures/bi-specialist/candidate/holdout-underspecified-adversarial.sqlite",
+      "path": "services/bi-control/fixtures/bi-specialist/candidate/holdout-underspecified-adversarial.sqlite",
       "sha256": "835ad550dc6259596cc97070468feb6c9faf87eeff5f2d06da9be9470470bbce",
       "classification": "fixture_visible"
     },
     {
       "id": "sealed_case-5b12",
-      "path": "/home/jo/.openclaw/workspace/superset-bi-agent-graph-pilot-20260815/tests/evaluator-sealed/m6-03/pack-v2/6c7d31.sqlite",
+      "path": "tests/evaluator-sealed/m6-03/pack-v2/6c7d31.sqlite",
       "sha256": "2a11835375268df25f1c16758c0727824eb239bb70a69f5fd462e5594c2f3ad4",
       "classification": "sealed"
     },
     {
       "id": "sealed_case-8eaf",
-      "path": "/home/jo/.openclaw/workspace/superset-bi-agent-graph-pilot-20260815/tests/evaluator-sealed/m6-03/pack-v2/38f4a2.sqlite",
+      "path": "tests/evaluator-sealed/m6-03/pack-v2/38f4a2.sqlite",
       "sha256": "f987f69be6bb0396813a4aa7596e0ad5fee9b384ba5da76fd483abb3b47d7948",
       "classification": "sealed"
     },
     {
       "id": "sealed_case-c349",
-      "path": "/home/jo/.openclaw/workspace/superset-bi-agent-graph-pilot-20260815/tests/evaluator-sealed/m6-03/pack-v2/ab209e.sqlite",
+      "path": "tests/evaluator-sealed/m6-03/pack-v2/ab209e.sqlite",
       "sha256": "c68d118a274c60ab3a3a12fb902a7a70dbf2661ad5282aff72522f71ed3a55c5",
       "classification": "sealed"
     }
@@ -188,25 +188,25 @@
       "refs": [
         {
           "id": "m6-03-terminal",
-          "path": "/home/jo/.openclaw/workspace/superset-bi-agent-graph-pilot-20260815/docs/evidence/m6-03-bi-specialist/terminal-manifest.json",
+          "path": "docs/evidence/m6-03-bi-specialist/terminal-manifest.json",
           "sha256": "80aa9877feabe2ed08f8bd3cb30a3a4c8bff6dc19715fc9938e4fed923a6f258",
           "classification": "evidence"
         },
         {
           "id": "m6-03-sealed-v2",
-          "path": "/home/jo/.openclaw/workspace/superset-bi-agent-graph-pilot-20260815/docs/evidence/m6-03-bi-specialist/sealed-blind-v2-manifest.json",
+          "path": "docs/evidence/m6-03-bi-specialist/sealed-blind-v2-manifest.json",
           "sha256": "42b1cff834e722c483c71c49fa3c5f5f4b7a3be8a3f8633ccde19185a74f08d4",
           "classification": "evidence"
         },
         {
           "id": "m6-04-terminal",
-          "path": "/home/jo/.openclaw/workspace/superset-bi-agent-graph-pilot-20260815/docs/evidence/m6-04-trusted-workflow/terminal-manifest.json",
+          "path": "docs/evidence/m6-04-trusted-workflow/terminal-manifest.json",
           "sha256": "b14498c13bd379175e794aae9d307c8bf3066eb4a7c57f92e1377220b24cf1d2",
           "classification": "evidence"
         },
         {
           "id": "m6-05-terminal",
-          "path": "/home/jo/.openclaw/workspace/superset-bi-agent-graph-pilot-20260815/docs/evidence/m6-05-ambiguous-outcome-reconciliation/terminal-manifest.json",
+          "path": "docs/evidence/m6-05-ambiguous-outcome-reconciliation/terminal-manifest.json",
           "sha256": "bc982b140dd6c112188b83f0cda5a92dc5c7aead60f82822d58c40b74dc123b7",
           "classification": "evidence"
         }
@@ -474,7 +474,7 @@
       },
       "receiptHash": "64b11eba3e14120b9a72d55f73e9bfe7e85df21e43e45d835388f3963cef1f88",
       "runtimeMetrics": {
-        "wallTimeMs": 0.04241000000000028,
+        "wallTimeMs": 0,
         "tokens": 0,
         "costUsd": 0,
         "cacheClass": "cold-local",
@@ -537,7 +537,7 @@
       },
       "receiptHash": "3d6c381ca14b5808f894cf69e4e71e0ce547a3fa36c80ddfe01b9ae2dde4c45c",
       "runtimeMetrics": {
-        "wallTimeMs": 4.035635000000003,
+        "wallTimeMs": 0,
         "tokens": 0,
         "costUsd": 0,
         "cacheClass": "cold-local",
@@ -579,8 +579,8 @@
       "nodeId": "BI-G1_reference_evidence",
       "status": "complete",
       "attempt": 1,
-      "inputDigest": "5b8adf2354c3d6f53c30b5a1a512735c5bbe19c3b54596def68ca059a5dfe65b",
-      "outputDigest": "4dd090a7eafd2cb6e37accad8acbd58af8fe336060a14d73566028815237a93c",
+      "inputDigest": "16cbfbecd8395ebdbdef29e1e40ed7832bdae644b276e4650f6623edc21c5155",
+      "outputDigest": "ac92cd49fbeb1bf2e95d8a6f926d385a9455896cc5a5a4093806da1313b11b98",
       "previousHash": "3d6c381ca14b5808f894cf69e4e71e0ce547a3fa36c80ddfe01b9ae2dde4c45c",
       "evidenceRefs": [
         "m6-03-terminal",
@@ -593,12 +593,12 @@
         "explorationSteps": 6,
         "modelTokens": 0,
         "toolCalls": 0,
-        "persistedBytes": 5679,
+        "persistedBytes": 5407,
         "mutations": 0
       },
-      "receiptHash": "64a375ddb8d19d48bd3364c73dc41e87e4d4f2f5ea96d1aafbe21ab8925ea5bf",
+      "receiptHash": "8e22410c8958ed0ef8fda9cc3db22b144e86b9a7ab39e4fa2da1f7a788532dc3",
       "runtimeMetrics": {
-        "wallTimeMs": 0.2823039999999999,
+        "wallTimeMs": 0,
         "tokens": 0,
         "costUsd": 0,
         "cacheClass": "cold-local",
@@ -613,8 +613,8 @@
         "nodeId": "BI-G1_reference_evidence",
         "status": "complete",
         "attempt": 1,
-        "inputDigest": "5b8adf2354c3d6f53c30b5a1a512735c5bbe19c3b54596def68ca059a5dfe65b",
-        "outputDigest": "4dd090a7eafd2cb6e37accad8acbd58af8fe336060a14d73566028815237a93c",
+        "inputDigest": "16cbfbecd8395ebdbdef29e1e40ed7832bdae644b276e4650f6623edc21c5155",
+        "outputDigest": "ac92cd49fbeb1bf2e95d8a6f926d385a9455896cc5a5a4093806da1313b11b98",
         "previousHash": "3d6c381ca14b5808f894cf69e4e71e0ce547a3fa36c80ddfe01b9ae2dde4c45c",
         "evidenceRefs": [
           "m6-03-terminal",
@@ -627,7 +627,7 @@
           "explorationSteps": 6,
           "modelTokens": 0,
           "toolCalls": 0,
-          "persistedBytes": 5679,
+          "persistedBytes": 5407,
           "mutations": 0
         }
       }
@@ -638,9 +638,9 @@
       "nodeId": "BI-G2_readiness_assembly",
       "status": "complete",
       "attempt": 1,
-      "inputDigest": "6e876d653fd42b0953d646a47bc12acba36047ed03e34b65a3d416c309a05669",
+      "inputDigest": "ac14b2cac17aebea912cbed21d7408294589427c703340a14b09bdde30d84645",
       "outputDigest": "4e26760718d8ff28340efc8653d4db451dff75e020ed4df03569a5fe33b080f0",
-      "previousHash": "64a375ddb8d19d48bd3364c73dc41e87e4d4f2f5ea96d1aafbe21ab8925ea5bf",
+      "previousHash": "8e22410c8958ed0ef8fda9cc3db22b144e86b9a7ab39e4fa2da1f7a788532dc3",
       "evidenceRefs": [
         "known_schema_order_to_cash",
         "unknown_schema_supplier",
@@ -654,12 +654,12 @@
         "explorationSteps": 6,
         "modelTokens": 0,
         "toolCalls": 0,
-        "persistedBytes": 9469,
+        "persistedBytes": 9197,
         "mutations": 0
       },
-      "receiptHash": "9484c19706a362eb8c7b9307ebcfba0b81a218584d4ce6e07c7327e713bdaa9a",
+      "receiptHash": "6a07bcc143a77094b77a713724e2bfd515cdcff6bb03e8193331d2c6c33f92dc",
       "runtimeMetrics": {
-        "wallTimeMs": 0.10694200000000009,
+        "wallTimeMs": 0,
         "tokens": 0,
         "costUsd": 0,
         "cacheClass": "cold-local",
@@ -674,9 +674,9 @@
         "nodeId": "BI-G2_readiness_assembly",
         "status": "complete",
         "attempt": 1,
-        "inputDigest": "6e876d653fd42b0953d646a47bc12acba36047ed03e34b65a3d416c309a05669",
+        "inputDigest": "ac14b2cac17aebea912cbed21d7408294589427c703340a14b09bdde30d84645",
         "outputDigest": "4e26760718d8ff28340efc8653d4db451dff75e020ed4df03569a5fe33b080f0",
-        "previousHash": "64a375ddb8d19d48bd3364c73dc41e87e4d4f2f5ea96d1aafbe21ab8925ea5bf",
+        "previousHash": "8e22410c8958ed0ef8fda9cc3db22b144e86b9a7ab39e4fa2da1f7a788532dc3",
         "evidenceRefs": [
           "known_schema_order_to_cash",
           "unknown_schema_supplier",
@@ -690,7 +690,7 @@
           "explorationSteps": 6,
           "modelTokens": 0,
           "toolCalls": 0,
-          "persistedBytes": 9469,
+          "persistedBytes": 9197,
           "mutations": 0
         }
       }
@@ -701,21 +701,21 @@
       "nodeId": "BI-G3_approval_contract",
       "status": "complete",
       "attempt": 1,
-      "inputDigest": "f6fc275da061a1086c4b18197fdefa9fe99389672f420497c57b6fcb15de0014",
+      "inputDigest": "d11b702bd975f9952b208d094ed45e986affb87aaeef19f345bcc294c8f65618",
       "outputDigest": "ac1f86577836faaeb608d29de636d23e2e1d112f8082c6cf78aa6faf16fd62ab",
-      "previousHash": "9484c19706a362eb8c7b9307ebcfba0b81a218584d4ce6e07c7327e713bdaa9a",
+      "previousHash": "6a07bcc143a77094b77a713724e2bfd515cdcff6bb03e8193331d2c6c33f92dc",
       "evidenceRefs": [],
       "budgetAfter": {
         "nodes": 5,
         "explorationSteps": 6,
         "modelTokens": 0,
         "toolCalls": 0,
-        "persistedBytes": 10408,
+        "persistedBytes": 10136,
         "mutations": 0
       },
-      "receiptHash": "bcb7dea47f9630c0faf9c061a66e493045d90862280398eecfff81c60ecca514",
+      "receiptHash": "489522644ef955fc6c52292f841b529d426359e737e630c392d823d6399bcfd8",
       "runtimeMetrics": {
-        "wallTimeMs": 0.23083700000000107,
+        "wallTimeMs": 0,
         "tokens": 0,
         "costUsd": 0,
         "cacheClass": "cold-local",
@@ -730,16 +730,16 @@
         "nodeId": "BI-G3_approval_contract",
         "status": "complete",
         "attempt": 1,
-        "inputDigest": "f6fc275da061a1086c4b18197fdefa9fe99389672f420497c57b6fcb15de0014",
+        "inputDigest": "d11b702bd975f9952b208d094ed45e986affb87aaeef19f345bcc294c8f65618",
         "outputDigest": "ac1f86577836faaeb608d29de636d23e2e1d112f8082c6cf78aa6faf16fd62ab",
-        "previousHash": "9484c19706a362eb8c7b9307ebcfba0b81a218584d4ce6e07c7327e713bdaa9a",
+        "previousHash": "6a07bcc143a77094b77a713724e2bfd515cdcff6bb03e8193331d2c6c33f92dc",
         "evidenceRefs": [],
         "budgetAfter": {
           "nodes": 5,
           "explorationSteps": 6,
           "modelTokens": 0,
           "toolCalls": 0,
-          "persistedBytes": 10408,
+          "persistedBytes": 10136,
           "mutations": 0
         }
       }
@@ -750,21 +750,21 @@
       "nodeId": "BI-G4_trusted_apply_boundary",
       "status": "complete",
       "attempt": 1,
-      "inputDigest": "63ac4cb832a263689bf3e9cf615f2b4a4a448afdc8ce5d89baf41c8ed6b1d76a",
+      "inputDigest": "7a1312c0b12632f8fd2e54751b6961e35f3d35cac0bfabbd86f57d4b0d477634",
       "outputDigest": "b6e5735c9222336443c5b2f81507ba9a6f2b0a536abf6aefa88b2d3af5cabd30",
-      "previousHash": "bcb7dea47f9630c0faf9c061a66e493045d90862280398eecfff81c60ecca514",
+      "previousHash": "489522644ef955fc6c52292f841b529d426359e737e630c392d823d6399bcfd8",
       "evidenceRefs": [],
       "budgetAfter": {
         "nodes": 6,
         "explorationSteps": 6,
         "modelTokens": 0,
         "toolCalls": 0,
-        "persistedBytes": 11216,
+        "persistedBytes": 10944,
         "mutations": 0
       },
-      "receiptHash": "f3a19e59b6d732c217869ada4225cd3b8976305d416a411562870c3c98bb8ca8",
+      "receiptHash": "44429ef4bdfa5838a8ada1a45a369ed10eac8fb1e2c395f661c45502ee36054e",
       "runtimeMetrics": {
-        "wallTimeMs": 0.04762999999999806,
+        "wallTimeMs": 0,
         "tokens": 0,
         "costUsd": 0,
         "cacheClass": "cold-local",
@@ -779,16 +779,16 @@
         "nodeId": "BI-G4_trusted_apply_boundary",
         "status": "complete",
         "attempt": 1,
-        "inputDigest": "63ac4cb832a263689bf3e9cf615f2b4a4a448afdc8ce5d89baf41c8ed6b1d76a",
+        "inputDigest": "7a1312c0b12632f8fd2e54751b6961e35f3d35cac0bfabbd86f57d4b0d477634",
         "outputDigest": "b6e5735c9222336443c5b2f81507ba9a6f2b0a536abf6aefa88b2d3af5cabd30",
-        "previousHash": "bcb7dea47f9630c0faf9c061a66e493045d90862280398eecfff81c60ecca514",
+        "previousHash": "489522644ef955fc6c52292f841b529d426359e737e630c392d823d6399bcfd8",
         "evidenceRefs": [],
         "budgetAfter": {
           "nodes": 6,
           "explorationSteps": 6,
           "modelTokens": 0,
           "toolCalls": 0,
-          "persistedBytes": 11216,
+          "persistedBytes": 10944,
           "mutations": 0
         }
       }
@@ -799,21 +799,21 @@
       "nodeId": "BI-G5_reconciliation_boundary",
       "status": "complete",
       "attempt": 1,
-      "inputDigest": "c9215d5213e36727054d44eeb5a5e6f96b86d037b9f4f7e163712f31303a941e",
+      "inputDigest": "b6fe429d0824a8d125d126cf87ba7b126e6fadb0bcc503be3228f7acfa32e6b3",
       "outputDigest": "6cad16dbabc6efe94f7158d8088f5622bad92c7f7e139fa54d5c89ffab9e8767",
-      "previousHash": "f3a19e59b6d732c217869ada4225cd3b8976305d416a411562870c3c98bb8ca8",
+      "previousHash": "44429ef4bdfa5838a8ada1a45a369ed10eac8fb1e2c395f661c45502ee36054e",
       "evidenceRefs": [],
       "budgetAfter": {
         "nodes": 7,
         "explorationSteps": 6,
         "modelTokens": 0,
         "toolCalls": 0,
-        "persistedBytes": 12031,
+        "persistedBytes": 11759,
         "mutations": 0
       },
-      "receiptHash": "e2c0f7f4aa888a0d756496b5d1d3659bba3571e2bdeded7990d9fc348511e014",
+      "receiptHash": "6af9fc579b05e2a28312c96a36091c37ff2b6ac718aa37d084297bdfc65923d5",
       "runtimeMetrics": {
-        "wallTimeMs": 0.042660000000001475,
+        "wallTimeMs": 0,
         "tokens": 0,
         "costUsd": 0,
         "cacheClass": "cold-local",
@@ -828,16 +828,16 @@
         "nodeId": "BI-G5_reconciliation_boundary",
         "status": "complete",
         "attempt": 1,
-        "inputDigest": "c9215d5213e36727054d44eeb5a5e6f96b86d037b9f4f7e163712f31303a941e",
+        "inputDigest": "b6fe429d0824a8d125d126cf87ba7b126e6fadb0bcc503be3228f7acfa32e6b3",
         "outputDigest": "6cad16dbabc6efe94f7158d8088f5622bad92c7f7e139fa54d5c89ffab9e8767",
-        "previousHash": "f3a19e59b6d732c217869ada4225cd3b8976305d416a411562870c3c98bb8ca8",
+        "previousHash": "44429ef4bdfa5838a8ada1a45a369ed10eac8fb1e2c395f661c45502ee36054e",
         "evidenceRefs": [],
         "budgetAfter": {
           "nodes": 7,
           "explorationSteps": 6,
           "modelTokens": 0,
           "toolCalls": 0,
-          "persistedBytes": 12031,
+          "persistedBytes": 11759,
           "mutations": 0
         }
       }
@@ -848,9 +848,9 @@
       "nodeId": "BI-G6_cost_quality_routing",
       "status": "complete",
       "attempt": 1,
-      "inputDigest": "66c73038941ff279a259e1c7a47defd2ee38487f243187a4947d057a1dd2ba74",
+      "inputDigest": "81803f3479de2cb0acfef1d4c6ab28e5a5e3125290c4978afc7ca9772b76dc1d",
       "outputDigest": "91a9ed5936e7c4cdd704a5b8a270aaaf19f1ebd3e037acb0403182eabf03d825",
-      "previousHash": "e2c0f7f4aa888a0d756496b5d1d3659bba3571e2bdeded7990d9fc348511e014",
+      "previousHash": "6af9fc579b05e2a28312c96a36091c37ff2b6ac718aa37d084297bdfc65923d5",
       "evidenceRefs": [
         "routing-policy-stub"
       ],
@@ -859,12 +859,12 @@
         "explorationSteps": 6,
         "modelTokens": 0,
         "toolCalls": 0,
-        "persistedBytes": 14152,
+        "persistedBytes": 13880,
         "mutations": 0
       },
-      "receiptHash": "fce0dfef68f2b3bdbfe9c4737385b7df7eae5cb9f560dd4f495bf2d863a52339",
+      "receiptHash": "64d958baea399b2982e1a534ee923d7fce125fd948b8f6c32d917f5b1f8eb35f",
       "runtimeMetrics": {
-        "wallTimeMs": 0.10576000000000008,
+        "wallTimeMs": 0,
         "tokens": 0,
         "costUsd": 0,
         "cacheClass": "cold-local",
@@ -879,9 +879,9 @@
         "nodeId": "BI-G6_cost_quality_routing",
         "status": "complete",
         "attempt": 1,
-        "inputDigest": "66c73038941ff279a259e1c7a47defd2ee38487f243187a4947d057a1dd2ba74",
+        "inputDigest": "81803f3479de2cb0acfef1d4c6ab28e5a5e3125290c4978afc7ca9772b76dc1d",
         "outputDigest": "91a9ed5936e7c4cdd704a5b8a270aaaf19f1ebd3e037acb0403182eabf03d825",
-        "previousHash": "e2c0f7f4aa888a0d756496b5d1d3659bba3571e2bdeded7990d9fc348511e014",
+        "previousHash": "6af9fc579b05e2a28312c96a36091c37ff2b6ac718aa37d084297bdfc65923d5",
         "evidenceRefs": [
           "routing-policy-stub"
         ],
@@ -890,7 +890,7 @@
           "explorationSteps": 6,
           "modelTokens": 0,
           "toolCalls": 0,
-          "persistedBytes": 14152,
+          "persistedBytes": 13880,
           "mutations": 0
         }
       }
@@ -901,21 +901,21 @@
       "nodeId": "BI-G7_terminal_manifest_contract",
       "status": "complete",
       "attempt": 1,
-      "inputDigest": "fb5394ba0ee43b5d545f7298e6a74d661f6ffeb42429aca7f8ff2d9c3b8f0afa",
+      "inputDigest": "c85663f057ada231a0ca2e6d56541e04c6f403e1bf18ea3edb9ac9b2873869a7",
       "outputDigest": "c6201d4fc767f70f324207f5d0068a8b979f5a8ed8d9195e5b62cf4d8488ac98",
-      "previousHash": "fce0dfef68f2b3bdbfe9c4737385b7df7eae5cb9f560dd4f495bf2d863a52339",
+      "previousHash": "64d958baea399b2982e1a534ee923d7fce125fd948b8f6c32d917f5b1f8eb35f",
       "evidenceRefs": [],
       "budgetAfter": {
         "nodes": 9,
         "explorationSteps": 6,
         "modelTokens": 0,
         "toolCalls": 0,
-        "persistedBytes": 14992,
+        "persistedBytes": 14720,
         "mutations": 0
       },
-      "receiptHash": "e12ac3a2f0bcdb2a2741c41f3123d2bdf5f5068181de6d2d9e4c4d6594535700",
+      "receiptHash": "5383cb36f1b8e03e39075cfac560a91c449ab9ef3b2d7dc49407ae49aa996806",
       "runtimeMetrics": {
-        "wallTimeMs": 0.0749910000000007,
+        "wallTimeMs": 0,
         "tokens": 0,
         "costUsd": 0,
         "cacheClass": "cold-local",
@@ -930,16 +930,16 @@
         "nodeId": "BI-G7_terminal_manifest_contract",
         "status": "complete",
         "attempt": 1,
-        "inputDigest": "fb5394ba0ee43b5d545f7298e6a74d661f6ffeb42429aca7f8ff2d9c3b8f0afa",
+        "inputDigest": "c85663f057ada231a0ca2e6d56541e04c6f403e1bf18ea3edb9ac9b2873869a7",
         "outputDigest": "c6201d4fc767f70f324207f5d0068a8b979f5a8ed8d9195e5b62cf4d8488ac98",
-        "previousHash": "fce0dfef68f2b3bdbfe9c4737385b7df7eae5cb9f560dd4f495bf2d863a52339",
+        "previousHash": "64d958baea399b2982e1a534ee923d7fce125fd948b8f6c32d917f5b1f8eb35f",
         "evidenceRefs": [],
         "budgetAfter": {
           "nodes": 9,
           "explorationSteps": 6,
           "modelTokens": 0,
           "toolCalls": 0,
-          "persistedBytes": 14992,
+          "persistedBytes": 14720,
           "mutations": 0
         }
       }
@@ -950,7 +950,7 @@
     "explorationSteps": 6,
     "modelTokens": 0,
     "toolCalls": 0,
-    "persistedBytes": 14992,
+    "persistedBytes": 14720,
     "mutations": 0
   },
   "privacy": {

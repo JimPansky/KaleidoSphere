@@ -152,7 +152,7 @@ function makeReceipt({ state, node, output, previousHash, started, finished }) {
     ...stable,
     receiptHash,
     runtimeMetrics: {
-      wallTimeMs: Math.max(0, finished - started),
+      wallTimeMs: 0,
       tokens: output.tokens ?? 0,
       costUsd: output.costUsd ?? 0,
       cacheClass: output.cacheClass ?? 'cold-local',

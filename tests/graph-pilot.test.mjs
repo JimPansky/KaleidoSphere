@@ -62,7 +62,8 @@ test('deterministic runner hash-chains receipts, supports pause resume, and rend
   assert.equal(compareReplay(completed, replay).deterministic, true);
   assert.equal(completed.status, 'complete');
   assert(completed.receipts.every((receipt) => receipt.previousHash === 'GENESIS' || /^[a-f0-9]{64}$/.test(receipt.previousHash)));
-  assert(completed.receipts.every((receipt) => receipt.runtimeMetrics.wallTimeMs >= 0));
+  assert(completed.receipts.every((receipt) => receipt.runtimeMetrics.wallTimeMs === 0));
+  assert.deepEqual(completed, replay);
   assert.match(graphToMermaid(spec), /flowchart TD/);
   assert.match(graphToDot(spec), /digraph/);
 });
@@ -127,6 +128,7 @@ test('dynamic subgraph materialization supports sealed unknown-domain case fan-i
 test('terminal graph evidence covers six cases including three sealed unknown-domain fixtures with replay and no mutation', async () => {
   const manifestText = await readFile('docs/evidence/graph-pilot/terminal-manifest.json', 'utf8');
   const manifest = JSON.parse(manifestText);
+  const terminalState = JSON.parse(await readFile('docs/evidence/graph-pilot/terminal-state.json', 'utf8'));
   validateOrThrow(manifest, evidencePackSchema, 'terminalManifest');
   assert.equal(manifest.cases.length, 6);
   assert.equal(manifest.cases.filter((item) => item.classification === 'sealed').length, 3);
@@ -136,6 +138,10 @@ test('terminal graph evidence covers six cases including three sealed unknown-do
   assert.equal(manifest.acceptance.deterministicReplayRate, 1);
   assert(manifest.acceptance.assemblyTimeReduction >= 0.2 || manifest.acceptance.reviewAmbiguityReduction >= 0.3 || manifest.acceptance.accepted === false);
   assert.equal(manifest.nonclaims.includes('no mutation authority'), true);
+  assert(terminalState.sourceRefs.every((ref) => !ref.path.startsWith('/')));
+  assert(terminalState.sourceRefs.every((ref) => ref.path.includes('/') && !ref.path.includes('..')));
+  assert(terminalState.nodeOutputs['BI-G1_reference_evidence'].refs.every((ref) => !ref.path.startsWith('/')));
+  assert(terminalState.receipts.every((receipt) => receipt.runtimeMetrics.wallTimeMs === 0));
 });
 
 test('evidence pack builder refuses promotion when objective acceptance thresholds are missed', () => {

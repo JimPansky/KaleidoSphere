@@ -6,31 +6,31 @@
   "sourceRefs": [
     {
       "id": "graph-schema-v1",
-      "path": "/home/jo/.openclaw/workspace/superset-bi-agent-graph-adaptive-v1-20260815/contracts/bi-adaptive-investigation-graph/v1/graph-spec.schema.json",
+      "path": "contracts/bi-adaptive-investigation-graph/v1/graph-spec.schema.json",
       "sha256": "41714b0afefda6460ddccc2ff847d07bdb87e996be0b3e85b0c4875bb5ad28f0",
       "classification": "contract"
     },
     {
       "id": "state-schema-v1",
-      "path": "/home/jo/.openclaw/workspace/superset-bi-agent-graph-adaptive-v1-20260815/contracts/bi-adaptive-investigation-graph/v1/state.schema.json",
+      "path": "contracts/bi-adaptive-investigation-graph/v1/state.schema.json",
       "sha256": "e699a2f24ae79670a25a110ca47555f411facfb03c4d9da3cce01a82dedff3ca",
       "classification": "contract"
     },
     {
       "id": "receipt-schema-v1",
-      "path": "/home/jo/.openclaw/workspace/superset-bi-agent-graph-adaptive-v1-20260815/contracts/bi-adaptive-investigation-graph/v1/receipt.schema.json",
+      "path": "contracts/bi-adaptive-investigation-graph/v1/receipt.schema.json",
       "sha256": "d6184917c247dfb940ad81aa4399e91dcc39b0941cf86c3952377e1458486221",
       "classification": "contract"
     },
     {
       "id": "evidence-pack-schema-v1",
-      "path": "/home/jo/.openclaw/workspace/superset-bi-agent-graph-adaptive-v1-20260815/contracts/bi-adaptive-investigation-graph/v1/evidence-pack.schema.json",
+      "path": "contracts/bi-adaptive-investigation-graph/v1/evidence-pack.schema.json",
       "sha256": "24a3ae11f2355ec6fdbc97a64c1153b51df290cb340b458751722e1e25307ee8",
       "classification": "contract"
     },
     {
       "id": "sealed-neutral-packs-v1",
-      "path": "/home/jo/.openclaw/workspace/superset-bi-agent-graph-adaptive-v1-20260815/services/bi-control/fixtures/graph-adaptive-v1/sealed-neutral-packs.json",
+      "path": "services/bi-control/fixtures/graph-adaptive-v1/sealed-neutral-packs.json",
       "sha256": "b6ff8b240c29cb7f49fcf55c3ef3e387f44e9510f8f528a2bf31bfe3d665099f",
       "classification": "sealed"
     },
@@ -875,7 +875,7 @@
       },
       "receiptHash": "71b110716204c20cc9278f9a4d97c41bab0d73e5d7a457d6b44c923aa054c826",
       "runtimeMetrics": {
-        "wallTimeMs": 0.017272000000001952,
+        "wallTimeMs": 0,
         "tokens": 0,
         "costUsd": 0,
         "probes": 0,
@@ -935,7 +935,7 @@
       },
       "receiptHash": "59c893a2d2ab9f8473902869cceb44d8db2a5968e39e0da4b2b9eaf7ad46043d",
       "runtimeMetrics": {
-        "wallTimeMs": 0.10628100000000273,
+        "wallTimeMs": 0,
         "tokens": 0,
         "costUsd": 0,
         "probes": 0,
@@ -1001,7 +1001,7 @@
       },
       "receiptHash": "210e1422027644de775b0f27ee414975dd953835785b5e0d9c043365291a1905",
       "runtimeMetrics": {
-        "wallTimeMs": 0.36574099999999987,
+        "wallTimeMs": 0,
         "tokens": 0,
         "costUsd": 0,
         "probes": 0,
@@ -1065,7 +1065,7 @@
       },
       "receiptHash": "cd6198c5eac9682ce0cbacbb64d3ad977df2e10d7165319793500c3443073736",
       "runtimeMetrics": {
-        "wallTimeMs": 0.3066190000000013,
+        "wallTimeMs": 0,
         "tokens": 0,
         "costUsd": 0,
         "probes": 4,
@@ -1128,7 +1128,7 @@
       },
       "receiptHash": "bbdf9d31b93f3cfc683b3406b67dd2a953754769b2ba3d7d69e4a88321fa4fe7",
       "runtimeMetrics": {
-        "wallTimeMs": 0.3809100000000001,
+        "wallTimeMs": 0,
         "tokens": 0,
         "costUsd": 0,
         "probes": 0,
@@ -1188,7 +1188,7 @@
       },
       "receiptHash": "164fbfb6c6a6ea8e0ccc9e97216840658db0fdfcccbdc449d32523f3b9b2a575",
       "runtimeMetrics": {
-        "wallTimeMs": 0.14577600000000146,
+        "wallTimeMs": 0,
         "tokens": 0,
         "costUsd": 0,
         "probes": 0,

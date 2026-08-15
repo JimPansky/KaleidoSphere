@@ -82,6 +82,8 @@ test('runner supports pause/replay and emits no source rows, samples, mutations 
   const replayState = await executeAdaptiveGraph({ spec, graphSchema, receiptSchema, initialState, handlers });
   const replay = compareAdaptiveReplay(state, replayState);
   assert.equal(replay.deterministic, true);
+  assert.deepEqual(state, replayState);
+  assert(state.receipts.every((receipt) => receipt.runtimeMetrics.wallTimeMs === 0));
   assert.equal(state.budgetUsage.modelTokens, 0);
   assert.equal(state.budgetUsage.toolCalls, 0);
   assert.equal(state.budgetUsage.mutations, 0);
@@ -166,6 +168,7 @@ test('negative probes fail closed for profile leakage, probe budget, tamper and 
 
 test('terminal adaptive v1 evidence is accepted, replayable, sealed, local-only and privacy-clean', async () => {
   const manifest = JSON.parse(await readFile('docs/evidence/graph-adaptive-v1/terminal-manifest.json', 'utf8'));
+  const terminalState = JSON.parse(await readFile('docs/evidence/graph-adaptive-v1/terminal-state.json', 'utf8'));
   validateOrThrow(manifest, evidencePackSchema, 'adaptiveTerminalManifest');
   assert.equal(manifest.baseCommit, ADAPTIVE_REQUIRED_BASE_COMMIT);
   assert.equal(manifest.verdict, 'ACCEPTED');
@@ -183,4 +186,7 @@ test('terminal adaptive v1 evidence is accepted, replayable, sealed, local-only 
   assert.equal(manifest.negativeEvidence.length, 3);
   assert(manifest.negativeEvidence.every((item) => item.includes(':PASS:')));
   assert(manifest.nonclaims.includes('no live model quality claim'));
+  assert(terminalState.sourceRefs.every((ref) => !ref.path.startsWith('/')));
+  assert(terminalState.sourceRefs.every((ref) => ref.path.includes('/') && !ref.path.includes('..')));
+  assert(terminalState.receipts.every((receipt) => receipt.runtimeMetrics.wallTimeMs === 0));
 });

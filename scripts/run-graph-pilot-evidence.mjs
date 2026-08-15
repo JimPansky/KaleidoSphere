@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { relative, resolve } from 'node:path';
 
 import {
   REQUIRED_BASE_COMMIT,
@@ -21,6 +21,7 @@ const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex');
 const root = resolve(process.cwd());
 const evidenceDir = resolve(root, 'docs/evidence/graph-pilot');
 const checkOnly = process.argv.includes('--check');
+const repoPath = (path) => relative(root, path).split('\\').join('/');
 const graphSchema = await loadSchema(resolve(root, 'contracts/bi-discovery-readiness-graph/v0/graph-spec.schema.json'));
 const receiptSchema = await loadSchema(resolve(root, 'contracts/bi-discovery-readiness-graph/v0/receipt.schema.json'));
 const evidencePackSchema = await loadSchema(resolve(root, 'contracts/bi-discovery-readiness-graph/v0/evidence-pack.schema.json'));
@@ -47,10 +48,10 @@ for (const [id, classification, databasePath, objective] of [...visibleTargets, 
 }
 
 const evidenceFiles = {
-  'm6-03-terminal': resolve(root, 'docs/evidence/m6-03-bi-specialist/terminal-manifest.json'),
-  'm6-03-sealed-v2': resolve(root, 'docs/evidence/m6-03-bi-specialist/sealed-blind-v2-manifest.json'),
-  'm6-04-terminal': resolve(root, 'docs/evidence/m6-04-trusted-workflow/terminal-manifest.json'),
-  'm6-05-terminal': resolve(root, 'docs/evidence/m6-05-ambiguous-outcome-reconciliation/terminal-manifest.json'),
+  'm6-03-terminal': 'docs/evidence/m6-03-bi-specialist/terminal-manifest.json',
+  'm6-03-sealed-v2': 'docs/evidence/m6-03-bi-specialist/sealed-blind-v2-manifest.json',
+  'm6-04-terminal': 'docs/evidence/m6-04-trusted-workflow/terminal-manifest.json',
+  'm6-05-terminal': 'docs/evidence/m6-05-ambiguous-outcome-reconciliation/terminal-manifest.json',
 };
 
 const baseline = {
@@ -63,7 +64,7 @@ const spec = buildDiscoveryReadinessGraphSpec();
 validateGraphSpec(spec, graphSchema);
 const initialState = createInitialGraphState({
   runId: 'graph-pilot-discovery-readiness-v0-local',
-  sourceRefs: targets.map((target) => ({ id: target.id, path: target.databasePath, sha256: target.databaseSha256, classification: target.classification })),
+  sourceRefs: targets.map((target) => ({ id: target.id, path: repoPath(target.databasePath), sha256: target.databaseSha256, classification: target.classification })),
   discoveryTargets: targets.map((target) => ({ id: target.id, classification: target.classification })),
 });
 const handlers = buildBiHandlers({ targets, evidenceFiles, baseline });

@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { relative, resolve } from 'node:path';
 
 import {
   ADAPTIVE_REQUIRED_BASE_COMMIT,
@@ -22,6 +22,7 @@ const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex');
 const root = resolve(process.cwd());
 const evidenceDir = resolve(root, 'docs/evidence/graph-adaptive-v1');
 const checkOnly = process.argv.includes('--check');
+const repoPath = (path) => relative(root, path).split('\\').join('/');
 
 const paths = {
   graphSchema: resolve(root, 'contracts/bi-adaptive-investigation-graph/v1/graph-spec.schema.json'),
@@ -68,11 +69,11 @@ const candidateFreezeBody = `${JSON.stringify(candidateFreeze, null, 2)}\n`;
 const candidateFreezeFileSha256 = sha256(candidateFreezeBody);
 
 const sourceRefs = [
-  { id: 'graph-schema-v1', path: paths.graphSchema, sha256: sha256(await readFile(paths.graphSchema)), classification: 'contract' },
-  { id: 'state-schema-v1', path: paths.stateSchema, sha256: sha256(await readFile(paths.stateSchema)), classification: 'contract' },
-  { id: 'receipt-schema-v1', path: paths.receiptSchema, sha256: sha256(await readFile(paths.receiptSchema)), classification: 'contract' },
-  { id: 'evidence-pack-schema-v1', path: paths.evidencePackSchema, sha256: sha256(await readFile(paths.evidencePackSchema)), classification: 'contract' },
-  { id: 'sealed-neutral-packs-v1', path: paths.sealedPacks, sha256: sha256(await readFile(paths.sealedPacks)), classification: 'sealed' },
+  { id: 'graph-schema-v1', path: repoPath(paths.graphSchema), sha256: sha256(await readFile(paths.graphSchema)), classification: 'contract' },
+  { id: 'state-schema-v1', path: repoPath(paths.stateSchema), sha256: sha256(await readFile(paths.stateSchema)), classification: 'contract' },
+  { id: 'receipt-schema-v1', path: repoPath(paths.receiptSchema), sha256: sha256(await readFile(paths.receiptSchema)), classification: 'contract' },
+  { id: 'evidence-pack-schema-v1', path: repoPath(paths.evidencePackSchema), sha256: sha256(await readFile(paths.evidencePackSchema)), classification: 'contract' },
+  { id: 'sealed-neutral-packs-v1', path: repoPath(paths.sealedPacks), sha256: sha256(await readFile(paths.sealedPacks)), classification: 'sealed' },
   { id: 'candidate-freeze-v1', path: 'docs/evidence/graph-adaptive-v1/candidate-freeze.json', sha256: candidateFreezeFileSha256, classification: 'candidate_freeze' },
 ];
 
