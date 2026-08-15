@@ -12,6 +12,7 @@
     "test:visual-scenarios": "node --test tests/visual-scenario-lab.test.mjs",
     "test:trusted-workflow": "node --test tests/trusted-workflow.test.mjs",
     "test:ambiguous-outcome": "node --test tests/ambiguous-outcome-reconciliation.test.mjs",
+    "evidence:ambiguous-outcome": "node scripts/run-ambiguous-outcome-reconciliation-evidence.mjs",
     "visual-lab": "node services/bi-control/src/visual-scenario-lab/server.mjs",
     "release:archive": "node scripts/build-release.mjs",
     "test:source": "node --test tests/source-map.test.mjs",

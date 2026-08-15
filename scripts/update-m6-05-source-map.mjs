@@ -6,6 +6,10 @@ const root = resolve(process.cwd());
 const sourceMapPath = resolve(root, 'SOURCE-MAP.json');
 const authoredFiles = [
   'package.json',
+  'docs/evidence/m6-05-ambiguous-outcome-reconciliation/committed-response-lost-journal.json',
+  'docs/evidence/m6-05-ambiguous-outcome-reconciliation/live-manifest.json',
+  'docs/evidence/m6-05-ambiguous-outcome-reconciliation/unchanged-safe-to-retry-journal.json',
+  'scripts/run-ambiguous-outcome-reconciliation-evidence.mjs',
   'scripts/update-m6-05-source-map.mjs',
   'services/bi-control/src/trusted-workflow/ambiguous-outcome-reconciliation.mjs',
   'tests/ambiguous-outcome-reconciliation.test.mjs',
