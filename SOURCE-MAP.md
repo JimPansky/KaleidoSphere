@@ -88,3 +88,12 @@ work against an isolated loopback Apache Superset 6.1.0 stack. The bridge uses
 only supported public REST endpoints and deterministic synthetic data. It does
 not copy Apache Superset source or assets, does not use source credentials, and
 does not claim unsupported native UI actions.
+
+M6-03 real-BI-specialist adapter/core, progressive read-only discovery, task-adaptive
+planning/sampling policy, incumbent-selection gate, synthetic SQLite training/holdout corpus,
+hidden evaluator oracles, local Qwen conformance/evaluation scripts, tests, decision record and
+evidence manifests are repository-authored clean-room work. They use built-in Node facilities
+and an externally installed local llama.cpp/Qwen runtime only for isolated evaluation; no
+llama.cpp, Qwen, DeepSeek Harness, Hermes or OpenClaw runtime code/artifact is copied or
+redistributed. M6-03 files are ordinary repository-authored hashes under `files`, not derived
+files.

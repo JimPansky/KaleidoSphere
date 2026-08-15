@@ -1,0 +1,907 @@
+{
+  "schemaVersion": "chimpmaera.bi/m6-03-core-evidence/v1",
+  "generatedAt": "2026-08-15T04:16:33.920Z",
+  "candidateInputs": {
+    "fixtureProvenanceDigest": "fb2b6f5a4fea1b41e96b18d80b7e62d66bc64c34aaee092470341f558459d352",
+    "hiddenOracleDigest": "b734ac450a63d9e1c068755d61594c357aac9eca8a802029af1ab3ed58227372",
+    "hiddenOraclePathOutsideCandidateTree": true
+  },
+  "coverage": {
+    "fixtures": 5,
+    "training": 2,
+    "holdout": 3,
+    "schemaPerturbation": true,
+    "domainShift": true,
+    "underspecified": true,
+    "adversarialBoundaryCoveredByTests": true
+  },
+  "cases": [
+    {
+      "id": "training-order-to-cash",
+      "lane": "training",
+      "domain": "order-to-cash/customer/dealer",
+      "databaseSha256": "72f507a16c78fa4938c86b0035f34a7e9a8e44995450c973e99fbfc500510ab6",
+      "oracleDigest": "2acfd3b625a5152692113412e206b1c44ad7b0c700eb747ffd2d6ca6e8318945",
+      "oracleNotCandidateInput": true,
+      "evaluation": {
+        "checks": {
+          "inventory": true,
+          "relationships": true,
+          "domains": true,
+          "anomalies": true,
+          "citations": true,
+          "bounded": true,
+          "previewOnly": true
+        },
+        "score": 1,
+        "hardFailures": []
+      },
+      "incumbentEvaluation": {
+        "checks": {
+          "inventory": false,
+          "relationships": false,
+          "domains": false,
+          "anomalies": true,
+          "citations": true,
+          "bounded": true,
+          "previewOnly": true
+        },
+        "score": 0.5714285714285714,
+        "hardFailures": [
+          "inventory",
+          "relationships",
+          "domains"
+        ]
+      },
+      "inventoryCount": 5,
+      "relationshipCount": 4,
+      "anomalyTypes": [
+        "duplicate_values",
+        "extreme_values",
+        "missing_values",
+        "negative_values"
+      ],
+      "queryCount": 20,
+      "rowsObserved": 59,
+      "observableTraceDigest": "6537d3a5830c5b155ebf22e21bf92b1b40d95e81d849dd2b8efb44762472fb56",
+      "repeatability": {
+        "runs": 2,
+        "distinctObservableDigests": 1,
+        "fixedSeedStable": true,
+        "digests": [
+          "6537d3a5830c5b155ebf22e21bf92b1b40d95e81d849dd2b8efb44762472fb56",
+          "6537d3a5830c5b155ebf22e21bf92b1b40d95e81d849dd2b8efb44762472fb56"
+        ]
+      },
+      "privacySafe": true
+    },
+    {
+      "id": "training-production-supplier",
+      "lane": "training",
+      "domain": "supplier/production-cost/flow/quality",
+      "databaseSha256": "ba5a2ac094b04f3af9b5c7e14fc7398b4e2f1b6786a409b11d5e46af097a25ed",
+      "oracleDigest": "4ae3bc98199fb089559121b4792fce89dd0556163475774fda4857c290467e4f",
+      "oracleNotCandidateInput": true,
+      "evaluation": {
+        "checks": {
+          "inventory": true,
+          "relationships": true,
+          "domains": true,
+          "anomalies": true,
+          "citations": true,
+          "bounded": true,
+          "previewOnly": true
+        },
+        "score": 1,
+        "hardFailures": []
+      },
+      "incumbentEvaluation": {
+        "checks": {
+          "inventory": false,
+          "relationships": false,
+          "domains": false,
+          "anomalies": false,
+          "citations": true,
+          "bounded": true,
+          "previewOnly": true
+        },
+        "score": 0.42857142857142855,
+        "hardFailures": [
+          "inventory",
+          "relationships",
+          "domains",
+          "anomalies"
+        ]
+      },
+      "inventoryCount": 4,
+      "relationshipCount": 3,
+      "anomalyTypes": [
+        "duplicate_values",
+        "extreme_values",
+        "missing_values",
+        "negative_values"
+      ],
+      "queryCount": 16,
+      "rowsObserved": 49,
+      "observableTraceDigest": "54225b33034a0f067eed80bcaea93bd9777387506e9be26e128642c27e3f499a",
+      "repeatability": {
+        "runs": 2,
+        "distinctObservableDigests": 1,
+        "fixedSeedStable": true,
+        "digests": [
+          "54225b33034a0f067eed80bcaea93bd9777387506e9be26e128642c27e3f499a",
+          "54225b33034a0f067eed80bcaea93bd9777387506e9be26e128642c27e3f499a"
+        ]
+      },
+      "privacySafe": true
+    },
+    {
+      "id": "holdout-channel-perturbed",
+      "lane": "holdout",
+      "domain": "channel/customer-360 with schema perturbation",
+      "databaseSha256": "9419708619c34f72ff651a25eb034389f5d3a8bee1788e88bb57d23ca74e99d2",
+      "oracleDigest": "c13c37da2b2fc8013ae42279f368adcc0424fb897d1d1d8f17c2435d4d97b1c0",
+      "oracleNotCandidateInput": true,
+      "evaluation": {
+        "checks": {
+          "inventory": true,
+          "relationships": true,
+          "domains": true,
+          "anomalies": true,
+          "citations": true,
+          "bounded": true,
+          "previewOnly": true
+        },
+        "score": 1,
+        "hardFailures": []
+      },
+      "incumbentEvaluation": {
+        "checks": {
+          "inventory": false,
+          "relationships": false,
+          "domains": false,
+          "anomalies": true,
+          "citations": true,
+          "bounded": true,
+          "previewOnly": true
+        },
+        "score": 0.5714285714285714,
+        "hardFailures": [
+          "inventory",
+          "relationships",
+          "domains"
+        ]
+      },
+      "inventoryCount": 5,
+      "relationshipCount": 4,
+      "anomalyTypes": [
+        "duplicate_values",
+        "extreme_values",
+        "missing_values",
+        "negative_values"
+      ],
+      "queryCount": 20,
+      "rowsObserved": 55,
+      "observableTraceDigest": "45949f086455a8cc104b3ed4017308dde12d841db63f9236f4e5a6cbfa7174fa",
+      "repeatability": {
+        "runs": 2,
+        "distinctObservableDigests": 1,
+        "fixedSeedStable": true,
+        "digests": [
+          "45949f086455a8cc104b3ed4017308dde12d841db63f9236f4e5a6cbfa7174fa",
+          "45949f086455a8cc104b3ed4017308dde12d841db63f9236f4e5a6cbfa7174fa"
+        ]
+      },
+      "privacySafe": true
+    },
+    {
+      "id": "holdout-clinical-domain-shift",
+      "lane": "holdout",
+      "domain": "clinical domain shift",
+      "databaseSha256": "dc6f52cb6199b02111158d1741bc1537bf59aa822c5cd7f958101da69c251939",
+      "oracleDigest": "788cf28cae1ede0df1d0d8fddccf96715512900e16e3d8097e07e23046d0f680",
+      "oracleNotCandidateInput": true,
+      "evaluation": {
+        "checks": {
+          "inventory": true,
+          "relationships": true,
+          "domains": true,
+          "anomalies": true,
+          "citations": true,
+          "bounded": true,
+          "previewOnly": true
+        },
+        "score": 1,
+        "hardFailures": []
+      },
+      "incumbentEvaluation": {
+        "checks": {
+          "inventory": true,
+          "relationships": true,
+          "domains": true,
+          "anomalies": true,
+          "citations": true,
+          "bounded": true,
+          "previewOnly": true
+        },
+        "score": 1,
+        "hardFailures": []
+      },
+      "inventoryCount": 3,
+      "relationshipCount": 2,
+      "anomalyTypes": [
+        "duplicate_values",
+        "extreme_values",
+        "missing_values",
+        "negative_values"
+      ],
+      "queryCount": 12,
+      "rowsObserved": 36,
+      "observableTraceDigest": "efc374a8739460b745f7686754bbd2487499b8658fe5e3d2fae411936a2aed0b",
+      "repeatability": {
+        "runs": 2,
+        "distinctObservableDigests": 1,
+        "fixedSeedStable": true,
+        "digests": [
+          "efc374a8739460b745f7686754bbd2487499b8658fe5e3d2fae411936a2aed0b",
+          "efc374a8739460b745f7686754bbd2487499b8658fe5e3d2fae411936a2aed0b"
+        ]
+      },
+      "privacySafe": true
+    },
+    {
+      "id": "holdout-underspecified-adversarial",
+      "lane": "holdout",
+      "domain": "underspecified/adversarial boundary",
+      "databaseSha256": "835ad550dc6259596cc97070468feb6c9faf87eeff5f2d06da9be9470470bbce",
+      "oracleDigest": "f486464ec9716dc32f744b19058000dafd58f967ef71a03b6680f8f03fcea6e4",
+      "oracleNotCandidateInput": true,
+      "evaluation": {
+        "checks": {
+          "inventory": true,
+          "relationships": true,
+          "domains": true,
+          "anomalies": true,
+          "citations": true,
+          "bounded": true,
+          "previewOnly": true
+        },
+        "score": 1,
+        "hardFailures": []
+      },
+      "incumbentEvaluation": {
+        "checks": {
+          "inventory": true,
+          "relationships": true,
+          "domains": true,
+          "anomalies": true,
+          "citations": true,
+          "bounded": true,
+          "previewOnly": true
+        },
+        "score": 1,
+        "hardFailures": []
+      },
+      "inventoryCount": 2,
+      "relationshipCount": 1,
+      "anomalyTypes": [],
+      "queryCount": 8,
+      "rowsObserved": 19,
+      "observableTraceDigest": "6bf289fc40d4db628739c9f06bbd0011349b276935a3a529db05f15a95b7acad",
+      "repeatability": {
+        "runs": 2,
+        "distinctObservableDigests": 1,
+        "fixedSeedStable": true,
+        "digests": [
+          "6bf289fc40d4db628739c9f06bbd0011349b276935a3a529db05f15a95b7acad",
+          "6bf289fc40d4db628739c9f06bbd0011349b276935a3a529db05f15a95b7acad"
+        ]
+      },
+      "privacySafe": true
+    }
+  ],
+  "policyGuide": {
+    "extraction": {
+      "pattern": "direct-execute-check",
+      "sampling": "deterministic_extract_v1",
+      "validationDepth": "exact",
+      "toolBudget": 4,
+      "stepBudget": 6,
+      "samplingProfile": {
+        "id": "deterministic_extract_v1",
+        "temperature": 0,
+        "topP": 0.9,
+        "seed": 7,
+        "maxTokens": 512
+      },
+      "clarification": "material-ambiguity-only",
+      "escalation": "capability-gap",
+      "fallback": "incumbent",
+      "reconciliation": "idempotency-and-readback"
+    },
+    "sql": {
+      "pattern": "plan-execute-check",
+      "sampling": "precise_tool_v1",
+      "validationDepth": "exact-and-bounded",
+      "toolBudget": 6,
+      "stepBudget": 8,
+      "samplingProfile": {
+        "id": "precise_tool_v1",
+        "temperature": 0.1,
+        "topP": 0.9,
+        "seed": 7,
+        "maxTokens": 768
+      },
+      "clarification": "material-ambiguity-only",
+      "escalation": "capability-gap",
+      "fallback": "incumbent",
+      "reconciliation": "idempotency-and-readback"
+    },
+    "anomaly_quality": {
+      "pattern": "hypothesis-test-revise",
+      "sampling": "balanced_analysis_v1",
+      "validationDepth": "oracle-and-citations",
+      "toolBudget": 12,
+      "stepBudget": 16,
+      "samplingProfile": {
+        "id": "balanced_analysis_v1",
+        "temperature": 0.2,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 1024
+      },
+      "clarification": "material-ambiguity-only",
+      "escalation": "capability-gap",
+      "fallback": "incumbent",
+      "reconciliation": "idempotency-and-readback"
+    },
+    "relationship_cause": {
+      "pattern": "hierarchical-decomposition",
+      "sampling": "deep_hypothesis_v1",
+      "validationDepth": "graph-targeted-tests",
+      "toolBudget": 16,
+      "stepBudget": 20,
+      "samplingProfile": {
+        "id": "deep_hypothesis_v1",
+        "temperature": 0.4,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 1024
+      },
+      "clarification": "material-ambiguity-only",
+      "escalation": "capability-gap",
+      "fallback": "incumbent",
+      "reconciliation": "idempotency-and-readback"
+    },
+    "synthesis": {
+      "pattern": "plan-synthesize-self-check",
+      "sampling": "balanced_analysis_v1",
+      "validationDepth": "citation-and-overreach",
+      "toolBudget": 4,
+      "stepBudget": 8,
+      "samplingProfile": {
+        "id": "balanced_analysis_v1",
+        "temperature": 0.2,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 1024
+      },
+      "clarification": "material-ambiguity-only",
+      "escalation": "capability-gap",
+      "fallback": "incumbent",
+      "reconciliation": "idempotency-and-readback"
+    },
+    "visualization": {
+      "pattern": "preview-compare-critique",
+      "sampling": "preview_design_v1",
+      "validationDepth": "truth-ux-decision",
+      "toolBudget": 0,
+      "stepBudget": 8,
+      "samplingProfile": {
+        "id": "preview_design_v1",
+        "temperature": 0.6,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 1024
+      },
+      "clarification": "material-ambiguity-only",
+      "escalation": "capability-gap",
+      "fallback": "incumbent",
+      "reconciliation": "idempotency-and-readback",
+      "previewOnlyHighTemperatureComparator": {
+        "id": "preview_design_high_v1",
+        "temperature": 0.8,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 1024
+      }
+    },
+    "repair": {
+      "pattern": "diagnose-repair-replay",
+      "sampling": "critique_repair_v1",
+      "validationDepth": "full-regression",
+      "toolBudget": 8,
+      "stepBudget": 12,
+      "samplingProfile": {
+        "id": "critique_repair_v1",
+        "temperature": 0.1,
+        "topP": 0.9,
+        "seed": 7,
+        "maxTokens": 768
+      },
+      "clarification": "material-ambiguity-only",
+      "escalation": "capability-gap",
+      "fallback": "incumbent",
+      "reconciliation": "idempotency-and-readback"
+    },
+    "persistent_apply": {
+      "pattern": "clarify-preview-approve-apply-readback",
+      "sampling": "precise_tool_v1",
+      "validationDepth": "approval-readback-rollback",
+      "toolBudget": 4,
+      "stepBudget": 10,
+      "samplingProfile": {
+        "id": "precise_tool_v1",
+        "temperature": 0.1,
+        "topP": 0.9,
+        "seed": 7,
+        "maxTokens": 768
+      },
+      "clarification": "mandatory",
+      "escalation": "trusted-approval-required",
+      "fallback": "incumbent",
+      "reconciliation": "idempotency-and-readback"
+    }
+  },
+  "planningComparisonMatrix": [
+    {
+      "taskClass": "extraction",
+      "planningPattern": "direct-execute-check",
+      "validationDepth": "exact",
+      "toolBudget": 4,
+      "stepBudget": 6,
+      "pairedInputRule": "same-objective-evidence-tools-prompt-and-validator",
+      "changedFactor": "temperature-only",
+      "incumbent": {
+        "profileId": "deterministic_extract_v1",
+        "temperature": 0,
+        "topP": 0.9,
+        "seed": 7,
+        "maxTokens": 512
+      },
+      "comparator": {
+        "profileId": "deterministic_extract_v1:temperature-comparator",
+        "temperature": 0.1,
+        "topP": 0.9,
+        "seed": 7,
+        "maxTokens": 512
+      },
+      "promotionRule": "screening-only; no promotion without zero-hard-failure paired holdout evidence"
+    },
+    {
+      "taskClass": "sql",
+      "planningPattern": "plan-execute-check",
+      "validationDepth": "exact-and-bounded",
+      "toolBudget": 6,
+      "stepBudget": 8,
+      "pairedInputRule": "same-objective-evidence-tools-prompt-and-validator",
+      "changedFactor": "temperature-only",
+      "incumbent": {
+        "profileId": "precise_tool_v1",
+        "temperature": 0.1,
+        "topP": 0.9,
+        "seed": 7,
+        "maxTokens": 768
+      },
+      "comparator": {
+        "profileId": "precise_tool_v1:temperature-comparator",
+        "temperature": 0,
+        "topP": 0.9,
+        "seed": 7,
+        "maxTokens": 768
+      },
+      "promotionRule": "screening-only; no promotion without zero-hard-failure paired holdout evidence"
+    },
+    {
+      "taskClass": "anomaly_quality",
+      "planningPattern": "hypothesis-test-revise",
+      "validationDepth": "oracle-and-citations",
+      "toolBudget": 12,
+      "stepBudget": 16,
+      "pairedInputRule": "same-objective-evidence-tools-prompt-and-validator",
+      "changedFactor": "temperature-only",
+      "incumbent": {
+        "profileId": "balanced_analysis_v1",
+        "temperature": 0.2,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 1024
+      },
+      "comparator": {
+        "profileId": "balanced_analysis_v1:temperature-comparator",
+        "temperature": 0.4,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 1024
+      },
+      "promotionRule": "screening-only; no promotion without zero-hard-failure paired holdout evidence"
+    },
+    {
+      "taskClass": "relationship_cause",
+      "planningPattern": "hierarchical-decomposition",
+      "validationDepth": "graph-targeted-tests",
+      "toolBudget": 16,
+      "stepBudget": 20,
+      "pairedInputRule": "same-objective-evidence-tools-prompt-and-validator",
+      "changedFactor": "temperature-only",
+      "incumbent": {
+        "profileId": "deep_hypothesis_v1",
+        "temperature": 0.4,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 1024
+      },
+      "comparator": {
+        "profileId": "deep_hypothesis_v1:temperature-comparator",
+        "temperature": 0.2,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 1024
+      },
+      "promotionRule": "screening-only; no promotion without zero-hard-failure paired holdout evidence"
+    },
+    {
+      "taskClass": "synthesis",
+      "planningPattern": "plan-synthesize-self-check",
+      "validationDepth": "citation-and-overreach",
+      "toolBudget": 4,
+      "stepBudget": 8,
+      "pairedInputRule": "same-objective-evidence-tools-prompt-and-validator",
+      "changedFactor": "temperature-only",
+      "incumbent": {
+        "profileId": "balanced_analysis_v1",
+        "temperature": 0.2,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 1024
+      },
+      "comparator": {
+        "profileId": "balanced_analysis_v1:temperature-comparator",
+        "temperature": 0.4,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 1024
+      },
+      "promotionRule": "screening-only; no promotion without zero-hard-failure paired holdout evidence"
+    },
+    {
+      "taskClass": "visualization",
+      "planningPattern": "preview-compare-critique",
+      "validationDepth": "truth-ux-decision",
+      "toolBudget": 0,
+      "stepBudget": 8,
+      "pairedInputRule": "same-objective-evidence-tools-prompt-and-validator",
+      "changedFactor": "temperature-only",
+      "incumbent": {
+        "profileId": "preview_design_v1",
+        "temperature": 0.6,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 1024
+      },
+      "comparator": {
+        "profileId": "preview_design_v1:temperature-comparator",
+        "temperature": 0.4,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 1024
+      },
+      "promotionRule": "screening-only; no promotion without zero-hard-failure paired holdout evidence"
+    },
+    {
+      "taskClass": "repair",
+      "planningPattern": "diagnose-repair-replay",
+      "validationDepth": "full-regression",
+      "toolBudget": 8,
+      "stepBudget": 12,
+      "pairedInputRule": "same-objective-evidence-tools-prompt-and-validator",
+      "changedFactor": "temperature-only",
+      "incumbent": {
+        "profileId": "critique_repair_v1",
+        "temperature": 0.1,
+        "topP": 0.9,
+        "seed": 7,
+        "maxTokens": 768
+      },
+      "comparator": {
+        "profileId": "critique_repair_v1:temperature-comparator",
+        "temperature": 0.2,
+        "topP": 0.9,
+        "seed": 7,
+        "maxTokens": 768
+      },
+      "promotionRule": "screening-only; no promotion without zero-hard-failure paired holdout evidence"
+    },
+    {
+      "taskClass": "persistent_apply",
+      "planningPattern": "clarify-preview-approve-apply-readback",
+      "validationDepth": "approval-readback-rollback",
+      "toolBudget": 4,
+      "stepBudget": 10,
+      "pairedInputRule": "same-objective-evidence-tools-prompt-and-validator",
+      "changedFactor": "temperature-only",
+      "incumbent": {
+        "profileId": "precise_tool_v1",
+        "temperature": 0.1,
+        "topP": 0.9,
+        "seed": 7,
+        "maxTokens": 768
+      },
+      "comparator": {
+        "profileId": "precise_tool_v1:temperature-comparator",
+        "temperature": 0,
+        "topP": 0.9,
+        "seed": 7,
+        "maxTokens": 768
+      },
+      "promotionRule": "screening-only; no promotion without zero-hard-failure paired holdout evidence"
+    }
+  ],
+  "generations": {
+    "incumbent": {
+      "id": "m6-03-incumbent-v1",
+      "policyVersion": "planning-policy/v0",
+      "promptVersion": "discovery/v0",
+      "model": "deterministic-core",
+      "sampling": {},
+      "results": [
+        {
+          "hardFailures": [
+            "inventory",
+            "relationships",
+            "domains"
+          ],
+          "discoveryScore": 0.5714285714285714,
+          "oracleScore": 0.5714285714285714,
+          "citationScore": 1,
+          "toolCorrectness": 1,
+          "privacySafe": true,
+          "safetyGreen": true
+        },
+        {
+          "hardFailures": [
+            "inventory",
+            "relationships",
+            "domains",
+            "anomalies"
+          ],
+          "discoveryScore": 0.42857142857142855,
+          "oracleScore": 0.42857142857142855,
+          "citationScore": 1,
+          "toolCorrectness": 1,
+          "privacySafe": true,
+          "safetyGreen": true
+        },
+        {
+          "hardFailures": [
+            "inventory",
+            "relationships",
+            "domains"
+          ],
+          "discoveryScore": 0.5714285714285714,
+          "oracleScore": 0.5714285714285714,
+          "citationScore": 1,
+          "toolCorrectness": 1,
+          "privacySafe": true,
+          "safetyGreen": true
+        },
+        {
+          "hardFailures": [],
+          "discoveryScore": 1,
+          "oracleScore": 1,
+          "citationScore": 1,
+          "toolCorrectness": 1,
+          "privacySafe": true,
+          "safetyGreen": true
+        },
+        {
+          "hardFailures": [],
+          "discoveryScore": 1,
+          "oracleScore": 1,
+          "citationScore": 1,
+          "toolCorrectness": 1,
+          "privacySafe": true,
+          "safetyGreen": true
+        }
+      ],
+      "manifestDigest": "e576656e4814d472074754e1edbbba68ed5ea829d5220d0b9b22d64c34910197"
+    },
+    "candidate": {
+      "id": "m6-03-candidate-v1",
+      "policyVersion": "planning-policy/v1",
+      "promptVersion": "discovery/v1",
+      "model": "deterministic-core",
+      "sampling": {},
+      "results": [
+        {
+          "hardFailures": [],
+          "discoveryScore": 1,
+          "oracleScore": 1,
+          "citationScore": 1,
+          "toolCorrectness": 1,
+          "privacySafe": true,
+          "safetyGreen": true
+        },
+        {
+          "hardFailures": [],
+          "discoveryScore": 1,
+          "oracleScore": 1,
+          "citationScore": 1,
+          "toolCorrectness": 1,
+          "privacySafe": true,
+          "safetyGreen": true
+        },
+        {
+          "hardFailures": [],
+          "discoveryScore": 1,
+          "oracleScore": 1,
+          "citationScore": 1,
+          "toolCorrectness": 1,
+          "privacySafe": true,
+          "safetyGreen": true
+        },
+        {
+          "hardFailures": [],
+          "discoveryScore": 1,
+          "oracleScore": 1,
+          "citationScore": 1,
+          "toolCorrectness": 1,
+          "privacySafe": true,
+          "safetyGreen": true
+        },
+        {
+          "hardFailures": [],
+          "discoveryScore": 1,
+          "oracleScore": 1,
+          "citationScore": 1,
+          "toolCorrectness": 1,
+          "privacySafe": true,
+          "safetyGreen": true
+        }
+      ],
+      "manifestDigest": "040d526096254ce5c475167376c7a5d19aef540d4a35426f23f998d18a6483a9"
+    },
+    "acceptedSelection": {
+      "accepted": true,
+      "selectedGenerationId": "m6-03-candidate-v1",
+      "incumbent": {
+        "hardFailures": 10,
+        "discovery": 0.7142857142857142,
+        "oracle": 0.7142857142857142,
+        "citation": 1,
+        "tool": 1,
+        "privacy": 1,
+        "safety": 1
+      },
+      "candidate": {
+        "hardFailures": 0,
+        "discovery": 1,
+        "oracle": 1,
+        "citation": 1,
+        "tool": 1,
+        "privacy": 1,
+        "safety": 1
+      },
+      "regressions": [],
+      "negativeEvidence": [],
+      "rollback": "restore-generation:m6-03-incumbent-v1"
+    },
+    "rejectedCandidate": {
+      "id": "m6-03-negative-candidate-v1",
+      "policyVersion": "planning-policy/bad-ablation",
+      "promptVersion": "discovery/v1",
+      "model": "deterministic-core",
+      "sampling": {},
+      "results": [
+        {
+          "hardFailures": [
+            "ORACLE_REGRESSION"
+          ],
+          "discoveryScore": 1,
+          "oracleScore": 0,
+          "citationScore": 1,
+          "toolCorrectness": 1,
+          "privacySafe": false,
+          "safetyGreen": true
+        },
+        {
+          "hardFailures": [],
+          "discoveryScore": 1,
+          "oracleScore": 1,
+          "citationScore": 1,
+          "toolCorrectness": 1,
+          "privacySafe": true,
+          "safetyGreen": true
+        },
+        {
+          "hardFailures": [],
+          "discoveryScore": 1,
+          "oracleScore": 1,
+          "citationScore": 1,
+          "toolCorrectness": 1,
+          "privacySafe": true,
+          "safetyGreen": true
+        },
+        {
+          "hardFailures": [],
+          "discoveryScore": 1,
+          "oracleScore": 1,
+          "citationScore": 1,
+          "toolCorrectness": 1,
+          "privacySafe": true,
+          "safetyGreen": true
+        },
+        {
+          "hardFailures": [],
+          "discoveryScore": 1,
+          "oracleScore": 1,
+          "citationScore": 1,
+          "toolCorrectness": 1,
+          "privacySafe": true,
+          "safetyGreen": true
+        }
+      ],
+      "manifestDigest": "85f932dcc3a92c192109af602ace26d69aa8f6d1b53feed33203ff51c8f48044"
+    },
+    "rejectedSelection": {
+      "accepted": false,
+      "selectedGenerationId": "m6-03-candidate-v1",
+      "incumbent": {
+        "hardFailures": 0,
+        "discovery": 1,
+        "oracle": 1,
+        "citation": 1,
+        "tool": 1,
+        "privacy": 1,
+        "safety": 1
+      },
+      "candidate": {
+        "hardFailures": 1,
+        "discovery": 1,
+        "oracle": 0.8,
+        "citation": 1,
+        "tool": 1,
+        "privacy": 0.8,
+        "safety": 1
+      },
+      "regressions": [
+        "oracle",
+        "privacy"
+      ],
+      "negativeEvidence": [
+        "NEW_OR_RETAINED_HARD_FAILURE",
+        "REGRESSION:oracle",
+        "REGRESSION:privacy"
+      ],
+      "rollback": "restore-generation:m6-03-candidate-v1"
+    }
+  },
+  "aggregate": {
+    "exactOracleCases": 5,
+    "hardFailures": 0,
+    "privacyFailures": 0,
+    "repeatabilityStableCases": 5
+  },
+  "optimizationInterpretation": {
+    "acceptedCandidateClaim": "measured local improvement over the explicitly bounded three-table incumbent",
+    "improvementClaimScope": "five local synthetic fixtures only",
+    "comparisonType": "paired-fixture incumbent-versus-candidate",
+    "negativeProbe": "the privacy-unsafe oracle-regressing ablation is rejected and the incumbent is retained"
+  },
+  "nonclaims": [
+    "No production/customer database evidence",
+    "No causal proof from correlation",
+    "No native Superset apply",
+    "No cross-hardware determinism claim"
+  ]
+}

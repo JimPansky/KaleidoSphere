@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "chimpmaera.bi/bi-specialist-fixture-provenance/v1",
+  "generatedBy": "scripts/materialize-bi-specialist-fixtures.mjs",
+  "fixtures": [
+    {
+      "id": "holdout-channel-perturbed",
+      "lane": "holdout",
+      "domain": "channel/customer-360 with schema perturbation",
+      "filename": "holdout-channel-perturbed.sqlite",
+      "databaseSha256": "9419708619c34f72ff651a25eb034389f5d3a8bee1788e88bb57d23ca74e99d2",
+      "candidateInputContainsOracle": false,
+      "optimizationSeen": false
+    },
+    {
+      "id": "holdout-clinical-domain-shift",
+      "lane": "holdout",
+      "domain": "clinical domain shift",
+      "filename": "holdout-clinical-domain-shift.sqlite",
+      "databaseSha256": "dc6f52cb6199b02111158d1741bc1537bf59aa822c5cd7f958101da69c251939",
+      "candidateInputContainsOracle": false,
+      "optimizationSeen": false
+    },
+    {
+      "id": "holdout-underspecified-adversarial",
+      "lane": "holdout",
+      "domain": "underspecified/adversarial boundary",
+      "filename": "holdout-underspecified-adversarial.sqlite",
+      "databaseSha256": "835ad550dc6259596cc97070468feb6c9faf87eeff5f2d06da9be9470470bbce",
+      "candidateInputContainsOracle": false,
+      "optimizationSeen": false
+    },
+    {
+      "id": "training-order-to-cash",
+      "lane": "training",
+      "domain": "order-to-cash/customer/dealer",
+      "filename": "training-order-to-cash.sqlite",
+      "databaseSha256": "72f507a16c78fa4938c86b0035f34a7e9a8e44995450c973e99fbfc500510ab6",
+      "candidateInputContainsOracle": false,
+      "optimizationSeen": true
+    },
+    {
+      "id": "training-production-supplier",
+      "lane": "training",
+      "domain": "supplier/production-cost/flow/quality",
+      "filename": "training-production-supplier.sqlite",
+      "databaseSha256": "ba5a2ac094b04f3af9b5c7e14fc7398b4e2f1b6786a409b11d5e46af097a25ed",
+      "candidateInputContainsOracle": false,
+      "optimizationSeen": true
+    }
+  ]
+}

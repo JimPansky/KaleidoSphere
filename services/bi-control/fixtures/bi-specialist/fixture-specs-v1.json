@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "chimpmaera.bi/bi-specialist-fixtures/v1",
+  "fixtures": [
+    {
+      "id": "training-order-to-cash",
+      "lane": "training",
+      "domain": "order-to-cash/customer/dealer",
+      "filename": "training-order-to-cash.sqlite",
+      "statements": [
+        "CREATE TABLE customer (id INTEGER PRIMARY KEY, customer_number TEXT, email TEXT, region TEXT)",
+        "CREATE TABLE dealer (id INTEGER PRIMARY KEY, dealer_code TEXT, channel TEXT)",
+        "CREATE TABLE sales_order (id INTEGER PRIMARY KEY, customer_id INTEGER REFERENCES customer(id), dealer_id INTEGER REFERENCES dealer(id), order_date TEXT, amount REAL, promised_days INTEGER)",
+        "CREATE TABLE shipment (id INTEGER PRIMARY KEY, order_id INTEGER REFERENCES sales_order(id), shipped_date TEXT, delivery_days INTEGER, status TEXT)",
+        "CREATE TABLE invoice (id INTEGER PRIMARY KEY, order_id INTEGER REFERENCES sales_order(id), invoice_date TEXT, amount REAL, paid_days INTEGER)",
+        "INSERT INTO customer VALUES (1,'C-001','ops@acme.test','north'),(2,'C-002','buyer@beta.test','south'),(3,'C-003','ops@acme.test',NULL),(4,'C-004','desk@delta.test','west'),(5,'C-005','team@echo.test','north'),(6,'C-006','x@foxtrot.test','east')",
+        "INSERT INTO dealer VALUES (1,'D-01','direct'),(2,'D-02','partner'),(3,'D-03','online')",
+        "INSERT INTO sales_order VALUES (101,1,1,'2026-01-02',1200,5),(102,2,2,'2026-01-03',850,5),(103,3,2,'2026-01-04',910,7),(104,4,3,'2026-01-05',450,3),(105,5,1,'2026-01-06',1300,5),(106,6,3,'2026-01-07',710,4) ",
+        "INSERT INTO shipment VALUES (201,101,'2026-01-04',2,'delivered'),(202,102,'2026-01-12',9,'delivered'),(203,103,'2026-02-10',37,'delivered'),(204,104,'2026-01-06',1,'delivered'),(205,105,'2026-01-11',5,'delivered'),(206,106,NULL,45,'delayed')",
+        "INSERT INTO invoice VALUES (301,101,'2026-01-05',1200,2),(302,102,'2026-01-13',850,30),(303,103,'2026-02-11',910,45),(304,104,'2026-01-07',450,1),(305,105,'2026-01-12',1300,4),(306,106,'2026-01-08',-25,60)"
+      ]
+    },
+    {
+      "id": "training-production-supplier",
+      "lane": "training",
+      "domain": "supplier/production-cost/flow/quality",
+      "filename": "training-production-supplier.sqlite",
+      "statements": [
+        "CREATE TABLE supplier (id INTEGER PRIMARY KEY, supplier_code TEXT, country TEXT, risk_tier TEXT)",
+        "CREATE TABLE work_order (id INTEGER PRIMARY KEY, supplier_id INTEGER REFERENCES supplier(id), machine_code TEXT, planned_cost REAL, actual_cost REAL, cycle_minutes REAL)",
+        "CREATE TABLE quality_check (id INTEGER PRIMARY KEY, work_order_id INTEGER REFERENCES work_order(id), defect_count INTEGER, sample_size INTEGER, result TEXT)",
+        "CREATE TABLE machine_event (id INTEGER PRIMARY KEY, work_order_id INTEGER REFERENCES work_order(id), event_code TEXT, downtime_minutes REAL)",
+        "INSERT INTO supplier VALUES (1,'S-A','DE','low'),(2,'S-B','PL','medium'),(3,'S-C','CZ','high'),(4,'S-D','DE',NULL),(5,'S-E','NL','low')",
+        "INSERT INTO work_order VALUES (11,1,'M-1',1000,980,42),(12,2,'M-1',900,1100,55),(13,3,'M-2',800,1700,120),(14,4,'M-2',700,-10,40),(15,5,'M-3',1200,1210,44),(16,3,'M-2',850,1800,130)",
+        "INSERT INTO quality_check VALUES (21,11,0,100,'pass'),(22,12,2,100,'pass'),(23,13,19,100,'fail'),(24,14,1,100,'pass'),(25,15,0,100,'pass'),(26,16,22,100,'fail')",
+        "INSERT INTO machine_event VALUES (31,11,'RUN',0),(32,12,'STOP',12),(33,13,'STOP',180),(34,14,'RUN',0),(35,15,'RUN',0),(36,16,'STOP',210)"
+      ]
+    },
+    {
+      "id": "holdout-channel-perturbed",
+      "lane": "holdout",
+      "domain": "channel/customer-360 with schema perturbation",
+      "filename": "holdout-channel-perturbed.sqlite",
+      "statements": [
+        "CREATE TABLE acct_dim (id INTEGER PRIMARY KEY, external_code TEXT, territory TEXT)",
+        "CREATE TABLE route_dim (id INTEGER PRIMARY KEY, route_code TEXT, route_family TEXT)",
+        "CREATE TABLE txn_hdr (id INTEGER PRIMARY KEY, acct_id INTEGER REFERENCES acct_dim(id), route_id INTEGER REFERENCES route_dim(id), booked_on TEXT, net_value REAL)",
+        "CREATE TABLE fulfil_evt (id INTEGER PRIMARY KEY, txn_id INTEGER REFERENCES txn_hdr(id), elapsed_days INTEGER, state TEXT)",
+        "CREATE TABLE bill_doc (id INTEGER PRIMARY KEY, txn_id INTEGER REFERENCES txn_hdr(id), billed_value REAL, settlement_days INTEGER)",
+        "INSERT INTO acct_dim VALUES (1,'A-X1','NE'),(2,'A-X2','SW'),(3,'A-X2',NULL),(4,'A-X4','NW'),(5,'A-X5','NE'),(6,'A-X6','SE')",
+        "INSERT INTO route_dim VALUES (1,'R-A','field'),(2,'R-B','reseller'),(3,'R-C','digital')",
+        "INSERT INTO txn_hdr VALUES (41,1,1,'2026-02-01',500),(42,2,2,'2026-02-02',750),(43,3,2,'2026-02-03',800),(44,4,3,'2026-02-04',620),(45,5,1,'2026-02-05',510),(46,6,3,'2026-02-06',990)",
+        "INSERT INTO fulfil_evt VALUES (51,41,2,'done'),(52,42,4,'done'),(53,43,42,'done'),(54,44,3,'done'),(55,45,2,'done'),(56,46,60,'blocked')",
+        "INSERT INTO bill_doc VALUES (61,41,500,3),(62,42,750,7),(63,43,800,45),(64,44,620,2),(65,45,510,3),(66,46,-90,70)"
+      ]
+    },
+    {
+      "id": "holdout-clinical-domain-shift",
+      "lane": "holdout",
+      "domain": "clinical domain shift",
+      "filename": "holdout-clinical-domain-shift.sqlite",
+      "statements": [
+        "CREATE TABLE patient (id INTEGER PRIMARY KEY, cohort_code TEXT, district TEXT)",
+        "CREATE TABLE encounter (id INTEGER PRIMARY KEY, patient_id INTEGER REFERENCES patient(id), admitted_on TEXT, length_days INTEGER, disposition TEXT)",
+        "CREATE TABLE lab_result (id INTEGER PRIMARY KEY, encounter_id INTEGER REFERENCES encounter(id), test_code TEXT, numeric_value REAL, unit TEXT)",
+        "INSERT INTO patient VALUES (1,'P-A','north'),(2,'P-B','south'),(3,'P-C',NULL),(4,'P-D','west'),(5,'P-E','east'),(6,'P-F','north')",
+        "INSERT INTO encounter VALUES (11,1,'2026-03-01',2,'home'),(12,2,'2026-03-02',3,'home'),(13,3,'2026-03-03',28,'transfer'),(14,4,'2026-03-04',2,'home'),(15,5,'2026-03-05',3,'home'),(16,6,'2026-03-06',40,'transfer')",
+        "INSERT INTO lab_result VALUES (21,11,'CRP',4.2,'mg/L'),(22,12,'CRP',5.1,'mg/L'),(23,13,'CRP',220,'mg/L'),(24,14,'CRP',3.9,'mg/L'),(25,15,'CRP',4.5,'mg/L'),(26,16,'CRP',-2,'mg/L')"
+      ]
+    },
+    {
+      "id": "holdout-underspecified-adversarial",
+      "lane": "holdout",
+      "domain": "underspecified/adversarial boundary",
+      "filename": "holdout-underspecified-adversarial.sqlite",
+      "statements": [
+        "CREATE TABLE opaque_a (id INTEGER PRIMARY KEY, opaque_code TEXT, value_x REAL)",
+        "CREATE TABLE opaque_b (id INTEGER PRIMARY KEY, opaque_a_id INTEGER REFERENCES opaque_a(id), state_y TEXT)",
+        "INSERT INTO opaque_a VALUES (1,'X1',10),(2,'X2',11),(3,'X3',12),(4,'X4',13),(5,'X5',14)",
+        "INSERT INTO opaque_b VALUES (11,1,'ok'),(12,2,'ok'),(13,3,'review'),(14,4,'ok'),(15,5,'ok')"
+      ]
+    }
+  ]
+}

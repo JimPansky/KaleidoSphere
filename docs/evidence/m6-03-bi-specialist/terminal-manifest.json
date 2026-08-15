@@ -1,0 +1,159 @@
+{
+  "schemaVersion": "chimpmaera.bi/m6-03-terminal-evidence/v1",
+  "generatedAt": "2026-08-15T04:21:39.050Z",
+  "gates": {
+    "G1": "PASS",
+    "G2": "PASS",
+    "G3": "PASS",
+    "G4": "PASS",
+    "G5": "PASS",
+    "G6": "PASS",
+    "G7": "PASS"
+  },
+  "tests": {
+    "focused": "12/12",
+    "full": "112/112",
+    "sourceMap": "PASS",
+    "diffCheck": "PASS",
+    "privacyNegativeProbes": "PASS"
+  },
+  "quality": {
+    "exactOracleCases": 5,
+    "qwenConformance": "11/11",
+    "qwenSpecialistCases": "5/5",
+    "pairedSamplingCalls": "12/12 schema-valid",
+    "deterministicCoreReplay": "5/5 normalized-stable",
+    "fixedSeedQwenByteStableProfiles": "0/6"
+  },
+  "runtimeTeardown": {
+    "service": "sba-m6-03-qwen36-q6-20260815.service",
+    "state": "inactive",
+    "listenerPort": 18103,
+    "listenerCount": 0,
+    "processCount": 0,
+    "existingServicesModified": false
+  },
+  "directReview": {
+    "coreManifest": "PASS",
+    "qwenManifest": "PASS",
+    "rawModelResponsesPersisted": false,
+    "rawChainOfThoughtPersisted": false,
+    "candidateOracleSeparated": true,
+    "persistentMutations": 0,
+    "secretFindings": 0
+  },
+  "negativeEvidence": [
+    "Fixed-seed Qwen outputs were schema-stable but not byte-identical for every measured profile; do not claim runtime determinism.",
+    "One profile initially exceeded the response budget and failed closed; policy was corrected and the complete suite rerun.",
+    "One transient service interruption occurred between iterations; the isolated lifecycle was re-preflighted and the final sequence rerun before teardown.",
+    "NEW_OR_RETAINED_HARD_FAILURE",
+    "REGRESSION:oracle",
+    "REGRESSION:privacy"
+  ],
+  "files": {
+    "package.json": {
+      "sha256": "dbacf92ed8474ca1fa545be415859eb67d090941f310429164dedd0a7e22aceb",
+      "bytes": 1177
+    },
+    "docs/decisions/M6-03-REAL-BI-SPECIALIST-MVP.md": {
+      "sha256": "f7763c37018251022668913075d20468c234b13c8a06a2552053291a3f32d15f",
+      "bytes": 3635
+    },
+    "docs/evidence/M6-03_REAL_BI_SPECIALIST_MVP.md": {
+      "sha256": "ca3df6e2c8946676b49f236683a24e458060b53e154dd971ffa703e3c98d6657",
+      "bytes": 5616
+    },
+    "docs/evidence/m6-03-bi-specialist/core-manifest.json": {
+      "sha256": "2c8be28b8cafd1b2121e5fe254d9428163476186b45aa141d728f2ddc4af0ef3",
+      "bytes": 27036
+    },
+    "docs/evidence/m6-03-bi-specialist/qwen-conformance-manifest.json": {
+      "sha256": "3e84c799cb8b79df04fbc5ed434865bdaa1318224287f64957df9fb153d02a82",
+      "bytes": 23265
+    },
+    "scripts/finalize-m6-03-evidence.mjs": {
+      "sha256": "32d1e5acfed57831478cc041c3e0f78bc9a3aa7049d267cbbf648f0b45201e99",
+      "bytes": 5838
+    },
+    "scripts/materialize-bi-specialist-fixtures.mjs": {
+      "sha256": "496f99710fc3c6a547d8b4852ecf075f53c2afc54755cb8d10659a97b9bbe5f6",
+      "bytes": 1998
+    },
+    "scripts/run-bi-specialist-evidence.mjs": {
+      "sha256": "861ce2d8b5a75f3dade76cb62872df1d46e05d64580259877b5b17ab0cc20831",
+      "bytes": 8800
+    },
+    "scripts/run-qwen-conformance-evidence.mjs": {
+      "sha256": "15e2211dcb718174f6f5a788b65568f9a24c982e83c345b655c98ee069c7e88a",
+      "bytes": 12824
+    },
+    "services/bi-control/fixtures/bi-specialist/fixture-provenance-v1.json": {
+      "sha256": "4d5dedb9bca2f7a7089dfca1d9fa9380399d12174a3f4ce6e5ed7bb0ed56be6e",
+      "bytes": 1965
+    },
+    "services/bi-control/fixtures/bi-specialist/fixture-specs-v1.json": {
+      "sha256": "5961c9f46b9589a086973f3ba1bca0a89d0412f114d55e55b60b3a58df60018e",
+      "bytes": 6910
+    },
+    "services/bi-control/fixtures/bi-specialist/candidate/training-order-to-cash.sqlite": {
+      "sha256": "72f507a16c78fa4938c86b0035f34a7e9a8e44995450c973e99fbfc500510ab6",
+      "bytes": 24576
+    },
+    "services/bi-control/fixtures/bi-specialist/candidate/training-production-supplier.sqlite": {
+      "sha256": "ba5a2ac094b04f3af9b5c7e14fc7398b4e2f1b6786a409b11d5e46af097a25ed",
+      "bytes": 20480
+    },
+    "services/bi-control/fixtures/bi-specialist/candidate/holdout-channel-perturbed.sqlite": {
+      "sha256": "9419708619c34f72ff651a25eb034389f5d3a8bee1788e88bb57d23ca74e99d2",
+      "bytes": 24576
+    },
+    "services/bi-control/fixtures/bi-specialist/candidate/holdout-clinical-domain-shift.sqlite": {
+      "sha256": "dc6f52cb6199b02111158d1741bc1537bf59aa822c5cd7f958101da69c251939",
+      "bytes": 16384
+    },
+    "services/bi-control/fixtures/bi-specialist/candidate/holdout-underspecified-adversarial.sqlite": {
+      "sha256": "835ad550dc6259596cc97070468feb6c9faf87eeff5f2d06da9be9470470bbce",
+      "bytes": 12288
+    },
+    "services/bi-control/src/bi-specialist/local-openai-adapter.mjs": {
+      "sha256": "f8b884bad7ad7455e6be3abbd5f1cf22aa670975ed8feef2fbfe69730fbd9994",
+      "bytes": 10866
+    },
+    "services/bi-control/src/bi-specialist/optimization-gate.mjs": {
+      "sha256": "4543407b9ec9992f78cd57a04fcba6b2620578fae2eadad320af3e3ba8b96b05",
+      "bytes": 2810
+    },
+    "services/bi-control/src/bi-specialist/planning-policy.mjs": {
+      "sha256": "c3893e269c219d3ee53aef3adcb58b642ccfd0fe9603f30795cf5bdb2021df67",
+      "bytes": 5189
+    },
+    "services/bi-control/src/bi-specialist/progressive-discovery.mjs": {
+      "sha256": "727fd54d3663c5d5e512db7d03b007616cddd0251695d970b427143fdb3ef98b",
+      "bytes": 14170
+    },
+    "services/bi-control/src/bi-specialist/specialist-agent.mjs": {
+      "sha256": "46dd9aa00e40518fef45c56386475be36dae0e6f2d6fb810e6c06b67e659ba0f",
+      "bytes": 3179
+    },
+    "tests/bi-specialist.test.mjs": {
+      "sha256": "4de045a96c73ee886479464e6aa30d2e632d2f1b981eb54856acfb237e207052",
+      "bytes": 17890
+    },
+    "tests/fixtures/bi-specialist-hidden-oracles-v1.json": {
+      "sha256": "b734ac450a63d9e1c068755d61594c357aac9eca8a802029af1ab3ed58227372",
+      "bytes": 1506
+    }
+  },
+  "rollback": [
+    "restore-generation:m6-03-incumbent-v1",
+    "trusted semantic store rollback point",
+    "git revert the final local M6-03 commit"
+  ],
+  "nonclaims": [
+    "production/customer evidence",
+    "causal proof",
+    "byte determinism",
+    "rendered UI acceptance",
+    "push/PR/tag/release/deployment"
+  ]
+}
