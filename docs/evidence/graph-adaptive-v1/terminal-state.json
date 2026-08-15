@@ -37,7 +37,7 @@
     {
       "id": "candidate-freeze-v1",
       "path": "docs/evidence/graph-adaptive-v1/candidate-freeze.json",
-      "sha256": "a72dba3d22e15e8ea6111b94742c3097d77771282d01fcee4161bbabc039bd48",
+      "sha256": "26609c15e09e6b978afdb3df56bc7a99d302e391508a0f3275e220aa25553558",
       "classification": "candidate_freeze"
     }
   ],
@@ -875,7 +875,7 @@
       },
       "receiptHash": "71b110716204c20cc9278f9a4d97c41bab0d73e5d7a457d6b44c923aa054c826",
       "runtimeMetrics": {
-        "wallTimeMs": 0.01619099999999918,
+        "wallTimeMs": 0.017272000000001952,
         "tokens": 0,
         "costUsd": 0,
         "probes": 0,
@@ -935,7 +935,7 @@
       },
       "receiptHash": "59c893a2d2ab9f8473902869cceb44d8db2a5968e39e0da4b2b9eaf7ad46043d",
       "runtimeMetrics": {
-        "wallTimeMs": 0.10808399999999807,
+        "wallTimeMs": 0.10628100000000273,
         "tokens": 0,
         "costUsd": 0,
         "probes": 0,
@@ -1001,7 +1001,7 @@
       },
       "receiptHash": "210e1422027644de775b0f27ee414975dd953835785b5e0d9c043365291a1905",
       "runtimeMetrics": {
-        "wallTimeMs": 0.3515240000000013,
+        "wallTimeMs": 0.36574099999999987,
         "tokens": 0,
         "costUsd": 0,
         "probes": 0,
@@ -1065,7 +1065,7 @@
       },
       "receiptHash": "cd6198c5eac9682ce0cbacbb64d3ad977df2e10d7165319793500c3443073736",
       "runtimeMetrics": {
-        "wallTimeMs": 0.29774300000000054,
+        "wallTimeMs": 0.3066190000000013,
         "tokens": 0,
         "costUsd": 0,
         "probes": 4,
@@ -1128,7 +1128,7 @@
       },
       "receiptHash": "bbdf9d31b93f3cfc683b3406b67dd2a953754769b2ba3d7d69e4a88321fa4fe7",
       "runtimeMetrics": {
-        "wallTimeMs": 0.3818710000000003,
+        "wallTimeMs": 0.3809100000000001,
         "tokens": 0,
         "costUsd": 0,
         "probes": 0,
@@ -1188,7 +1188,7 @@
       },
       "receiptHash": "164fbfb6c6a6ea8e0ccc9e97216840658db0fdfcccbdc449d32523f3b9b2a575",
       "runtimeMetrics": {
-        "wallTimeMs": 0.14526499999999842,
+        "wallTimeMs": 0.14577600000000146,
         "tokens": 0,
         "costUsd": 0,
         "probes": 0,

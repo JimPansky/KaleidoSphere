@@ -143,12 +143,17 @@
   },
   "hashes": {
     "graphSpec": "0b71852226b3845f14e27195e2239355935f966debdb423d0174a3e944379c6e",
-    "terminalState": "f698607d322547fb889abded61ee31a8060b1f7c9ea01426cc92f54a0d3549d6",
+    "terminalState": "d1c2361dd104ad076567f7b78306d5be96a2446f9a79cb88bb76ddad05f66fdb",
     "sealedInputSet": "d706dfbe44aec18231310e952a01f032c816140e48aad826f9f07b4c0bd51f7b",
     "sealedOracleSet": "9cb0c813d52e8c7d54fafb1655a02990904df9fd47ce9cdf1619bce3eb895d98",
-    "candidateFreeze": "a72dba3d22e15e8ea6111b94742c3097d77771282d01fcee4161bbabc039bd48"
+    "candidateFreezeCanonical": "a72dba3d22e15e8ea6111b94742c3097d77771282d01fcee4161bbabc039bd48",
+    "candidateFreezeFile": "26609c15e09e6b978afdb3df56bc7a99d302e391508a0f3275e220aa25553558"
   },
-  "negativeEvidence": [],
+  "negativeEvidence": [
+    "privacy-leak-source-rows:PASS:ADAPTIVE_PROFILE_PRIVACY_FILTER_DENIED",
+    "per-case-probe-budget-zero:PASS:ADAPTIVE_CASE_PROBE_BUDGET_EXCEEDED",
+    "receipt-tamper:PASS:deterministic replay mismatch detected"
+  ],
   "nonclaims": [
     "synthetic profile summaries only",
     "no source rows or sampled values persisted",

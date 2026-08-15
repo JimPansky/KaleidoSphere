@@ -555,7 +555,7 @@ export function graphToDot(spec) {
   return `${lines.join('\n')}\n`;
 }
 
-export function buildAdaptiveEvidencePack({ runId, state, replay, packs, candidateFreeze, hashes }) {
+export function buildAdaptiveEvidencePack({ runId, state, replay, packs, candidateFreeze, hashes, negativeEvidence = [] }) {
   const comparison = state.nodeOutputs['BI-G6_static_vs_adaptive_compare'].comparison;
   const accepted = comparison.acceptance.accepted && replay.rate === 1;
   const verdict = accepted ? 'ACCEPTED' : comparison.acceptance.privacyMutationHardFails === 0 ? 'PARTIAL' : 'NEGATIVE';
@@ -579,7 +579,9 @@ export function buildAdaptiveEvidencePack({ runId, state, replay, packs, candida
     replay,
     privacy: state.privacy,
     hashes,
-    negativeEvidence: accepted ? [] : ['ADAPTIVE_V1_NOT_ACCEPTED_FOR_PROMOTION'],
+    negativeEvidence: accepted
+      ? negativeEvidence
+      : [...negativeEvidence, 'ADAPTIVE_V1_NOT_ACCEPTED_FOR_PROMOTION'],
     nonclaims: state.verdict.nonclaims,
     artifacts: {
       mermaid: 'docs/evidence/graph-adaptive-v1/adaptive-investigation-v1.mmd',

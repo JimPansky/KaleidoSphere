@@ -178,5 +178,9 @@ test('terminal adaptive v1 evidence is accepted, replayable, sealed, local-only 
   assert(manifest.cases.every((item) => item.sealed === true));
   assert.equal(manifest.candidateFreeze.frozenBeforeSealedRun, true);
   assert.equal(manifest.candidateFreeze.liveModelUsed, false);
+  assert.equal(manifest.hashes.candidateFreezeCanonical, manifest.candidateFreeze.sha256);
+  assert.match(manifest.hashes.candidateFreezeFile, /^[a-f0-9]{64}$/);
+  assert.equal(manifest.negativeEvidence.length, 3);
+  assert(manifest.negativeEvidence.every((item) => item.includes(':PASS:')));
   assert(manifest.nonclaims.includes('no live model quality claim'));
 });
