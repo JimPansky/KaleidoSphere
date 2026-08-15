@@ -99,3 +99,10 @@ and an externally installed local llama.cpp/Qwen runtime only for isolated evalu
 llama.cpp, Qwen, DeepSeek Harness, Hermes or OpenClaw runtime code/artifact is copied or
 redistributed. M6-03 files are ordinary repository-authored hashes under `files`, not derived
 files.
+
+M6-04 trusted-workflow compiler, reviewed Superset executor, deterministic approval and
+reconciliation boundaries, disposable-stack evidence runner, tests, decision record and
+evidence manifests are repository-authored clean-room work. They compose the existing M6-00,
+M6-02 and M6-03 interfaces without copying Apache Superset, model, OpenClaw, or third-party
+runtime source. M6-04 files are ordinary repository-authored hashes under `files`, not derived
+files.
