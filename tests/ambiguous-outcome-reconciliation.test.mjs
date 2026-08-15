@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdtemp, rm } from 'node:fs/promises';
+import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import test from 'node:test';
@@ -15,7 +15,9 @@ import {
   FileOutcomeJournal,
   OutcomeJournal,
   authorizeFreshRetryAfterUnchanged,
+  compensateOwnedPartialOutcome,
   createOutcomeContext,
+  recoverUnknownOutcomeFromFile,
   reconcileUnknownOutcome,
   transitionOutcomeState,
 } from '../services/bi-control/src/trusted-workflow/ambiguous-outcome-reconciliation.mjs';
@@ -276,4 +278,113 @@ test('G3 classifies owned partial, diverged, foreign-owned, and target drift as 
   const drift = await reconcileUnknownOutcome({ journal: driftJournal, plan, target: driftedTarget, ...adapterFor(plan, { '01-dataset': 'before', '02-chart': 'before' }) });
   assert.equal(drift.state, 'manual_review');
   assert.equal(drift.entry.decision.manualReviewRequired, true);
+});
+
+test('G5 restart recovery is single-owner, suppresses concurrent duplicates, and is idempotent', async () => {
+  const { context, plan } = fixtures();
+  const tmp = await mkdtemp(join(tmpdir(), 'm6-05-recovery-'));
+  try {
+    const filePath = join(tmp, 'journal.json');
+    const leasePath = join(tmp, 'recovery.lock');
+    const firstProcess = await FileOutcomeJournal.open({ filePath, context });
+    await firstProcess.appendAndFlush({ eventType: 'initialized' });
+    await firstProcess.appendAndFlush({ eventType: 'dispatch_response_lost', decision: { blindRetryAllowed: false } });
+
+    let releaseRead;
+    const readGate = new Promise((resolve) => { releaseRead = resolve; });
+    let readStarted;
+    const started = new Promise((resolve) => { readStarted = resolve; });
+    const values = new Map(plan.actions.map((action) => [action.actionId, action.after]));
+    const calls = { read: 0, applyValue: 0 };
+    const adapter = {
+      async read(action) { calls.read += 1; readStarted(); await readGate; return structuredClone(values.get(action.actionId)); },
+      async applyValue() { calls.applyValue += 1; throw new Error('duplicate mutation denied'); },
+    };
+    const owner = recoverUnknownOutcomeFromFile({ filePath, leasePath, ownerId: 'executor-restart-1', context, plan, adapter, target: target() });
+    await started;
+    await assert.rejects(
+      recoverUnknownOutcomeFromFile({ filePath, leasePath, ownerId: 'executor-restart-2', context, plan, adapter, target: target() }),
+      /OUTCOME_RECOVERY_LEASE_HELD/,
+    );
+    releaseRead();
+    const recovered = await owner;
+    assert.equal(recovered.state, 'committed_equivalent');
+    assert.equal(recovered.recovered, true);
+    assert.equal(calls.applyValue, 0);
+
+    const repeated = await recoverUnknownOutcomeFromFile({ filePath, leasePath, ownerId: 'executor-restart-3', context, plan, adapter, target: target() });
+    assert.equal(repeated.state, 'committed_equivalent');
+    assert.equal(repeated.recovered, false);
+    assert.equal(repeated.duplicateSuppressed, true);
+    assert.equal(calls.read, 2);
+    assert.equal(calls.applyValue, 0);
+  } finally {
+    await rm(tmp, { recursive: true, force: true });
+  }
+});
+
+test('G5 compensates only exact owned partial actions and leaves unrelated assets untouched', async () => {
+  const { context, plan } = fixtures();
+  const journal = new OutcomeJournal({ context });
+  journal.append({ eventType: 'initialized' });
+  journal.append({ eventType: 'dispatch_response_lost' });
+  const values = new Map(plan.actions.map((action) => [action.actionId, action.actionId === '01-dataset' ? action.after : action.before]));
+  const unrelated = { identity: 'dashboard:unrelated', title: 'untouched' };
+  const calls = [];
+  const adapter = {
+    async read(action) { return structuredClone(values.get(action.actionId)); },
+    async applyValue(action, value) { calls.push(action.actionId); values.set(action.actionId, structuredClone(value)); return structuredClone(value); },
+  };
+  const classified = await reconcileUnknownOutcome({ journal, plan, adapter, target: target() });
+  assert.equal(classified.state, 'partial');
+  const compensation = await compensateOwnedPartialOutcome({ journal, plan, adapter });
+  assert.deepEqual(calls, ['01-dataset']);
+  assert.equal(compensation.restored.length, 1);
+  assert.deepEqual(unrelated, { identity: 'dashboard:unrelated', title: 'untouched' });
+  assert.equal(compensation.entry.evidence.unrelatedAssetsMutated, 0);
+
+  const foreignJournal = new OutcomeJournal({ context });
+  foreignJournal.append({ eventType: 'initialized' });
+  foreignJournal.append({ eventType: 'dispatch_response_lost' });
+  values.set('01-dataset', structuredClone(plan.actions.find((action) => action.actionId === '01-dataset').after));
+  await reconcileUnknownOutcome({ journal: foreignJournal, plan, adapter, target: target() });
+  assert.equal(foreignJournal.state, 'partial');
+  await assert.rejects(compensateOwnedPartialOutcome({ journal: foreignJournal, plan, adapter, ownership: { '01-dataset': 'foreign' } }), /OUTCOME_COMPENSATION_FOREIGN_OWNERSHIP/);
+});
+
+test('G6 rejects forged journal heads and plan substitution, and closes on capability drift without mutation', async () => {
+  const { context, plan } = fixtures();
+  const tmp = await mkdtemp(join(tmpdir(), 'm6-05-adversarial-'));
+  try {
+    const filePath = join(tmp, 'journal.json');
+    const journal = await FileOutcomeJournal.open({ filePath, context });
+    await journal.appendAndFlush({ eventType: 'initialized' });
+    await journal.appendAndFlush({ eventType: 'dispatch_response_lost' });
+    const forged = JSON.parse(await readFile(filePath, 'utf8'));
+    forged.lastHash = `sha256:${'0'.repeat(64)}`;
+    await writeFile(filePath, `${JSON.stringify(forged)}\n`);
+    await assert.rejects(FileOutcomeJournal.open({ filePath, context }), /OUTCOME_JOURNAL_FILE_TRUNCATED_OR_FORGED/);
+
+    const substituted = structuredClone(plan);
+    substituted.actions[0].after.description = 'substituted';
+    const body = Object.fromEntries(Object.entries(substituted).filter(([key]) => key !== 'previewDigest'));
+    substituted.previewDigest = sha256Digest(body);
+    const substitutionJournal = new OutcomeJournal({ context });
+    substitutionJournal.append({ eventType: 'initialized' });
+    substitutionJournal.append({ eventType: 'dispatch_response_lost' });
+    await assert.rejects(reconcileUnknownOutcome({ journal: substitutionJournal, plan: substituted, ...adapterFor(substituted, { '01-dataset': 'before', '02-chart': 'before' }), target: target() }), /OUTCOME_PLAN_SUBSTITUTION/);
+
+    const driftTarget = target();
+    driftTarget.capabilityRevision = 'foreign-revision';
+    const driftJournal = new OutcomeJournal({ context });
+    driftJournal.append({ eventType: 'initialized' });
+    driftJournal.append({ eventType: 'dispatch_response_lost' });
+    const { adapter, calls } = adapterFor(plan, { '01-dataset': 'before', '02-chart': 'before' });
+    const drift = await reconcileUnknownOutcome({ journal: driftJournal, plan, adapter, target: driftTarget });
+    assert.equal(drift.state, 'manual_review');
+    assert.equal(calls.read, 0);
+    assert.equal(calls.applyValue, 0);
+  } finally {
+    await rm(tmp, { recursive: true, force: true });
+  }
 });

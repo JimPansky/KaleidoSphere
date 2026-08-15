@@ -1,4 +1,4 @@
-import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
+import { mkdir, open, readFile, rename, unlink, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 
 import { canonicalJson } from '../canonical-json.js';
@@ -207,6 +207,7 @@ function assertJournalEntry(entry, expected) {
 }
 
 export class OutcomeJournal {
+  #context;
   #contextDigest;
   #entries;
   #state;
@@ -214,6 +215,7 @@ export class OutcomeJournal {
 
   constructor({ context, entries = [], clock = () => new Date().toISOString() }) {
     if (!context || context.schemaVersion !== OUTCOME_CONTEXT_VERSION) FAIL('OUTCOME_CONTEXT_INVALID');
+    this.#context = canonicalClone(context);
     this.#contextDigest = sha256Digest(context);
     this.#entries = [];
     this.#state = null;
@@ -223,6 +225,7 @@ export class OutcomeJournal {
 
   get state() { return this.#state; }
   get contextDigest() { return this.#contextDigest; }
+  context() { return clone(this.#context); }
 
   entries() { return this.#entries.map(clone); }
 
@@ -284,8 +287,12 @@ export class FileOutcomeJournal extends OutcomeJournal {
     let entries = [];
     try {
       const parsed = JSON.parse(await readFile(filePath, 'utf8'));
-      if (!parsed || parsed.schemaVersion !== OUTCOME_JOURNAL_VERSION || parsed.contextDigest !== sha256Digest(context) || !Array.isArray(parsed.entries)) FAIL('OUTCOME_JOURNAL_FILE_INVALID');
+      exactKeys(parsed, new Set(['schemaVersion', 'contextDigest', 'state', 'entries', 'lastHash']), 'OUTCOME_JOURNAL_FILE_INVALID');
+      if (parsed.schemaVersion !== OUTCOME_JOURNAL_VERSION || parsed.contextDigest !== sha256Digest(context) || !Array.isArray(parsed.entries)) FAIL('OUTCOME_JOURNAL_FILE_INVALID');
       entries = parsed.entries;
+      const verified = new OutcomeJournal({ context, entries });
+      const verifiedSnapshot = verified.snapshot();
+      if (parsed.state !== verifiedSnapshot.state || parsed.lastHash !== verifiedSnapshot.lastHash) FAIL('OUTCOME_JOURNAL_FILE_TRUNCATED_OR_FORGED');
     } catch (error) {
       if (error.code !== 'ENOENT') throw error;
     }
@@ -309,6 +316,38 @@ export class FileOutcomeJournal extends OutcomeJournal {
   }
 }
 
+export async function withOutcomeRecoveryLease({ leasePath, ownerId, operation, occurredAt = new Date().toISOString() }) {
+  if (!ID.test(ownerId ?? '') || typeof operation !== 'function') FAIL('OUTCOME_RECOVERY_LEASE_INVALID');
+  await mkdir(dirname(leasePath), { recursive: true });
+  let handle;
+  try {
+    handle = await open(leasePath, 'wx', 0o600);
+  } catch (error) {
+    if (error.code === 'EEXIST') FAIL('OUTCOME_RECOVERY_LEASE_HELD');
+    throw error;
+  }
+  try {
+    await handle.writeFile(`${JSON.stringify({ ownerId, occurredAt })}\n`);
+    await handle.sync();
+    return await operation();
+  } finally {
+    await handle.close();
+    await unlink(leasePath).catch((error) => { if (error.code !== 'ENOENT') throw error; });
+  }
+}
+
+export async function recoverUnknownOutcomeFromFile({ filePath, leasePath = `${filePath}.recovery.lock`, ownerId, context, plan, adapter, target, ownership = {}, occurredAt }) {
+  return withOutcomeRecoveryLease({ leasePath, ownerId, occurredAt, operation: async () => {
+    const journal = await FileOutcomeJournal.open({ filePath, context });
+    if (journal.state !== 'outcome_unknown') {
+      return { state: journal.state, recovered: false, duplicateSuppressed: true, mutationRequestsIssued: 0, journal };
+    }
+    const result = await reconcileUnknownOutcome({ journal, plan, adapter, target, ownership, occurredAt });
+    await journal.flush();
+    return { ...result, recovered: true, duplicateSuppressed: false, mutationRequestsIssued: 0, journal };
+  }});
+}
+
 function relationForObserved({ observed, action, missingCode }) {
   if (missingCode && action.before === null) return 'before';
   if (missingCode && action.after === null) return 'after';
@@ -322,6 +361,16 @@ export async function reconcileUnknownOutcome({ journal, plan, adapter, target, 
   if (!(journal instanceof OutcomeJournal)) FAIL('OUTCOME_JOURNAL_REQUIRED');
   if (journal.state !== 'outcome_unknown') FAIL('OUTCOME_RECONCILE_STATE_INVALID');
   assertPlan(plan);
+  const boundContext = journal.context();
+  if (boundContext.planDigest !== sha256Digest(plan)) FAIL('OUTCOME_PLAN_SUBSTITUTION');
+  if (!target || target.targetId !== boundContext.target.targetId || target.environment !== boundContext.target.environment || target.fingerprint.digest !== boundContext.target.fingerprintDigest || target.capabilityRevision !== boundContext.target.capabilityRevision || sha256Digest([...target.capabilities].sort((a, b) => a.capabilityId.localeCompare(b.capabilityId))) !== boundContext.target.capabilityDigest) {
+    const entry = journal.append({
+      eventType: 'reconcile_manual_review', occurredAt,
+      evidence: { reason: 'target_or_capability_drift', targetBindingDigest: boundContext.targetBindingDigest },
+      decision: { retryAllowed: false, compensationAllowed: false, manualReviewRequired: true },
+    });
+    return { state: entry.toState, classification: 'manual_review', entry };
+  }
   if (target && sha256Digest([...target.assets].sort((a, b) => a.identity.localeCompare(b.identity))) !== plan.targetBinding.assetSnapshotDigest) {
     const entry = journal.append({
       eventType: 'reconcile_manual_review',
@@ -415,4 +464,28 @@ export function authorizeFreshRetryAfterUnchanged({ journal, context, plan, auth
     },
     decision: { retryAllowed: true, blindRedispatch: false, freshIdempotencyKeyDigest: sha256Digest(idempotencyKey) },
   });
+}
+
+export async function compensateOwnedPartialOutcome({ journal, plan, adapter, ownership = {}, occurredAt }) {
+  if (!(journal instanceof OutcomeJournal) || journal.state !== 'partial') FAIL('OUTCOME_COMPENSATION_STATE_INVALID');
+  assertPlan(plan);
+  const byId = new Map(plan.actions.map((action) => [action.actionId, action]));
+  const restored = [];
+  for (const actionId of [...plan.applyOrder].reverse()) {
+    const action = byId.get(actionId);
+    if ((ownership[actionId] ?? 'owned') !== 'owned') FAIL('OUTCOME_COMPENSATION_FOREIGN_OWNERSHIP');
+    const observed = await adapter.read(action);
+    if (same(observed, action.before)) continue;
+    if (!same(observed, action.after)) FAIL('OUTCOME_COMPENSATION_DRIFT');
+    const readback = await adapter.applyValue(action, action.before);
+    if (!same(readback, action.before)) FAIL('OUTCOME_COMPENSATION_READBACK_MISMATCH');
+    restored.push({ actionId, restoredDigest: sha256Digest(readback) });
+  }
+  const entry = journal.append({
+    eventType: 'manual_review_opened',
+    occurredAt,
+    evidence: { restored, planDigest: sha256Digest(plan), unrelatedAssetsMutated: 0 },
+    decision: { compensationCompleted: true, retryAllowed: false, manualReviewRequired: false },
+  });
+  return { state: entry.toState, restored, entry };
 }
