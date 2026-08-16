@@ -1,0 +1,827 @@
+{
+  "schemaVersion": "chimpmaera.bi/m6-03-qwen-conformance/v1",
+  "generatedAt": "2026-08-15T04:15:49.500Z",
+  "provider": {
+    "endpoint": "http://127.0.0.1:18103/v1",
+    "loopbackOnly": true,
+    "model": "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+    "quantization": "Q6_K",
+    "reasoningPersisted": false,
+    "binaryPath": "/mnt/data2/ai/llama.cpp/llama-b8929/llama-server",
+    "binarySha256": "96b71dd5794723b8812e559e39657e3cb1acfb699ebe52938717c32143212b04",
+    "modelPath": "/mnt/data2/ai/gguf-models/qwen3.6-28b-reap20-a3b/Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+    "modelSha256": "62cecf9785ea5d13c9a59b46c3c5a61eb629c2b6fe40e5a991beb4b0a11fcbe3",
+    "config": {
+      "host": "127.0.0.1",
+      "port": 18103,
+      "ctxSize": 16384,
+      "parallel": 1,
+      "jinja": true,
+      "reasoning": "off",
+      "reasoningBudget": 0,
+      "gpuLayers": 99,
+      "threads": 8
+    },
+    "service": "sba-m6-03-qwen36-q6-20260815.service"
+  },
+  "observations": [
+    {
+      "id": "models-endpoint",
+      "passed": true,
+      "count": 1,
+      "ids": [
+        "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf"
+      ]
+    },
+    {
+      "id": "normal-response",
+      "passed": true,
+      "contentDigest": "c2e3ac47f4a325469c1a2d5f117e463ec943c721986d5d9f09ac4540b7d80526",
+      "outputChars": 5,
+      "receipt": {
+        "idempotencyKey": "m6-live-normal",
+        "requestDigest": "d6dbbf0970021cbe84d664a1b39114226d64786c3c1d697c3b3049fc2da2eb21",
+        "attempts": 1
+      }
+    },
+    {
+      "id": "structured-output",
+      "passed": true,
+      "contentDigest": "03a7ece21d5ab2b2d057b3b30a0919397605e2396a560ebf19195a00dd933f23",
+      "keys": [
+        "blind_spots",
+        "confidence",
+        "status"
+      ]
+    },
+    {
+      "id": "tool-call-parsing",
+      "passed": true,
+      "toolCallCount": 1,
+      "toolNames": [
+        "inspect_schema"
+      ]
+    },
+    {
+      "id": "timeout",
+      "passed": true,
+      "code": "MODEL_TIMEOUT"
+    },
+    {
+      "id": "streaming-cancel",
+      "passed": true,
+      "streamDeltas": 1,
+      "code": "MODEL_CANCELLED"
+    },
+    {
+      "id": "restart-reconciliation-idempotency",
+      "passed": true,
+      "receipt": {
+        "idempotencyKey": "m6-live-reconcile",
+        "requestDigest": "5d12011769a5638a2e42596acce17575e0f54250411df6d4db69784d8b73e5b0",
+        "attempts": 1
+      }
+    },
+    {
+      "id": "context-response-budgets",
+      "passed": true,
+      "contextCode": "CONTEXT_BUDGET_EXCEEDED",
+      "responseCode": "RESPONSE_BUDGET_EXCEEDED"
+    },
+    {
+      "id": "paired-sampling-matrix",
+      "passed": true,
+      "calls": 12,
+      "temperatures": [
+        0,
+        0.1,
+        0.2,
+        0.4,
+        0.6,
+        0.8
+      ]
+    },
+    {
+      "id": "qwen-specialist-training-and-blind-holdouts",
+      "passed": true,
+      "cases": 5,
+      "training": 2,
+      "holdout": 3,
+      "failures": []
+    },
+    {
+      "id": "privacy-safe-trace-schema",
+      "passed": true,
+      "traceCount": 21,
+      "fields": [
+        "inputChars",
+        "latencyMs",
+        "model",
+        "outputChars",
+        "requestDigest",
+        "sampling",
+        "status",
+        "toolCallCount",
+        "type"
+      ]
+    }
+  ],
+  "samplingMatrix": [
+    {
+      "profileId": "temperature-ablation-0.0",
+      "taskClass": "deterministic-extraction",
+      "repeat": 1,
+      "sampling": {
+        "temperature": 0,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "validJson": true,
+      "requiredKeys": true,
+      "outputDigest": "8efbc6e87588f3a8177c66b60280e07270adac8535b2e8059ea6697f98dec890",
+      "outputChars": 194,
+      "receipt": {
+        "idempotencyKey": "m6-matrix-temperature-ablation-0.0-1",
+        "requestDigest": "4bf989ada1a5f349f5b7f68f4245a9174e5a50a8931e61958450d272515fbd45",
+        "attempts": 1
+      }
+    },
+    {
+      "profileId": "temperature-ablation-0.0",
+      "taskClass": "deterministic-extraction",
+      "repeat": 2,
+      "sampling": {
+        "temperature": 0,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "validJson": true,
+      "requiredKeys": true,
+      "outputDigest": "0333225788eb45b4da793fbca22e05728b8082863d0751401065912db47ceb2a",
+      "outputChars": 228,
+      "receipt": {
+        "idempotencyKey": "m6-matrix-temperature-ablation-0.0-2",
+        "requestDigest": "4bf989ada1a5f349f5b7f68f4245a9174e5a50a8931e61958450d272515fbd45",
+        "attempts": 1
+      }
+    },
+    {
+      "profileId": "temperature-ablation-0.1",
+      "taskClass": "sql-and-repair",
+      "repeat": 1,
+      "sampling": {
+        "temperature": 0.1,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "validJson": true,
+      "requiredKeys": true,
+      "outputDigest": "4612745318f5c469082c8f4dc7d8edaca202aa79a08e5b2678b2827b6108a137",
+      "outputChars": 222,
+      "receipt": {
+        "idempotencyKey": "m6-matrix-temperature-ablation-0.1-1",
+        "requestDigest": "d753746da3c9866ec30628a6bdbe58437b2fc6dc92dabb8c2007d4924362ba76",
+        "attempts": 1
+      }
+    },
+    {
+      "profileId": "temperature-ablation-0.1",
+      "taskClass": "sql-and-repair",
+      "repeat": 2,
+      "sampling": {
+        "temperature": 0.1,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "validJson": true,
+      "requiredKeys": true,
+      "outputDigest": "8efbc6e87588f3a8177c66b60280e07270adac8535b2e8059ea6697f98dec890",
+      "outputChars": 194,
+      "receipt": {
+        "idempotencyKey": "m6-matrix-temperature-ablation-0.1-2",
+        "requestDigest": "d753746da3c9866ec30628a6bdbe58437b2fc6dc92dabb8c2007d4924362ba76",
+        "attempts": 1
+      }
+    },
+    {
+      "profileId": "temperature-ablation-0.2",
+      "taskClass": "anomaly-quality",
+      "repeat": 1,
+      "sampling": {
+        "temperature": 0.2,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "validJson": true,
+      "requiredKeys": true,
+      "outputDigest": "4612745318f5c469082c8f4dc7d8edaca202aa79a08e5b2678b2827b6108a137",
+      "outputChars": 222,
+      "receipt": {
+        "idempotencyKey": "m6-matrix-temperature-ablation-0.2-1",
+        "requestDigest": "d6ca30fbf5a860e60f9b2d904bbc7699ee85b477f18509a48b13d49c67509ac7",
+        "attempts": 1
+      }
+    },
+    {
+      "profileId": "temperature-ablation-0.2",
+      "taskClass": "anomaly-quality",
+      "repeat": 2,
+      "sampling": {
+        "temperature": 0.2,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "validJson": true,
+      "requiredKeys": true,
+      "outputDigest": "0333225788eb45b4da793fbca22e05728b8082863d0751401065912db47ceb2a",
+      "outputChars": 228,
+      "receipt": {
+        "idempotencyKey": "m6-matrix-temperature-ablation-0.2-2",
+        "requestDigest": "d6ca30fbf5a860e60f9b2d904bbc7699ee85b477f18509a48b13d49c67509ac7",
+        "attempts": 1
+      }
+    },
+    {
+      "profileId": "temperature-ablation-0.4",
+      "taskClass": "relationship-cause",
+      "repeat": 1,
+      "sampling": {
+        "temperature": 0.4,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "validJson": true,
+      "requiredKeys": true,
+      "outputDigest": "0402a59a2136f5beceab6fffd46c562d6427edbcb5f9cc515c7a767e0244d9f7",
+      "outputChars": 188,
+      "receipt": {
+        "idempotencyKey": "m6-matrix-temperature-ablation-0.4-1",
+        "requestDigest": "84fe99fcfce1bd90af06d3f7db393d3835c773f3eb4c94f316a2f4873763be39",
+        "attempts": 1
+      }
+    },
+    {
+      "profileId": "temperature-ablation-0.4",
+      "taskClass": "relationship-cause",
+      "repeat": 2,
+      "sampling": {
+        "temperature": 0.4,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "validJson": true,
+      "requiredKeys": true,
+      "outputDigest": "5ce768874948d0949cfbd33c952627e566f1fc233dd43c151c8ab18bc8cfc5d1",
+      "outputChars": 194,
+      "receipt": {
+        "idempotencyKey": "m6-matrix-temperature-ablation-0.4-2",
+        "requestDigest": "84fe99fcfce1bd90af06d3f7db393d3835c773f3eb4c94f316a2f4873763be39",
+        "attempts": 1
+      }
+    },
+    {
+      "profileId": "temperature-ablation-0.6",
+      "taskClass": "visual-preview",
+      "repeat": 1,
+      "sampling": {
+        "temperature": 0.6,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "validJson": true,
+      "requiredKeys": true,
+      "outputDigest": "ff5d67e79c2af9cc445e423611f294621e8feaba1d043ff29e0853a674bd6191",
+      "outputChars": 299,
+      "receipt": {
+        "idempotencyKey": "m6-matrix-temperature-ablation-0.6-1",
+        "requestDigest": "45bed93d0299ea7f7bb3b0e34b89b1f014e779240f687a92b9ebaf35c81c534a",
+        "attempts": 1
+      }
+    },
+    {
+      "profileId": "temperature-ablation-0.6",
+      "taskClass": "visual-preview",
+      "repeat": 2,
+      "sampling": {
+        "temperature": 0.6,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "validJson": true,
+      "requiredKeys": true,
+      "outputDigest": "46d96950d72b1b076362293857353b86107b2148e5e9f18d675982f5534e3c03",
+      "outputChars": 376,
+      "receipt": {
+        "idempotencyKey": "m6-matrix-temperature-ablation-0.6-2",
+        "requestDigest": "45bed93d0299ea7f7bb3b0e34b89b1f014e779240f687a92b9ebaf35c81c534a",
+        "attempts": 1
+      }
+    },
+    {
+      "profileId": "temperature-ablation-0.8",
+      "taskClass": "visual-preview-high-comparator",
+      "repeat": 1,
+      "sampling": {
+        "temperature": 0.8,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "validJson": true,
+      "requiredKeys": true,
+      "outputDigest": "4c7c5a559aa7d409b0e18e2b7d261a8b5ae1cb9404d553e8a4517544a77dec63",
+      "outputChars": 259,
+      "receipt": {
+        "idempotencyKey": "m6-matrix-temperature-ablation-0.8-1",
+        "requestDigest": "9acf39eab0b29fcb05e7f9b927159f88228ca56ef2c422001b69010424a42d30",
+        "attempts": 1
+      }
+    },
+    {
+      "profileId": "temperature-ablation-0.8",
+      "taskClass": "visual-preview-high-comparator",
+      "repeat": 2,
+      "sampling": {
+        "temperature": 0.8,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "validJson": true,
+      "requiredKeys": true,
+      "outputDigest": "6d40998812aa3eebfc392ed440b4e1c02ded9a40bcbec4756872016d0b1831fe",
+      "outputChars": 423,
+      "receipt": {
+        "idempotencyKey": "m6-matrix-temperature-ablation-0.8-2",
+        "requestDigest": "9acf39eab0b29fcb05e7f9b927159f88228ca56ef2c422001b69010424a42d30",
+        "attempts": 1
+      }
+    }
+  ],
+  "specialistCases": [
+    {
+      "id": "training-order-to-cash",
+      "lane": "training",
+      "taskClass": "anomaly_quality",
+      "sampling": {
+        "id": "balanced_analysis_v1",
+        "temperature": 0.2,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 1024
+      },
+      "schemaValid": true,
+      "groundedTables": true,
+      "errorCode": null,
+      "outputDigest": "cee28fa073591cf75a4758fee3d71cca3674acf7cb70949a68c4f3a1f0135e22",
+      "discoveredTables": 5,
+      "evidenceTableCount": 5,
+      "mutationPerformed": false
+    },
+    {
+      "id": "training-production-supplier",
+      "lane": "training",
+      "taskClass": "relationship_cause",
+      "sampling": {
+        "id": "deep_hypothesis_v1",
+        "temperature": 0.4,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 1024
+      },
+      "schemaValid": true,
+      "groundedTables": true,
+      "errorCode": null,
+      "outputDigest": "1e162bf6fa8d046dafff3973cd42d0875ef2f23077c8a58f2dfa46a12d0d1b17",
+      "discoveredTables": 4,
+      "evidenceTableCount": 4,
+      "mutationPerformed": false
+    },
+    {
+      "id": "holdout-channel-perturbed",
+      "lane": "holdout",
+      "taskClass": "visualization",
+      "sampling": {
+        "id": "preview_design_v1",
+        "temperature": 0.6,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 1024
+      },
+      "schemaValid": true,
+      "groundedTables": true,
+      "errorCode": null,
+      "outputDigest": "7cd38aac8043aaf3239df8d8f20d36e70c22a80eebf646574b240c37b8e332c1",
+      "discoveredTables": 5,
+      "evidenceTableCount": 5,
+      "mutationPerformed": false
+    },
+    {
+      "id": "holdout-clinical-domain-shift",
+      "lane": "holdout",
+      "taskClass": "anomaly_quality",
+      "sampling": {
+        "id": "balanced_analysis_v1",
+        "temperature": 0.2,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 1024
+      },
+      "schemaValid": true,
+      "groundedTables": true,
+      "errorCode": null,
+      "outputDigest": "ae8493544c86fa24eb5f384ae44b962e3d19fb269af271caef45f5d4e854456e",
+      "discoveredTables": 3,
+      "evidenceTableCount": 3,
+      "mutationPerformed": false
+    },
+    {
+      "id": "holdout-underspecified-adversarial",
+      "lane": "holdout",
+      "taskClass": "extraction",
+      "sampling": {
+        "id": "deterministic_extract_v1",
+        "temperature": 0,
+        "topP": 0.9,
+        "seed": 7,
+        "maxTokens": 512
+      },
+      "schemaValid": true,
+      "groundedTables": true,
+      "errorCode": null,
+      "outputDigest": "de6eb8439c48fb6fb08efe1b7207cd98f36a57e1f39a3a8e0d658a83359df6f1",
+      "discoveredTables": 2,
+      "evidenceTableCount": 2,
+      "mutationPerformed": false
+    }
+  ],
+  "safeTraces": [
+    {
+      "type": "model_call",
+      "model": "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+      "requestDigest": "d6dbbf0970021cbe84d664a1b39114226d64786c3c1d697c3b3049fc2da2eb21",
+      "sampling": {
+        "temperature": 0.1,
+        "topP": 0.9,
+        "seed": 7,
+        "maxTokens": 32
+      },
+      "inputChars": 64,
+      "outputChars": 5,
+      "toolCallCount": 0,
+      "latencyMs": 358,
+      "status": "complete"
+    },
+    {
+      "type": "model_call",
+      "model": "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+      "requestDigest": "5fa4e106a1af24b8399fd62d1e9afc15694692ede6e66fa3fb61df37058e9e75",
+      "sampling": {
+        "temperature": 0,
+        "topP": 0.9,
+        "seed": 7,
+        "maxTokens": 128
+      },
+      "inputChars": 181,
+      "outputChars": 62,
+      "toolCallCount": 0,
+      "latencyMs": 214,
+      "status": "complete"
+    },
+    {
+      "type": "model_call",
+      "model": "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+      "requestDigest": "4c12b82528095f844005f0a55cd18c736781ffcdecddf60c5daa189517f94e55",
+      "sampling": {
+        "temperature": 0.1,
+        "topP": 0.9,
+        "seed": 7,
+        "maxTokens": 128
+      },
+      "inputChars": 92,
+      "outputChars": 0,
+      "toolCallCount": 1,
+      "latencyMs": 181,
+      "status": "complete"
+    },
+    {
+      "type": "model_call",
+      "model": "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+      "requestDigest": "5d12011769a5638a2e42596acce17575e0f54250411df6d4db69784d8b73e5b0",
+      "sampling": {
+        "temperature": 0,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 32
+      },
+      "inputChars": 50,
+      "outputChars": 9,
+      "toolCallCount": 0,
+      "latencyMs": 92,
+      "status": "complete"
+    },
+    {
+      "type": "model_call",
+      "model": "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+      "requestDigest": "4bf989ada1a5f349f5b7f68f4245a9174e5a50a8931e61958450d272515fbd45",
+      "sampling": {
+        "temperature": 0,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "inputChars": 256,
+      "outputChars": 194,
+      "toolCallCount": 0,
+      "latencyMs": 410,
+      "status": "complete"
+    },
+    {
+      "type": "model_call",
+      "model": "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+      "requestDigest": "4bf989ada1a5f349f5b7f68f4245a9174e5a50a8931e61958450d272515fbd45",
+      "sampling": {
+        "temperature": 0,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "inputChars": 256,
+      "outputChars": 228,
+      "toolCallCount": 0,
+      "latencyMs": 423,
+      "status": "complete"
+    },
+    {
+      "type": "model_call",
+      "model": "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+      "requestDigest": "d753746da3c9866ec30628a6bdbe58437b2fc6dc92dabb8c2007d4924362ba76",
+      "sampling": {
+        "temperature": 0.1,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "inputChars": 256,
+      "outputChars": 222,
+      "toolCallCount": 0,
+      "latencyMs": 424,
+      "status": "complete"
+    },
+    {
+      "type": "model_call",
+      "model": "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+      "requestDigest": "d753746da3c9866ec30628a6bdbe58437b2fc6dc92dabb8c2007d4924362ba76",
+      "sampling": {
+        "temperature": 0.1,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "inputChars": 256,
+      "outputChars": 194,
+      "toolCallCount": 0,
+      "latencyMs": 380,
+      "status": "complete"
+    },
+    {
+      "type": "model_call",
+      "model": "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+      "requestDigest": "d6ca30fbf5a860e60f9b2d904bbc7699ee85b477f18509a48b13d49c67509ac7",
+      "sampling": {
+        "temperature": 0.2,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "inputChars": 256,
+      "outputChars": 222,
+      "toolCallCount": 0,
+      "latencyMs": 411,
+      "status": "complete"
+    },
+    {
+      "type": "model_call",
+      "model": "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+      "requestDigest": "d6ca30fbf5a860e60f9b2d904bbc7699ee85b477f18509a48b13d49c67509ac7",
+      "sampling": {
+        "temperature": 0.2,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "inputChars": 256,
+      "outputChars": 228,
+      "toolCallCount": 0,
+      "latencyMs": 410,
+      "status": "complete"
+    },
+    {
+      "type": "model_call",
+      "model": "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+      "requestDigest": "84fe99fcfce1bd90af06d3f7db393d3835c773f3eb4c94f316a2f4873763be39",
+      "sampling": {
+        "temperature": 0.4,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "inputChars": 256,
+      "outputChars": 188,
+      "toolCallCount": 0,
+      "latencyMs": 361,
+      "status": "complete"
+    },
+    {
+      "type": "model_call",
+      "model": "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+      "requestDigest": "84fe99fcfce1bd90af06d3f7db393d3835c773f3eb4c94f316a2f4873763be39",
+      "sampling": {
+        "temperature": 0.4,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "inputChars": 256,
+      "outputChars": 194,
+      "toolCallCount": 0,
+      "latencyMs": 404,
+      "status": "complete"
+    },
+    {
+      "type": "model_call",
+      "model": "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+      "requestDigest": "45bed93d0299ea7f7bb3b0e34b89b1f014e779240f687a92b9ebaf35c81c534a",
+      "sampling": {
+        "temperature": 0.6,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "inputChars": 256,
+      "outputChars": 299,
+      "toolCallCount": 0,
+      "latencyMs": 489,
+      "status": "complete"
+    },
+    {
+      "type": "model_call",
+      "model": "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+      "requestDigest": "45bed93d0299ea7f7bb3b0e34b89b1f014e779240f687a92b9ebaf35c81c534a",
+      "sampling": {
+        "temperature": 0.6,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "inputChars": 256,
+      "outputChars": 376,
+      "toolCallCount": 0,
+      "latencyMs": 503,
+      "status": "complete"
+    },
+    {
+      "type": "model_call",
+      "model": "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+      "requestDigest": "9acf39eab0b29fcb05e7f9b927159f88228ca56ef2c422001b69010424a42d30",
+      "sampling": {
+        "temperature": 0.8,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "inputChars": 256,
+      "outputChars": 259,
+      "toolCallCount": 0,
+      "latencyMs": 405,
+      "status": "complete"
+    },
+    {
+      "type": "model_call",
+      "model": "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+      "requestDigest": "9acf39eab0b29fcb05e7f9b927159f88228ca56ef2c422001b69010424a42d30",
+      "sampling": {
+        "temperature": 0.8,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 256
+      },
+      "inputChars": 256,
+      "outputChars": 423,
+      "toolCallCount": 0,
+      "latencyMs": 576,
+      "status": "complete"
+    },
+    {
+      "type": "model_call",
+      "model": "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+      "requestDigest": "ad8a4eb6a95141373649438cd5a375a937c5897cadd7f224d353fa65865db675",
+      "sampling": {
+        "temperature": 0.2,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 1024
+      },
+      "inputChars": 2803,
+      "outputChars": 922,
+      "toolCallCount": 0,
+      "latencyMs": 1090,
+      "status": "complete"
+    },
+    {
+      "type": "model_call",
+      "model": "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+      "requestDigest": "7834775af430b53db2ce8a9659ebf9e2ba04294f7080149b54f6c0338ece724f",
+      "sampling": {
+        "temperature": 0.4,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 1024
+      },
+      "inputChars": 3008,
+      "outputChars": 1078,
+      "toolCallCount": 0,
+      "latencyMs": 1247,
+      "status": "complete"
+    },
+    {
+      "type": "model_call",
+      "model": "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+      "requestDigest": "3db63f4c8b89bd5e89b6ad37e280e1665d7ea3a042b7890aa71c1a2020eaf90a",
+      "sampling": {
+        "temperature": 0.6,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 1024
+      },
+      "inputChars": 2507,
+      "outputChars": 773,
+      "toolCallCount": 0,
+      "latencyMs": 1109,
+      "status": "complete"
+    },
+    {
+      "type": "model_call",
+      "model": "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+      "requestDigest": "5a3534a6b5705aac1a78b333b26d2086a9d05c347991e831f6ce06f633c4407f",
+      "sampling": {
+        "temperature": 0.2,
+        "topP": 0.95,
+        "seed": 7,
+        "maxTokens": 1024
+      },
+      "inputChars": 2006,
+      "outputChars": 456,
+      "toolCallCount": 0,
+      "latencyMs": 657,
+      "status": "complete"
+    },
+    {
+      "type": "model_call",
+      "model": "Qwen3.6-28B-REAP20-A3B-Q6_K.gguf",
+      "requestDigest": "1559f859241d102d9afc3e54a7722bcc42b03bf6ab0f8a3492ac144ab799c242",
+      "sampling": {
+        "temperature": 0,
+        "topP": 0.9,
+        "seed": 7,
+        "maxTokens": 512
+      },
+      "inputChars": 884,
+      "outputChars": 429,
+      "toolCallCount": 0,
+      "latencyMs": 684,
+      "status": "complete"
+    }
+  ],
+  "aggregate": {
+    "checks": 11,
+    "passed": 11,
+    "failed": [],
+    "fixedSeedByteStableProfiles": 0,
+    "fixedSeedProfilesMeasured": 6
+  },
+  "boundaryEvidence": {
+    "malformedUnknownArgsAndBoundedRetries": "tests/bi-specialist.test.mjs",
+    "executionBoundary": "read-only allowlisted tool registry",
+    "noHarnessDependency": true
+  },
+  "negativeEvidence": [
+    "Fixed-seed Qwen outputs were schema-stable but not byte-identical for every measured profile; do not claim runtime determinism."
+  ],
+  "nonclaims": [
+    "No full model determinism claim",
+    "No Q5 default or silent downgrade",
+    "No production/provider support claim",
+    "No raw reasoning evidence"
+  ]
+}

@@ -202,3 +202,18 @@ requires:
 Reset removes this repository's generated metadata, projections, receipts, and
 generated internal passwords. It does not remove `.env` or external source/API
 secret files.
+
+## M6-00 contract fixtures
+
+The M6-00 assistant foundation has no environment variables, credentials,
+network listeners, Compose service, feature flag, runtime plugin directory, or
+activation command. Its static manifests and deterministic fixtures live under
+`services/bi-control/fixtures/assistant-foundation/`; test them with:
+
+```bash
+node --test tests/assistant-foundation.test.mjs
+```
+
+Changing a built-in plugin artifact requires an intentional manifest and
+expected-digest update plus a fresh resolved-config hash. There is no runtime
+digest override or install source.

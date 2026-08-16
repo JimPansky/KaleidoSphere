@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "chimpmaera.bi/ambiguous-outcome-journal/v1",
+  "contextDigest": "sha256:8e988c44647eb1aea26927e63a640904820af771fe2d761b3806a3a1ce5fda2d",
+  "state": "not_dispatched",
+  "entries": [
+    {
+      "schemaVersion": "chimpmaera.bi/ambiguous-outcome-journal-entry/v1",
+      "seq": 1,
+      "occurredAt": "2026-08-15T06:57:05.659Z",
+      "contextDigest": "sha256:8e988c44647eb1aea26927e63a640904820af771fe2d761b3806a3a1ce5fda2d",
+      "previousHash": "sha256:5f35b9d16925ffd3ad044e752c06f1d581afaeb03c967abb1454a118642cc406",
+      "fromState": null,
+      "toState": "not_dispatched",
+      "eventType": "initialized",
+      "evidence": {
+        "planDigest": "sha256:93211ab6a4e1e939a9442c1a128846551538d8c9f29ea1fa747e383ca1aed1ce",
+        "targetBindingDigest": "sha256:8dd1028d03d7b65ba9873f9c89b591ecff9fdc216f82233444acfdf2c12233a1"
+      },
+      "decision": {
+        "dispatchAllowed": true,
+        "blindRetryAllowed": false
+      },
+      "entryHash": "sha256:987e3033542b7f92179abb1126fb76ddc39fb3ea26b12ee07175836c15ebc1b6"
+    },
+    {
+      "schemaVersion": "chimpmaera.bi/ambiguous-outcome-journal-entry/v1",
+      "seq": 2,
+      "occurredAt": "2026-08-15T06:57:05.659Z",
+      "contextDigest": "sha256:8e988c44647eb1aea26927e63a640904820af771fe2d761b3806a3a1ce5fda2d",
+      "previousHash": "sha256:987e3033542b7f92179abb1126fb76ddc39fb3ea26b12ee07175836c15ebc1b6",
+      "fromState": "not_dispatched",
+      "toState": "outcome_unknown",
+      "eventType": "dispatch_response_lost",
+      "evidence": {
+        "transportFault": "pre_dispatch_loopback_cut",
+        "dispatchReachedServer": false,
+        "proxyMutationRequests": 0
+      },
+      "decision": {
+        "blindRetryAllowed": false
+      },
+      "entryHash": "sha256:3b7b67b07b1debdf01b655e6f2698abc13394057d1bd5e3a412e5b4cbd852dc4"
+    },
+    {
+      "schemaVersion": "chimpmaera.bi/ambiguous-outcome-journal-entry/v1",
+      "seq": 3,
+      "occurredAt": "2026-08-15T06:57:05.660Z",
+      "contextDigest": "sha256:8e988c44647eb1aea26927e63a640904820af771fe2d761b3806a3a1ce5fda2d",
+      "previousHash": "sha256:3b7b67b07b1debdf01b655e6f2698abc13394057d1bd5e3a412e5b4cbd852dc4",
+      "fromState": "outcome_unknown",
+      "toState": "unchanged_safe_to_retry",
+      "eventType": "reconcile_exact_before",
+      "evidence": {
+        "readback": [
+          {
+            "actionId": "01-dataset",
+            "relation": "before",
+            "observedDigest": "sha256:b40a01c8399978899f10a7ae2f01113ba8cdcad777a44261cb558a96c2c2faca",
+            "readErrorCode": null,
+            "owner": "owned"
+          }
+        ],
+        "planDigest": "sha256:93211ab6a4e1e939a9442c1a128846551538d8c9f29ea1fa747e383ca1aed1ce",
+        "mutationRequestsIssuedByReconciler": 0
+      },
+      "decision": {
+        "classification": "unchanged_safe_to_retry",
+        "retryAllowed": true,
+        "retryRequiresFreshGrant": true,
+        "compensationAllowed": false,
+        "manualReviewRequired": false
+      },
+      "entryHash": "sha256:a294c8b9e1f1a0f19d26769c11c23e2de8d5f6c1f8d47da367c386855755a9f9"
+    },
+    {
+      "schemaVersion": "chimpmaera.bi/ambiguous-outcome-journal-entry/v1",
+      "seq": 4,
+      "occurredAt": "2026-08-15T06:57:05.713Z",
+      "contextDigest": "sha256:8e988c44647eb1aea26927e63a640904820af771fe2d761b3806a3a1ce5fda2d",
+      "previousHash": "sha256:a294c8b9e1f1a0f19d26769c11c23e2de8d5f6c1f8d47da367c386855755a9f9",
+      "fromState": "unchanged_safe_to_retry",
+      "toState": "not_dispatched",
+      "eventType": "fresh_retry_authorized",
+      "evidence": {
+        "originalContextDigest": "sha256:8e988c44647eb1aea26927e63a640904820af771fe2d761b3806a3a1ce5fda2d",
+        "planDigest": "sha256:93211ab6a4e1e939a9442c1a128846551538d8c9f29ea1fa747e383ca1aed1ce",
+        "freshGrantDigest": "sha256:f8d02dc6cf21d1187cce75ec433e394adf4b4e46c2d092a793a24ef8f7bb51cc"
+      },
+      "decision": {
+        "retryAllowed": true,
+        "blindRedispatch": false,
+        "freshIdempotencyKeyDigest": "sha256:ce6de0c3f70dd3a77a396535a1ee0de818db1ff6c6262dff24f17e04552a4222"
+      },
+      "entryHash": "sha256:39c7774746cfc34b4e719dc83888178df5552a8f577d2911dd29aa5cf7702a25"
+    }
+  ],
+  "lastHash": "sha256:39c7774746cfc34b4e719dc83888178df5552a8f577d2911dd29aa5cf7702a25"
+}

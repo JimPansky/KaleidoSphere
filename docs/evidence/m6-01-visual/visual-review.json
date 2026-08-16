@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "chimpmaera.bi/visual-review/v1",
+  "reviewedManifestSha256": "8db6e3660e227dcdf8b5f9293bebb6c74e47daf4925c0001471fc24afa2f39af",
+  "reviewedAt": "2026-08-14T18:25:00.000Z",
+  "inspectionMethod": "Direct pixel inspection of all 16 PNG captures after the final correction run",
+  "scenarioVerdicts": [
+    {"scenarioId": "executive-sales", "desktop": "pass", "narrow": "pass"},
+    {"scenarioId": "quality-investigation", "desktop": "pass", "narrow": "pass"},
+    {"scenarioId": "inventory-risk", "desktop": "pass", "narrow": "pass"},
+    {"scenarioId": "maintenance", "desktop": "pass", "narrow": "pass"},
+    {"scenarioId": "cross-domain", "desktop": "pass", "narrow": "pass"},
+    {"scenarioId": "voice-correction-cancel", "desktop": "pass", "narrow": "pass"},
+    {"scenarioId": "undo-idempotency", "desktop": "pass", "narrow": "pass"},
+    {"scenarioId": "persistent-request-denied", "desktop": "pass", "narrow": "pass"}
+  ],
+  "rubric": {
+    "overlayClippingAndResponsiveLayout": 9.1,
+    "activeFilterAndTimeReadability": 9.3,
+    "dashboardUsabilityAndFocusState": 9.0,
+    "actionFeedbackAndProvenance": 9.4,
+    "undoIdempotencyAndCancelClarity": 9.2,
+    "denialAndErrorClarity": 9.5,
+    "keyboardAndAriaSemantics": 9.0,
+    "overall": 9.2
+  },
+  "severity1Defects": 0,
+  "severity2Defects": 0,
+  "correctedDefects": [
+    {
+      "classification": "Severity 3 visual/focus evidence defect",
+      "symptom": "The off-screen skip link was projected into Playwright full-page screenshots after keyboard activation.",
+      "rootCause": "The classic negative-top skip-link technique remained inside the full-page projection surface.",
+      "correction": "Keep the link visibility hidden until :focus-visible while preserving keyboard reachability.",
+      "focusedRerun": "pass",
+      "fullRerun": "16/16 captures pass"
+    },
+    {
+      "classification": "Usability gap",
+      "symptom": "Embedded dashboard tabs were visually presented but did not update aria-pressed state.",
+      "correction": "Add native button interaction and live-region readback without routing assistant actions through DOM control.",
+      "focusedRerun": "pass on desktop and narrow"
+    }
+  ],
+  "nonclaims": [
+    "The screenshots use a faithful embedded shell, not a live Superset runtime.",
+    "Voice timing is deterministic simulation; no speech provider is tested.",
+    "No OpenClaw, Hermes, Claude, or other real-agent adapter quality is claimed."
+  ]
+}

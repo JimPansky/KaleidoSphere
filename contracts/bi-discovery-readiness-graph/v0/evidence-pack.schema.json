@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "chimpmaera.bi/discovery-readiness-graph/v0/evidence-pack.schema.json",
+  "title": "BI Discovery-to-Readiness Evidence Pack v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "runId", "graphId", "baseCommit", "acceptance", "cases", "replay", "routing", "privacy", "negativeEvidence", "nonclaims", "artifacts"],
+  "properties": {
+    "schemaVersion": { "const": "chimpmaera.bi/discovery-readiness-evidence-pack/v0" },
+    "runId": { "type": "string" },
+    "graphId": { "type": "string" },
+    "baseCommit": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+    "acceptance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["accepted", "reason", "sourceRowsPersisted", "mutations", "privacyMutationHardFails", "deterministicReplayRate", "assemblyTimeReduction", "reviewAmbiguityReduction"],
+      "properties": {
+        "accepted": { "type": "boolean" },
+        "reason": { "type": "string" },
+        "sourceRowsPersisted": { "const": 0 },
+        "mutations": { "const": 0 },
+        "privacyMutationHardFails": { "const": 0 },
+        "deterministicReplayRate": { "type": "number", "minimum": 0 },
+        "assemblyTimeReduction": { "type": "number" },
+        "reviewAmbiguityReduction": { "type": "number" }
+      }
+    },
+    "cases": { "type": "array", "items": { "type": "object" } },
+    "replay": { "type": "object" },
+    "routing": { "type": "object" },
+    "privacy": { "type": "object" },
+    "negativeEvidence": { "type": "array", "items": { "type": "string" } },
+    "nonclaims": { "type": "array", "items": { "type": "string" } },
+    "artifacts": { "type": "object" }
+  }
+}

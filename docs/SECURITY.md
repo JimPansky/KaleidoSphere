@@ -122,3 +122,19 @@ this repository. It does not delete `.env` or external source/API secret files.
 Before using live database mode, verify least-privilege grants independently and
 treat the first run as evidence collection. The fixture quickstart is useful for
 local validation but remains `SYNTHETIC_UNVALIDATED`.
+
+## Assistant contract security boundary
+
+The inactive M6-00 foundation uses fail-closed versioned envelopes, payload
+digests, sensitivity/redaction facts, static built-in plugin digests, exact
+capability dependencies, monotone mandatory guards, and one-shot approvals
+bound to arguments, resources, policy, capability, execution, trusted UI, and
+expiry. A denial cannot be overridden by a later allow. An uncertain side-effect
+outcome is `outcome_unknown` and cannot be blindly retried.
+
+Runtime plugin installation, URLs/packages/filesystem paths, dynamic imports,
+HMR/watchers, arbitrary MCP servers, direct DOM/JavaScript agent control, raw
+secrets, source rows, unredacted PII, and chain-of-thought storage are denied by
+the contract/tests. Persistent Superset changes cannot be voice-approved or
+applied by the in-memory stub. No live credentials or external provider are
+needed for the M6-00 evidence.

@@ -1,0 +1,972 @@
+{
+  "schemaVersion": "chimpmaera.bi/discovery-readiness-state/v0",
+  "graphId": "superset-bi.discovery-readiness.v0",
+  "runId": "graph-pilot-discovery-readiness-v0-local",
+  "status": "complete",
+  "sourceRefs": [
+    {
+      "id": "known_schema_order_to_cash",
+      "path": "services/bi-control/fixtures/bi-specialist/candidate/training-order-to-cash.sqlite",
+      "sha256": "72f507a16c78fa4938c86b0035f34a7e9a8e44995450c973e99fbfc500510ab6",
+      "classification": "fixture_visible"
+    },
+    {
+      "id": "unknown_schema_supplier",
+      "path": "services/bi-control/fixtures/bi-specialist/candidate/training-production-supplier.sqlite",
+      "sha256": "ba5a2ac094b04f3af9b5c7e14fc7398b4e2f1b6786a409b11d5e46af097a25ed",
+      "classification": "fixture_visible"
+    },
+    {
+      "id": "ambiguous_grain_adversarial",
+      "path": "services/bi-control/fixtures/bi-specialist/candidate/holdout-underspecified-adversarial.sqlite",
+      "sha256": "835ad550dc6259596cc97070468feb6c9faf87eeff5f2d06da9be9470470bbce",
+      "classification": "fixture_visible"
+    },
+    {
+      "id": "sealed_case-5b12",
+      "path": "tests/evaluator-sealed/m6-03/pack-v2/6c7d31.sqlite",
+      "sha256": "2a11835375268df25f1c16758c0727824eb239bb70a69f5fd462e5594c2f3ad4",
+      "classification": "sealed"
+    },
+    {
+      "id": "sealed_case-8eaf",
+      "path": "tests/evaluator-sealed/m6-03/pack-v2/38f4a2.sqlite",
+      "sha256": "f987f69be6bb0396813a4aa7596e0ad5fee9b384ba5da76fd483abb3b47d7948",
+      "classification": "sealed"
+    },
+    {
+      "id": "sealed_case-c349",
+      "path": "tests/evaluator-sealed/m6-03/pack-v2/ab209e.sqlite",
+      "sha256": "c68d118a274c60ab3a3a12fb902a7a70dbf2661ad5282aff72522f71ed3a55c5",
+      "classification": "sealed"
+    }
+  ],
+  "discoveryTargets": [
+    {
+      "id": "known_schema_order_to_cash",
+      "classification": "fixture_visible"
+    },
+    {
+      "id": "unknown_schema_supplier",
+      "classification": "fixture_visible"
+    },
+    {
+      "id": "ambiguous_grain_adversarial",
+      "classification": "fixture_visible"
+    },
+    {
+      "id": "sealed_case-5b12",
+      "classification": "sealed"
+    },
+    {
+      "id": "sealed_case-8eaf",
+      "classification": "sealed"
+    },
+    {
+      "id": "sealed_case-c349",
+      "classification": "sealed"
+    }
+  ],
+  "nodeOutputs": {
+    "BI-G0_risk_preflight": {
+      "mutationPerformed": false,
+      "sourceRowsPersisted": false,
+      "readOnly": true,
+      "targetCount": 6,
+      "deniedCapabilities": [
+        "mutation",
+        "source-row-persistence",
+        "live-superset",
+        "external-model"
+      ]
+    },
+    "BI-G1_discovery_core": {
+      "cases": [
+        {
+          "caseId": "known_schema_order_to_cash",
+          "classification": "fixture_visible",
+          "databaseSha256": "72f507a16c78fa4938c86b0035f34a7e9a8e44995450c973e99fbfc500510ab6",
+          "tableCount": 5,
+          "relationshipCount": 4,
+          "kpiCount": 2,
+          "queryCount": 20,
+          "rowsObservedVolatileOnly": 59,
+          "sourceRowsPersisted": false,
+          "mutationPerformed": false,
+          "hardFailures": [],
+          "blindSpots": [],
+          "reviewAmbiguityPoints": 0,
+          "resultDigest": "2213facb34ef441dc5bfc2e1f0f1ba51e59b261cf56755720beca0b107b30bec"
+        },
+        {
+          "caseId": "unknown_schema_supplier",
+          "classification": "fixture_visible",
+          "databaseSha256": "ba5a2ac094b04f3af9b5c7e14fc7398b4e2f1b6786a409b11d5e46af097a25ed",
+          "tableCount": 4,
+          "relationshipCount": 3,
+          "kpiCount": 2,
+          "queryCount": 16,
+          "rowsObservedVolatileOnly": 49,
+          "sourceRowsPersisted": false,
+          "mutationPerformed": false,
+          "hardFailures": [],
+          "blindSpots": [],
+          "reviewAmbiguityPoints": 0,
+          "resultDigest": "1300bc3d459ad6641d937323b46129a87a55165f2989061a17ac6b7a9ac70899"
+        },
+        {
+          "caseId": "ambiguous_grain_adversarial",
+          "classification": "fixture_visible",
+          "databaseSha256": "835ad550dc6259596cc97070468feb6c9faf87eeff5f2d06da9be9470470bbce",
+          "tableCount": 2,
+          "relationshipCount": 1,
+          "kpiCount": 0,
+          "queryCount": 8,
+          "rowsObservedVolatileOnly": 19,
+          "sourceRowsPersisted": false,
+          "mutationPerformed": false,
+          "hardFailures": [],
+          "blindSpots": [
+            "kpi-semantics-require-user-confirmation"
+          ],
+          "reviewAmbiguityPoints": 3,
+          "resultDigest": "d9f6dc6cc7286ea0bc427ea4f9105c3426650f1c8f877bec23750154b1798883"
+        },
+        {
+          "caseId": "sealed_case-5b12",
+          "classification": "sealed",
+          "databaseSha256": "2a11835375268df25f1c16758c0727824eb239bb70a69f5fd462e5594c2f3ad4",
+          "tableCount": 4,
+          "relationshipCount": 3,
+          "kpiCount": 3,
+          "queryCount": 16,
+          "rowsObservedVolatileOnly": 50,
+          "sourceRowsPersisted": false,
+          "mutationPerformed": false,
+          "hardFailures": [],
+          "blindSpots": [],
+          "reviewAmbiguityPoints": 0,
+          "resultDigest": "bc4e70ba0d51892b906ae95ed70ba7e4cdb58d3b4f6b0dfeaeb0abdfde71641c"
+        },
+        {
+          "caseId": "sealed_case-8eaf",
+          "classification": "sealed",
+          "databaseSha256": "f987f69be6bb0396813a4aa7596e0ad5fee9b384ba5da76fd483abb3b47d7948",
+          "tableCount": 4,
+          "relationshipCount": 3,
+          "kpiCount": 2,
+          "queryCount": 16,
+          "rowsObservedVolatileOnly": 49,
+          "sourceRowsPersisted": false,
+          "mutationPerformed": false,
+          "hardFailures": [],
+          "blindSpots": [],
+          "reviewAmbiguityPoints": 0,
+          "resultDigest": "5342bac8791485dc56a87f24d56858219a0a0f378adb1b0fd90882e6f86a221f"
+        },
+        {
+          "caseId": "sealed_case-c349",
+          "classification": "sealed",
+          "databaseSha256": "c68d118a274c60ab3a3a12fb902a7a70dbf2661ad5282aff72522f71ed3a55c5",
+          "tableCount": 4,
+          "relationshipCount": 3,
+          "kpiCount": 3,
+          "queryCount": 16,
+          "rowsObservedVolatileOnly": 50,
+          "sourceRowsPersisted": false,
+          "mutationPerformed": false,
+          "hardFailures": [],
+          "blindSpots": [],
+          "reviewAmbiguityPoints": 0,
+          "resultDigest": "0d39186c1a92f28a9dcd759b4e37bbd7505b9b3a6a8ef43a6f2ec2f7119644f8"
+        }
+      ],
+      "sourceRowsPersisted": false,
+      "mutationPerformed": false
+    },
+    "BI-G1_reference_evidence": {
+      "refs": [
+        {
+          "id": "m6-03-terminal",
+          "path": "docs/evidence/m6-03-bi-specialist/terminal-manifest.json",
+          "sha256": "80aa9877feabe2ed08f8bd3cb30a3a4c8bff6dc19715fc9938e4fed923a6f258",
+          "classification": "evidence"
+        },
+        {
+          "id": "m6-03-sealed-v2",
+          "path": "docs/evidence/m6-03-bi-specialist/sealed-blind-v2-manifest.json",
+          "sha256": "42b1cff834e722c483c71c49fa3c5f5f4b7a3be8a3f8633ccde19185a74f08d4",
+          "classification": "evidence"
+        },
+        {
+          "id": "m6-04-terminal",
+          "path": "docs/evidence/m6-04-trusted-workflow/terminal-manifest.json",
+          "sha256": "b14498c13bd379175e794aae9d307c8bf3066eb4a7c57f92e1377220b24cf1d2",
+          "classification": "evidence"
+        },
+        {
+          "id": "m6-05-terminal",
+          "path": "docs/evidence/m6-05-ambiguous-outcome-reconciliation/terminal-manifest.json",
+          "sha256": "bc982b140dd6c112188b83f0cda5a92dc5c7aead60f82822d58c40b74dc123b7",
+          "classification": "evidence"
+        }
+      ],
+      "boundaries": {
+        "m603": "read-only discovery evidence reused without relabeling visible fixtures as blind",
+        "m604": "trusted apply/readback/rollback reference only",
+        "m605": "ambiguous outcome reconciliation reference only"
+      }
+    },
+    "BI-G2_readiness_assembly": {
+      "verdict": {
+        "readiness": "ready_for_review",
+        "nonclaims": [
+          "read-only local fixture readiness only",
+          "no production/customer/staging Superset or database evidence",
+          "no mutation authority",
+          "no model-loaded savings claim"
+        ],
+        "promotionAllowed": false
+      },
+      "cases": [
+        {
+          "caseId": "known_schema_order_to_cash",
+          "classification": "fixture_visible",
+          "databaseSha256": "72f507a16c78fa4938c86b0035f34a7e9a8e44995450c973e99fbfc500510ab6",
+          "tableCount": 5,
+          "relationshipCount": 4,
+          "kpiCount": 2,
+          "queryCount": 20,
+          "rowsObservedVolatileOnly": 59,
+          "sourceRowsPersisted": false,
+          "mutationPerformed": false,
+          "hardFailures": [],
+          "blindSpots": [],
+          "reviewAmbiguityPoints": 0,
+          "resultDigest": "2213facb34ef441dc5bfc2e1f0f1ba51e59b261cf56755720beca0b107b30bec"
+        },
+        {
+          "caseId": "unknown_schema_supplier",
+          "classification": "fixture_visible",
+          "databaseSha256": "ba5a2ac094b04f3af9b5c7e14fc7398b4e2f1b6786a409b11d5e46af097a25ed",
+          "tableCount": 4,
+          "relationshipCount": 3,
+          "kpiCount": 2,
+          "queryCount": 16,
+          "rowsObservedVolatileOnly": 49,
+          "sourceRowsPersisted": false,
+          "mutationPerformed": false,
+          "hardFailures": [],
+          "blindSpots": [],
+          "reviewAmbiguityPoints": 0,
+          "resultDigest": "1300bc3d459ad6641d937323b46129a87a55165f2989061a17ac6b7a9ac70899"
+        },
+        {
+          "caseId": "ambiguous_grain_adversarial",
+          "classification": "fixture_visible",
+          "databaseSha256": "835ad550dc6259596cc97070468feb6c9faf87eeff5f2d06da9be9470470bbce",
+          "tableCount": 2,
+          "relationshipCount": 1,
+          "kpiCount": 0,
+          "queryCount": 8,
+          "rowsObservedVolatileOnly": 19,
+          "sourceRowsPersisted": false,
+          "mutationPerformed": false,
+          "hardFailures": [],
+          "blindSpots": [
+            "kpi-semantics-require-user-confirmation"
+          ],
+          "reviewAmbiguityPoints": 3,
+          "resultDigest": "d9f6dc6cc7286ea0bc427ea4f9105c3426650f1c8f877bec23750154b1798883"
+        },
+        {
+          "caseId": "sealed_case-5b12",
+          "classification": "sealed",
+          "databaseSha256": "2a11835375268df25f1c16758c0727824eb239bb70a69f5fd462e5594c2f3ad4",
+          "tableCount": 4,
+          "relationshipCount": 3,
+          "kpiCount": 3,
+          "queryCount": 16,
+          "rowsObservedVolatileOnly": 50,
+          "sourceRowsPersisted": false,
+          "mutationPerformed": false,
+          "hardFailures": [],
+          "blindSpots": [],
+          "reviewAmbiguityPoints": 0,
+          "resultDigest": "bc4e70ba0d51892b906ae95ed70ba7e4cdb58d3b4f6b0dfeaeb0abdfde71641c"
+        },
+        {
+          "caseId": "sealed_case-8eaf",
+          "classification": "sealed",
+          "databaseSha256": "f987f69be6bb0396813a4aa7596e0ad5fee9b384ba5da76fd483abb3b47d7948",
+          "tableCount": 4,
+          "relationshipCount": 3,
+          "kpiCount": 2,
+          "queryCount": 16,
+          "rowsObservedVolatileOnly": 49,
+          "sourceRowsPersisted": false,
+          "mutationPerformed": false,
+          "hardFailures": [],
+          "blindSpots": [],
+          "reviewAmbiguityPoints": 0,
+          "resultDigest": "5342bac8791485dc56a87f24d56858219a0a0f378adb1b0fd90882e6f86a221f"
+        },
+        {
+          "caseId": "sealed_case-c349",
+          "classification": "sealed",
+          "databaseSha256": "c68d118a274c60ab3a3a12fb902a7a70dbf2661ad5282aff72522f71ed3a55c5",
+          "tableCount": 4,
+          "relationshipCount": 3,
+          "kpiCount": 3,
+          "queryCount": 16,
+          "rowsObservedVolatileOnly": 50,
+          "sourceRowsPersisted": false,
+          "mutationPerformed": false,
+          "hardFailures": [],
+          "blindSpots": [],
+          "reviewAmbiguityPoints": 0,
+          "resultDigest": "0d39186c1a92f28a9dcd759b4e37bbd7505b9b3a6a8ef43a6f2ec2f7119644f8"
+        }
+      ],
+      "objectiveReviewAmbiguity": {
+        "baseline": 36,
+        "graph": 3,
+        "reduction": 0.9166666666666666
+      },
+      "deterministicCredit": true,
+      "modelSelfCreditDenied": true,
+      "sourceRowsPersisted": false,
+      "mutationPerformed": false
+    },
+    "BI-G3_approval_contract": {
+      "nodeId": "BI-G3_approval_contract",
+      "gate": "BI-G3",
+      "contractOnly": true,
+      "mutationPerformed": false,
+      "sourceRowsPersisted": false,
+      "nonclaim": "BI-G3 is mapped as contract/reference only in this local read-only pilot"
+    },
+    "BI-G4_trusted_apply_boundary": {
+      "nodeId": "BI-G4_trusted_apply_boundary",
+      "gate": "BI-G4",
+      "contractOnly": true,
+      "mutationPerformed": false,
+      "sourceRowsPersisted": false,
+      "nonclaim": "BI-G4 is mapped as contract/reference only in this local read-only pilot"
+    },
+    "BI-G5_reconciliation_boundary": {
+      "nodeId": "BI-G5_reconciliation_boundary",
+      "gate": "BI-G5",
+      "contractOnly": true,
+      "mutationPerformed": false,
+      "sourceRowsPersisted": false,
+      "nonclaim": "BI-G5 is mapped as contract/reference only in this local read-only pilot"
+    },
+    "BI-G6_cost_quality_routing": {
+      "policy": {
+        "deterministicEasy": [
+          "risk preflight",
+          "schema inventory",
+          "bounded profiling",
+          "evidence hashing",
+          "readiness scoring"
+        ],
+        "strongModelEscalationStub": [
+          "ambiguous KPI semantics",
+          "domain naming conflict",
+          "visual rationale drafting"
+        ],
+        "modelLoaded": false,
+        "savingsClaimAllowed": false
+      },
+      "criticalPathNodes": [
+        "BI-G0_risk_preflight",
+        "BI-G2_readiness_assembly",
+        "BI-G3_approval_contract",
+        "BI-G4_trusted_apply_boundary",
+        "BI-G5_reconciliation_boundary"
+      ],
+      "parallelSafeNodes": [
+        "BI-G1_discovery_core",
+        "BI-G1_reference_evidence"
+      ],
+      "cacheRetryEscalationClasses": [
+        {
+          "nodeId": "BI-G0_risk_preflight",
+          "cacheClass": "cold-local",
+          "retryClass": "no-retry",
+          "escalationClass": "deterministic"
+        },
+        {
+          "nodeId": "BI-G1_discovery_core",
+          "cacheClass": "cold-local",
+          "retryClass": "no-retry",
+          "escalationClass": "deterministic-easy"
+        },
+        {
+          "nodeId": "BI-G1_reference_evidence",
+          "cacheClass": "cold-local",
+          "retryClass": "no-retry",
+          "escalationClass": "deterministic-reference-bind"
+        },
+        {
+          "nodeId": "BI-G2_readiness_assembly",
+          "cacheClass": "cold-local",
+          "retryClass": "no-retry",
+          "escalationClass": "strong-model-contract-stub"
+        },
+        {
+          "nodeId": "BI-G3_approval_contract",
+          "cacheClass": "cold-local",
+          "retryClass": "no-retry",
+          "escalationClass": "contract-only-no-runtime"
+        },
+        {
+          "nodeId": "BI-G4_trusted_apply_boundary",
+          "cacheClass": "cold-local",
+          "retryClass": "no-retry",
+          "escalationClass": "contract-only-no-runtime"
+        },
+        {
+          "nodeId": "BI-G5_reconciliation_boundary",
+          "cacheClass": "cold-local",
+          "retryClass": "no-retry",
+          "escalationClass": "contract-only-no-runtime"
+        }
+      ],
+      "sourceRowsPersisted": false,
+      "mutationPerformed": false
+    },
+    "BI-G7_terminal_manifest_contract": {
+      "nodeId": "BI-G7_terminal_manifest_contract",
+      "gate": "BI-G7",
+      "contractOnly": true,
+      "mutationPerformed": false,
+      "sourceRowsPersisted": false,
+      "nonclaim": "BI-G7 is mapped as contract/reference only in this local read-only pilot"
+    }
+  },
+  "receipts": [
+    {
+      "schemaVersion": "chimpmaera.bi/discovery-readiness-receipt/v0",
+      "runId": "graph-pilot-discovery-readiness-v0-local",
+      "nodeId": "BI-G0_risk_preflight",
+      "status": "complete",
+      "attempt": 1,
+      "inputDigest": "f3acee8afce9377dc4e53913d09034bd7cffad7adf64fead78a5921c32224c24",
+      "outputDigest": "5523ea31b56e80d6987a1e646d902c14d2ffc15d77fd5bd312e55b21ae0d5d5a",
+      "previousHash": "GENESIS",
+      "evidenceRefs": [
+        "known_schema_order_to_cash",
+        "unknown_schema_supplier",
+        "ambiguous_grain_adversarial",
+        "sealed_case-5b12",
+        "sealed_case-8eaf",
+        "sealed_case-c349"
+      ],
+      "budgetAfter": {
+        "nodes": 1,
+        "explorationSteps": 0,
+        "modelTokens": 0,
+        "toolCalls": 0,
+        "persistedBytes": 234,
+        "mutations": 0
+      },
+      "receiptHash": "64b11eba3e14120b9a72d55f73e9bfe7e85df21e43e45d835388f3963cef1f88",
+      "runtimeMetrics": {
+        "wallTimeMs": 0,
+        "tokens": 0,
+        "costUsd": 0,
+        "cacheClass": "cold-local",
+        "retryClass": "no-retry",
+        "escalationClass": "deterministic",
+        "criticalPath": true,
+        "parallelSafe": false
+      },
+      "stable": {
+        "schemaVersion": "chimpmaera.bi/discovery-readiness-receipt/v0",
+        "runId": "graph-pilot-discovery-readiness-v0-local",
+        "nodeId": "BI-G0_risk_preflight",
+        "status": "complete",
+        "attempt": 1,
+        "inputDigest": "f3acee8afce9377dc4e53913d09034bd7cffad7adf64fead78a5921c32224c24",
+        "outputDigest": "5523ea31b56e80d6987a1e646d902c14d2ffc15d77fd5bd312e55b21ae0d5d5a",
+        "previousHash": "GENESIS",
+        "evidenceRefs": [
+          "known_schema_order_to_cash",
+          "unknown_schema_supplier",
+          "ambiguous_grain_adversarial",
+          "sealed_case-5b12",
+          "sealed_case-8eaf",
+          "sealed_case-c349"
+        ],
+        "budgetAfter": {
+          "nodes": 1,
+          "explorationSteps": 0,
+          "modelTokens": 0,
+          "toolCalls": 0,
+          "persistedBytes": 234,
+          "mutations": 0
+        }
+      }
+    },
+    {
+      "schemaVersion": "chimpmaera.bi/discovery-readiness-receipt/v0",
+      "runId": "graph-pilot-discovery-readiness-v0-local",
+      "nodeId": "BI-G1_discovery_core",
+      "status": "complete",
+      "attempt": 1,
+      "inputDigest": "4f4a2d9d0b625bf0112d68639ab44f2a5bbee9c19258989ed651a825a40c659f",
+      "outputDigest": "87aaa02e29a2768f751c9ec8fe9957a450b88028258d0cedb74c1a05eee7335d",
+      "previousHash": "64b11eba3e14120b9a72d55f73e9bfe7e85df21e43e45d835388f3963cef1f88",
+      "evidenceRefs": [
+        "known_schema_order_to_cash",
+        "unknown_schema_supplier",
+        "ambiguous_grain_adversarial",
+        "sealed_case-5b12",
+        "sealed_case-8eaf",
+        "sealed_case-c349"
+      ],
+      "budgetAfter": {
+        "nodes": 2,
+        "explorationSteps": 6,
+        "modelTokens": 0,
+        "toolCalls": 0,
+        "persistedBytes": 3648,
+        "mutations": 0
+      },
+      "receiptHash": "3d6c381ca14b5808f894cf69e4e71e0ce547a3fa36c80ddfe01b9ae2dde4c45c",
+      "runtimeMetrics": {
+        "wallTimeMs": 0,
+        "tokens": 0,
+        "costUsd": 0,
+        "cacheClass": "cold-local",
+        "retryClass": "no-retry",
+        "escalationClass": "deterministic-easy",
+        "criticalPath": false,
+        "parallelSafe": true
+      },
+      "stable": {
+        "schemaVersion": "chimpmaera.bi/discovery-readiness-receipt/v0",
+        "runId": "graph-pilot-discovery-readiness-v0-local",
+        "nodeId": "BI-G1_discovery_core",
+        "status": "complete",
+        "attempt": 1,
+        "inputDigest": "4f4a2d9d0b625bf0112d68639ab44f2a5bbee9c19258989ed651a825a40c659f",
+        "outputDigest": "87aaa02e29a2768f751c9ec8fe9957a450b88028258d0cedb74c1a05eee7335d",
+        "previousHash": "64b11eba3e14120b9a72d55f73e9bfe7e85df21e43e45d835388f3963cef1f88",
+        "evidenceRefs": [
+          "known_schema_order_to_cash",
+          "unknown_schema_supplier",
+          "ambiguous_grain_adversarial",
+          "sealed_case-5b12",
+          "sealed_case-8eaf",
+          "sealed_case-c349"
+        ],
+        "budgetAfter": {
+          "nodes": 2,
+          "explorationSteps": 6,
+          "modelTokens": 0,
+          "toolCalls": 0,
+          "persistedBytes": 3648,
+          "mutations": 0
+        }
+      }
+    },
+    {
+      "schemaVersion": "chimpmaera.bi/discovery-readiness-receipt/v0",
+      "runId": "graph-pilot-discovery-readiness-v0-local",
+      "nodeId": "BI-G1_reference_evidence",
+      "status": "complete",
+      "attempt": 1,
+      "inputDigest": "16cbfbecd8395ebdbdef29e1e40ed7832bdae644b276e4650f6623edc21c5155",
+      "outputDigest": "ac92cd49fbeb1bf2e95d8a6f926d385a9455896cc5a5a4093806da1313b11b98",
+      "previousHash": "3d6c381ca14b5808f894cf69e4e71e0ce547a3fa36c80ddfe01b9ae2dde4c45c",
+      "evidenceRefs": [
+        "m6-03-terminal",
+        "m6-03-sealed-v2",
+        "m6-04-terminal",
+        "m6-05-terminal"
+      ],
+      "budgetAfter": {
+        "nodes": 3,
+        "explorationSteps": 6,
+        "modelTokens": 0,
+        "toolCalls": 0,
+        "persistedBytes": 5407,
+        "mutations": 0
+      },
+      "receiptHash": "8e22410c8958ed0ef8fda9cc3db22b144e86b9a7ab39e4fa2da1f7a788532dc3",
+      "runtimeMetrics": {
+        "wallTimeMs": 0,
+        "tokens": 0,
+        "costUsd": 0,
+        "cacheClass": "cold-local",
+        "retryClass": "no-retry",
+        "escalationClass": "deterministic-reference-bind",
+        "criticalPath": false,
+        "parallelSafe": true
+      },
+      "stable": {
+        "schemaVersion": "chimpmaera.bi/discovery-readiness-receipt/v0",
+        "runId": "graph-pilot-discovery-readiness-v0-local",
+        "nodeId": "BI-G1_reference_evidence",
+        "status": "complete",
+        "attempt": 1,
+        "inputDigest": "16cbfbecd8395ebdbdef29e1e40ed7832bdae644b276e4650f6623edc21c5155",
+        "outputDigest": "ac92cd49fbeb1bf2e95d8a6f926d385a9455896cc5a5a4093806da1313b11b98",
+        "previousHash": "3d6c381ca14b5808f894cf69e4e71e0ce547a3fa36c80ddfe01b9ae2dde4c45c",
+        "evidenceRefs": [
+          "m6-03-terminal",
+          "m6-03-sealed-v2",
+          "m6-04-terminal",
+          "m6-05-terminal"
+        ],
+        "budgetAfter": {
+          "nodes": 3,
+          "explorationSteps": 6,
+          "modelTokens": 0,
+          "toolCalls": 0,
+          "persistedBytes": 5407,
+          "mutations": 0
+        }
+      }
+    },
+    {
+      "schemaVersion": "chimpmaera.bi/discovery-readiness-receipt/v0",
+      "runId": "graph-pilot-discovery-readiness-v0-local",
+      "nodeId": "BI-G2_readiness_assembly",
+      "status": "complete",
+      "attempt": 1,
+      "inputDigest": "ac14b2cac17aebea912cbed21d7408294589427c703340a14b09bdde30d84645",
+      "outputDigest": "4e26760718d8ff28340efc8653d4db451dff75e020ed4df03569a5fe33b080f0",
+      "previousHash": "8e22410c8958ed0ef8fda9cc3db22b144e86b9a7ab39e4fa2da1f7a788532dc3",
+      "evidenceRefs": [
+        "known_schema_order_to_cash",
+        "unknown_schema_supplier",
+        "ambiguous_grain_adversarial",
+        "sealed_case-5b12",
+        "sealed_case-8eaf",
+        "sealed_case-c349"
+      ],
+      "budgetAfter": {
+        "nodes": 4,
+        "explorationSteps": 6,
+        "modelTokens": 0,
+        "toolCalls": 0,
+        "persistedBytes": 9197,
+        "mutations": 0
+      },
+      "receiptHash": "6a07bcc143a77094b77a713724e2bfd515cdcff6bb03e8193331d2c6c33f92dc",
+      "runtimeMetrics": {
+        "wallTimeMs": 0,
+        "tokens": 0,
+        "costUsd": 0,
+        "cacheClass": "cold-local",
+        "retryClass": "no-retry",
+        "escalationClass": "strong-model-contract-stub",
+        "criticalPath": true,
+        "parallelSafe": false
+      },
+      "stable": {
+        "schemaVersion": "chimpmaera.bi/discovery-readiness-receipt/v0",
+        "runId": "graph-pilot-discovery-readiness-v0-local",
+        "nodeId": "BI-G2_readiness_assembly",
+        "status": "complete",
+        "attempt": 1,
+        "inputDigest": "ac14b2cac17aebea912cbed21d7408294589427c703340a14b09bdde30d84645",
+        "outputDigest": "4e26760718d8ff28340efc8653d4db451dff75e020ed4df03569a5fe33b080f0",
+        "previousHash": "8e22410c8958ed0ef8fda9cc3db22b144e86b9a7ab39e4fa2da1f7a788532dc3",
+        "evidenceRefs": [
+          "known_schema_order_to_cash",
+          "unknown_schema_supplier",
+          "ambiguous_grain_adversarial",
+          "sealed_case-5b12",
+          "sealed_case-8eaf",
+          "sealed_case-c349"
+        ],
+        "budgetAfter": {
+          "nodes": 4,
+          "explorationSteps": 6,
+          "modelTokens": 0,
+          "toolCalls": 0,
+          "persistedBytes": 9197,
+          "mutations": 0
+        }
+      }
+    },
+    {
+      "schemaVersion": "chimpmaera.bi/discovery-readiness-receipt/v0",
+      "runId": "graph-pilot-discovery-readiness-v0-local",
+      "nodeId": "BI-G3_approval_contract",
+      "status": "complete",
+      "attempt": 1,
+      "inputDigest": "d11b702bd975f9952b208d094ed45e986affb87aaeef19f345bcc294c8f65618",
+      "outputDigest": "ac1f86577836faaeb608d29de636d23e2e1d112f8082c6cf78aa6faf16fd62ab",
+      "previousHash": "6a07bcc143a77094b77a713724e2bfd515cdcff6bb03e8193331d2c6c33f92dc",
+      "evidenceRefs": [],
+      "budgetAfter": {
+        "nodes": 5,
+        "explorationSteps": 6,
+        "modelTokens": 0,
+        "toolCalls": 0,
+        "persistedBytes": 10136,
+        "mutations": 0
+      },
+      "receiptHash": "489522644ef955fc6c52292f841b529d426359e737e630c392d823d6399bcfd8",
+      "runtimeMetrics": {
+        "wallTimeMs": 0,
+        "tokens": 0,
+        "costUsd": 0,
+        "cacheClass": "cold-local",
+        "retryClass": "no-retry",
+        "escalationClass": "contract-only-no-runtime",
+        "criticalPath": true,
+        "parallelSafe": false
+      },
+      "stable": {
+        "schemaVersion": "chimpmaera.bi/discovery-readiness-receipt/v0",
+        "runId": "graph-pilot-discovery-readiness-v0-local",
+        "nodeId": "BI-G3_approval_contract",
+        "status": "complete",
+        "attempt": 1,
+        "inputDigest": "d11b702bd975f9952b208d094ed45e986affb87aaeef19f345bcc294c8f65618",
+        "outputDigest": "ac1f86577836faaeb608d29de636d23e2e1d112f8082c6cf78aa6faf16fd62ab",
+        "previousHash": "6a07bcc143a77094b77a713724e2bfd515cdcff6bb03e8193331d2c6c33f92dc",
+        "evidenceRefs": [],
+        "budgetAfter": {
+          "nodes": 5,
+          "explorationSteps": 6,
+          "modelTokens": 0,
+          "toolCalls": 0,
+          "persistedBytes": 10136,
+          "mutations": 0
+        }
+      }
+    },
+    {
+      "schemaVersion": "chimpmaera.bi/discovery-readiness-receipt/v0",
+      "runId": "graph-pilot-discovery-readiness-v0-local",
+      "nodeId": "BI-G4_trusted_apply_boundary",
+      "status": "complete",
+      "attempt": 1,
+      "inputDigest": "7a1312c0b12632f8fd2e54751b6961e35f3d35cac0bfabbd86f57d4b0d477634",
+      "outputDigest": "b6e5735c9222336443c5b2f81507ba9a6f2b0a536abf6aefa88b2d3af5cabd30",
+      "previousHash": "489522644ef955fc6c52292f841b529d426359e737e630c392d823d6399bcfd8",
+      "evidenceRefs": [],
+      "budgetAfter": {
+        "nodes": 6,
+        "explorationSteps": 6,
+        "modelTokens": 0,
+        "toolCalls": 0,
+        "persistedBytes": 10944,
+        "mutations": 0
+      },
+      "receiptHash": "44429ef4bdfa5838a8ada1a45a369ed10eac8fb1e2c395f661c45502ee36054e",
+      "runtimeMetrics": {
+        "wallTimeMs": 0,
+        "tokens": 0,
+        "costUsd": 0,
+        "cacheClass": "cold-local",
+        "retryClass": "no-retry",
+        "escalationClass": "contract-only-no-runtime",
+        "criticalPath": true,
+        "parallelSafe": false
+      },
+      "stable": {
+        "schemaVersion": "chimpmaera.bi/discovery-readiness-receipt/v0",
+        "runId": "graph-pilot-discovery-readiness-v0-local",
+        "nodeId": "BI-G4_trusted_apply_boundary",
+        "status": "complete",
+        "attempt": 1,
+        "inputDigest": "7a1312c0b12632f8fd2e54751b6961e35f3d35cac0bfabbd86f57d4b0d477634",
+        "outputDigest": "b6e5735c9222336443c5b2f81507ba9a6f2b0a536abf6aefa88b2d3af5cabd30",
+        "previousHash": "489522644ef955fc6c52292f841b529d426359e737e630c392d823d6399bcfd8",
+        "evidenceRefs": [],
+        "budgetAfter": {
+          "nodes": 6,
+          "explorationSteps": 6,
+          "modelTokens": 0,
+          "toolCalls": 0,
+          "persistedBytes": 10944,
+          "mutations": 0
+        }
+      }
+    },
+    {
+      "schemaVersion": "chimpmaera.bi/discovery-readiness-receipt/v0",
+      "runId": "graph-pilot-discovery-readiness-v0-local",
+      "nodeId": "BI-G5_reconciliation_boundary",
+      "status": "complete",
+      "attempt": 1,
+      "inputDigest": "b6fe429d0824a8d125d126cf87ba7b126e6fadb0bcc503be3228f7acfa32e6b3",
+      "outputDigest": "6cad16dbabc6efe94f7158d8088f5622bad92c7f7e139fa54d5c89ffab9e8767",
+      "previousHash": "44429ef4bdfa5838a8ada1a45a369ed10eac8fb1e2c395f661c45502ee36054e",
+      "evidenceRefs": [],
+      "budgetAfter": {
+        "nodes": 7,
+        "explorationSteps": 6,
+        "modelTokens": 0,
+        "toolCalls": 0,
+        "persistedBytes": 11759,
+        "mutations": 0
+      },
+      "receiptHash": "6af9fc579b05e2a28312c96a36091c37ff2b6ac718aa37d084297bdfc65923d5",
+      "runtimeMetrics": {
+        "wallTimeMs": 0,
+        "tokens": 0,
+        "costUsd": 0,
+        "cacheClass": "cold-local",
+        "retryClass": "no-retry",
+        "escalationClass": "contract-only-no-runtime",
+        "criticalPath": true,
+        "parallelSafe": false
+      },
+      "stable": {
+        "schemaVersion": "chimpmaera.bi/discovery-readiness-receipt/v0",
+        "runId": "graph-pilot-discovery-readiness-v0-local",
+        "nodeId": "BI-G5_reconciliation_boundary",
+        "status": "complete",
+        "attempt": 1,
+        "inputDigest": "b6fe429d0824a8d125d126cf87ba7b126e6fadb0bcc503be3228f7acfa32e6b3",
+        "outputDigest": "6cad16dbabc6efe94f7158d8088f5622bad92c7f7e139fa54d5c89ffab9e8767",
+        "previousHash": "44429ef4bdfa5838a8ada1a45a369ed10eac8fb1e2c395f661c45502ee36054e",
+        "evidenceRefs": [],
+        "budgetAfter": {
+          "nodes": 7,
+          "explorationSteps": 6,
+          "modelTokens": 0,
+          "toolCalls": 0,
+          "persistedBytes": 11759,
+          "mutations": 0
+        }
+      }
+    },
+    {
+      "schemaVersion": "chimpmaera.bi/discovery-readiness-receipt/v0",
+      "runId": "graph-pilot-discovery-readiness-v0-local",
+      "nodeId": "BI-G6_cost_quality_routing",
+      "status": "complete",
+      "attempt": 1,
+      "inputDigest": "81803f3479de2cb0acfef1d4c6ab28e5a5e3125290c4978afc7ca9772b76dc1d",
+      "outputDigest": "91a9ed5936e7c4cdd704a5b8a270aaaf19f1ebd3e037acb0403182eabf03d825",
+      "previousHash": "6af9fc579b05e2a28312c96a36091c37ff2b6ac718aa37d084297bdfc65923d5",
+      "evidenceRefs": [
+        "routing-policy-stub"
+      ],
+      "budgetAfter": {
+        "nodes": 8,
+        "explorationSteps": 6,
+        "modelTokens": 0,
+        "toolCalls": 0,
+        "persistedBytes": 13880,
+        "mutations": 0
+      },
+      "receiptHash": "64d958baea399b2982e1a534ee923d7fce125fd948b8f6c32d917f5b1f8eb35f",
+      "runtimeMetrics": {
+        "wallTimeMs": 0,
+        "tokens": 0,
+        "costUsd": 0,
+        "cacheClass": "cold-local",
+        "retryClass": "no-retry",
+        "escalationClass": "deterministic-routing-contract",
+        "criticalPath": false,
+        "parallelSafe": true
+      },
+      "stable": {
+        "schemaVersion": "chimpmaera.bi/discovery-readiness-receipt/v0",
+        "runId": "graph-pilot-discovery-readiness-v0-local",
+        "nodeId": "BI-G6_cost_quality_routing",
+        "status": "complete",
+        "attempt": 1,
+        "inputDigest": "81803f3479de2cb0acfef1d4c6ab28e5a5e3125290c4978afc7ca9772b76dc1d",
+        "outputDigest": "91a9ed5936e7c4cdd704a5b8a270aaaf19f1ebd3e037acb0403182eabf03d825",
+        "previousHash": "6af9fc579b05e2a28312c96a36091c37ff2b6ac718aa37d084297bdfc65923d5",
+        "evidenceRefs": [
+          "routing-policy-stub"
+        ],
+        "budgetAfter": {
+          "nodes": 8,
+          "explorationSteps": 6,
+          "modelTokens": 0,
+          "toolCalls": 0,
+          "persistedBytes": 13880,
+          "mutations": 0
+        }
+      }
+    },
+    {
+      "schemaVersion": "chimpmaera.bi/discovery-readiness-receipt/v0",
+      "runId": "graph-pilot-discovery-readiness-v0-local",
+      "nodeId": "BI-G7_terminal_manifest_contract",
+      "status": "complete",
+      "attempt": 1,
+      "inputDigest": "c85663f057ada231a0ca2e6d56541e04c6f403e1bf18ea3edb9ac9b2873869a7",
+      "outputDigest": "c6201d4fc767f70f324207f5d0068a8b979f5a8ed8d9195e5b62cf4d8488ac98",
+      "previousHash": "64d958baea399b2982e1a534ee923d7fce125fd948b8f6c32d917f5b1f8eb35f",
+      "evidenceRefs": [],
+      "budgetAfter": {
+        "nodes": 9,
+        "explorationSteps": 6,
+        "modelTokens": 0,
+        "toolCalls": 0,
+        "persistedBytes": 14720,
+        "mutations": 0
+      },
+      "receiptHash": "5383cb36f1b8e03e39075cfac560a91c449ab9ef3b2d7dc49407ae49aa996806",
+      "runtimeMetrics": {
+        "wallTimeMs": 0,
+        "tokens": 0,
+        "costUsd": 0,
+        "cacheClass": "cold-local",
+        "retryClass": "no-retry",
+        "escalationClass": "contract-only-no-runtime",
+        "criticalPath": true,
+        "parallelSafe": false
+      },
+      "stable": {
+        "schemaVersion": "chimpmaera.bi/discovery-readiness-receipt/v0",
+        "runId": "graph-pilot-discovery-readiness-v0-local",
+        "nodeId": "BI-G7_terminal_manifest_contract",
+        "status": "complete",
+        "attempt": 1,
+        "inputDigest": "c85663f057ada231a0ca2e6d56541e04c6f403e1bf18ea3edb9ac9b2873869a7",
+        "outputDigest": "c6201d4fc767f70f324207f5d0068a8b979f5a8ed8d9195e5b62cf4d8488ac98",
+        "previousHash": "64d958baea399b2982e1a534ee923d7fce125fd948b8f6c32d917f5b1f8eb35f",
+        "evidenceRefs": [],
+        "budgetAfter": {
+          "nodes": 9,
+          "explorationSteps": 6,
+          "modelTokens": 0,
+          "toolCalls": 0,
+          "persistedBytes": 14720,
+          "mutations": 0
+        }
+      }
+    }
+  ],
+  "budgetUsage": {
+    "nodes": 9,
+    "explorationSteps": 6,
+    "modelTokens": 0,
+    "toolCalls": 0,
+    "persistedBytes": 14720,
+    "mutations": 0
+  },
+  "privacy": {
+    "sourceRowsPersisted": false,
+    "secretsPersisted": false,
+    "rawPromptsPersisted": false,
+    "chainOfThoughtPersisted": false
+  },
+  "verdict": {
+    "readiness": "ready_for_review",
+    "nonclaims": [
+      "read-only local fixture readiness only",
+      "no production/customer/staging Superset or database evidence",
+      "no mutation authority",
+      "no model-loaded savings claim"
+    ],
+    "promotionAllowed": false
+  }
+}

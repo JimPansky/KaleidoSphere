@@ -1,0 +1,13 @@
+digraph superset_bi_adaptive_investigation_v1 {
+  "BI-G2_adaptive_contracts" [label="BI-G2 contract"];
+  "BI-G3_profile_ledger" [label="BI-G3 deterministic"];
+  "BI-G4_hypothesis_graph" [label="BI-G4 model_owned_candidate"];
+  "BI-G5_targeted_probe_policy" [label="BI-G5 deterministic"];
+  "BI-G6_static_vs_adaptive_compare" [label="BI-G6 deterministic_judge"];
+  "BI-G7_terminal_manifest" [label="BI-G7 deterministic_judge"];
+  "BI-G2_adaptive_contracts" -> "BI-G3_profile_ledger" [label="BI-G2_adaptive_contracts.complete"];
+  "BI-G3_profile_ledger" -> "BI-G4_hypothesis_graph" [label="BI-G3_profile_ledger.complete"];
+  "BI-G4_hypothesis_graph" -> "BI-G5_targeted_probe_policy" [label="BI-G4_hypothesis_graph.complete"];
+  "BI-G5_targeted_probe_policy" -> "BI-G6_static_vs_adaptive_compare" [label="BI-G5_targeted_probe_policy.complete"];
+  "BI-G6_static_vs_adaptive_compare" -> "BI-G7_terminal_manifest" [label="BI-G6_static_vs_adaptive_compare.complete"];
+}

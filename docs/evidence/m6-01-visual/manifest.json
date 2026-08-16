@@ -1,0 +1,3208 @@
+{
+  "schemaVersion": "chimpmaera.bi/visual-browser-evidence/v1",
+  "generatedAt": "2026-08-14T18:15:00.000Z",
+  "deterministicClock": true,
+  "baseUrl": "http://127.0.0.1:41737",
+  "browser": "148.0.7778.96",
+  "automation": "preinstalled-playwright-core",
+  "freeDomOrJavaScriptExecution": false,
+  "persistentMutations": 0,
+  "runs": [
+    {
+      "scenarioId": "executive-sales",
+      "title": "Executive sales & margin",
+      "viewport": {
+        "id": "desktop-1440x900",
+        "width": 1440,
+        "height": 900
+      },
+      "userUtterance": "Zeige das letzte abgeschlossene Quartal: Umsatz, Marge sowie Top-Produkte und Top-Kunden.",
+      "normalizedActionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "executive-sales-01",
+            "action": "set_time_range",
+            "args": {
+              "from": "2026-04-01",
+              "to": "2026-06-30"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "executive-sales-idem-01",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "executive-sales-01",
+            "action": "set_time_range",
+            "status": "applied",
+            "previousStateVersion": 1,
+            "stateVersion": 2,
+            "idempotencyKey": "executive-sales-idem-01",
+            "requestDigest": "sha256:f5dc0a0f298d0dda7c31c1aaa124b6c7c969ef2d082f872461127c2e0b4424df",
+            "undoToken": "sha256:18a46a301946b0c60a39d922e1bc453e54735719e9c216c5bb0ab83cbf0115fa",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "executive-sales-02",
+            "action": "select_tab",
+            "args": {
+              "tabId": "executive"
+            },
+            "stateVersion": 2,
+            "idempotencyKey": "executive-sales-idem-02",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "executive-sales-02",
+            "action": "select_tab",
+            "status": "applied",
+            "previousStateVersion": 2,
+            "stateVersion": 3,
+            "idempotencyKey": "executive-sales-idem-02",
+            "requestDigest": "sha256:941a91a1279d471edd4109daae3ff78822eec7713ca3216bbfbffe4406dbd03a",
+            "undoToken": "sha256:70c26842619f09e1914edf1663ed630938ea707ea07eaff22acf73a3bf8699aa",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 3,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "executive-sales-03",
+            "action": "focus_chart",
+            "args": {
+              "chartId": "sales-margin"
+            },
+            "stateVersion": 3,
+            "idempotencyKey": "executive-sales-idem-03",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "executive-sales-03",
+            "action": "focus_chart",
+            "status": "applied",
+            "previousStateVersion": 3,
+            "stateVersion": 4,
+            "idempotencyKey": "executive-sales-idem-03",
+            "requestDigest": "sha256:8afada800a392046476a5d6194e485f55690bad4403cd78b2d27b3a2ca4a3848",
+            "undoToken": "sha256:a5ad3107c89cfc1305c6eda522e6c91a6d218c99c6ffaa82ad21524516b7e00b",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 4,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "executive-sales-04",
+            "action": "compare_segments",
+            "args": {
+              "segments": [
+                "Atlas Drive",
+                "Futura Retail"
+              ]
+            },
+            "stateVersion": 4,
+            "idempotencyKey": "executive-sales-idem-04",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "executive-sales-04",
+            "action": "compare_segments",
+            "status": "applied",
+            "previousStateVersion": 4,
+            "stateVersion": 5,
+            "idempotencyKey": "executive-sales-idem-04",
+            "requestDigest": "sha256:bd3033d36978885be5e910e517b28e5392d6722576ad76e9ff57b4aab75f138d",
+            "undoToken": "sha256:3330eab52b5852a520de877b16032f99c63632932586a251e10e1192c661ae74",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        }
+      ],
+      "expectedState": {
+        "version": 5,
+        "filters": {},
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": "sales-margin",
+        "drilldown": null,
+        "segments": [
+          "Atlas Drive",
+          "Futura Retail"
+        ],
+        "tab": "executive",
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "actualState": {
+        "version": 5,
+        "filters": {},
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": "sales-margin",
+        "drilldown": null,
+        "segments": [
+          "Atlas Drive",
+          "Futura Retail"
+        ],
+        "tab": "executive",
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "nativeSupersetReadback": {
+        "mode": "faithful_embedded_shell",
+        "dashboardId": "northstar-operations-synthetic",
+        "activeFilters": {},
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": "sales-margin",
+        "dashboardStillUsable": true
+      },
+      "oracle": {
+        "truthKey": "executiveQ2",
+        "values": {
+          "window": {
+            "from": "2026-04-01",
+            "to": "2026-06-30"
+          },
+          "revenueEur": 12480000,
+          "grossMarginPct": 31.4,
+          "topProduct": "Atlas Drive",
+          "topCustomer": "Futura Retail"
+        },
+        "conclusion": "Q2 revenue €12,480,000; gross margin 31.4%. Top product Atlas Drive; top customer Futura Retail."
+      },
+      "contractVerdict": {
+        "exactStateMatch": true,
+        "oracleMatch": true,
+        "unauthorizedPersistentMutations": 0,
+        "directDomOrJsActions": 0,
+        "actionsAfterCancel": null,
+        "visualInspection": "pending_browser_evidence"
+      },
+      "screenshot": "screenshots/executive-sales--desktop-1440x900.png",
+      "screenshotSha256": "0a5e2f6944305060cba5ca92525ed4970436311deec431714982552981536646",
+      "beforeAriaSnapshotSha256": "9a39ab94f5b1cad51a6b4678f1a45270d721d3a6b9e303927ee94f952bc6974f",
+      "afterAriaSnapshotSha256": "575162227422a61309061a71277dd536f715102ffdba14fd2580667feab35659",
+      "keyboardActivationChecked": true,
+      "measuredHorizontalOverflow": false,
+      "visualVerdict": "pending_human_visual_inspection",
+      "defectNotes": []
+    },
+    {
+      "scenarioId": "quality-investigation",
+      "title": "Quality investigation",
+      "viewport": {
+        "id": "desktop-1440x900",
+        "width": 1440,
+        "height": 900
+      },
+      "userUtterance": "Untersuche den Ausschuss-Peak in Werk 3, Linie C, und prüfe Volumen sowie Liefercharge.",
+      "normalizedActionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "quality-investigation-01",
+            "action": "set_filter",
+            "args": {
+              "key": "plant",
+              "value": "Werk 3"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "quality-investigation-idem-01",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "quality-investigation-01",
+            "action": "set_filter",
+            "status": "applied",
+            "previousStateVersion": 1,
+            "stateVersion": 2,
+            "idempotencyKey": "quality-investigation-idem-01",
+            "requestDigest": "sha256:0c0b2b011fc74ef4d95bba7086ab9f2c0519fd8a8bd6eea437cc0fac509895fa",
+            "undoToken": "sha256:1603d6cbf8948b74331f634f1e00e917c448f95722a8a2f2ba56f4015dc243e6",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "quality-investigation-02",
+            "action": "set_filter",
+            "args": {
+              "key": "line",
+              "value": "Linie C"
+            },
+            "stateVersion": 2,
+            "idempotencyKey": "quality-investigation-idem-02",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "quality-investigation-02",
+            "action": "set_filter",
+            "status": "applied",
+            "previousStateVersion": 2,
+            "stateVersion": 3,
+            "idempotencyKey": "quality-investigation-idem-02",
+            "requestDigest": "sha256:f00035268b6f767594ed3b75dd1fac01f7b16d8e77a8b3ced55c32b0b0ff8577",
+            "undoToken": "sha256:b07844f435e59c516fc52199f05fa05cd02bdeab0c6979778dfcd1c6b5172c33",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 3,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "quality-investigation-03",
+            "action": "set_time_range",
+            "args": {
+              "from": "2026-05-12",
+              "to": "2026-05-18"
+            },
+            "stateVersion": 3,
+            "idempotencyKey": "quality-investigation-idem-03",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "quality-investigation-03",
+            "action": "set_time_range",
+            "status": "applied",
+            "previousStateVersion": 3,
+            "stateVersion": 4,
+            "idempotencyKey": "quality-investigation-idem-03",
+            "requestDigest": "sha256:e1e3f6a2c73f6a2fd6052080ee988b1ee11da0066bdd619ae1fc1c198c215eec",
+            "undoToken": "sha256:40e43d15647744a26121c5b7f03f09da43654e7099d0565416dadf56a32f9425",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 4,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "quality-investigation-04",
+            "action": "focus_chart",
+            "args": {
+              "chartId": "quality-trend"
+            },
+            "stateVersion": 4,
+            "idempotencyKey": "quality-investigation-idem-04",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "quality-investigation-04",
+            "action": "focus_chart",
+            "status": "applied",
+            "previousStateVersion": 4,
+            "stateVersion": 5,
+            "idempotencyKey": "quality-investigation-idem-04",
+            "requestDigest": "sha256:85ed50f594271142fa5348139bb11d17a08989d1855325e7d65ef8b8e37fcebd",
+            "undoToken": "sha256:a167a5c9ce95a251b07b686375c9fe14615f8763bb2f7a36758eadaef666dca1",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 5,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "quality-investigation-05",
+            "action": "compare_segments",
+            "args": {
+              "segments": [
+                "defect_rate",
+                "production_volume"
+              ]
+            },
+            "stateVersion": 5,
+            "idempotencyKey": "quality-investigation-idem-05",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "quality-investigation-05",
+            "action": "compare_segments",
+            "status": "applied",
+            "previousStateVersion": 5,
+            "stateVersion": 6,
+            "idempotencyKey": "quality-investigation-idem-05",
+            "requestDigest": "sha256:25fb92943815eb9fffa6f10cf6bf91e94264c16984d281f7caa5f326b16af227",
+            "undoToken": "sha256:502ed53ae59aefac0e69104bff0601a6c3a6b1d1d04c6c3389426900d9e2cc28",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 6,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "quality-investigation-06",
+            "action": "open_drilldown",
+            "args": {
+              "chartId": "quality-trend",
+              "dimension": "supplier_batch"
+            },
+            "stateVersion": 6,
+            "idempotencyKey": "quality-investigation-idem-06",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "quality-investigation-06",
+            "action": "open_drilldown",
+            "status": "applied",
+            "previousStateVersion": 6,
+            "stateVersion": 7,
+            "idempotencyKey": "quality-investigation-idem-06",
+            "requestDigest": "sha256:1e7543a910b70ba2a7a909c88714ee1c2fbb6888416b0888bf9ebcc4f34d3248",
+            "undoToken": "sha256:9baf5c91c3e6e4eb4da3365e3e83f03ff681de61e09370db8a0e52bb68b17e22",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        }
+      ],
+      "expectedState": {
+        "version": 7,
+        "filters": {
+          "plant": "Werk 3",
+          "line": "Linie C"
+        },
+        "timeRange": {
+          "from": "2026-05-12",
+          "to": "2026-05-18"
+        },
+        "focusedChartId": "quality-trend",
+        "drilldown": {
+          "chartId": "quality-trend",
+          "dimension": "supplier_batch"
+        },
+        "segments": [
+          "defect_rate",
+          "production_volume"
+        ],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "actualState": {
+        "version": 7,
+        "filters": {
+          "plant": "Werk 3",
+          "line": "Linie C"
+        },
+        "timeRange": {
+          "from": "2026-05-12",
+          "to": "2026-05-18"
+        },
+        "focusedChartId": "quality-trend",
+        "drilldown": {
+          "chartId": "quality-trend",
+          "dimension": "supplier_batch"
+        },
+        "segments": [
+          "defect_rate",
+          "production_volume"
+        ],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "nativeSupersetReadback": {
+        "mode": "faithful_embedded_shell",
+        "dashboardId": "northstar-operations-synthetic",
+        "activeFilters": {
+          "plant": "Werk 3",
+          "line": "Linie C"
+        },
+        "timeRange": {
+          "from": "2026-05-12",
+          "to": "2026-05-18"
+        },
+        "focusedChartId": "quality-trend",
+        "dashboardStillUsable": true
+      },
+      "oracle": {
+        "truthKey": "qualitySpike",
+        "values": {
+          "window": {
+            "from": "2026-05-12",
+            "to": "2026-05-18"
+          },
+          "plant": "Werk 3",
+          "line": "Linie C",
+          "defectRatePct": 8.6,
+          "baselineDefectRatePct": 1.9,
+          "productionUnits": 18200,
+          "supplierBatch": "SB-X17",
+          "interpretation": "Strong association with supplier batch SB-X17; causation is not established."
+        },
+        "conclusion": "Defect rate 8.6% versus 1.9% baseline at Werk 3/Linie C; 18200 units. Strong association with supplier batch SB-X17; causation is not established."
+      },
+      "contractVerdict": {
+        "exactStateMatch": true,
+        "oracleMatch": true,
+        "unauthorizedPersistentMutations": 0,
+        "directDomOrJsActions": 0,
+        "actionsAfterCancel": null,
+        "visualInspection": "pending_browser_evidence"
+      },
+      "screenshot": "screenshots/quality-investigation--desktop-1440x900.png",
+      "screenshotSha256": "f0748ffa1bc0d00df6cf980c507504c6f75e2955c7b5d808d22452941fbf46de",
+      "beforeAriaSnapshotSha256": "575162227422a61309061a71277dd536f715102ffdba14fd2580667feab35659",
+      "afterAriaSnapshotSha256": "38e921559826605e93053b088f616893b431cfa4151c0d30a96ce5d29ba5fa22",
+      "keyboardActivationChecked": false,
+      "measuredHorizontalOverflow": false,
+      "visualVerdict": "pending_human_visual_inspection",
+      "defectNotes": []
+    },
+    {
+      "scenarioId": "inventory-risk",
+      "title": "Inventory stockout risk",
+      "viewport": {
+        "id": "desktop-1440x900",
+        "width": 1440,
+        "height": 900
+      },
+      "userUtterance": "Zeige das knappste Material für Werk 2, Rotor-7, sortiert nach Reichweite, und vergleiche Bedarf mit bestätigtem Zulauf.",
+      "normalizedActionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "inventory-risk-01",
+            "action": "set_filter",
+            "args": {
+              "key": "plant",
+              "value": "Werk 2"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "inventory-risk-idem-01",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "inventory-risk-01",
+            "action": "set_filter",
+            "status": "applied",
+            "previousStateVersion": 1,
+            "stateVersion": 2,
+            "idempotencyKey": "inventory-risk-idem-01",
+            "requestDigest": "sha256:e0bc73080cb71f614ff5655b2b3aa691afd59b166b0eb343091f63406dccc0ef",
+            "undoToken": "sha256:06b1789b93e9a08e0a52a9ee0e49f9ee36635010f4e7b082166e386fc827cf22",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "inventory-risk-02",
+            "action": "set_filter",
+            "args": {
+              "key": "component",
+              "value": "Rotor-7"
+            },
+            "stateVersion": 2,
+            "idempotencyKey": "inventory-risk-idem-02",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "inventory-risk-02",
+            "action": "set_filter",
+            "status": "applied",
+            "previousStateVersion": 2,
+            "stateVersion": 3,
+            "idempotencyKey": "inventory-risk-idem-02",
+            "requestDigest": "sha256:491d42b039ba5ef94f283d96fc37d5b724528393c6b3153efd93417ab9fae642",
+            "undoToken": "sha256:00183dd279acdd32252af6ef93a8aed47cdc8bd83e1b26752e1277712839d843",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 3,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "inventory-risk-03",
+            "action": "focus_chart",
+            "args": {
+              "chartId": "inventory-coverage"
+            },
+            "stateVersion": 3,
+            "idempotencyKey": "inventory-risk-idem-03",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "inventory-risk-03",
+            "action": "focus_chart",
+            "status": "applied",
+            "previousStateVersion": 3,
+            "stateVersion": 4,
+            "idempotencyKey": "inventory-risk-idem-03",
+            "requestDigest": "sha256:8ce51aded7c133efb2f3c51dc9238c056abb1687330140d078dda4dcb0a8a20a",
+            "undoToken": "sha256:5a86dd512e4814f17aabf38940c6e13996c76ac0de81df0917ff59732e3fbcfe",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 4,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "inventory-risk-04",
+            "action": "sort_table",
+            "args": {
+              "chartId": "inventory-table",
+              "column": "coverage_days",
+              "direction": "asc"
+            },
+            "stateVersion": 4,
+            "idempotencyKey": "inventory-risk-idem-04",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "inventory-risk-04",
+            "action": "sort_table",
+            "status": "applied",
+            "previousStateVersion": 4,
+            "stateVersion": 5,
+            "idempotencyKey": "inventory-risk-idem-04",
+            "requestDigest": "sha256:e866bbfdbb80b7bd02c34a71205dbefef53efee9ae1bcec8d43f012ba7aee1f2",
+            "undoToken": "sha256:2fa89b4c252a40803c076f82cf330c8b5a94b9a7b52a049e46fa261b1ffdd5cc",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 5,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "inventory-risk-05",
+            "action": "compare_segments",
+            "args": {
+              "segments": [
+                "demand",
+                "confirmed_supply"
+              ]
+            },
+            "stateVersion": 5,
+            "idempotencyKey": "inventory-risk-idem-05",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "inventory-risk-05",
+            "action": "compare_segments",
+            "status": "applied",
+            "previousStateVersion": 5,
+            "stateVersion": 6,
+            "idempotencyKey": "inventory-risk-idem-05",
+            "requestDigest": "sha256:04798582cb58d91bd04d917dbbc79b862afe8a95317302d52cee79af5bf73bb7",
+            "undoToken": "sha256:636bb8b092f47a715120ccf58038c718326eaf588629464a14b9b95fea7483a8",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        }
+      ],
+      "expectedState": {
+        "version": 6,
+        "filters": {
+          "plant": "Werk 2",
+          "component": "Rotor-7"
+        },
+        "timeRange": null,
+        "focusedChartId": "inventory-coverage",
+        "drilldown": null,
+        "segments": [
+          "demand",
+          "confirmed_supply"
+        ],
+        "tab": null,
+        "tableSort": {
+          "chartId": "inventory-table",
+          "column": "coverage_days",
+          "direction": "asc"
+        },
+        "hiddenSeries": []
+      },
+      "actualState": {
+        "version": 6,
+        "filters": {
+          "plant": "Werk 2",
+          "component": "Rotor-7"
+        },
+        "timeRange": null,
+        "focusedChartId": "inventory-coverage",
+        "drilldown": null,
+        "segments": [
+          "demand",
+          "confirmed_supply"
+        ],
+        "tab": null,
+        "tableSort": {
+          "chartId": "inventory-table",
+          "column": "coverage_days",
+          "direction": "asc"
+        },
+        "hiddenSeries": []
+      },
+      "nativeSupersetReadback": {
+        "mode": "faithful_embedded_shell",
+        "dashboardId": "northstar-operations-synthetic",
+        "activeFilters": {
+          "plant": "Werk 2",
+          "component": "Rotor-7"
+        },
+        "timeRange": null,
+        "focusedChartId": "inventory-coverage",
+        "dashboardStillUsable": true
+      },
+      "oracle": {
+        "truthKey": "inventoryRisk",
+        "values": {
+          "plant": "Werk 2",
+          "component": "Rotor-7",
+          "coverageDays": 2.4,
+          "demandUnits": 4200,
+          "confirmedSupplyUnits": 900,
+          "risk": "stockout"
+        },
+        "conclusion": "Rotor-7 at Werk 2: 2.4 days coverage, demand 4200, confirmed supply 900; stockout risk."
+      },
+      "contractVerdict": {
+        "exactStateMatch": true,
+        "oracleMatch": true,
+        "unauthorizedPersistentMutations": 0,
+        "directDomOrJsActions": 0,
+        "actionsAfterCancel": null,
+        "visualInspection": "pending_browser_evidence"
+      },
+      "screenshot": "screenshots/inventory-risk--desktop-1440x900.png",
+      "screenshotSha256": "8b429aa44013870503f67f07de0dca56b48ee91cd4a893db8a2dd3a6141298ab",
+      "beforeAriaSnapshotSha256": "38e921559826605e93053b088f616893b431cfa4151c0d30a96ce5d29ba5fa22",
+      "afterAriaSnapshotSha256": "2ce2c64f8ee58b19bed2701207561649027b8e1cb625db14fca688d86df189cc",
+      "keyboardActivationChecked": false,
+      "measuredHorizontalOverflow": false,
+      "visualVerdict": "pending_human_visual_inspection",
+      "defectNotes": []
+    },
+    {
+      "scenarioId": "maintenance",
+      "title": "Maintenance downtime & MTBF",
+      "viewport": {
+        "id": "desktop-1440x900",
+        "width": 1440,
+        "height": 900
+      },
+      "userUtterance": "Fokussiere Pressen-Ausfallzeit und MTBF im zweiten Quartal und öffne die Ereignisse.",
+      "normalizedActionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "maintenance-01",
+            "action": "set_filter",
+            "args": {
+              "key": "asset_class",
+              "value": "Press"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "maintenance-idem-01",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "maintenance-01",
+            "action": "set_filter",
+            "status": "applied",
+            "previousStateVersion": 1,
+            "stateVersion": 2,
+            "idempotencyKey": "maintenance-idem-01",
+            "requestDigest": "sha256:954b066d694106accbe5c15207524fa25ec33d46f23da634ce1283d6a7e53c28",
+            "undoToken": "sha256:0e10697e08fc50096dbd2b2cd48656475092aee283d3f82d990a895890a5981b",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "maintenance-02",
+            "action": "set_time_range",
+            "args": {
+              "from": "2026-04-01",
+              "to": "2026-06-30"
+            },
+            "stateVersion": 2,
+            "idempotencyKey": "maintenance-idem-02",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "maintenance-02",
+            "action": "set_time_range",
+            "status": "applied",
+            "previousStateVersion": 2,
+            "stateVersion": 3,
+            "idempotencyKey": "maintenance-idem-02",
+            "requestDigest": "sha256:7f4a0851c08bee02b9b69779d6e14901226b226de77d1b5a8684a8d99d734f2e",
+            "undoToken": "sha256:63846b0f68aff8dba8c52fc10574bcecf503d93f402eb6e4150224bb090c8e88",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 3,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "maintenance-03",
+            "action": "focus_chart",
+            "args": {
+              "chartId": "maintenance-downtime"
+            },
+            "stateVersion": 3,
+            "idempotencyKey": "maintenance-idem-03",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "maintenance-03",
+            "action": "focus_chart",
+            "status": "applied",
+            "previousStateVersion": 3,
+            "stateVersion": 4,
+            "idempotencyKey": "maintenance-idem-03",
+            "requestDigest": "sha256:7028cc3f43522521a4edf79d842203b53f37ee9e18e36555969f9c375e2687be",
+            "undoToken": "sha256:5196cc20e39d84cc9821fe72b06777fdf584fe52e2675f9aa994881a3d05901d",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 4,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "maintenance-04",
+            "action": "open_drilldown",
+            "args": {
+              "chartId": "maintenance-downtime",
+              "dimension": "event_type"
+            },
+            "stateVersion": 4,
+            "idempotencyKey": "maintenance-idem-04",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "maintenance-04",
+            "action": "open_drilldown",
+            "status": "applied",
+            "previousStateVersion": 4,
+            "stateVersion": 5,
+            "idempotencyKey": "maintenance-idem-04",
+            "requestDigest": "sha256:5f60be3c1b3815eedd869c0570e69a1fde2e1e096a41ad0947b9b7a37b74f5d3",
+            "undoToken": "sha256:a41533940905a36cc414a49fbd15a95b559fd4284c6d54e4d3897dae62aac4b0",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        }
+      ],
+      "expectedState": {
+        "version": 5,
+        "filters": {
+          "asset_class": "Press"
+        },
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": "maintenance-downtime",
+        "drilldown": {
+          "chartId": "maintenance-downtime",
+          "dimension": "event_type"
+        },
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "actualState": {
+        "version": 5,
+        "filters": {
+          "asset_class": "Press"
+        },
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": "maintenance-downtime",
+        "drilldown": {
+          "chartId": "maintenance-downtime",
+          "dimension": "event_type"
+        },
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "nativeSupersetReadback": {
+        "mode": "faithful_embedded_shell",
+        "dashboardId": "northstar-operations-synthetic",
+        "activeFilters": {
+          "asset_class": "Press"
+        },
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": "maintenance-downtime",
+        "dashboardStillUsable": true
+      },
+      "oracle": {
+        "truthKey": "maintenance",
+        "values": {
+          "window": {
+            "from": "2026-04-01",
+            "to": "2026-06-30"
+          },
+          "assetClass": "Press",
+          "downtimeHours": 41.5,
+          "mtbfHours": 68,
+          "eventCount": 6
+        },
+        "conclusion": "Press: 41.5 h downtime, 68 h MTBF, 6 events in Q2."
+      },
+      "contractVerdict": {
+        "exactStateMatch": true,
+        "oracleMatch": true,
+        "unauthorizedPersistentMutations": 0,
+        "directDomOrJsActions": 0,
+        "actionsAfterCancel": null,
+        "visualInspection": "pending_browser_evidence"
+      },
+      "screenshot": "screenshots/maintenance--desktop-1440x900.png",
+      "screenshotSha256": "f2253818165c0d3810e2b240c38380ecbcd22bb8c2ec95ba2d5a3c01282be9bb",
+      "beforeAriaSnapshotSha256": "2ce2c64f8ee58b19bed2701207561649027b8e1cb625db14fca688d86df189cc",
+      "afterAriaSnapshotSha256": "6bf5d14f93a89e89baf29ac8f273a8e8d96ba88c362d9be6791bed070a71844d",
+      "keyboardActivationChecked": false,
+      "measuredHorizontalOverflow": false,
+      "visualVerdict": "pending_human_visual_inspection",
+      "defectNotes": []
+    },
+    {
+      "scenarioId": "cross-domain",
+      "title": "Cross-domain demand comparison",
+      "viewport": {
+        "id": "desktop-1440x900",
+        "width": 1440,
+        "height": 900
+      },
+      "userUtterance": "Vergleiche Atlas-Drive-Nachfrage mit Produktion und Bestand im zweiten Quartal. Keine Kausalbehauptung.",
+      "normalizedActionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "cross-domain-01",
+            "action": "select_tab",
+            "args": {
+              "tabId": "cross-domain"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "cross-domain-idem-01",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "cross-domain-01",
+            "action": "select_tab",
+            "status": "applied",
+            "previousStateVersion": 1,
+            "stateVersion": 2,
+            "idempotencyKey": "cross-domain-idem-01",
+            "requestDigest": "sha256:74bc4e3456356f13e73888105989008158d193c020d7cca8045a4776fdc9c149",
+            "undoToken": "sha256:9b67c50758d4051fc01e07b8e4bea3df44d44e9c3eeaba235d86127aae17b53f",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "cross-domain-02",
+            "action": "focus_chart",
+            "args": {
+              "chartId": "demand-supply"
+            },
+            "stateVersion": 2,
+            "idempotencyKey": "cross-domain-idem-02",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "cross-domain-02",
+            "action": "focus_chart",
+            "status": "applied",
+            "previousStateVersion": 2,
+            "stateVersion": 3,
+            "idempotencyKey": "cross-domain-idem-02",
+            "requestDigest": "sha256:3aff7444d98ea3c6b637668bdb562fea44c611da6caeec5c37be65278f7bf8e9",
+            "undoToken": "sha256:d298e48aa3d4bcc596ce4376d9219515525c4a155376e0921f1fc934d43c8da8",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 3,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "cross-domain-03",
+            "action": "compare_segments",
+            "args": {
+              "segments": [
+                "demand",
+                "production",
+                "inventory"
+              ]
+            },
+            "stateVersion": 3,
+            "idempotencyKey": "cross-domain-idem-03",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "cross-domain-03",
+            "action": "compare_segments",
+            "status": "applied",
+            "previousStateVersion": 3,
+            "stateVersion": 4,
+            "idempotencyKey": "cross-domain-idem-03",
+            "requestDigest": "sha256:008ca18532833baf8873cb2c6e39f2f0f41eb5e2dcc8b2c72d4c21a26d9504da",
+            "undoToken": "sha256:e5bc7daf52638c7018a32f59c292f6939ea60f5cd7b0e75d58760ff0db3e0610",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 4,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "cross-domain-04",
+            "action": "set_time_range",
+            "args": {
+              "from": "2026-04-01",
+              "to": "2026-06-30"
+            },
+            "stateVersion": 4,
+            "idempotencyKey": "cross-domain-idem-04",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "cross-domain-04",
+            "action": "set_time_range",
+            "status": "applied",
+            "previousStateVersion": 4,
+            "stateVersion": 5,
+            "idempotencyKey": "cross-domain-idem-04",
+            "requestDigest": "sha256:59a064c9fc75675aeed37016f1511591d9e61ca9cc42a941b84327b5caf72482",
+            "undoToken": "sha256:ed7c5d948c8fccd4f81a9a175dc80d65a8b721af50984594914f33e4030fcfdf",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        }
+      ],
+      "expectedState": {
+        "version": 5,
+        "filters": {},
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": "demand-supply",
+        "drilldown": null,
+        "segments": [
+          "demand",
+          "production",
+          "inventory"
+        ],
+        "tab": "cross-domain",
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "actualState": {
+        "version": 5,
+        "filters": {},
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": "demand-supply",
+        "drilldown": null,
+        "segments": [
+          "demand",
+          "production",
+          "inventory"
+        ],
+        "tab": "cross-domain",
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "nativeSupersetReadback": {
+        "mode": "faithful_embedded_shell",
+        "dashboardId": "northstar-operations-synthetic",
+        "activeFilters": {},
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": "demand-supply",
+        "dashboardStillUsable": true
+      },
+      "oracle": {
+        "truthKey": "crossDomain",
+        "values": {
+          "window": {
+            "from": "2026-04-01",
+            "to": "2026-06-30"
+          },
+          "product": "Atlas Drive",
+          "demandChangePct": 24,
+          "productionChangePct": 9,
+          "inventoryCoverageDays": 3.1,
+          "interpretation": "Demand growth co-occurs with lower coverage; this is correlation, not proof of causation."
+        },
+        "conclusion": "Atlas Drive: demand +24%, production +9%, coverage 3.1 days. Demand growth co-occurs with lower coverage; this is correlation, not proof of causation."
+      },
+      "contractVerdict": {
+        "exactStateMatch": true,
+        "oracleMatch": true,
+        "unauthorizedPersistentMutations": 0,
+        "directDomOrJsActions": 0,
+        "actionsAfterCancel": null,
+        "visualInspection": "pending_browser_evidence"
+      },
+      "screenshot": "screenshots/cross-domain--desktop-1440x900.png",
+      "screenshotSha256": "4f6966bc0942a6b2b6089a4dcbfe6f6238c77f109cad956d43cfc61d09ff5f9a",
+      "beforeAriaSnapshotSha256": "6bf5d14f93a89e89baf29ac8f273a8e8d96ba88c362d9be6791bed070a71844d",
+      "afterAriaSnapshotSha256": "55b9f2b745be53f6a5018bb0454aa3ce69a69c6fcb539a5347909b1a875034c5",
+      "keyboardActivationChecked": false,
+      "measuredHorizontalOverflow": false,
+      "visualVerdict": "pending_human_visual_inspection",
+      "defectNotes": []
+    },
+    {
+      "scenarioId": "voice-correction-cancel",
+      "title": "Voice correction, barge-in & cancel",
+      "viewport": {
+        "id": "desktop-1440x900",
+        "width": 1440,
+        "height": 900
+      },
+      "userUtterance": "Werk 2 … nein Werk 3 … abbrechen.",
+      "normalizedActionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "voice-correction-cancel-01",
+            "action": "set_filter",
+            "args": {
+              "key": "plant",
+              "value": "Werk 3"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "voice-correction-cancel-idem-01",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "voice-correction-cancel-01",
+            "action": "set_filter",
+            "status": "applied",
+            "previousStateVersion": 1,
+            "stateVersion": 2,
+            "idempotencyKey": "voice-correction-cancel-idem-01",
+            "requestDigest": "sha256:a0c22cc339b32751e8e74468e6a517ddb267db20be14883a5c87744a4d01f639",
+            "undoToken": "sha256:5ef19fc15105e7f5ba7f91e59ddee956f4a4f2126efcc63b4a44c42094f3939a",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        }
+      ],
+      "expectedState": {
+        "version": 2,
+        "filters": {
+          "plant": "Werk 3"
+        },
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "actualState": {
+        "version": 2,
+        "filters": {
+          "plant": "Werk 3"
+        },
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "nativeSupersetReadback": {
+        "mode": "faithful_embedded_shell",
+        "dashboardId": "northstar-operations-synthetic",
+        "activeFilters": {
+          "plant": "Werk 3"
+        },
+        "timeRange": null,
+        "focusedChartId": null,
+        "dashboardStillUsable": true
+      },
+      "oracle": {
+        "truthKey": "qualitySpike",
+        "values": {
+          "window": {
+            "from": "2026-05-12",
+            "to": "2026-05-18"
+          },
+          "plant": "Werk 3",
+          "line": "Linie C",
+          "defectRatePct": 8.6,
+          "baselineDefectRatePct": 1.9,
+          "productionUnits": 18200,
+          "supplierBatch": "SB-X17",
+          "interpretation": "Strong association with supplier batch SB-X17; causation is not established."
+        },
+        "conclusion": "Defect rate 8.6% versus 1.9% baseline at Werk 3/Linie C; 18200 units. Strong association with supplier batch SB-X17; causation is not established."
+      },
+      "contractVerdict": {
+        "exactStateMatch": true,
+        "oracleMatch": true,
+        "unauthorizedPersistentMutations": 0,
+        "directDomOrJsActions": 0,
+        "actionsAfterCancel": 0,
+        "visualInspection": "pending_browser_evidence"
+      },
+      "screenshot": "screenshots/voice-correction-cancel--desktop-1440x900.png",
+      "screenshotSha256": "0d0ad2f0533f72d378186f888384580af6067aa863f1c2ca7cfb76f29ce26c41",
+      "beforeAriaSnapshotSha256": "55b9f2b745be53f6a5018bb0454aa3ce69a69c6fcb539a5347909b1a875034c5",
+      "afterAriaSnapshotSha256": "9b51d2fc4773029f2b8218eb93809f3d548ffb569c8865c3589c14769c315d4a",
+      "keyboardActivationChecked": false,
+      "measuredHorizontalOverflow": false,
+      "visualVerdict": "pending_human_visual_inspection",
+      "defectNotes": []
+    },
+    {
+      "scenarioId": "undo-idempotency",
+      "title": "Undo & idempotency",
+      "viewport": {
+        "id": "desktop-1440x900",
+        "width": 1440,
+        "height": 900
+      },
+      "userUtterance": "Filtere Atlas Drive; dieselbe Aktion kommt doppelt. Danach rückgängig.",
+      "normalizedActionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "undo-idempotency-01",
+            "action": "set_filter",
+            "args": {
+              "key": "product",
+              "value": "Atlas Drive"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "undo-idempotency-idem-01",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "undo-idempotency-01",
+            "action": "set_filter",
+            "status": "applied",
+            "previousStateVersion": 1,
+            "stateVersion": 2,
+            "idempotencyKey": "undo-idempotency-idem-01",
+            "requestDigest": "sha256:d317ae3434648cea85139ea0397a7568e606727cb0b705647b82eb8a46c3dc3c",
+            "undoToken": "sha256:bed39ece15c21176b64d7f000dee87f2f8632b007511c11550c2c14d6f2ec5fa",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "undo-idempotency-01",
+            "action": "set_filter",
+            "args": {
+              "key": "product",
+              "value": "Atlas Drive"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "undo-idempotency-idem-01",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "undo-idempotency-01",
+            "action": "set_filter",
+            "status": "already_applied",
+            "previousStateVersion": 1,
+            "stateVersion": 2,
+            "idempotencyKey": "undo-idempotency-idem-01",
+            "requestDigest": "sha256:d317ae3434648cea85139ea0397a7568e606727cb0b705647b82eb8a46c3dc3c",
+            "undoToken": "sha256:bed39ece15c21176b64d7f000dee87f2f8632b007511c11550c2c14d6f2ec5fa",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 3,
+          "provenance": "deterministic_stub",
+          "contract": "undo-bound-receipt",
+          "request": {
+            "action": "undo",
+            "undoToken": "sha256:bed39ece15c21176b64d7f000dee87f2f8632b007511c11550c2c14d6f2ec5fa"
+          },
+          "receipt": {
+            "status": "undone",
+            "stateVersion": 3,
+            "persistentSupersetMutation": false
+          }
+        }
+      ],
+      "expectedState": {
+        "version": 3,
+        "filters": {},
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "actualState": {
+        "version": 3,
+        "filters": {},
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "nativeSupersetReadback": {
+        "mode": "faithful_embedded_shell",
+        "dashboardId": "northstar-operations-synthetic",
+        "activeFilters": {},
+        "timeRange": null,
+        "focusedChartId": null,
+        "dashboardStillUsable": true
+      },
+      "oracle": {
+        "truthKey": "executiveQ2",
+        "values": {
+          "window": {
+            "from": "2026-04-01",
+            "to": "2026-06-30"
+          },
+          "revenueEur": 12480000,
+          "grossMarginPct": 31.4,
+          "topProduct": "Atlas Drive",
+          "topCustomer": "Futura Retail"
+        },
+        "conclusion": "Q2 revenue €12,480,000; gross margin 31.4%. Top product Atlas Drive; top customer Futura Retail."
+      },
+      "contractVerdict": {
+        "exactStateMatch": true,
+        "oracleMatch": true,
+        "unauthorizedPersistentMutations": 0,
+        "directDomOrJsActions": 0,
+        "actionsAfterCancel": null,
+        "visualInspection": "pending_browser_evidence"
+      },
+      "screenshot": "screenshots/undo-idempotency--desktop-1440x900.png",
+      "screenshotSha256": "00809f20f647640bdead80b9df1bd8fc6a515bcc60779436a824daf0dfb114c8",
+      "beforeAriaSnapshotSha256": "9b51d2fc4773029f2b8218eb93809f3d548ffb569c8865c3589c14769c315d4a",
+      "afterAriaSnapshotSha256": "e4a42fe369b93baa58668620d8b4a4299f7d96d7fdd2fa4896ea10a0857b4c67",
+      "keyboardActivationChecked": false,
+      "measuredHorizontalOverflow": false,
+      "visualVerdict": "pending_human_visual_inspection",
+      "defectNotes": []
+    },
+    {
+      "scenarioId": "persistent-request-denied",
+      "title": "Persistent request stays preview-only",
+      "viewport": {
+        "id": "desktop-1440x900",
+        "width": 1440,
+        "height": 900
+      },
+      "userUtterance": "Speichere und ersetze dieses Dashboard dauerhaft.",
+      "normalizedActionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/persistent-asset-revision-proposal/v1",
+          "request": {
+            "action": "save_dashboard",
+            "channel": "chat"
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": null,
+            "action": "save_dashboard",
+            "status": "denied",
+            "denialReason": "TRUSTED_UI_APPROVAL_REQUIRED",
+            "stateVersion": 1,
+            "idempotencyKey": null,
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false
+          },
+          "proposal": {
+            "schemaVersion": "chimpmaera.bi/persistent-asset-revision-proposal/v1",
+            "proposalId": "persistent-request-denied-preview",
+            "dashboardId": "northstar-operations-synthetic",
+            "baseRevision": "synthetic-rev-1",
+            "diff": {
+              "title": {
+                "from": "Operations",
+                "to": "Executive Control Tower"
+              }
+            },
+            "status": "proposal_only",
+            "requirements": [
+              "preview_diff",
+              "trusted_ui_approval",
+              "bi_control_apply",
+              "readback",
+              "rollback"
+            ],
+            "applied": false
+          }
+        }
+      ],
+      "expectedState": {
+        "version": 1,
+        "filters": {},
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "actualState": {
+        "version": 1,
+        "filters": {},
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "nativeSupersetReadback": {
+        "mode": "faithful_embedded_shell",
+        "dashboardId": "northstar-operations-synthetic",
+        "activeFilters": {},
+        "timeRange": null,
+        "focusedChartId": null,
+        "dashboardStillUsable": true
+      },
+      "oracle": {
+        "truthKey": "executiveQ2",
+        "values": {
+          "window": {
+            "from": "2026-04-01",
+            "to": "2026-06-30"
+          },
+          "revenueEur": 12480000,
+          "grossMarginPct": 31.4,
+          "topProduct": "Atlas Drive",
+          "topCustomer": "Futura Retail"
+        },
+        "conclusion": "Q2 revenue €12,480,000; gross margin 31.4%. Top product Atlas Drive; top customer Futura Retail."
+      },
+      "contractVerdict": {
+        "exactStateMatch": true,
+        "oracleMatch": true,
+        "unauthorizedPersistentMutations": 0,
+        "directDomOrJsActions": 0,
+        "actionsAfterCancel": null,
+        "visualInspection": "pending_browser_evidence"
+      },
+      "screenshot": "screenshots/persistent-request-denied--desktop-1440x900.png",
+      "screenshotSha256": "ac1487539aa7e2e61366f4c1f637d36a609b485c158f53aca7830e1d184ff2b8",
+      "beforeAriaSnapshotSha256": "e4a42fe369b93baa58668620d8b4a4299f7d96d7fdd2fa4896ea10a0857b4c67",
+      "afterAriaSnapshotSha256": "3839b1fa84c7a128f83c6943612a6f238bc7236ca80a731d2950fa6c7895e63e",
+      "keyboardActivationChecked": false,
+      "measuredHorizontalOverflow": false,
+      "visualVerdict": "pending_human_visual_inspection",
+      "defectNotes": []
+    },
+    {
+      "scenarioId": "executive-sales",
+      "title": "Executive sales & margin",
+      "viewport": {
+        "id": "narrow-390x844",
+        "width": 390,
+        "height": 844
+      },
+      "userUtterance": "Zeige das letzte abgeschlossene Quartal: Umsatz, Marge sowie Top-Produkte und Top-Kunden.",
+      "normalizedActionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "executive-sales-01",
+            "action": "set_time_range",
+            "args": {
+              "from": "2026-04-01",
+              "to": "2026-06-30"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "executive-sales-idem-01",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "executive-sales-01",
+            "action": "set_time_range",
+            "status": "applied",
+            "previousStateVersion": 1,
+            "stateVersion": 2,
+            "idempotencyKey": "executive-sales-idem-01",
+            "requestDigest": "sha256:f5dc0a0f298d0dda7c31c1aaa124b6c7c969ef2d082f872461127c2e0b4424df",
+            "undoToken": "sha256:18a46a301946b0c60a39d922e1bc453e54735719e9c216c5bb0ab83cbf0115fa",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "executive-sales-02",
+            "action": "select_tab",
+            "args": {
+              "tabId": "executive"
+            },
+            "stateVersion": 2,
+            "idempotencyKey": "executive-sales-idem-02",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "executive-sales-02",
+            "action": "select_tab",
+            "status": "applied",
+            "previousStateVersion": 2,
+            "stateVersion": 3,
+            "idempotencyKey": "executive-sales-idem-02",
+            "requestDigest": "sha256:941a91a1279d471edd4109daae3ff78822eec7713ca3216bbfbffe4406dbd03a",
+            "undoToken": "sha256:70c26842619f09e1914edf1663ed630938ea707ea07eaff22acf73a3bf8699aa",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 3,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "executive-sales-03",
+            "action": "focus_chart",
+            "args": {
+              "chartId": "sales-margin"
+            },
+            "stateVersion": 3,
+            "idempotencyKey": "executive-sales-idem-03",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "executive-sales-03",
+            "action": "focus_chart",
+            "status": "applied",
+            "previousStateVersion": 3,
+            "stateVersion": 4,
+            "idempotencyKey": "executive-sales-idem-03",
+            "requestDigest": "sha256:8afada800a392046476a5d6194e485f55690bad4403cd78b2d27b3a2ca4a3848",
+            "undoToken": "sha256:a5ad3107c89cfc1305c6eda522e6c91a6d218c99c6ffaa82ad21524516b7e00b",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 4,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "executive-sales-04",
+            "action": "compare_segments",
+            "args": {
+              "segments": [
+                "Atlas Drive",
+                "Futura Retail"
+              ]
+            },
+            "stateVersion": 4,
+            "idempotencyKey": "executive-sales-idem-04",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "executive-sales-04",
+            "action": "compare_segments",
+            "status": "applied",
+            "previousStateVersion": 4,
+            "stateVersion": 5,
+            "idempotencyKey": "executive-sales-idem-04",
+            "requestDigest": "sha256:bd3033d36978885be5e910e517b28e5392d6722576ad76e9ff57b4aab75f138d",
+            "undoToken": "sha256:3330eab52b5852a520de877b16032f99c63632932586a251e10e1192c661ae74",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        }
+      ],
+      "expectedState": {
+        "version": 5,
+        "filters": {},
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": "sales-margin",
+        "drilldown": null,
+        "segments": [
+          "Atlas Drive",
+          "Futura Retail"
+        ],
+        "tab": "executive",
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "actualState": {
+        "version": 5,
+        "filters": {},
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": "sales-margin",
+        "drilldown": null,
+        "segments": [
+          "Atlas Drive",
+          "Futura Retail"
+        ],
+        "tab": "executive",
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "nativeSupersetReadback": {
+        "mode": "faithful_embedded_shell",
+        "dashboardId": "northstar-operations-synthetic",
+        "activeFilters": {},
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": "sales-margin",
+        "dashboardStillUsable": true
+      },
+      "oracle": {
+        "truthKey": "executiveQ2",
+        "values": {
+          "window": {
+            "from": "2026-04-01",
+            "to": "2026-06-30"
+          },
+          "revenueEur": 12480000,
+          "grossMarginPct": 31.4,
+          "topProduct": "Atlas Drive",
+          "topCustomer": "Futura Retail"
+        },
+        "conclusion": "Q2 revenue €12,480,000; gross margin 31.4%. Top product Atlas Drive; top customer Futura Retail."
+      },
+      "contractVerdict": {
+        "exactStateMatch": true,
+        "oracleMatch": true,
+        "unauthorizedPersistentMutations": 0,
+        "directDomOrJsActions": 0,
+        "actionsAfterCancel": null,
+        "visualInspection": "pending_browser_evidence"
+      },
+      "screenshot": "screenshots/executive-sales--narrow-390x844.png",
+      "screenshotSha256": "5e1014f3fc4906da710b80f61e4e0cf82649b8a7fed0112068f6567d02f55edc",
+      "beforeAriaSnapshotSha256": "49a34dd57458f9028474f50472e702bbb5a4a9463aa7a7d3efde9fd7d70b5f5e",
+      "afterAriaSnapshotSha256": "3781abfa8e89e9e360d41759fe29af35ee20d0e1e89f53112056f6480fc66d95",
+      "keyboardActivationChecked": true,
+      "measuredHorizontalOverflow": false,
+      "visualVerdict": "pending_human_visual_inspection",
+      "defectNotes": []
+    },
+    {
+      "scenarioId": "quality-investigation",
+      "title": "Quality investigation",
+      "viewport": {
+        "id": "narrow-390x844",
+        "width": 390,
+        "height": 844
+      },
+      "userUtterance": "Untersuche den Ausschuss-Peak in Werk 3, Linie C, und prüfe Volumen sowie Liefercharge.",
+      "normalizedActionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "quality-investigation-01",
+            "action": "set_filter",
+            "args": {
+              "key": "plant",
+              "value": "Werk 3"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "quality-investigation-idem-01",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "quality-investigation-01",
+            "action": "set_filter",
+            "status": "applied",
+            "previousStateVersion": 1,
+            "stateVersion": 2,
+            "idempotencyKey": "quality-investigation-idem-01",
+            "requestDigest": "sha256:0c0b2b011fc74ef4d95bba7086ab9f2c0519fd8a8bd6eea437cc0fac509895fa",
+            "undoToken": "sha256:1603d6cbf8948b74331f634f1e00e917c448f95722a8a2f2ba56f4015dc243e6",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "quality-investigation-02",
+            "action": "set_filter",
+            "args": {
+              "key": "line",
+              "value": "Linie C"
+            },
+            "stateVersion": 2,
+            "idempotencyKey": "quality-investigation-idem-02",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "quality-investigation-02",
+            "action": "set_filter",
+            "status": "applied",
+            "previousStateVersion": 2,
+            "stateVersion": 3,
+            "idempotencyKey": "quality-investigation-idem-02",
+            "requestDigest": "sha256:f00035268b6f767594ed3b75dd1fac01f7b16d8e77a8b3ced55c32b0b0ff8577",
+            "undoToken": "sha256:b07844f435e59c516fc52199f05fa05cd02bdeab0c6979778dfcd1c6b5172c33",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 3,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "quality-investigation-03",
+            "action": "set_time_range",
+            "args": {
+              "from": "2026-05-12",
+              "to": "2026-05-18"
+            },
+            "stateVersion": 3,
+            "idempotencyKey": "quality-investigation-idem-03",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "quality-investigation-03",
+            "action": "set_time_range",
+            "status": "applied",
+            "previousStateVersion": 3,
+            "stateVersion": 4,
+            "idempotencyKey": "quality-investigation-idem-03",
+            "requestDigest": "sha256:e1e3f6a2c73f6a2fd6052080ee988b1ee11da0066bdd619ae1fc1c198c215eec",
+            "undoToken": "sha256:40e43d15647744a26121c5b7f03f09da43654e7099d0565416dadf56a32f9425",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 4,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "quality-investigation-04",
+            "action": "focus_chart",
+            "args": {
+              "chartId": "quality-trend"
+            },
+            "stateVersion": 4,
+            "idempotencyKey": "quality-investigation-idem-04",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "quality-investigation-04",
+            "action": "focus_chart",
+            "status": "applied",
+            "previousStateVersion": 4,
+            "stateVersion": 5,
+            "idempotencyKey": "quality-investigation-idem-04",
+            "requestDigest": "sha256:85ed50f594271142fa5348139bb11d17a08989d1855325e7d65ef8b8e37fcebd",
+            "undoToken": "sha256:a167a5c9ce95a251b07b686375c9fe14615f8763bb2f7a36758eadaef666dca1",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 5,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "quality-investigation-05",
+            "action": "compare_segments",
+            "args": {
+              "segments": [
+                "defect_rate",
+                "production_volume"
+              ]
+            },
+            "stateVersion": 5,
+            "idempotencyKey": "quality-investigation-idem-05",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "quality-investigation-05",
+            "action": "compare_segments",
+            "status": "applied",
+            "previousStateVersion": 5,
+            "stateVersion": 6,
+            "idempotencyKey": "quality-investigation-idem-05",
+            "requestDigest": "sha256:25fb92943815eb9fffa6f10cf6bf91e94264c16984d281f7caa5f326b16af227",
+            "undoToken": "sha256:502ed53ae59aefac0e69104bff0601a6c3a6b1d1d04c6c3389426900d9e2cc28",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 6,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "quality-investigation-06",
+            "action": "open_drilldown",
+            "args": {
+              "chartId": "quality-trend",
+              "dimension": "supplier_batch"
+            },
+            "stateVersion": 6,
+            "idempotencyKey": "quality-investigation-idem-06",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "quality-investigation-06",
+            "action": "open_drilldown",
+            "status": "applied",
+            "previousStateVersion": 6,
+            "stateVersion": 7,
+            "idempotencyKey": "quality-investigation-idem-06",
+            "requestDigest": "sha256:1e7543a910b70ba2a7a909c88714ee1c2fbb6888416b0888bf9ebcc4f34d3248",
+            "undoToken": "sha256:9baf5c91c3e6e4eb4da3365e3e83f03ff681de61e09370db8a0e52bb68b17e22",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        }
+      ],
+      "expectedState": {
+        "version": 7,
+        "filters": {
+          "plant": "Werk 3",
+          "line": "Linie C"
+        },
+        "timeRange": {
+          "from": "2026-05-12",
+          "to": "2026-05-18"
+        },
+        "focusedChartId": "quality-trend",
+        "drilldown": {
+          "chartId": "quality-trend",
+          "dimension": "supplier_batch"
+        },
+        "segments": [
+          "defect_rate",
+          "production_volume"
+        ],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "actualState": {
+        "version": 7,
+        "filters": {
+          "plant": "Werk 3",
+          "line": "Linie C"
+        },
+        "timeRange": {
+          "from": "2026-05-12",
+          "to": "2026-05-18"
+        },
+        "focusedChartId": "quality-trend",
+        "drilldown": {
+          "chartId": "quality-trend",
+          "dimension": "supplier_batch"
+        },
+        "segments": [
+          "defect_rate",
+          "production_volume"
+        ],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "nativeSupersetReadback": {
+        "mode": "faithful_embedded_shell",
+        "dashboardId": "northstar-operations-synthetic",
+        "activeFilters": {
+          "plant": "Werk 3",
+          "line": "Linie C"
+        },
+        "timeRange": {
+          "from": "2026-05-12",
+          "to": "2026-05-18"
+        },
+        "focusedChartId": "quality-trend",
+        "dashboardStillUsable": true
+      },
+      "oracle": {
+        "truthKey": "qualitySpike",
+        "values": {
+          "window": {
+            "from": "2026-05-12",
+            "to": "2026-05-18"
+          },
+          "plant": "Werk 3",
+          "line": "Linie C",
+          "defectRatePct": 8.6,
+          "baselineDefectRatePct": 1.9,
+          "productionUnits": 18200,
+          "supplierBatch": "SB-X17",
+          "interpretation": "Strong association with supplier batch SB-X17; causation is not established."
+        },
+        "conclusion": "Defect rate 8.6% versus 1.9% baseline at Werk 3/Linie C; 18200 units. Strong association with supplier batch SB-X17; causation is not established."
+      },
+      "contractVerdict": {
+        "exactStateMatch": true,
+        "oracleMatch": true,
+        "unauthorizedPersistentMutations": 0,
+        "directDomOrJsActions": 0,
+        "actionsAfterCancel": null,
+        "visualInspection": "pending_browser_evidence"
+      },
+      "screenshot": "screenshots/quality-investigation--narrow-390x844.png",
+      "screenshotSha256": "47b0172730e3c990d1b167a779b732135442324a5cfc08fabaf52b987ba875fd",
+      "beforeAriaSnapshotSha256": "3781abfa8e89e9e360d41759fe29af35ee20d0e1e89f53112056f6480fc66d95",
+      "afterAriaSnapshotSha256": "31a0f2b46c53d5a7ecb4d527ce55cfa98124816e2f3e967d2c8dfa0b7d06b909",
+      "keyboardActivationChecked": false,
+      "measuredHorizontalOverflow": false,
+      "visualVerdict": "pending_human_visual_inspection",
+      "defectNotes": []
+    },
+    {
+      "scenarioId": "inventory-risk",
+      "title": "Inventory stockout risk",
+      "viewport": {
+        "id": "narrow-390x844",
+        "width": 390,
+        "height": 844
+      },
+      "userUtterance": "Zeige das knappste Material für Werk 2, Rotor-7, sortiert nach Reichweite, und vergleiche Bedarf mit bestätigtem Zulauf.",
+      "normalizedActionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "inventory-risk-01",
+            "action": "set_filter",
+            "args": {
+              "key": "plant",
+              "value": "Werk 2"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "inventory-risk-idem-01",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "inventory-risk-01",
+            "action": "set_filter",
+            "status": "applied",
+            "previousStateVersion": 1,
+            "stateVersion": 2,
+            "idempotencyKey": "inventory-risk-idem-01",
+            "requestDigest": "sha256:e0bc73080cb71f614ff5655b2b3aa691afd59b166b0eb343091f63406dccc0ef",
+            "undoToken": "sha256:06b1789b93e9a08e0a52a9ee0e49f9ee36635010f4e7b082166e386fc827cf22",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "inventory-risk-02",
+            "action": "set_filter",
+            "args": {
+              "key": "component",
+              "value": "Rotor-7"
+            },
+            "stateVersion": 2,
+            "idempotencyKey": "inventory-risk-idem-02",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "inventory-risk-02",
+            "action": "set_filter",
+            "status": "applied",
+            "previousStateVersion": 2,
+            "stateVersion": 3,
+            "idempotencyKey": "inventory-risk-idem-02",
+            "requestDigest": "sha256:491d42b039ba5ef94f283d96fc37d5b724528393c6b3153efd93417ab9fae642",
+            "undoToken": "sha256:00183dd279acdd32252af6ef93a8aed47cdc8bd83e1b26752e1277712839d843",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 3,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "inventory-risk-03",
+            "action": "focus_chart",
+            "args": {
+              "chartId": "inventory-coverage"
+            },
+            "stateVersion": 3,
+            "idempotencyKey": "inventory-risk-idem-03",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "inventory-risk-03",
+            "action": "focus_chart",
+            "status": "applied",
+            "previousStateVersion": 3,
+            "stateVersion": 4,
+            "idempotencyKey": "inventory-risk-idem-03",
+            "requestDigest": "sha256:8ce51aded7c133efb2f3c51dc9238c056abb1687330140d078dda4dcb0a8a20a",
+            "undoToken": "sha256:5a86dd512e4814f17aabf38940c6e13996c76ac0de81df0917ff59732e3fbcfe",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 4,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "inventory-risk-04",
+            "action": "sort_table",
+            "args": {
+              "chartId": "inventory-table",
+              "column": "coverage_days",
+              "direction": "asc"
+            },
+            "stateVersion": 4,
+            "idempotencyKey": "inventory-risk-idem-04",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "inventory-risk-04",
+            "action": "sort_table",
+            "status": "applied",
+            "previousStateVersion": 4,
+            "stateVersion": 5,
+            "idempotencyKey": "inventory-risk-idem-04",
+            "requestDigest": "sha256:e866bbfdbb80b7bd02c34a71205dbefef53efee9ae1bcec8d43f012ba7aee1f2",
+            "undoToken": "sha256:2fa89b4c252a40803c076f82cf330c8b5a94b9a7b52a049e46fa261b1ffdd5cc",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 5,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "inventory-risk-05",
+            "action": "compare_segments",
+            "args": {
+              "segments": [
+                "demand",
+                "confirmed_supply"
+              ]
+            },
+            "stateVersion": 5,
+            "idempotencyKey": "inventory-risk-idem-05",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "inventory-risk-05",
+            "action": "compare_segments",
+            "status": "applied",
+            "previousStateVersion": 5,
+            "stateVersion": 6,
+            "idempotencyKey": "inventory-risk-idem-05",
+            "requestDigest": "sha256:04798582cb58d91bd04d917dbbc79b862afe8a95317302d52cee79af5bf73bb7",
+            "undoToken": "sha256:636bb8b092f47a715120ccf58038c718326eaf588629464a14b9b95fea7483a8",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        }
+      ],
+      "expectedState": {
+        "version": 6,
+        "filters": {
+          "plant": "Werk 2",
+          "component": "Rotor-7"
+        },
+        "timeRange": null,
+        "focusedChartId": "inventory-coverage",
+        "drilldown": null,
+        "segments": [
+          "demand",
+          "confirmed_supply"
+        ],
+        "tab": null,
+        "tableSort": {
+          "chartId": "inventory-table",
+          "column": "coverage_days",
+          "direction": "asc"
+        },
+        "hiddenSeries": []
+      },
+      "actualState": {
+        "version": 6,
+        "filters": {
+          "plant": "Werk 2",
+          "component": "Rotor-7"
+        },
+        "timeRange": null,
+        "focusedChartId": "inventory-coverage",
+        "drilldown": null,
+        "segments": [
+          "demand",
+          "confirmed_supply"
+        ],
+        "tab": null,
+        "tableSort": {
+          "chartId": "inventory-table",
+          "column": "coverage_days",
+          "direction": "asc"
+        },
+        "hiddenSeries": []
+      },
+      "nativeSupersetReadback": {
+        "mode": "faithful_embedded_shell",
+        "dashboardId": "northstar-operations-synthetic",
+        "activeFilters": {
+          "plant": "Werk 2",
+          "component": "Rotor-7"
+        },
+        "timeRange": null,
+        "focusedChartId": "inventory-coverage",
+        "dashboardStillUsable": true
+      },
+      "oracle": {
+        "truthKey": "inventoryRisk",
+        "values": {
+          "plant": "Werk 2",
+          "component": "Rotor-7",
+          "coverageDays": 2.4,
+          "demandUnits": 4200,
+          "confirmedSupplyUnits": 900,
+          "risk": "stockout"
+        },
+        "conclusion": "Rotor-7 at Werk 2: 2.4 days coverage, demand 4200, confirmed supply 900; stockout risk."
+      },
+      "contractVerdict": {
+        "exactStateMatch": true,
+        "oracleMatch": true,
+        "unauthorizedPersistentMutations": 0,
+        "directDomOrJsActions": 0,
+        "actionsAfterCancel": null,
+        "visualInspection": "pending_browser_evidence"
+      },
+      "screenshot": "screenshots/inventory-risk--narrow-390x844.png",
+      "screenshotSha256": "82349e64be4254e9fd917894e4bfcd05331b871ef953a8a404c70f58e5669cbf",
+      "beforeAriaSnapshotSha256": "31a0f2b46c53d5a7ecb4d527ce55cfa98124816e2f3e967d2c8dfa0b7d06b909",
+      "afterAriaSnapshotSha256": "101f47090875c257e6211eaec41b633832ff6073a2ae381352c50245fcbd368b",
+      "keyboardActivationChecked": false,
+      "measuredHorizontalOverflow": false,
+      "visualVerdict": "pending_human_visual_inspection",
+      "defectNotes": []
+    },
+    {
+      "scenarioId": "maintenance",
+      "title": "Maintenance downtime & MTBF",
+      "viewport": {
+        "id": "narrow-390x844",
+        "width": 390,
+        "height": 844
+      },
+      "userUtterance": "Fokussiere Pressen-Ausfallzeit und MTBF im zweiten Quartal und öffne die Ereignisse.",
+      "normalizedActionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "maintenance-01",
+            "action": "set_filter",
+            "args": {
+              "key": "asset_class",
+              "value": "Press"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "maintenance-idem-01",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "maintenance-01",
+            "action": "set_filter",
+            "status": "applied",
+            "previousStateVersion": 1,
+            "stateVersion": 2,
+            "idempotencyKey": "maintenance-idem-01",
+            "requestDigest": "sha256:954b066d694106accbe5c15207524fa25ec33d46f23da634ce1283d6a7e53c28",
+            "undoToken": "sha256:0e10697e08fc50096dbd2b2cd48656475092aee283d3f82d990a895890a5981b",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "maintenance-02",
+            "action": "set_time_range",
+            "args": {
+              "from": "2026-04-01",
+              "to": "2026-06-30"
+            },
+            "stateVersion": 2,
+            "idempotencyKey": "maintenance-idem-02",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "maintenance-02",
+            "action": "set_time_range",
+            "status": "applied",
+            "previousStateVersion": 2,
+            "stateVersion": 3,
+            "idempotencyKey": "maintenance-idem-02",
+            "requestDigest": "sha256:7f4a0851c08bee02b9b69779d6e14901226b226de77d1b5a8684a8d99d734f2e",
+            "undoToken": "sha256:63846b0f68aff8dba8c52fc10574bcecf503d93f402eb6e4150224bb090c8e88",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 3,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "maintenance-03",
+            "action": "focus_chart",
+            "args": {
+              "chartId": "maintenance-downtime"
+            },
+            "stateVersion": 3,
+            "idempotencyKey": "maintenance-idem-03",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "maintenance-03",
+            "action": "focus_chart",
+            "status": "applied",
+            "previousStateVersion": 3,
+            "stateVersion": 4,
+            "idempotencyKey": "maintenance-idem-03",
+            "requestDigest": "sha256:7028cc3f43522521a4edf79d842203b53f37ee9e18e36555969f9c375e2687be",
+            "undoToken": "sha256:5196cc20e39d84cc9821fe72b06777fdf584fe52e2675f9aa994881a3d05901d",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 4,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "maintenance-04",
+            "action": "open_drilldown",
+            "args": {
+              "chartId": "maintenance-downtime",
+              "dimension": "event_type"
+            },
+            "stateVersion": 4,
+            "idempotencyKey": "maintenance-idem-04",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "maintenance-04",
+            "action": "open_drilldown",
+            "status": "applied",
+            "previousStateVersion": 4,
+            "stateVersion": 5,
+            "idempotencyKey": "maintenance-idem-04",
+            "requestDigest": "sha256:5f60be3c1b3815eedd869c0570e69a1fde2e1e096a41ad0947b9b7a37b74f5d3",
+            "undoToken": "sha256:a41533940905a36cc414a49fbd15a95b559fd4284c6d54e4d3897dae62aac4b0",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        }
+      ],
+      "expectedState": {
+        "version": 5,
+        "filters": {
+          "asset_class": "Press"
+        },
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": "maintenance-downtime",
+        "drilldown": {
+          "chartId": "maintenance-downtime",
+          "dimension": "event_type"
+        },
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "actualState": {
+        "version": 5,
+        "filters": {
+          "asset_class": "Press"
+        },
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": "maintenance-downtime",
+        "drilldown": {
+          "chartId": "maintenance-downtime",
+          "dimension": "event_type"
+        },
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "nativeSupersetReadback": {
+        "mode": "faithful_embedded_shell",
+        "dashboardId": "northstar-operations-synthetic",
+        "activeFilters": {
+          "asset_class": "Press"
+        },
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": "maintenance-downtime",
+        "dashboardStillUsable": true
+      },
+      "oracle": {
+        "truthKey": "maintenance",
+        "values": {
+          "window": {
+            "from": "2026-04-01",
+            "to": "2026-06-30"
+          },
+          "assetClass": "Press",
+          "downtimeHours": 41.5,
+          "mtbfHours": 68,
+          "eventCount": 6
+        },
+        "conclusion": "Press: 41.5 h downtime, 68 h MTBF, 6 events in Q2."
+      },
+      "contractVerdict": {
+        "exactStateMatch": true,
+        "oracleMatch": true,
+        "unauthorizedPersistentMutations": 0,
+        "directDomOrJsActions": 0,
+        "actionsAfterCancel": null,
+        "visualInspection": "pending_browser_evidence"
+      },
+      "screenshot": "screenshots/maintenance--narrow-390x844.png",
+      "screenshotSha256": "cc8b7ba47e5500d5cacc46f9218569a5ffdde04407274adf342c7bef04363f38",
+      "beforeAriaSnapshotSha256": "101f47090875c257e6211eaec41b633832ff6073a2ae381352c50245fcbd368b",
+      "afterAriaSnapshotSha256": "3b766c4864626d6bb645f0f522921093db6b56cd488fa6803ad3154444a67341",
+      "keyboardActivationChecked": false,
+      "measuredHorizontalOverflow": false,
+      "visualVerdict": "pending_human_visual_inspection",
+      "defectNotes": []
+    },
+    {
+      "scenarioId": "cross-domain",
+      "title": "Cross-domain demand comparison",
+      "viewport": {
+        "id": "narrow-390x844",
+        "width": 390,
+        "height": 844
+      },
+      "userUtterance": "Vergleiche Atlas-Drive-Nachfrage mit Produktion und Bestand im zweiten Quartal. Keine Kausalbehauptung.",
+      "normalizedActionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "cross-domain-01",
+            "action": "select_tab",
+            "args": {
+              "tabId": "cross-domain"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "cross-domain-idem-01",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "cross-domain-01",
+            "action": "select_tab",
+            "status": "applied",
+            "previousStateVersion": 1,
+            "stateVersion": 2,
+            "idempotencyKey": "cross-domain-idem-01",
+            "requestDigest": "sha256:74bc4e3456356f13e73888105989008158d193c020d7cca8045a4776fdc9c149",
+            "undoToken": "sha256:9b67c50758d4051fc01e07b8e4bea3df44d44e9c3eeaba235d86127aae17b53f",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "cross-domain-02",
+            "action": "focus_chart",
+            "args": {
+              "chartId": "demand-supply"
+            },
+            "stateVersion": 2,
+            "idempotencyKey": "cross-domain-idem-02",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "cross-domain-02",
+            "action": "focus_chart",
+            "status": "applied",
+            "previousStateVersion": 2,
+            "stateVersion": 3,
+            "idempotencyKey": "cross-domain-idem-02",
+            "requestDigest": "sha256:3aff7444d98ea3c6b637668bdb562fea44c611da6caeec5c37be65278f7bf8e9",
+            "undoToken": "sha256:d298e48aa3d4bcc596ce4376d9219515525c4a155376e0921f1fc934d43c8da8",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 3,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "cross-domain-03",
+            "action": "compare_segments",
+            "args": {
+              "segments": [
+                "demand",
+                "production",
+                "inventory"
+              ]
+            },
+            "stateVersion": 3,
+            "idempotencyKey": "cross-domain-idem-03",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "cross-domain-03",
+            "action": "compare_segments",
+            "status": "applied",
+            "previousStateVersion": 3,
+            "stateVersion": 4,
+            "idempotencyKey": "cross-domain-idem-03",
+            "requestDigest": "sha256:008ca18532833baf8873cb2c6e39f2f0f41eb5e2dcc8b2c72d4c21a26d9504da",
+            "undoToken": "sha256:e5bc7daf52638c7018a32f59c292f6939ea60f5cd7b0e75d58760ff0db3e0610",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 4,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "cross-domain-04",
+            "action": "set_time_range",
+            "args": {
+              "from": "2026-04-01",
+              "to": "2026-06-30"
+            },
+            "stateVersion": 4,
+            "idempotencyKey": "cross-domain-idem-04",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "cross-domain-04",
+            "action": "set_time_range",
+            "status": "applied",
+            "previousStateVersion": 4,
+            "stateVersion": 5,
+            "idempotencyKey": "cross-domain-idem-04",
+            "requestDigest": "sha256:59a064c9fc75675aeed37016f1511591d9e61ca9cc42a941b84327b5caf72482",
+            "undoToken": "sha256:ed7c5d948c8fccd4f81a9a175dc80d65a8b721af50984594914f33e4030fcfdf",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        }
+      ],
+      "expectedState": {
+        "version": 5,
+        "filters": {},
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": "demand-supply",
+        "drilldown": null,
+        "segments": [
+          "demand",
+          "production",
+          "inventory"
+        ],
+        "tab": "cross-domain",
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "actualState": {
+        "version": 5,
+        "filters": {},
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": "demand-supply",
+        "drilldown": null,
+        "segments": [
+          "demand",
+          "production",
+          "inventory"
+        ],
+        "tab": "cross-domain",
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "nativeSupersetReadback": {
+        "mode": "faithful_embedded_shell",
+        "dashboardId": "northstar-operations-synthetic",
+        "activeFilters": {},
+        "timeRange": {
+          "from": "2026-04-01",
+          "to": "2026-06-30"
+        },
+        "focusedChartId": "demand-supply",
+        "dashboardStillUsable": true
+      },
+      "oracle": {
+        "truthKey": "crossDomain",
+        "values": {
+          "window": {
+            "from": "2026-04-01",
+            "to": "2026-06-30"
+          },
+          "product": "Atlas Drive",
+          "demandChangePct": 24,
+          "productionChangePct": 9,
+          "inventoryCoverageDays": 3.1,
+          "interpretation": "Demand growth co-occurs with lower coverage; this is correlation, not proof of causation."
+        },
+        "conclusion": "Atlas Drive: demand +24%, production +9%, coverage 3.1 days. Demand growth co-occurs with lower coverage; this is correlation, not proof of causation."
+      },
+      "contractVerdict": {
+        "exactStateMatch": true,
+        "oracleMatch": true,
+        "unauthorizedPersistentMutations": 0,
+        "directDomOrJsActions": 0,
+        "actionsAfterCancel": null,
+        "visualInspection": "pending_browser_evidence"
+      },
+      "screenshot": "screenshots/cross-domain--narrow-390x844.png",
+      "screenshotSha256": "c17891ed1950752faf212667b26aea423581c8fc61155ad292c35c4561341cea",
+      "beforeAriaSnapshotSha256": "3b766c4864626d6bb645f0f522921093db6b56cd488fa6803ad3154444a67341",
+      "afterAriaSnapshotSha256": "8cfb8ec1e81ad799ebace705e4d580f940aace193f479f4c4abbd40610d8fe1e",
+      "keyboardActivationChecked": false,
+      "measuredHorizontalOverflow": false,
+      "visualVerdict": "pending_human_visual_inspection",
+      "defectNotes": []
+    },
+    {
+      "scenarioId": "voice-correction-cancel",
+      "title": "Voice correction, barge-in & cancel",
+      "viewport": {
+        "id": "narrow-390x844",
+        "width": 390,
+        "height": 844
+      },
+      "userUtterance": "Werk 2 … nein Werk 3 … abbrechen.",
+      "normalizedActionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "voice-correction-cancel-01",
+            "action": "set_filter",
+            "args": {
+              "key": "plant",
+              "value": "Werk 3"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "voice-correction-cancel-idem-01",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "voice-correction-cancel-01",
+            "action": "set_filter",
+            "status": "applied",
+            "previousStateVersion": 1,
+            "stateVersion": 2,
+            "idempotencyKey": "voice-correction-cancel-idem-01",
+            "requestDigest": "sha256:a0c22cc339b32751e8e74468e6a517ddb267db20be14883a5c87744a4d01f639",
+            "undoToken": "sha256:5ef19fc15105e7f5ba7f91e59ddee956f4a4f2126efcc63b4a44c42094f3939a",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        }
+      ],
+      "expectedState": {
+        "version": 2,
+        "filters": {
+          "plant": "Werk 3"
+        },
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "actualState": {
+        "version": 2,
+        "filters": {
+          "plant": "Werk 3"
+        },
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "nativeSupersetReadback": {
+        "mode": "faithful_embedded_shell",
+        "dashboardId": "northstar-operations-synthetic",
+        "activeFilters": {
+          "plant": "Werk 3"
+        },
+        "timeRange": null,
+        "focusedChartId": null,
+        "dashboardStillUsable": true
+      },
+      "oracle": {
+        "truthKey": "qualitySpike",
+        "values": {
+          "window": {
+            "from": "2026-05-12",
+            "to": "2026-05-18"
+          },
+          "plant": "Werk 3",
+          "line": "Linie C",
+          "defectRatePct": 8.6,
+          "baselineDefectRatePct": 1.9,
+          "productionUnits": 18200,
+          "supplierBatch": "SB-X17",
+          "interpretation": "Strong association with supplier batch SB-X17; causation is not established."
+        },
+        "conclusion": "Defect rate 8.6% versus 1.9% baseline at Werk 3/Linie C; 18200 units. Strong association with supplier batch SB-X17; causation is not established."
+      },
+      "contractVerdict": {
+        "exactStateMatch": true,
+        "oracleMatch": true,
+        "unauthorizedPersistentMutations": 0,
+        "directDomOrJsActions": 0,
+        "actionsAfterCancel": 0,
+        "visualInspection": "pending_browser_evidence"
+      },
+      "screenshot": "screenshots/voice-correction-cancel--narrow-390x844.png",
+      "screenshotSha256": "8c962522f7ff6535396536de95c347c73319a6cc086a899d5249f05fb52b0922",
+      "beforeAriaSnapshotSha256": "8cfb8ec1e81ad799ebace705e4d580f940aace193f479f4c4abbd40610d8fe1e",
+      "afterAriaSnapshotSha256": "203782ff4ab16dd1de80a0931e7da3104d28d3115c23b8b5ab777acf78aadff4",
+      "keyboardActivationChecked": false,
+      "measuredHorizontalOverflow": false,
+      "visualVerdict": "pending_human_visual_inspection",
+      "defectNotes": []
+    },
+    {
+      "scenarioId": "undo-idempotency",
+      "title": "Undo & idempotency",
+      "viewport": {
+        "id": "narrow-390x844",
+        "width": 390,
+        "height": 844
+      },
+      "userUtterance": "Filtere Atlas Drive; dieselbe Aktion kommt doppelt. Danach rückgängig.",
+      "normalizedActionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "undo-idempotency-01",
+            "action": "set_filter",
+            "args": {
+              "key": "product",
+              "value": "Atlas Drive"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "undo-idempotency-idem-01",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "undo-idempotency-01",
+            "action": "set_filter",
+            "status": "applied",
+            "previousStateVersion": 1,
+            "stateVersion": 2,
+            "idempotencyKey": "undo-idempotency-idem-01",
+            "requestDigest": "sha256:d317ae3434648cea85139ea0397a7568e606727cb0b705647b82eb8a46c3dc3c",
+            "undoToken": "sha256:bed39ece15c21176b64d7f000dee87f2f8632b007511c11550c2c14d6f2ec5fa",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 2,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/ui-action/v1",
+          "request": {
+            "schemaVersion": "chimpmaera.bi/ui-action/v1",
+            "actionId": "undo-idempotency-01",
+            "action": "set_filter",
+            "args": {
+              "key": "product",
+              "value": "Atlas Drive"
+            },
+            "stateVersion": 1,
+            "idempotencyKey": "undo-idempotency-idem-01",
+            "preconditions": {
+              "dashboardId": "northstar-operations-synthetic"
+            }
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": "undo-idempotency-01",
+            "action": "set_filter",
+            "status": "already_applied",
+            "previousStateVersion": 1,
+            "stateVersion": 2,
+            "idempotencyKey": "undo-idempotency-idem-01",
+            "requestDigest": "sha256:d317ae3434648cea85139ea0397a7568e606727cb0b705647b82eb8a46c3dc3c",
+            "undoToken": "sha256:bed39ece15c21176b64d7f000dee87f2f8632b007511c11550c2c14d6f2ec5fa",
+            "sideEffect": "reversible_session",
+            "persistentSupersetMutation": false
+          }
+        },
+        {
+          "sequence": 3,
+          "provenance": "deterministic_stub",
+          "contract": "undo-bound-receipt",
+          "request": {
+            "action": "undo",
+            "undoToken": "sha256:bed39ece15c21176b64d7f000dee87f2f8632b007511c11550c2c14d6f2ec5fa"
+          },
+          "receipt": {
+            "status": "undone",
+            "stateVersion": 3,
+            "persistentSupersetMutation": false
+          }
+        }
+      ],
+      "expectedState": {
+        "version": 3,
+        "filters": {},
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "actualState": {
+        "version": 3,
+        "filters": {},
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "nativeSupersetReadback": {
+        "mode": "faithful_embedded_shell",
+        "dashboardId": "northstar-operations-synthetic",
+        "activeFilters": {},
+        "timeRange": null,
+        "focusedChartId": null,
+        "dashboardStillUsable": true
+      },
+      "oracle": {
+        "truthKey": "executiveQ2",
+        "values": {
+          "window": {
+            "from": "2026-04-01",
+            "to": "2026-06-30"
+          },
+          "revenueEur": 12480000,
+          "grossMarginPct": 31.4,
+          "topProduct": "Atlas Drive",
+          "topCustomer": "Futura Retail"
+        },
+        "conclusion": "Q2 revenue €12,480,000; gross margin 31.4%. Top product Atlas Drive; top customer Futura Retail."
+      },
+      "contractVerdict": {
+        "exactStateMatch": true,
+        "oracleMatch": true,
+        "unauthorizedPersistentMutations": 0,
+        "directDomOrJsActions": 0,
+        "actionsAfterCancel": null,
+        "visualInspection": "pending_browser_evidence"
+      },
+      "screenshot": "screenshots/undo-idempotency--narrow-390x844.png",
+      "screenshotSha256": "65c60acc7ac93ff8905db39a6513336abb3a6ca204d2863e7f5121b90a59a0a5",
+      "beforeAriaSnapshotSha256": "203782ff4ab16dd1de80a0931e7da3104d28d3115c23b8b5ab777acf78aadff4",
+      "afterAriaSnapshotSha256": "7b298423c3eb7dd066d60e698559c664d0a0a5637c585b5956ce5955c63f7b9d",
+      "keyboardActivationChecked": false,
+      "measuredHorizontalOverflow": false,
+      "visualVerdict": "pending_human_visual_inspection",
+      "defectNotes": []
+    },
+    {
+      "scenarioId": "persistent-request-denied",
+      "title": "Persistent request stays preview-only",
+      "viewport": {
+        "id": "narrow-390x844",
+        "width": 390,
+        "height": 844
+      },
+      "userUtterance": "Speichere und ersetze dieses Dashboard dauerhaft.",
+      "normalizedActionTrace": [
+        {
+          "sequence": 1,
+          "provenance": "deterministic_stub",
+          "contract": "chimpmaera.bi/persistent-asset-revision-proposal/v1",
+          "request": {
+            "action": "save_dashboard",
+            "channel": "chat"
+          },
+          "receipt": {
+            "schemaVersion": "chimpmaera.bi/ui-action-receipt/v1",
+            "actionId": null,
+            "action": "save_dashboard",
+            "status": "denied",
+            "denialReason": "TRUSTED_UI_APPROVAL_REQUIRED",
+            "stateVersion": 1,
+            "idempotencyKey": null,
+            "undoToken": null,
+            "sideEffect": "none",
+            "persistentSupersetMutation": false
+          },
+          "proposal": {
+            "schemaVersion": "chimpmaera.bi/persistent-asset-revision-proposal/v1",
+            "proposalId": "persistent-request-denied-preview",
+            "dashboardId": "northstar-operations-synthetic",
+            "baseRevision": "synthetic-rev-1",
+            "diff": {
+              "title": {
+                "from": "Operations",
+                "to": "Executive Control Tower"
+              }
+            },
+            "status": "proposal_only",
+            "requirements": [
+              "preview_diff",
+              "trusted_ui_approval",
+              "bi_control_apply",
+              "readback",
+              "rollback"
+            ],
+            "applied": false
+          }
+        }
+      ],
+      "expectedState": {
+        "version": 1,
+        "filters": {},
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "actualState": {
+        "version": 1,
+        "filters": {},
+        "timeRange": null,
+        "focusedChartId": null,
+        "drilldown": null,
+        "segments": [],
+        "tab": null,
+        "tableSort": null,
+        "hiddenSeries": []
+      },
+      "nativeSupersetReadback": {
+        "mode": "faithful_embedded_shell",
+        "dashboardId": "northstar-operations-synthetic",
+        "activeFilters": {},
+        "timeRange": null,
+        "focusedChartId": null,
+        "dashboardStillUsable": true
+      },
+      "oracle": {
+        "truthKey": "executiveQ2",
+        "values": {
+          "window": {
+            "from": "2026-04-01",
+            "to": "2026-06-30"
+          },
+          "revenueEur": 12480000,
+          "grossMarginPct": 31.4,
+          "topProduct": "Atlas Drive",
+          "topCustomer": "Futura Retail"
+        },
+        "conclusion": "Q2 revenue €12,480,000; gross margin 31.4%. Top product Atlas Drive; top customer Futura Retail."
+      },
+      "contractVerdict": {
+        "exactStateMatch": true,
+        "oracleMatch": true,
+        "unauthorizedPersistentMutations": 0,
+        "directDomOrJsActions": 0,
+        "actionsAfterCancel": null,
+        "visualInspection": "pending_browser_evidence"
+      },
+      "screenshot": "screenshots/persistent-request-denied--narrow-390x844.png",
+      "screenshotSha256": "f29cb3947f27095cacb0dc20cd098856ebf42f024382bfb2be76ed135bd739aa",
+      "beforeAriaSnapshotSha256": "7b298423c3eb7dd066d60e698559c664d0a0a5637c585b5956ce5955c63f7b9d",
+      "afterAriaSnapshotSha256": "c8b633555a62ed8a62e9121b667c6a3fe35016c0811c75fb4b4d8e38273db11e",
+      "keyboardActivationChecked": false,
+      "measuredHorizontalOverflow": false,
+      "visualVerdict": "pending_human_visual_inspection",
+      "defectNotes": []
+    }
+  ],
+  "controlChecks": [
+    {
+      "viewport": "desktop-1440x900",
+      "control": "undo",
+      "keyboardReachable": true,
+      "receiptStatus": "undone",
+      "restoredSegments": [],
+      "persistentSupersetMutation": false
+    },
+    {
+      "viewport": "desktop-1440x900",
+      "control": "native-tab",
+      "ariaPressed": "true"
+    },
+    {
+      "viewport": "narrow-390x844",
+      "control": "undo",
+      "keyboardReachable": true,
+      "receiptStatus": "undone",
+      "restoredSegments": [],
+      "persistentSupersetMutation": false
+    },
+    {
+      "viewport": "narrow-390x844",
+      "control": "native-tab",
+      "ariaPressed": "true"
+    }
+  ]
+}

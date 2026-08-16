@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>M6-02 Native Superset Diversity Lab</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#dashboard">Zum Dashboard</a>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">NORTHSTAR COMPONENTS · SYNTHETIC</p>
+      <h1>Operations Control Tower</h1>
+    </div>
+    <div class="environment" aria-label="Testumgebung">
+      <span class="status-dot" aria-hidden="true"></span>
+      M6-02 session-only composition preview
+    </div>
+  </header>
+
+  <div class="workspace">
+    <nav class="scenario-nav" aria-label="Golden scenarios">
+      <div class="nav-heading">
+        <span>Scenario Lab</span>
+        <span id="scenario-count" class="count">0</span>
+      </div>
+      <div id="scenario-list" class="scenario-list"></div>
+      <div class="boundary-note">
+        <strong>Safety boundary</strong>
+        <span>No SQL · no DOM/JS actions · no persistent apply</span>
+      </div>
+    </nav>
+
+    <main id="dashboard" class="dashboard" tabindex="-1">
+      <section class="dashboard-heading" aria-labelledby="view-title">
+        <div>
+          <p class="eyebrow">Faithful embedded Superset readback</p>
+          <h2 id="view-title">Executive overview</h2>
+        </div>
+        <div class="toolbar" aria-label="Dashboard controls">
+          <button type="button" class="tool-button" aria-pressed="true">Executive</button>
+          <button type="button" class="tool-button">Operations</button>
+          <button type="button" class="tool-button">Cross-domain</button>
+        </div>
+      </section>
+
+      <section class="filter-strip" aria-label="Active filters and time range">
+        <div>
+          <span class="filter-label">Aktive Filter</span>
+          <div id="active-filters" class="filter-values"><span class="empty-chip">Keine</span></div>
+        </div>
+        <div>
+          <span class="filter-label">Zeitraum</span>
+          <strong id="active-time">Alle Daten</strong>
+        </div>
+        <button id="undo-button" class="undo-button" type="button" disabled aria-describedby="undo-help">↶ Rückgängig</button>
+        <span id="undo-help" class="visually-hidden">Stellt den vorherigen reversiblen Sitzungszustand wieder her.</span>
+      </section>
+
+      <section id="composition-meta" class="composition-meta" aria-live="polite"></section>
+      <section id="visual-composition" class="visual-composition" aria-label="Scenario-specific native Superset composition preview"></section>
+
+      <section id="conclusion-card" class="conclusion-card" hidden aria-live="polite">
+        <span>Known-truth conclusion</span>
+        <p id="oracle-conclusion"></p>
+      </section>
+    </main>
+
+    <aside class="assistant" aria-labelledby="assistant-title">
+      <header class="assistant-header">
+        <div><span class="assistant-mark" aria-hidden="true">A</span><div><h2 id="assistant-title">BI Assistant</h2><span>ui-action/v1 only</span></div></div>
+        <span id="run-verdict" class="verdict neutral">Bereit</span>
+      </header>
+
+      <section class="transcript" aria-labelledby="transcript-title">
+        <h3 id="transcript-title">Transcript</h3>
+        <div id="transcript-content" class="transcript-content"><p>Wähle ein Golden Scenario. Aktionen werden deterministisch geplant und fail-closed angewendet.</p></div>
+      </section>
+
+      <section class="action-section" aria-labelledby="action-title">
+        <div class="section-heading"><h3 id="action-title">Action trace</h3><span id="state-version">state v1</span></div>
+        <ol id="action-trace" class="action-trace"><li class="trace-empty">Noch keine Aktion</li></ol>
+      </section>
+
+      <details class="state-details">
+        <summary>Expected vs actual UI state</summary>
+        <div class="state-columns"><div><span>Expected</span><pre id="expected-state">{}</pre></div><div><span>Actual</span><pre id="actual-state">{}</pre></div></div>
+      </details>
+
+      <footer class="assistant-footer">
+        <span id="scenario-id">No scenario selected</span>
+        <span>Persistent mutations: <strong id="mutation-count">0</strong></span>
+      </footer>
+    </aside>
+  </div>
+  <div id="live-status" class="visually-hidden" aria-live="assertive"></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "chimpmaera.bi/ambiguous-outcome-journal/v1",
+  "contextDigest": "sha256:e8a292fdbac601172e67a46c876a7dd93e012144c4b2ed5cd2987a96f8defc4d",
+  "state": "committed_equivalent",
+  "entries": [
+    {
+      "schemaVersion": "chimpmaera.bi/ambiguous-outcome-journal-entry/v1",
+      "seq": 1,
+      "occurredAt": "2026-08-15T06:57:04.983Z",
+      "contextDigest": "sha256:e8a292fdbac601172e67a46c876a7dd93e012144c4b2ed5cd2987a96f8defc4d",
+      "previousHash": "sha256:29512032fab343c589e95594e1740080a429d4318fdaede20e7d1bf44c0346e5",
+      "fromState": null,
+      "toState": "not_dispatched",
+      "eventType": "initialized",
+      "evidence": {
+        "planDigest": "sha256:7c4d3c37e0501638be2d861df2812072daba419674e5bc6ba81e14e2a15f4bfc",
+        "targetBindingDigest": "sha256:8dd1028d03d7b65ba9873f9c89b591ecff9fdc216f82233444acfdf2c12233a1"
+      },
+      "decision": {
+        "dispatchAllowed": true,
+        "blindRetryAllowed": false
+      },
+      "entryHash": "sha256:8307135949dfcb45b0f4859d5c96290bb21c81b82d3378bf453db75d9cf43dfb"
+    },
+    {
+      "schemaVersion": "chimpmaera.bi/ambiguous-outcome-journal-entry/v1",
+      "seq": 2,
+      "occurredAt": "2026-08-15T06:57:05.277Z",
+      "contextDigest": "sha256:e8a292fdbac601172e67a46c876a7dd93e012144c4b2ed5cd2987a96f8defc4d",
+      "previousHash": "sha256:8307135949dfcb45b0f4859d5c96290bb21c81b82d3378bf453db75d9cf43dfb",
+      "fromState": "not_dispatched",
+      "toState": "outcome_unknown",
+      "eventType": "dispatch_response_lost",
+      "evidence": {
+        "transportFault": "loopback_proxy_destroyed_client_response_after_upstream_commit",
+        "dispatchReachedServer": true,
+        "responseLostCode": "WORKFLOW_APPLY_FAILED",
+        "proxyReviewedAssetMutationRequests": 1,
+        "proxyTotalMutationLikeRequests": 2,
+        "proxyFaultCount": 1
+      },
+      "decision": {
+        "blindRetryAllowed": false
+      },
+      "entryHash": "sha256:47dca97038ff714abc47cb8f1b26f73d2fce9ff7df298563fc8929aea4c9ff20"
+    },
+    {
+      "schemaVersion": "chimpmaera.bi/ambiguous-outcome-journal-entry/v1",
+      "seq": 3,
+      "occurredAt": "2026-08-15T06:57:05.326Z",
+      "contextDigest": "sha256:e8a292fdbac601172e67a46c876a7dd93e012144c4b2ed5cd2987a96f8defc4d",
+      "previousHash": "sha256:47dca97038ff714abc47cb8f1b26f73d2fce9ff7df298563fc8929aea4c9ff20",
+      "fromState": "outcome_unknown",
+      "toState": "committed_equivalent",
+      "eventType": "reconcile_exact_after",
+      "evidence": {
+        "readback": [
+          {
+            "actionId": "01-dataset",
+            "relation": "after",
+            "observedDigest": "sha256:2b52ae4f1ded0a40e3af4ac00340f43871ba9b05990c7706c28dc3dbd90f3225",
+            "readErrorCode": null,
+            "owner": "owned"
+          }
+        ],
+        "planDigest": "sha256:7c4d3c37e0501638be2d861df2812072daba419674e5bc6ba81e14e2a15f4bfc",
+        "mutationRequestsIssuedByReconciler": 0
+      },
+      "decision": {
+        "classification": "committed_equivalent",
+        "retryAllowed": false,
+        "retryRequiresFreshGrant": false,
+        "compensationAllowed": false,
+        "manualReviewRequired": false
+      },
+      "entryHash": "sha256:2ff2f2775911b19a8e044ed1ec1269dbc6effb4c11f2fdac07cb77c878db460a"
+    }
+  ],
+  "lastHash": "sha256:2ff2f2775911b19a8e044ed1ec1269dbc6effb4c11f2fdac07cb77c878db460a"
+}

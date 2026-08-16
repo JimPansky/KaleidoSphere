@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "chimpmaera.bi/m6-04-terminal-evidence/v1",
+  "generatedAt": "2026-08-15T05:23:05.796Z",
+  "implementationCommit": "a217c5238e70d7e05257f61513e49cdb572e0168",
+  "branch": "m6-04-trusted-specialist-superset-workflow",
+  "gates": {
+    "G1": "PASS",
+    "G2": "PASS",
+    "G3": "PASS",
+    "G4": "PASS",
+    "G5": "PASS",
+    "G6": "PASS",
+    "G7": "PASS"
+  },
+  "tests": {
+    "focused": "92/92",
+    "full": "122/122",
+    "postImplementationCommit": "PASS",
+    "sourceMap": "PASS",
+    "diffCheck": "PASS",
+    "jsonAndSyntax": "PASS"
+  },
+  "liveEvidence": {
+    "path": "docs/evidence/m6-04-trusted-workflow/live-manifest.json",
+    "sha256": "2e351264ced4fb4daa5c1a834d4dd195bd2fb1ff7c67a2b2a339b9c0e3202770"
+  },
+  "quality": {
+    "trustedActions": 6,
+    "chartVisualizationTypes": 3,
+    "exactApplyReadbacks": 6,
+    "exactRollbackReadbacks": 6,
+    "idempotentReplayWithoutDispatch": true,
+    "restartReconciliationWithoutDispatch": true,
+    "realPartialFailureCompensation": "2/2"
+  },
+  "security": {
+    "loopbackOnly": true,
+    "disposableSyntheticOnly": true,
+    "planAndAuthorizationRevalidatedAtExecution": true,
+    "freeFormSqlDomPathNetworkDenied": true,
+    "responsePayloadPersisted": false,
+    "sourceRecordsPersisted": false,
+    "modelTranscriptPersisted": false,
+    "chainOfThoughtPersisted": false,
+    "secretFindings": 0,
+    "deliberateFakeSecretProbeFindings": 1
+  },
+  "runtimeTeardown": {
+    "composeProject": "sba-m6-04-trusted-20260815",
+    "listenerPort": 39044,
+    "ownedContainers": 0,
+    "ownedNetworks": 0,
+    "listenerCount": 0,
+    "relatedProcesses": 0,
+    "unrelatedExistingStacksModified": false
+  },
+  "negativeEvidence": [
+    "Initial focused run failed 0/4 because an overbroad dangerous-key matcher falsely matched description; it was narrowed and the complete suite rerun.",
+    "Initial setup failed closed because the reviewed local .env had not yet been created.",
+    "Initial live workflow rejected an unknown dashboard metadata key with HTTP 400 after four writes; automatic compensation restored 4/4 before the supported field was selected.",
+    "A later successful workflow run failed only during manifest hashing because Buffer is not canonical plain JSON; byte hashing was corrected and the complete live workflow rerun."
+  ],
+  "files": {
+    "package.json": {
+      "sha256": "2a6000cef57bab8dbf6300c0982603e69aa4f1e3788c404649f5a101818bbd10",
+      "bytes": 1285
+    },
+    "SOURCE-MAP.md": {
+      "sha256": "e6a0d6fa65927ed47e7b4c917c5b98e0cb01178ba1644246b3986fc985b14c52",
+      "bytes": 6504
+    },
+    "docs/decisions/M6-04-TRUSTED-SPECIALIST-SUPERSET-WORKFLOW.md": {
+      "sha256": "db9200cd62abcdc8a002b46e42dbc7fcd3897d7ada846cf442535f4353a80bce",
+      "bytes": 3727
+    },
+    "docs/evidence/M6-04_TRUSTED_SPECIALIST_SUPERSET_WORKFLOW.md": {
+      "sha256": "fcc9664e19d7797fc1763bedddacf09549e81e0f5d386a5d69375736e4b65cb3",
+      "bytes": 3159
+    },
+    "docs/evidence/m6-04-trusted-workflow/live-manifest.json": {
+      "sha256": "2e351264ced4fb4daa5c1a834d4dd195bd2fb1ff7c67a2b2a339b9c0e3202770",
+      "bytes": 15045
+    },
+    "scripts/finalize-m6-04-evidence.mjs": {
+      "sha256": "e1ebab9713eb356afd7c4286c7fcd24a89706f97cc56d009e119c74dab445cc3",
+      "bytes": 5853
+    },
+    "scripts/run-trusted-superset-workflow-evidence.mjs": {
+      "sha256": "81d3f494e874f91bb9747518b03f20db63598a3929ccc227c99c20264f39643a",
+      "bytes": 12410
+    },
+    "scripts/update-m6-04-source-map.mjs": {
+      "sha256": "5ec15986623d3bfd09f2382239412ea502410ac8df5b300acaad328593a27703",
+      "bytes": 1690
+    },
+    "services/bi-control/src/trusted-workflow/reviewed-superset-executor.mjs": {
+      "sha256": "55d3057d237c4d4aa46d55c985f5349adca6e88d44c01f43aa841e4f83d672d3",
+      "bytes": 13827
+    },
+    "services/bi-control/src/trusted-workflow/trusted-specialist-workflow.mjs": {
+      "sha256": "c67bc7bee74d4e5625359ba1d5f213abd272a63f6c512dd9cbe5bbc0cb577c30",
+      "bytes": 19103
+    },
+    "tests/trusted-workflow.test.mjs": {
+      "sha256": "deaa52d757efc3460271b7313b1de6967bbb57383da8c2d5281f4148a80b1504",
+      "bytes": 21715
+    }
+  },
+  "rollback": [
+    "git revert the terminal-evidence commit, then git revert a217c5238e70d7e05257f61513e49cdb572e0168",
+    "restore only allowlisted Superset asset pre-state",
+    "remove only Compose project sba-m6-04-trusted-20260815"
+  ],
+  "nonclaims": [
+    "Delivery",
+    "production/customer/personal Superset",
+    "organizationally independent validation",
+    "causal proof",
+    "unknown-network-outcome recovery",
+    "cross-hardware determinism",
+    "broad provider support",
+    "deployment/publication/push/PR/tag/release"
+  ]
+}

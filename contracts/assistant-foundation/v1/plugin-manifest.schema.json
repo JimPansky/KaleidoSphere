@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contracts.chimpmaera.local/assistant-foundation/v1/plugin-manifest.schema.json",
+  "title": "Static built-in PluginManifest v1",
+  "type": "object", "additionalProperties": false,
+  "required": ["schemaVersion", "pluginId", "pluginVersion", "builtIn", "artifactDigest", "provides", "requires"],
+  "properties": {
+    "schemaVersion": {"const": "chimpmaera.bi/plugin-manifest/v1"},
+    "pluginId": {"$ref": "#/$defs/id"},
+    "pluginVersion": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+(?:-[A-Za-z0-9.-]+)?$"},
+    "builtIn": {"const": true},
+    "artifactDigest": {"$ref": "#/$defs/digest"},
+    "provides": {"type": "array", "items": {"$ref": "#/$defs/capabilityRef"}, "uniqueItems": true},
+    "requires": {"type": "array", "items": {"$ref": "#/$defs/capabilityRef"}, "uniqueItems": true}
+  },
+  "$defs": {
+    "id": {"type": "string", "pattern": "^[a-z][a-z0-9.-]{1,127}$"},
+    "digest": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "capabilityRef": {
+      "type": "object", "additionalProperties": false,
+      "required": ["capabilityId", "contractVersion"],
+      "properties": {"capabilityId": {"$ref": "#/$defs/id"}, "contractVersion": {"type": "string", "pattern": "^v[1-9][0-9]*$"}}
+    }
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "schemaVersion": "chimpmaera.bi/m6-03-sealed-blind-evaluation/v2",
+  "generatedAt": "2026-08-15T04:28:28.583Z",
+  "execution": {
+    "firstRun": true,
+    "singleUse": true,
+    "intermediateFeedback": false,
+    "candidateProcessSeparated": true,
+    "candidateWorkingDirectory": "tests/evaluator-sealed/m6-03",
+    "candidateEnvironmentKeys": [
+      "LANG"
+    ],
+    "candidateBundleDigest": "68bdb2f6fcee2d194736afdde9ea0bc84dc420b49e86664082801946324bf353",
+    "committedAt": "2026-08-15T06:26:00+02:00",
+    "verifiedCandidateFiles": {
+      "services/bi-control/src/bi-specialist/local-openai-adapter.mjs": "f8b884bad7ad7455e6be3abbd5f1cf22aa670975ed8feef2fbfe69730fbd9994",
+      "services/bi-control/src/bi-specialist/optimization-gate.mjs": "4543407b9ec9992f78cd57a04fcba6b2620578fae2eadad320af3e3ba8b96b05",
+      "services/bi-control/src/bi-specialist/planning-policy.mjs": "c3893e269c219d3ee53aef3adcb58b642ccfd0fe9603f30795cf5bdb2021df67",
+      "services/bi-control/src/bi-specialist/progressive-discovery.mjs": "e44005b67721401e3cc2a33ed22925f07d87a8c0b10782ec18e4bcbd3c8fd24e",
+      "services/bi-control/src/bi-specialist/specialist-agent.mjs": "46dd9aa00e40518fef45c56386475be36dae0e6f2d6fb810e6c06b67e659ba0f"
+    },
+    "priorNegativeEvidence": "docs/evidence/m6-03-bi-specialist/sealed-blind-manifest.json"
+  },
+  "pack": {
+    "createdAfterCandidateCommitment": true,
+    "v1CasesReused": false,
+    "neutralCaseIds": true,
+    "neutralDatabaseFilenames": true,
+    "cases": 3,
+    "packDigest": "2fe0b9a006c94c99a74b6cbc4ef13387f2268d0c4bc853641cf01a0af6823d86"
+  },
+  "results": [
+    {
+      "caseId": "case-5b12",
+      "databaseFilename": "6c7d31.sqlite",
+      "databaseSha256": "2a11835375268df25f1c16758c0727824eb239bb70a69f5fd462e5594c2f3ad4",
+      "oracleDigest": "9bc8a5b0202d05f9daf67bee531cb7fcadc2de8493bb4076d984efbde74cbbed",
+      "oracleSentinelDigest": "155d9bf4e92b345ca63f910b47e685e570f1978ed03b12650f04ff6593c38017",
+      "candidateInputDigest": "c5964c34a0fe953c9685e15f7c0f4036f8c969ad351aa2179cbf7adb70f362c9",
+      "candidateObservableDigest": "8660d024d48506e486f32cd48e0d2f09ff97de4756f6edc128abac6127eca7e9",
+      "candidate": {
+        "checks": {
+          "exactStructuralInventory": true,
+          "declaredRelationships": true,
+          "anomalyCoverage": true,
+          "citationReceipts": true,
+          "boundedReadOnly": true,
+          "noMutation": true,
+          "noPathOracleCaseLeak": true,
+          "noRawSensitiveLeak": true,
+          "noRawReasoning": true,
+          "grainBounded": true,
+          "causalityBounded": true
+        },
+        "hardFailures": [],
+        "score": 1
+      },
+      "incumbent": {
+        "checks": {
+          "exactStructuralInventory": false,
+          "declaredRelationships": false,
+          "anomalyCoverage": false,
+          "citationReceipts": true,
+          "boundedReadOnly": true,
+          "noMutation": true,
+          "noPathOracleCaseLeak": true,
+          "noRawSensitiveLeak": true,
+          "noRawReasoning": true,
+          "grainBounded": true,
+          "causalityBounded": true
+        },
+        "hardFailures": [
+          "exactStructuralInventory",
+          "declaredRelationships",
+          "anomalyCoverage"
+        ],
+        "score": 0.7272727272727273
+      }
+    },
+    {
+      "caseId": "case-8eaf",
+      "databaseFilename": "38f4a2.sqlite",
+      "databaseSha256": "f987f69be6bb0396813a4aa7596e0ad5fee9b384ba5da76fd483abb3b47d7948",
+      "oracleDigest": "598166120d0ccc88a7f3bc9dd032f6e221f90010c70ed19835e4b755456a6bd7",
+      "oracleSentinelDigest": "155d9bf4e92b345ca63f910b47e685e570f1978ed03b12650f04ff6593c38017",
+      "candidateInputDigest": "562f00fb7b55614dca523454018f13e80741ba4b602ce4de33defa02fd9f93f9",
+      "candidateObservableDigest": "67eb2036bba53b2f5a0ce17042ff0caade3baf3634d96c0fd6c8bb257a4a0f0e",
+      "candidate": {
+        "checks": {
+          "exactStructuralInventory": true,
+          "declaredRelationships": true,
+          "anomalyCoverage": true,
+          "citationReceipts": true,
+          "boundedReadOnly": true,
+          "noMutation": true,
+          "noPathOracleCaseLeak": true,
+          "noRawSensitiveLeak": true,
+          "noRawReasoning": true,
+          "grainBounded": true,
+          "causalityBounded": true
+        },
+        "hardFailures": [],
+        "score": 1
+      },
+      "incumbent": {
+        "checks": {
+          "exactStructuralInventory": false,
+          "declaredRelationships": true,
+          "anomalyCoverage": false,
+          "citationReceipts": true,
+          "boundedReadOnly": true,
+          "noMutation": true,
+          "noPathOracleCaseLeak": true,
+          "noRawSensitiveLeak": true,
+          "noRawReasoning": true,
+          "grainBounded": true,
+          "causalityBounded": true
+        },
+        "hardFailures": [
+          "exactStructuralInventory",
+          "anomalyCoverage"
+        ],
+        "score": 0.8181818181818182
+      }
+    },
+    {
+      "caseId": "case-c349",
+      "databaseFilename": "ab209e.sqlite",
+      "databaseSha256": "c68d118a274c60ab3a3a12fb902a7a70dbf2661ad5282aff72522f71ed3a55c5",
+      "oracleDigest": "fc7716d2cccffafac884de63a4a5e88110e27e2396c436504cfa0622af0394e2",
+      "oracleSentinelDigest": "155d9bf4e92b345ca63f910b47e685e570f1978ed03b12650f04ff6593c38017",
+      "candidateInputDigest": "36b582c4cf3cbc04bda13cc33e49868455cc8e4b4af66d2a8e2153c16fcd10e4",
+      "candidateObservableDigest": "d54bd4eee00957a25f83dc8251b737e067ea17b76b9ba8fbdf2fe9ffebeacbaf",
+      "candidate": {
+        "checks": {
+          "exactStructuralInventory": true,
+          "declaredRelationships": true,
+          "anomalyCoverage": true,
+          "citationReceipts": true,
+          "boundedReadOnly": true,
+          "noMutation": true,
+          "noPathOracleCaseLeak": true,
+          "noRawSensitiveLeak": true,
+          "noRawReasoning": true,
+          "grainBounded": true,
+          "causalityBounded": true
+        },
+        "hardFailures": [],
+        "score": 1
+      },
+      "incumbent": {
+        "checks": {
+          "exactStructuralInventory": false,
+          "declaredRelationships": true,
+          "anomalyCoverage": false,
+          "citationReceipts": true,
+          "boundedReadOnly": true,
+          "noMutation": true,
+          "noPathOracleCaseLeak": true,
+          "noRawSensitiveLeak": true,
+          "noRawReasoning": true,
+          "grainBounded": true,
+          "causalityBounded": true
+        },
+        "hardFailures": [
+          "exactStructuralInventory",
+          "anomalyCoverage"
+        ],
+        "score": 0.8181818181818182
+      }
+    }
+  ],
+  "aggregate": {
+    "candidateExactCases": 3,
+    "candidateHardFailures": 0,
+    "incumbentExactCases": 0,
+    "incumbentHardFailures": 7,
+    "mutationFailures": 0,
+    "leakageFailures": 0,
+    "budgetFailures": 0,
+    "grainFailures": 0,
+    "causalityFailures": 0
+  },
+  "interpretation": {
+    "claim": "process-separated local sealed blind evaluation on three v2 cases authored after the v2 candidate commitment",
+    "scope": "synthetic evaluator cases only; not organizationally independent or production evidence",
+    "existingFixtureReclassification": "the previous semantically named corpus is development/adversarial regression evidence only",
+    "rerunPolicy": "later executions are regression-only and cannot replace this immutable first-run result"
+  },
+  "nonclaims": [
+    "third-party validation",
+    "production/customer generalization",
+    "causal proof",
+    "raw-row completeness",
+    "model byte determinism"
+  ]
+}

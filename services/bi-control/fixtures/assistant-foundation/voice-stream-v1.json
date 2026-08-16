@@ -1,0 +1,7 @@
+{
+  "schemaVersion": "chimpmaera.bi/voice-stream-event/v1",
+  "eventType": "transcript.final",
+  "language": "de-DE",
+  "confidence": 0.98,
+  "payload": {"text": "Zeige die Region EMEA"}
+}

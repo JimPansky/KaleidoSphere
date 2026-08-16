@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "chimpmaera.bi/discovery-readiness-evidence-pack/v0",
+  "runId": "graph-pilot-discovery-readiness-v0-local",
+  "graphId": "superset-bi.discovery-readiness.v0",
+  "baseCommit": "e6991f4e2ce29cf798efc95edb409faeb1af4e39",
+  "acceptance": {
+    "accepted": true,
+    "reason": "local read-only pilot acceptance thresholds met",
+    "sourceRowsPersisted": 0,
+    "mutations": 0,
+    "privacyMutationHardFails": 0,
+    "deterministicReplayRate": 1,
+    "assemblyTimeReduction": 1,
+    "reviewAmbiguityReduction": 0.9166666666666666
+  },
+  "cases": [
+    {
+      "id": "known_schema_order_to_cash",
+      "classification": "fixture_visible",
+      "sha256": "72f507a16c78fa4938c86b0035f34a7e9a8e44995450c973e99fbfc500510ab6"
+    },
+    {
+      "id": "unknown_schema_supplier",
+      "classification": "fixture_visible",
+      "sha256": "ba5a2ac094b04f3af9b5c7e14fc7398b4e2f1b6786a409b11d5e46af097a25ed"
+    },
+    {
+      "id": "ambiguous_grain_adversarial",
+      "classification": "fixture_visible",
+      "sha256": "835ad550dc6259596cc97070468feb6c9faf87eeff5f2d06da9be9470470bbce"
+    },
+    {
+      "id": "sealed_case-5b12",
+      "classification": "sealed",
+      "sha256": "2a11835375268df25f1c16758c0727824eb239bb70a69f5fd462e5594c2f3ad4"
+    },
+    {
+      "id": "sealed_case-8eaf",
+      "classification": "sealed",
+      "sha256": "f987f69be6bb0396813a4aa7596e0ad5fee9b384ba5da76fd483abb3b47d7948"
+    },
+    {
+      "id": "sealed_case-c349",
+      "classification": "sealed",
+      "sha256": "c68d118a274c60ab3a3a12fb902a7a70dbf2661ad5282aff72522f71ed3a55c5"
+    }
+  ],
+  "replay": {
+    "deterministic": true,
+    "first": [
+      "64b11eba3e14120b9a72d55f73e9bfe7e85df21e43e45d835388f3963cef1f88",
+      "3d6c381ca14b5808f894cf69e4e71e0ce547a3fa36c80ddfe01b9ae2dde4c45c",
+      "8e22410c8958ed0ef8fda9cc3db22b144e86b9a7ab39e4fa2da1f7a788532dc3",
+      "6a07bcc143a77094b77a713724e2bfd515cdcff6bb03e8193331d2c6c33f92dc",
+      "489522644ef955fc6c52292f841b529d426359e737e630c392d823d6399bcfd8",
+      "44429ef4bdfa5838a8ada1a45a369ed10eac8fb1e2c395f661c45502ee36054e",
+      "6af9fc579b05e2a28312c96a36091c37ff2b6ac718aa37d084297bdfc65923d5",
+      "64d958baea399b2982e1a534ee923d7fce125fd948b8f6c32d917f5b1f8eb35f",
+      "5383cb36f1b8e03e39075cfac560a91c449ab9ef3b2d7dc49407ae49aa996806"
+    ],
+    "second": [
+      "64b11eba3e14120b9a72d55f73e9bfe7e85df21e43e45d835388f3963cef1f88",
+      "3d6c381ca14b5808f894cf69e4e71e0ce547a3fa36c80ddfe01b9ae2dde4c45c",
+      "8e22410c8958ed0ef8fda9cc3db22b144e86b9a7ab39e4fa2da1f7a788532dc3",
+      "6a07bcc143a77094b77a713724e2bfd515cdcff6bb03e8193331d2c6c33f92dc",
+      "489522644ef955fc6c52292f841b529d426359e737e630c392d823d6399bcfd8",
+      "44429ef4bdfa5838a8ada1a45a369ed10eac8fb1e2c395f661c45502ee36054e",
+      "6af9fc579b05e2a28312c96a36091c37ff2b6ac718aa37d084297bdfc65923d5",
+      "64d958baea399b2982e1a534ee923d7fce125fd948b8f6c32d917f5b1f8eb35f",
+      "5383cb36f1b8e03e39075cfac560a91c449ab9ef3b2d7dc49407ae49aa996806"
+    ],
+    "rate": 1
+  },
+  "routing": {
+    "policy": {
+      "deterministicEasy": [
+        "risk preflight",
+        "schema inventory",
+        "bounded profiling",
+        "evidence hashing",
+        "readiness scoring"
+      ],
+      "strongModelEscalationStub": [
+        "ambiguous KPI semantics",
+        "domain naming conflict",
+        "visual rationale drafting"
+      ],
+      "modelLoaded": false,
+      "savingsClaimAllowed": false
+    },
+    "criticalPathNodes": [
+      "BI-G0_risk_preflight",
+      "BI-G2_readiness_assembly",
+      "BI-G3_approval_contract",
+      "BI-G4_trusted_apply_boundary",
+      "BI-G5_reconciliation_boundary"
+    ],
+    "parallelSafeNodes": [
+      "BI-G1_discovery_core",
+      "BI-G1_reference_evidence"
+    ],
+    "cacheRetryEscalationClasses": [
+      {
+        "nodeId": "BI-G0_risk_preflight",
+        "cacheClass": "cold-local",
+        "retryClass": "no-retry",
+        "escalationClass": "deterministic"
+      },
+      {
+        "nodeId": "BI-G1_discovery_core",
+        "cacheClass": "cold-local",
+        "retryClass": "no-retry",
+        "escalationClass": "deterministic-easy"
+      },
+      {
+        "nodeId": "BI-G1_reference_evidence",
+        "cacheClass": "cold-local",
+        "retryClass": "no-retry",
+        "escalationClass": "deterministic-reference-bind"
+      },
+      {
+        "nodeId": "BI-G2_readiness_assembly",
+        "cacheClass": "cold-local",
+        "retryClass": "no-retry",
+        "escalationClass": "strong-model-contract-stub"
+      },
+      {
+        "nodeId": "BI-G3_approval_contract",
+        "cacheClass": "cold-local",
+        "retryClass": "no-retry",
+        "escalationClass": "contract-only-no-runtime"
+      },
+      {
+        "nodeId": "BI-G4_trusted_apply_boundary",
+        "cacheClass": "cold-local",
+        "retryClass": "no-retry",
+        "escalationClass": "contract-only-no-runtime"
+      },
+      {
+        "nodeId": "BI-G5_reconciliation_boundary",
+        "cacheClass": "cold-local",
+        "retryClass": "no-retry",
+        "escalationClass": "contract-only-no-runtime"
+      }
+    ],
+    "sourceRowsPersisted": false,
+    "mutationPerformed": false
+  },
+  "privacy": {
+    "sourceRowsPersisted": false,
+    "secretsPersisted": false,
+    "rawPromptsPersisted": false,
+    "chainOfThoughtPersisted": false
+  },
+  "negativeEvidence": [],
+  "nonclaims": [
+    "read-only local fixture readiness only",
+    "no production/customer/staging Superset or database evidence",
+    "no mutation authority",
+    "no model-loaded savings claim"
+  ],
+  "artifacts": {
+    "mermaid": "docs/evidence/graph-pilot/discovery-readiness-v0.mmd",
+    "dot": "docs/evidence/graph-pilot/discovery-readiness-v0.dot",
+    "manifest": "docs/evidence/graph-pilot/terminal-manifest.json"
+  }
+}

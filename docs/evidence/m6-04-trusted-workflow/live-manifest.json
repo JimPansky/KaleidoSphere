@@ -1,0 +1,423 @@
+{
+  "schemaVersion": "chimpmaera.bi/trusted-superset-workflow-evidence/v1",
+  "generatedAt": "2026-08-15T05:15:52.174Z",
+  "runtime": {
+    "projectName": "sba-m6-04-trusted-20260815",
+    "baseUrl": "http://127.0.0.1:39044",
+    "loopbackOnly": true,
+    "product": "Apache Superset",
+    "version": "6.1.0",
+    "image": "apache/superset:6.1.0@sha256:fb3464528ec7076f91195f0ff7835755aa023e281f1bb78a84782ce7a36b3705",
+    "fixture": "northstar-components-synthetic-v1",
+    "projectionDigest": "sha256:5d1e04245dfd492816fbf6308397b50f5cefe62e18d3e6b26b1291b8b8bc40cc",
+    "customerData": false
+  },
+  "specialistBinding": {
+    "runId": "m6-04-deterministic-specialist",
+    "schemaVersion": "chimpmaera.bi/real-bi-specialist/v1",
+    "discoveryDigest": "sha256:42b7cecf0279398952bd4f79e7ea826369d4d9d1dc209e39b5040c471638e550",
+    "modelAuthority": false,
+    "rawModelOutputIncluded": false
+  },
+  "targetBinding": {
+    "targetId": "sba-m6-04-trusted-20260815",
+    "environment": "disposable_local",
+    "baseUrlOrigin": "http://127.0.0.1:39044",
+    "fingerprintDigest": "sha256:1fc3a0297ee6d80e976f3f1581d6b7ccb143fb491f08a581eee26e8ef0921a6a",
+    "capabilityRevision": "m6-04-reviewed-public-rest-v1",
+    "capabilityDigest": "sha256:ecf9e895a4dc2c20752d04cd890e640e3143044c4ce5f8081cade5b8b24e8bbd",
+    "assetSnapshotDigest": "sha256:962fd450cbb604ecceabff3de166f00d7894ca4d5ad154ce241e5b54c5b58591"
+  },
+  "preview": {
+    "planId": "m6-04-live-plan-1",
+    "previewDigest": "sha256:375929e3f0cf6e468e346f6004b5a3bbef42632027618882dd465a85dcd10711",
+    "actionCount": 6,
+    "applyOrder": [
+      "01-dataset",
+      "02-chart-1",
+      "02-chart-2",
+      "02-chart-3",
+      "03-dashboard",
+      "04-filter"
+    ],
+    "beforeAfterDiff": [
+      {
+        "actionId": "01-dataset",
+        "actionType": "dataset.update",
+        "asset": {
+          "identity": "dataset:c6020000-0000-4000-8000-000000000002",
+          "kind": "dataset"
+        },
+        "dependsOn": [
+          "database:c6020000-0000-4000-8000-000000000001"
+        ],
+        "before": {
+          "uuid": "c6020000-0000-4000-8000-000000000002",
+          "tableName": "northstar_scenario_oracle",
+          "databaseUuid": "c6020000-0000-4000-8000-000000000001",
+          "description": "Synthetic 12-row oracle projection · managed_by=sba-m6-02-native-bridge · no customer data"
+        },
+        "after": {
+          "uuid": "c6020000-0000-4000-8000-000000000002",
+          "tableName": "northstar_scenario_oracle",
+          "databaseUuid": "c6020000-0000-4000-8000-000000000001",
+          "description": "Synthetic 12-row oracle projection · managed_by=sba-m6-02-native-bridge · no customer data · M6-04 trusted apply"
+        }
+      },
+      {
+        "actionId": "02-chart-1",
+        "actionType": "chart.upsert",
+        "asset": {
+          "identity": "chart:c6020000-0000-4000-8000-000000001101",
+          "kind": "chart"
+        },
+        "dependsOn": [
+          "dataset:c6020000-0000-4000-8000-000000000002"
+        ],
+        "before": {
+          "uuid": "c6020000-0000-4000-8000-000000001101",
+          "title": "Revenue · EUR",
+          "vizType": "big_number",
+          "datasetUuid": "c6020000-0000-4000-8000-000000000002",
+          "metricId": "Synthetic metric value",
+          "groupBy": []
+        },
+        "after": {
+          "uuid": "c6020000-0000-4000-8000-000000001101",
+          "title": "M6-04 Trusted · Revenue · EUR",
+          "vizType": "big_number",
+          "datasetUuid": "c6020000-0000-4000-8000-000000000002",
+          "metricId": "Synthetic metric value",
+          "groupBy": []
+        }
+      },
+      {
+        "actionId": "02-chart-2",
+        "actionType": "chart.upsert",
+        "asset": {
+          "identity": "chart:c6020000-0000-4000-8000-000000001102",
+          "kind": "chart"
+        },
+        "dependsOn": [
+          "dataset:c6020000-0000-4000-8000-000000000002"
+        ],
+        "before": {
+          "uuid": "c6020000-0000-4000-8000-000000001102",
+          "title": "Q2 revenue signal",
+          "vizType": "echarts_timeseries_line",
+          "datasetUuid": "c6020000-0000-4000-8000-000000000002",
+          "metricId": "Synthetic metric value",
+          "groupBy": [
+            "metric_key"
+          ]
+        },
+        "after": {
+          "uuid": "c6020000-0000-4000-8000-000000001102",
+          "title": "M6-04 Trusted · Q2 revenue signal",
+          "vizType": "echarts_timeseries_line",
+          "datasetUuid": "c6020000-0000-4000-8000-000000000002",
+          "metricId": "Synthetic metric value",
+          "groupBy": [
+            "metric_key"
+          ]
+        }
+      },
+      {
+        "actionId": "02-chart-3",
+        "actionType": "chart.upsert",
+        "asset": {
+          "identity": "chart:c6020000-0000-4000-8000-000000001103",
+          "kind": "chart"
+        },
+        "dependsOn": [
+          "dataset:c6020000-0000-4000-8000-000000000002"
+        ],
+        "before": {
+          "uuid": "c6020000-0000-4000-8000-000000001103",
+          "title": "Revenue by period",
+          "vizType": "echarts_timeseries_bar",
+          "datasetUuid": "c6020000-0000-4000-8000-000000000002",
+          "metricId": "Synthetic metric value",
+          "groupBy": [
+            "metric_key"
+          ]
+        },
+        "after": {
+          "uuid": "c6020000-0000-4000-8000-000000001103",
+          "title": "M6-04 Trusted · Revenue by period",
+          "vizType": "echarts_timeseries_bar",
+          "datasetUuid": "c6020000-0000-4000-8000-000000000002",
+          "metricId": "Synthetic metric value",
+          "groupBy": [
+            "metric_key"
+          ]
+        }
+      },
+      {
+        "actionId": "03-dashboard",
+        "actionType": "dashboard.update",
+        "asset": {
+          "identity": "dashboard:c6020000-0000-4000-8000-000000000101",
+          "kind": "dashboard"
+        },
+        "dependsOn": [
+          "chart:c6020000-0000-4000-8000-000000001101",
+          "chart:c6020000-0000-4000-8000-000000001102",
+          "chart:c6020000-0000-4000-8000-000000001103"
+        ],
+        "before": {
+          "uuid": "c6020000-0000-4000-8000-000000000101",
+          "title": "M6-02 Executive Summary",
+          "slug": "m6-02-executive-summary",
+          "chartUuids": [
+            "c6020000-0000-4000-8000-000000001101",
+            "c6020000-0000-4000-8000-000000001102",
+            "c6020000-0000-4000-8000-000000001103"
+          ],
+          "layoutId": "Synthetic local evidence; managed_by=sba-m6-02-native-bridge"
+        },
+        "after": {
+          "uuid": "c6020000-0000-4000-8000-000000000101",
+          "title": "M6-04 Trusted Specialist Preview",
+          "slug": "m6-04-trusted-specialist-preview",
+          "chartUuids": [
+            "c6020000-0000-4000-8000-000000001101",
+            "c6020000-0000-4000-8000-000000001102",
+            "c6020000-0000-4000-8000-000000001103"
+          ],
+          "layoutId": "m6-04-trusted-three-view"
+        }
+      },
+      {
+        "actionId": "04-filter",
+        "actionType": "filter.configure",
+        "asset": {
+          "identity": "filter:c6020000-0000-4000-8000-000000000101:NATIVE_FILTER-M6_02_PLANT",
+          "kind": "filter"
+        },
+        "dependsOn": [
+          "dashboard:c6020000-0000-4000-8000-000000000101",
+          "dataset:c6020000-0000-4000-8000-000000000002"
+        ],
+        "before": {
+          "filterId": "NATIVE_FILTER-M6_02_PLANT",
+          "dashboardUuid": "c6020000-0000-4000-8000-000000000101",
+          "datasetUuid": "c6020000-0000-4000-8000-000000000002",
+          "column": "plant",
+          "filterType": "filter_select"
+        },
+        "after": {
+          "filterId": "NATIVE_FILTER-M6_02_PLANT",
+          "dashboardUuid": "c6020000-0000-4000-8000-000000000101",
+          "datasetUuid": "c6020000-0000-4000-8000-000000000002",
+          "column": "line",
+          "filterType": "filter_select"
+        }
+      }
+    ],
+    "limitations": [
+      "synthetic-disposable-target-only",
+      "typed-reviewed-adapter-only",
+      "no-free-form-sql",
+      "no-dom-control"
+    ],
+    "nonclaims": [
+      "no-delivery",
+      "no-production-or-customer-use",
+      "no-model-authority",
+      "no-causal-proof"
+    ]
+  },
+  "approval": {
+    "approvalId": "m6-04-live-approval-1",
+    "actorId": "synthetic-local-reviewer",
+    "sessionId": "m6-04-isolated-session",
+    "previewDigest": "sha256:375929e3f0cf6e468e346f6004b5a3bbef42632027618882dd465a85dcd10711",
+    "targetBindingDigest": "sha256:cdc20a9fa85ced8d10bee3df7af5b97f544cb4c99760574f419a4de81371fa16",
+    "oneShot": true,
+    "reusable": false,
+    "channel": "trusted_ui",
+    "modelGenerated": false
+  },
+  "apply": {
+    "receipt": {
+      "schemaVersion": "chimpmaera.bi/trusted-superset-workflow-receipt/v1",
+      "executionId": "m6-04-live-plan-1",
+      "capabilityId": "superset.asset-revision.apply",
+      "status": "succeeded",
+      "startedAt": "2026-08-15T05:15:45.574Z",
+      "finishedAt": "2026-08-15T05:15:47.923Z",
+      "planDigest": "sha256:aecb01ef20ee560392149e87bf4c96e4d382060de352a4f6dc7ef37b9b3b6d46",
+      "previewDigest": "sha256:375929e3f0cf6e468e346f6004b5a3bbef42632027618882dd465a85dcd10711",
+      "idempotencyKey": "m6-04-live-idempotency-1",
+      "appliedActionIds": [
+        "01-dataset",
+        "02-chart-1",
+        "02-chart-2",
+        "02-chart-3",
+        "03-dashboard",
+        "04-filter"
+      ],
+      "readback": [
+        {
+          "actionId": "01-dataset",
+          "valueDigest": "sha256:c7cae4ebf61d90cc2965a0d98ed1bd3c026d4b6cd3fba7309bb5781705c9acb3"
+        },
+        {
+          "actionId": "02-chart-1",
+          "valueDigest": "sha256:8e65bfe7acd52f6f06fa18471de3783ee557d6bfd361353e759e2fed5ac6884d"
+        },
+        {
+          "actionId": "02-chart-2",
+          "valueDigest": "sha256:c6ab36b19ac40aa447766e56e362bef8d10a7f83ca492ede35274b3d97ce027b"
+        },
+        {
+          "actionId": "02-chart-3",
+          "valueDigest": "sha256:a3daea4a130892fbf438e7af91eeadb2299c2a9ab84a7e6ec208143b7f0cf11b"
+        },
+        {
+          "actionId": "03-dashboard",
+          "valueDigest": "sha256:6af8763e8435c5da4d9edc75d236e4061b17059084ebfbc31ed6bf2564b73e60"
+        },
+        {
+          "actionId": "04-filter",
+          "valueDigest": "sha256:1ac7b5d473810997d6da89986c689d620007794549d752a97ee7528055dac6d4"
+        }
+      ],
+      "rollbackToken": "sha256:c76cf853e9695553ac6b77b48a81649c9f224c2226b3f138093cde63f4f125c3",
+      "sideEffect": "reversible",
+      "responsePayloadPersisted": false,
+      "sourceRecordsPersisted": false
+    },
+    "idempotentSecondStatus": "already_applied",
+    "afterReadback": [
+      {
+        "actionId": "01-dataset",
+        "digest": "sha256:c7cae4ebf61d90cc2965a0d98ed1bd3c026d4b6cd3fba7309bb5781705c9acb3"
+      },
+      {
+        "actionId": "02-chart-1",
+        "digest": "sha256:8e65bfe7acd52f6f06fa18471de3783ee557d6bfd361353e759e2fed5ac6884d"
+      },
+      {
+        "actionId": "02-chart-2",
+        "digest": "sha256:c6ab36b19ac40aa447766e56e362bef8d10a7f83ca492ede35274b3d97ce027b"
+      },
+      {
+        "actionId": "02-chart-3",
+        "digest": "sha256:a3daea4a130892fbf438e7af91eeadb2299c2a9ab84a7e6ec208143b7f0cf11b"
+      },
+      {
+        "actionId": "03-dashboard",
+        "digest": "sha256:6af8763e8435c5da4d9edc75d236e4061b17059084ebfbc31ed6bf2564b73e60"
+      },
+      {
+        "actionId": "04-filter",
+        "digest": "sha256:1ac7b5d473810997d6da89986c689d620007794549d752a97ee7528055dac6d4"
+      }
+    ],
+    "chartVizTypes": [
+      "big_number",
+      "echarts_timeseries_line",
+      "echarts_timeseries_bar"
+    ],
+    "distinctChartVizTypes": 3,
+    "unauthorizedDenial": "WORKFLOW_EXECUTION_AUTHORIZATION_REQUIRED"
+  },
+  "rollback": {
+    "receipt": {
+      "schemaVersion": "chimpmaera.bi/trusted-superset-rollback-receipt/v1",
+      "status": "rolled_back",
+      "planDigest": "sha256:aecb01ef20ee560392149e87bf4c96e4d382060de352a4f6dc7ef37b9b3b6d46",
+      "restored": [
+        {
+          "actionId": "04-filter",
+          "valueDigest": "sha256:206630a8dbd0c9d761cd47876e9b079d41463b1a7c646a40f82d8c39fab496bf"
+        },
+        {
+          "actionId": "03-dashboard",
+          "valueDigest": "sha256:5188b1e5ce9eb113dacd0c56a70932fae2a99b2076002027f788ac0f2b93ec5e"
+        },
+        {
+          "actionId": "02-chart-3",
+          "valueDigest": "sha256:10f82cf0d99d4455fc9742f288049c1e0bbafea453c622889985c36da24f26bd"
+        },
+        {
+          "actionId": "02-chart-2",
+          "valueDigest": "sha256:88f750e879194926653db0d13b47c32b511cce50f9aee4ebfcd4d39ac435176a"
+        },
+        {
+          "actionId": "02-chart-1",
+          "valueDigest": "sha256:2a639810ae84711df9405ca6fbbb901ba61ac1ce6127f066b21c6342186fd55e"
+        },
+        {
+          "actionId": "01-dataset",
+          "valueDigest": "sha256:b40a01c8399978899f10a7ae2f01113ba8cdcad777a44261cb558a96c2c2faca"
+        }
+      ],
+      "completedAt": "2026-08-15T05:15:50.189Z",
+      "rollbackTokenConsumed": true,
+      "responsePayloadPersisted": false
+    },
+    "postRollback": [
+      {
+        "actionId": "01-dataset",
+        "digest": "sha256:b40a01c8399978899f10a7ae2f01113ba8cdcad777a44261cb558a96c2c2faca"
+      },
+      {
+        "actionId": "02-chart-1",
+        "digest": "sha256:2a639810ae84711df9405ca6fbbb901ba61ac1ce6127f066b21c6342186fd55e"
+      },
+      {
+        "actionId": "02-chart-2",
+        "digest": "sha256:88f750e879194926653db0d13b47c32b511cce50f9aee4ebfcd4d39ac435176a"
+      },
+      {
+        "actionId": "02-chart-3",
+        "digest": "sha256:10f82cf0d99d4455fc9742f288049c1e0bbafea453c622889985c36da24f26bd"
+      },
+      {
+        "actionId": "03-dashboard",
+        "digest": "sha256:5188b1e5ce9eb113dacd0c56a70932fae2a99b2076002027f788ac0f2b93ec5e"
+      },
+      {
+        "actionId": "04-filter",
+        "digest": "sha256:206630a8dbd0c9d761cd47876e9b079d41463b1a7c646a40f82d8c39fab496bf"
+      }
+    ]
+  },
+  "reconciliation": {
+    "digest": "sha256:cb15a9b290ad9e14c28b00aa11ff1570d03746e81c969b4e75d9db85d70beda7",
+    "completedEntries": 1,
+    "rollbackPoints": 1,
+    "replayedWithoutDispatch": true
+  },
+  "partialFailure": {
+    "code": "INJECTED_PARTIAL_FAILURE",
+    "compensation": [
+      {
+        "actionId": "02-chart-1",
+        "restoredDigest": "sha256:2a639810ae84711df9405ca6fbbb901ba61ac1ce6127f066b21c6342186fd55e",
+        "status": "restored"
+      },
+      {
+        "actionId": "01-dataset",
+        "restoredDigest": "sha256:b40a01c8399978899f10a7ae2f01113ba8cdcad777a44261cb558a96c2c2faca",
+        "status": "restored"
+      }
+    ]
+  },
+  "privacy": {
+    "responsePayloadPersisted": false,
+    "sourceRecordsPersisted": false,
+    "modelTranscriptPersisted": false,
+    "chainOfThoughtPersisted": false
+  },
+  "nonclaims": [
+    "no-delivery",
+    "no-production-or-customer-use",
+    "no-organizationally-independent-validation",
+    "no-causal-proof",
+    "no-deployment"
+  ]
+}

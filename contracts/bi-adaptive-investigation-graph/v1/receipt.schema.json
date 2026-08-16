@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "chimpmaera.bi/adaptive-investigation-graph/v1/receipt.schema.json",
+  "title": "BI Adaptive Investigation Receipt v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "runId", "nodeId", "status", "attempt", "inputDigest", "outputDigest", "previousHash", "evidenceRefs", "budgetAfter", "receiptHash", "runtimeMetrics", "stable"],
+  "properties": {
+    "schemaVersion": { "const": "chimpmaera.bi/adaptive-investigation-receipt/v1" },
+    "runId": { "type": "string" },
+    "nodeId": { "type": "string" },
+    "status": { "const": "complete" },
+    "attempt": { "const": 1 },
+    "inputDigest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "outputDigest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "previousHash": { "type": "string" },
+    "evidenceRefs": { "type": "array", "items": { "type": "string" } },
+    "budgetAfter": { "type": "object" },
+    "receiptHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "runtimeMetrics": { "type": "object" },
+    "stable": { "type": "object" }
+  }
+}

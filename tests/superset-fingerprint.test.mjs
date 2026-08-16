@@ -59,6 +59,7 @@ test('Superset planning gate allows only review after a fresh compatible fingerp
   const fingerprint = buildSupersetFingerprint(await fixture());
   assert.deepEqual(evaluateSupersetPlanningGate({
     fingerprint,
+    now: '2026-08-14T05:29:30.000Z',
     request: {
       action: 'promotion zip import planning',
       target_base_url: 'http://superset:8088',

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "chimpmaera.bi/discovery-readiness-graph/v0/state.schema.json",
+  "title": "BI Discovery-to-Readiness Canonical State v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "graphId", "runId", "status", "sourceRefs", "discoveryTargets", "nodeOutputs", "receipts", "budgetUsage", "privacy", "verdict"],
+  "properties": {
+    "schemaVersion": { "const": "chimpmaera.bi/discovery-readiness-state/v0" },
+    "graphId": { "type": "string" },
+    "runId": { "type": "string" },
+    "status": { "enum": ["created", "running", "paused", "failed", "complete"] },
+    "sourceRefs": { "type": "array", "items": { "$ref": "#/$defs/ref" } },
+    "discoveryTargets": { "type": "array", "items": { "type": "object" } },
+    "pausedBefore": { "type": "string" },
+    "nodeOutputs": { "type": "object" },
+    "receipts": { "type": "array", "items": { "type": "object" } },
+    "budgetUsage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodes", "explorationSteps", "modelTokens", "toolCalls", "persistedBytes", "mutations"],
+      "properties": {
+        "nodes": { "type": "integer", "minimum": 0 },
+        "explorationSteps": { "type": "integer", "minimum": 0 },
+        "modelTokens": { "type": "integer", "minimum": 0 },
+        "toolCalls": { "type": "integer", "minimum": 0 },
+        "persistedBytes": { "type": "integer", "minimum": 0 },
+        "mutations": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sourceRowsPersisted", "secretsPersisted", "rawPromptsPersisted", "chainOfThoughtPersisted"],
+      "properties": {
+        "sourceRowsPersisted": { "const": false },
+        "secretsPersisted": { "const": false },
+        "rawPromptsPersisted": { "const": false },
+        "chainOfThoughtPersisted": { "const": false }
+      }
+    },
+    "verdict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["readiness", "nonclaims", "promotionAllowed"],
+      "properties": {
+        "readiness": { "enum": ["unknown", "not_ready", "ready_for_review", "contract_only"] },
+        "nonclaims": { "type": "array", "items": { "type": "string" } },
+        "promotionAllowed": { "const": false }
+      }
+    }
+  },
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "path", "sha256", "classification"],
+      "properties": {
+        "id": { "type": "string" },
+        "path": { "type": "string" },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "classification": { "enum": ["code", "fixture_visible", "sealed", "evidence", "contract"] }
+      }
+    }
+  }
+}

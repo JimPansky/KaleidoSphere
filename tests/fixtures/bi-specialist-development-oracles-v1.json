@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "chimpmaera.bi/bi-specialist-development-oracles/v1",
+  "classification": "Evaluator-side regression oracle for visible development fixtures; no blind-generalization claim.",
+  "oracles": {
+    "training-order-to-cash": {
+      "minimumTables": 5,
+      "minimumDeclaredRelationships": 4,
+      "requiredAnomalies": ["missing_values", "duplicate_values", "negative_values"],
+      "requiredDomains": ["customer", "dealer", "sales_order", "shipment", "invoice"]
+    },
+    "training-production-supplier": {
+      "minimumTables": 4,
+      "minimumDeclaredRelationships": 3,
+      "requiredAnomalies": ["missing_values", "negative_values", "extreme_values"],
+      "requiredDomains": ["supplier", "work_order", "quality_check", "machine_event"]
+    },
+    "holdout-channel-perturbed": {
+      "minimumTables": 5,
+      "minimumDeclaredRelationships": 4,
+      "requiredAnomalies": ["missing_values", "duplicate_values", "negative_values", "extreme_values"],
+      "requiredDomains": ["acct_dim", "route_dim", "txn_hdr", "fulfil_evt", "bill_doc"]
+    },
+    "holdout-clinical-domain-shift": {
+      "minimumTables": 3,
+      "minimumDeclaredRelationships": 2,
+      "requiredAnomalies": ["missing_values", "negative_values", "extreme_values"],
+      "requiredDomains": ["patient", "encounter", "lab_result"]
+    },
+    "holdout-underspecified-adversarial": {
+      "minimumTables": 2,
+      "minimumDeclaredRelationships": 1,
+      "requiredAnomalies": [],
+      "requiredDomains": ["opaque_a", "opaque_b"]
+    }
+  }
+}

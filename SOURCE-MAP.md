@@ -62,3 +62,47 @@ DB-link hosts are hash-only, scheduler action text is omitted, and catalog Q&A i
 answered from local safe projections only. New Compose, control, catalog,
 Superset materializer, fingerprint, review-bundle, agent UI, tests, and documentation were
 authored specifically for this repository.
+
+M6-00 contract schemas, four assistant-foundation runtime modules, deterministic
+fixtures, tests, ADR, evidence, and documentation updates are repository-authored
+clean-room work. DeepSeek Harness commit
+`47f943859bef60e4160492346772ded9b24f765a` and the exact architecture-note
+paths listed in `docs/decisions/M6-00-CONTRACT-SECURITY-FOUNDATION.md` are
+conceptual references only. No DSH/Cordis runtime, package, schema, artifact, or
+code was copied. These files are recorded as ordinary repository-authored hashes
+under `files` in `SOURCE-MAP.json`, not as derived files.
+
+M6-01 visual-scenario-lab code, the wholly synthetic Northstar Components oracle
+and portable seed, deterministic scenario engine, loopback shell/server, browser
+evidence runner, tests, ADR, visual review, screenshots, and evidence report are
+repository-authored clean-room work. Playwright Core and Chromium were used only
+as preinstalled test tooling and are not copied or redistributed. The embedded
+shell does not contain Apache Superset source or assets and makes no live-Superset
+claim. M6-01 files are ordinary repository-authored hashes under `files`, not
+derived files.
+
+M6-02 native-Superset bridge code, capability matrix, deterministic projection
+materializer, public REST API adapter, live evidence runners, direct pixel
+review, screenshots, and evidence manifests are repository-authored clean-room
+work against an isolated loopback Apache Superset 6.1.0 stack. The bridge uses
+only supported public REST endpoints and deterministic synthetic data. It does
+not copy Apache Superset source or assets, does not use source credentials, and
+does not claim unsupported native UI actions.
+
+M6-03 real-BI-specialist adapter/core, progressive read-only discovery, task-adaptive
+planning/sampling policy, incumbent-selection gate, visible synthetic SQLite development corpus,
+process-separated sealed evaluator packs and commitments, local Qwen conformance/evaluation
+scripts, tests, decision record and evidence manifests are repository-authored clean-room work.
+The first sealed result is retained as negative evidence; blind credit comes only from a wholly
+new pack authored after the corrected candidate commitment. They use built-in Node facilities
+and an externally installed local llama.cpp/Qwen runtime only for isolated evaluation; no
+llama.cpp, Qwen, DeepSeek Harness, Hermes or OpenClaw runtime code/artifact is copied or
+redistributed. M6-03 files are ordinary repository-authored hashes under `files`, not derived
+files.
+
+M6-04 trusted-workflow compiler, reviewed Superset executor, deterministic approval and
+reconciliation boundaries, disposable-stack evidence runner, tests, decision record and
+evidence manifests are repository-authored clean-room work. They compose the existing M6-00,
+M6-02 and M6-03 interfaces without copying Apache Superset, model, OpenClaw, or third-party
+runtime source. M6-04 files are ordinary repository-authored hashes under `files`, not derived
+files.

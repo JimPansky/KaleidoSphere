@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "chimpmaera.bi/m6-05-terminal-evidence/v1",
+  "generatedAt": "2026-08-15T07:18:00.000Z",
+  "baseCommit": "e4b20c0794dcb4f08f99893937ec6377617494bf",
+  "implementationCommit": "6d333eedaffd36c24cc7b2a178d927bf06e34004",
+  "branch": "m6-05-ambiguous-outcome-reconciliation",
+  "gates": { "G1": "PASS", "G2": "PASS", "G3": "PASS", "G4": "PASS", "G5": "PASS", "G6": "PASS", "G7": "PASS" },
+  "tests": {
+    "focused": "9/9",
+    "full": "131/131",
+    "sourceMap": "1/1",
+    "postImplementationCommit": "PASS",
+    "diffCheck": "PASS",
+    "syntaxAndJson": "PASS"
+  },
+  "liveEvidence": {
+    "path": "docs/evidence/m6-05-ambiguous-outcome-reconciliation/live-manifest.json",
+    "sha256": "55ec63f46915e72fe48366a7f0c034193bf885e360bc7e47d93eb7fc8eccf7e4",
+    "supersetVersion": "6.1.0",
+    "committedResponseLost": true,
+    "duplicateMutationRequestsAfterUnknown": 0
+  },
+  "recovery": {
+    "restartSafeJournalRehydration": true,
+    "exclusiveLocalLease": true,
+    "concurrentRecoverySuppressed": true,
+    "repeatedTerminalRecoveryMutations": 0,
+    "ownedPartialCompensation": true,
+    "unrelatedAssetsMutated": 0
+  },
+  "security": {
+    "forgedOrReorderedJournalDenied": true,
+    "planSubstitutionDenied": true,
+    "targetCapabilitySnapshotDriftDenied": true,
+    "foreignOwnershipDenied": true,
+    "blindRedispatchDenied": true,
+    "loopbackOnly": true,
+    "rawResponsePersisted": false,
+    "sourceRecordsPersisted": false,
+    "modelTranscriptPersisted": false,
+    "cotPersisted": false
+  },
+  "runtimeTeardown": {
+    "composeProject": "sba-m6-05-ambiguous-20260815",
+    "ports": [39045, 39790],
+    "ownedContainers": 0,
+    "ownedNetworks": 0,
+    "listenerCount": 0,
+    "unrelatedExistingStacksModified": false
+  },
+  "fileHashes": {
+    "services/bi-control/src/trusted-workflow/ambiguous-outcome-reconciliation.mjs": "794a032da7a516f24368c3ad2858a912bd86011a6d5e3a42b890b020f6dc2181",
+    "tests/ambiguous-outcome-reconciliation.test.mjs": "f7ecc5b473e0dca67ce5bca506a11e182b9acbe06770417ced8889ca8d979099"
+  },
+  "rollback": [
+    "revert the terminal evidence commit, then revert 6d333eedaffd36c24cc7b2a178d927bf06e34004",
+    "remove only the local M6-05 worktree and branch",
+    "remove only Compose project sba-m6-05-ambiguous-20260815 if present"
+  ],
+  "nonclaims": [
+    "production or customer use",
+    "production RBAC or concurrency",
+    "external durability",
+    "organizationally independent validation",
+    "arbitrary network partitions",
+    "broad provider support",
+    "deployment or publication",
+    "push, PR, tag, or release",
+    "global exactly-once semantics"
+  ]
+}

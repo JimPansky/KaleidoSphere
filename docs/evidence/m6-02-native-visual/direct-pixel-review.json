@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "chimpmaera.bi/native-superset-direct-pixel-review/v1",
+  "reviewedAt": "2026-08-14T20:13:54.953Z",
+  "method": "direct_pixel_review_of_all_16_full_resolution_browser_captures",
+  "visualScore": 8.5,
+  "requiredMinimum": 8.5,
+  "passed": true,
+  "severityCounts": {
+    "sev1": 0,
+    "sev2": 0,
+    "sev3": 1
+  },
+  "misleadingChartCount": 0,
+  "responsiveVerdict": "PASS_NATIVE_ROWS_RECOMPOSE_TO_FULL_WIDTH_CARDS_AT_390PX",
+  "reviewerNotes": [
+    "All desktop and narrow captures were inspected at full resolution after final chart scoping and responsive composition changes.",
+    "One Sev3 class records visually sparse one-period or single-point plots caused by the deterministic 12-row synthetic oracle; browser response and chart-render gates still prove successful queries.",
+    "Titles and filters keep unlike units separate; the cross-domain association view explicitly rejects causal interpretation."
+  ],
+  "captures": [
+    {
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:executive-sales:desktop-1440x900",
+      "scenarioId": "executive-sales",
+      "viewport": "desktop-1440x900",
+      "screenshotSha256": "96c8a62c1fe67fe5b7fa0dd927336812a4b003c49dec8a5e649f06c82e6ffba9",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:quality-investigation:desktop-1440x900",
+      "scenarioId": "quality-investigation",
+      "viewport": "desktop-1440x900",
+      "screenshotSha256": "805b24c3739c2ac43c23adbc03f55d0096749e3e120599c3b99646be067a3675",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:inventory-risk:desktop-1440x900",
+      "scenarioId": "inventory-risk",
+      "viewport": "desktop-1440x900",
+      "screenshotSha256": "4f7618b1ef04a013bf9892e02afcc155d84bf0995e641387d66c939806b25156",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:maintenance:desktop-1440x900",
+      "scenarioId": "maintenance",
+      "viewport": "desktop-1440x900",
+      "screenshotSha256": "3ae49071d80b44cdb1458d7b7acb6974b1d12a930c20b94a58f633a3ddc76b9d",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:cross-domain:desktop-1440x900",
+      "scenarioId": "cross-domain",
+      "viewport": "desktop-1440x900",
+      "screenshotSha256": "9e445b07ab7d019013ea975e44219626cbb762b3623af67f5aadd133c7987c07",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:voice-correction-cancel:desktop-1440x900",
+      "scenarioId": "voice-correction-cancel",
+      "viewport": "desktop-1440x900",
+      "screenshotSha256": "42992b5dd0ed561b972728041b5ec2c1a109b6fd0dc340602560f00f1718d84c",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:undo-idempotency:desktop-1440x900",
+      "scenarioId": "undo-idempotency",
+      "viewport": "desktop-1440x900",
+      "screenshotSha256": "cc7a4eeb245e9ab18982196682fa511eb85d9fba8ff888cef70e6814bff2f416",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:persistent-request-denied:desktop-1440x900",
+      "scenarioId": "persistent-request-denied",
+      "viewport": "desktop-1440x900",
+      "screenshotSha256": "43a0dd1fb5a5ea3b789f06c15a28e94d48b5462640ca2be8160c6955d31f6cc4",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:executive-sales:narrow-390x844",
+      "scenarioId": "executive-sales",
+      "viewport": "narrow-390x844",
+      "screenshotSha256": "7d2b6cbcd98681a6e159473e739f437dd6e05df92733ff8c29f30399dc6fe990",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:quality-investigation:narrow-390x844",
+      "scenarioId": "quality-investigation",
+      "viewport": "narrow-390x844",
+      "screenshotSha256": "50c791f61338af4c72fc21f6d02580641ba5ca5847bde9d4424b543bf591f52a",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:inventory-risk:narrow-390x844",
+      "scenarioId": "inventory-risk",
+      "viewport": "narrow-390x844",
+      "screenshotSha256": "6a367a653606a2c22e1d3145d479150da830c883f2231d5cdd4242e9038275b9",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:maintenance:narrow-390x844",
+      "scenarioId": "maintenance",
+      "viewport": "narrow-390x844",
+      "screenshotSha256": "fc8d047eeecc0e25da2ce52de948e1ceeb28cfa77e69da67025f32762e2ab530",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:cross-domain:narrow-390x844",
+      "scenarioId": "cross-domain",
+      "viewport": "narrow-390x844",
+      "screenshotSha256": "adaa6f4fddc295f278d56b4ca707d8de5adeb312e7177f6c03c980f79ef13325",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:voice-correction-cancel:narrow-390x844",
+      "scenarioId": "voice-correction-cancel",
+      "viewport": "narrow-390x844",
+      "screenshotSha256": "509d7d61847224d5eff607dbfd81c9e2083a83602aeb67290fa72b13677ad3b1",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:undo-idempotency:narrow-390x844",
+      "scenarioId": "undo-idempotency",
+      "viewport": "narrow-390x844",
+      "screenshotSha256": "02eb18086840761186a1ec0e3f9875f30a6f1f949ea5306b12c6d73985cc9c59",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    },
+    {
+      "captureId": "recovery-v4-live-m-20260814T2214-live-2:persistent-request-denied:narrow-390x844",
+      "scenarioId": "persistent-request-denied",
+      "viewport": "narrow-390x844",
+      "screenshotSha256": "0702da7eef2631215998c9933e9c137cdb6ce8dae40a681da5baad06339f43f4",
+      "verdict": "PASS_NO_SEV1_OR_SEV2"
+    }
+  ],
+  "reviewedManifest": "docs/evidence/m6-02-native-visual/manifest.json",
+  "reviewedManifestSha256": "eb0158df6f49b1324315809d3b1703669f36948e56591d55c8ae0800e4be8b71"
+}

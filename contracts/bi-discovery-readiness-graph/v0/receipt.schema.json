@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "chimpmaera.bi/discovery-readiness-graph/v0/receipt.schema.json",
+  "title": "BI Discovery-to-Readiness Node Receipt v0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "runId", "nodeId", "status", "attempt", "inputDigest", "outputDigest", "previousHash", "receiptHash", "evidenceRefs", "budgetAfter", "runtimeMetrics", "stable"],
+  "properties": {
+    "schemaVersion": { "const": "chimpmaera.bi/discovery-readiness-receipt/v0" },
+    "runId": { "type": "string" },
+    "nodeId": { "type": "string" },
+    "status": { "enum": ["complete", "paused", "failed"] },
+    "attempt": { "type": "integer", "minimum": 1 },
+    "inputDigest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "outputDigest": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "previousHash": { "type": "string" },
+    "receiptHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "evidenceRefs": { "type": "array", "items": { "type": "string" } },
+    "budgetAfter": { "type": "object" },
+    "runtimeMetrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["wallTimeMs", "tokens", "costUsd", "cacheClass", "retryClass", "escalationClass", "criticalPath", "parallelSafe"],
+      "properties": {
+        "wallTimeMs": { "type": "number", "minimum": 0 },
+        "tokens": { "type": "integer", "minimum": 0 },
+        "costUsd": { "type": "number", "minimum": 0 },
+        "cacheClass": { "type": "string" },
+        "retryClass": { "type": "string" },
+        "escalationClass": { "type": "string" },
+        "criticalPath": { "type": "boolean" },
+        "parallelSafe": { "type": "boolean" }
+      }
+    },
+    "stable": { "type": "object" }
+  }
+}

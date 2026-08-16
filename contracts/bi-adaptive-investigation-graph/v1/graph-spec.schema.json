@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "chimpmaera.bi/adaptive-investigation-graph/v1/graph-spec.schema.json",
+  "title": "BI Adaptive Investigation Graph Spec v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "graphId", "graphVersion", "owners", "privacy", "budgets", "nodes", "edges", "adaptivePolicy", "replay"],
+  "properties": {
+    "schemaVersion": { "const": "chimpmaera.bi/adaptive-investigation-graph/v1" },
+    "graphId": { "const": "superset-bi.adaptive-investigation.v1" },
+    "graphVersion": { "type": "string", "pattern": "^1\\.[0-9]+\\.[0-9]+$" },
+    "owners": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["domain", "writer", "mutationAuthority"],
+      "properties": {
+        "domain": { "const": "superset-bi-agent" },
+        "writer": { "type": "string", "minLength": 1 },
+        "mutationAuthority": { "const": false }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dataClasses", "forbiddenPersistedFields", "sourceRowsPersisted", "rawPromptPersisted"],
+      "properties": {
+        "dataClasses": { "type": "array", "items": { "type": "string" } },
+        "forbiddenPersistedFields": { "type": "array", "items": { "type": "string" } },
+        "sourceRowsPersisted": { "const": false },
+        "rawPromptPersisted": { "const": false }
+      }
+    },
+    "budgets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["maxWallMs", "maxNodes", "maxBranchesPerCase", "maxProbesPerCase", "maxTotalProbes", "maxModelTokens", "maxToolCalls", "maxPersistedBytes"],
+      "properties": {
+        "maxWallMs": { "type": "integer", "minimum": 1 },
+        "maxNodes": { "type": "integer", "minimum": 1 },
+        "maxBranchesPerCase": { "type": "integer", "minimum": 1 },
+        "maxProbesPerCase": { "type": "integer", "minimum": 0 },
+        "maxTotalProbes": { "type": "integer", "minimum": 0 },
+        "maxModelTokens": { "type": "integer", "minimum": 0 },
+        "maxToolCalls": { "type": "integer", "minimum": 0 },
+        "maxPersistedBytes": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "nodes": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/node" } },
+    "edges": { "type": "array", "items": { "$ref": "#/$defs/edge" } },
+    "adaptivePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowedProbeKinds", "stopReasons", "pHackingDenied", "mutationDenied", "sealedCandidateFreezeRequired"],
+      "properties": {
+        "allowedProbeKinds": { "type": "array", "items": { "type": "string" } },
+        "stopReasons": { "type": "array", "items": { "type": "string" } },
+        "pHackingDenied": { "const": true },
+        "mutationDenied": { "const": true },
+        "sealedCandidateFreezeRequired": { "const": true }
+      }
+    },
+    "replay": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["deterministicNodes", "modelOwnedNodes", "pauseResume", "evidenceHashes"],
+      "properties": {
+        "deterministicNodes": { "const": "recompute_and_compare_hash" },
+        "modelOwnedNodes": { "const": "replay_from_sealed_output_unless_new_candidate" },
+        "pauseResume": { "const": true },
+        "evidenceHashes": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "gate", "kind", "preconditions", "postconditions", "evidence", "onFailure", "sideEffects", "parallelSafe"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^BI-G[2-7]_[a-z0-9_]+$" },
+        "gate": { "enum": ["BI-G2", "BI-G3", "BI-G4", "BI-G5", "BI-G6", "BI-G7"] },
+        "kind": { "enum": ["contract", "deterministic", "model_owned_candidate", "deterministic_judge"] },
+        "preconditions": { "type": "array", "items": { "type": "string" } },
+        "postconditions": { "type": "array", "items": { "type": "string" } },
+        "evidence": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["required", "forbidden"],
+          "properties": {
+            "required": { "type": "array", "items": { "type": "string" } },
+            "forbidden": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "onFailure": { "enum": ["fail_closed", "pause_for_review"] },
+        "sideEffects": { "const": "none" },
+        "parallelSafe": { "type": "boolean" }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "to", "guard", "onFailure"],
+      "properties": {
+        "from": { "type": "string" },
+        "to": { "type": "string" },
+        "guard": { "type": "string", "minLength": 1 },
+        "onFailure": { "enum": ["fail_closed", "pause_for_review"] }
+      }
+    }
+  }
+}

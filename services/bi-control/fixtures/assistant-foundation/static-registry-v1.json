@@ -1,0 +1,33 @@
+{
+  "manifests": [
+    {
+      "schemaVersion": "chimpmaera.bi/plugin-manifest/v1",
+      "pluginId": "assistant-shell",
+      "pluginVersion": "1.0.0",
+      "builtIn": true,
+      "artifactDigest": "sha256:40724d3714926f5a735106dc8b904cb5782ba0a1e0ad500975f37ea454094059",
+      "provides": [{"capabilityId": "dashboard-session-actions", "contractVersion": "v1"}],
+      "requires": []
+    }
+  ],
+  "capabilities": [
+    {
+      "schemaVersion": "chimpmaera.bi/capability-descriptor/v1",
+      "capabilityId": "dashboard-session-actions",
+      "contractVersion": "v1",
+      "risk": "low",
+      "sideEffect": "reversible",
+      "dataClass": "internal",
+      "approval": "none for allowlisted session actions",
+      "cancellation": "checked before dispatch",
+      "idempotency": "required key",
+      "readback": "state version receipt",
+      "rollback": "single-use undo token",
+      "concurrency": "optimistic state version",
+      "enforcement": "in-memory adapter allowlist"
+    }
+  ],
+  "expectedDigests": {
+    "assistant-shell": "sha256:40724d3714926f5a735106dc8b904cb5782ba0a1e0ad500975f37ea454094059"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "schemaVersion": "chimpmaera.bi/ambiguous-outcome-reconciliation-evidence/v1",
+  "generatedAt": "2026-08-15T06:57:05.713Z",
+  "runtime": {
+    "projectName": "sba-m6-05-ambiguous-20260815",
+    "baseUrl": "http://127.0.0.1:39045",
+    "loopbackOnly": true,
+    "product": "Apache Superset",
+    "version": "6.1.0",
+    "image": "apache/superset:6.1.0@sha256:fb3464528ec7076f91195f0ff7835755aa023e281f1bb78a84782ce7a36b3705",
+    "fixture": "northstar-components-synthetic-v1",
+    "projectionDigest": "sha256:5d1e04245dfd492816fbf6308397b50f5cefe62e18d3e6b26b1291b8b8bc40cc",
+    "customerData": false
+  },
+  "managedAssets": {
+    "databases": 1,
+    "datasets": 1,
+    "charts": 21,
+    "dashboards": 8
+  },
+  "committedResponseLost": {
+    "planDigest": "sha256:7c4d3c37e0501638be2d861df2812072daba419674e5bc6ba81e14e2a15f4bfc",
+    "contextDigest": "sha256:e8a292fdbac601172e67a46c876a7dd93e012144c4b2ed5cd2987a96f8defc4d",
+    "journalDigest": "sha256:778f768428cb48bec44ef48db4eaf23f3031b3d13c2da09eda4d7ddfc05bc570",
+    "proxyTraceDigest": "sha256:30a09398d94e0ddd0197398d613eddcb25ec3a29e86a76a664bdc7a54d9afed1",
+    "proxyReviewedAssetMutationRequests": 1,
+    "proxyTotalMutationLikeRequests": 2,
+    "proxyFaultCount": 1,
+    "responseLostCode": "WORKFLOW_APPLY_FAILED",
+    "postFaultReadbackDigest": "sha256:2b52ae4f1ded0a40e3af4ac00340f43871ba9b05990c7706c28dc3dbd90f3225",
+    "expectedAfterDigest": "sha256:2b52ae4f1ded0a40e3af4ac00340f43871ba9b05990c7706c28dc3dbd90f3225",
+    "reconciliationState": "committed_equivalent",
+    "duplicateMutationRequestsAfterUnknown": 0,
+    "restoredDigest": "sha256:b40a01c8399978899f10a7ae2f01113ba8cdcad777a44261cb558a96c2c2faca",
+    "expectedBeforeDigest": "sha256:b40a01c8399978899f10a7ae2f01113ba8cdcad777a44261cb558a96c2c2faca"
+  },
+  "unchangedSafeToRetry": {
+    "planDigest": "sha256:93211ab6a4e1e939a9442c1a128846551538d8c9f29ea1fa747e383ca1aed1ce",
+    "contextDigest": "sha256:8e988c44647eb1aea26927e63a640904820af771fe2d761b3806a3a1ce5fda2d",
+    "journalDigest": "sha256:082013a4ced3d7f0e78598aa220ff82d1e0736577e12a2230c486fab637fe041",
+    "reconciliationState": "unchanged_safe_to_retry",
+    "originalRetryDenied": "OUTCOME_FRESH_RETRY_REQUIRES_NEW_IDEMPOTENCY",
+    "freshRetryEntryHash": "sha256:39c7774746cfc34b4e719dc83888178df5552a8f577d2911dd29aa5cf7702a25",
+    "freshRetryState": "not_dispatched"
+  },
+  "actionMatrix": [
+    {
+      "actionType": "dataset.update",
+      "liveFaultCovered": true,
+      "outcome": "committed_equivalent",
+      "duplicateMutationRequestsAfterUnknown": 0
+    },
+    {
+      "actionType": "dataset.update",
+      "liveUnchangedCovered": true,
+      "outcome": "unchanged_safe_to_retry_requires_fresh_grant"
+    },
+    {
+      "actionType": "chart.upsert",
+      "representativeCoverage": "unit-reconciler and M6-04 live apply/readback/rollback; live fault pending extension"
+    },
+    {
+      "actionType": "dashboard.update",
+      "representativeCoverage": "unit-reconciler and M6-04 live apply/readback/rollback; live fault pending extension"
+    },
+    {
+      "actionType": "filter.configure",
+      "representativeCoverage": "unit-reconciler and M6-04 live apply/readback/rollback; live fault pending extension"
+    },
+    {
+      "actionType": "delete",
+      "supported": false,
+      "reason": "M6-04 trusted executor denies reviewed delete; delete fault proof is a nonclaim for this action surface"
+    }
+  ],
+  "privacy": {
+    "rawResponsePersisted": false,
+    "responsePayloadPersisted": false,
+    "sourceRecordsPersisted": false,
+    "modelTranscriptPersisted": false,
+    "cotPersisted": false
+  },
+  "nonclaims": [
+    "no-production-or-customer-use",
+    "no-global-exactly-once",
+    "no-arbitrary-network-partition-proof",
+    "no-broad-provider-support",
+    "no-deployment"
+  ]
+}

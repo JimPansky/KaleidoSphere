@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "chimpmaera.bi/visual-scenario-suite/v1",
+  "oracleFixtureId": "northstar-components-synthetic-v1",
+  "rubricDefinedBeforeImplementation": true,
+  "scenarios": [
+    {
+      "id": "executive-sales",
+      "title": "Executive sales & margin",
+      "utterance": "Zeige das letzte abgeschlossene Quartal: Umsatz, Marge sowie Top-Produkte und Top-Kunden.",
+      "oracleTruth": "executiveQ2",
+      "actions": [
+        ["set_time_range", {"from": "2026-04-01", "to": "2026-06-30"}],
+        ["select_tab", {"tabId": "executive"}],
+        ["focus_chart", {"chartId": "sales-margin"}],
+        ["compare_segments", {"segments": ["Atlas Drive", "Futura Retail"]}]
+      ],
+      "expectedState": {"version": 5, "filters": {}, "timeRange": {"from": "2026-04-01", "to": "2026-06-30"}, "focusedChartId": "sales-margin", "drilldown": null, "segments": ["Atlas Drive", "Futura Retail"], "tab": "executive", "tableSort": null, "hiddenSeries": []}
+    },
+    {
+      "id": "quality-investigation",
+      "title": "Quality investigation",
+      "utterance": "Untersuche den Ausschuss-Peak in Werk 3, Linie C, und prüfe Volumen sowie Liefercharge.",
+      "oracleTruth": "qualitySpike",
+      "actions": [
+        ["set_filter", {"key": "plant", "value": "Werk 3"}],
+        ["set_filter", {"key": "line", "value": "Linie C"}],
+        ["set_time_range", {"from": "2026-05-12", "to": "2026-05-18"}],
+        ["focus_chart", {"chartId": "quality-trend"}],
+        ["compare_segments", {"segments": ["defect_rate", "production_volume"]}],
+        ["open_drilldown", {"chartId": "quality-trend", "dimension": "supplier_batch"}]
+      ],
+      "expectedState": {"version": 7, "filters": {"plant": "Werk 3", "line": "Linie C"}, "timeRange": {"from": "2026-05-12", "to": "2026-05-18"}, "focusedChartId": "quality-trend", "drilldown": {"chartId": "quality-trend", "dimension": "supplier_batch"}, "segments": ["defect_rate", "production_volume"], "tab": null, "tableSort": null, "hiddenSeries": []}
+    },
+    {
+      "id": "inventory-risk",
+      "title": "Inventory stockout risk",
+      "utterance": "Zeige das knappste Material für Werk 2, Rotor-7, sortiert nach Reichweite, und vergleiche Bedarf mit bestätigtem Zulauf.",
+      "oracleTruth": "inventoryRisk",
+      "actions": [
+        ["set_filter", {"key": "plant", "value": "Werk 2"}],
+        ["set_filter", {"key": "component", "value": "Rotor-7"}],
+        ["focus_chart", {"chartId": "inventory-coverage"}],
+        ["sort_table", {"chartId": "inventory-table", "column": "coverage_days", "direction": "asc"}],
+        ["compare_segments", {"segments": ["demand", "confirmed_supply"]}]
+      ],
+      "expectedState": {"version": 6, "filters": {"plant": "Werk 2", "component": "Rotor-7"}, "timeRange": null, "focusedChartId": "inventory-coverage", "drilldown": null, "segments": ["demand", "confirmed_supply"], "tab": null, "tableSort": {"chartId": "inventory-table", "column": "coverage_days", "direction": "asc"}, "hiddenSeries": []}
+    },
+    {
+      "id": "maintenance",
+      "title": "Maintenance downtime & MTBF",
+      "utterance": "Fokussiere Pressen-Ausfallzeit und MTBF im zweiten Quartal und öffne die Ereignisse.",
+      "oracleTruth": "maintenance",
+      "actions": [
+        ["set_filter", {"key": "asset_class", "value": "Press"}],
+        ["set_time_range", {"from": "2026-04-01", "to": "2026-06-30"}],
+        ["focus_chart", {"chartId": "maintenance-downtime"}],
+        ["open_drilldown", {"chartId": "maintenance-downtime", "dimension": "event_type"}]
+      ],
+      "expectedState": {"version": 5, "filters": {"asset_class": "Press"}, "timeRange": {"from": "2026-04-01", "to": "2026-06-30"}, "focusedChartId": "maintenance-downtime", "drilldown": {"chartId": "maintenance-downtime", "dimension": "event_type"}, "segments": [], "tab": null, "tableSort": null, "hiddenSeries": []}
+    },
+    {
+      "id": "cross-domain",
+      "title": "Cross-domain demand comparison",
+      "utterance": "Vergleiche Atlas-Drive-Nachfrage mit Produktion und Bestand im zweiten Quartal. Keine Kausalbehauptung.",
+      "oracleTruth": "crossDomain",
+      "actions": [
+        ["select_tab", {"tabId": "cross-domain"}],
+        ["focus_chart", {"chartId": "demand-supply"}],
+        ["compare_segments", {"segments": ["demand", "production", "inventory"]}],
+        ["set_time_range", {"from": "2026-04-01", "to": "2026-06-30"}]
+      ],
+      "expectedState": {"version": 5, "filters": {}, "timeRange": {"from": "2026-04-01", "to": "2026-06-30"}, "focusedChartId": "demand-supply", "drilldown": null, "segments": ["demand", "production", "inventory"], "tab": "cross-domain", "tableSort": null, "hiddenSeries": []}
+    },
+    {
+      "id": "voice-correction-cancel",
+      "title": "Voice correction, barge-in & cancel",
+      "utterance": "Werk 2 … nein Werk 3 … abbrechen.",
+      "oracleTruth": "qualitySpike",
+      "voiceEvents": ["transcript.partial:Werk 2", "interaction.interrupted", "transcript.final:Werk 3", "ui_action.applied:set_filter", "interaction.cancelled"],
+      "actions": [["set_filter", {"key": "plant", "value": "Werk 3"}]],
+      "expectedState": {"version": 2, "filters": {"plant": "Werk 3"}, "timeRange": null, "focusedChartId": null, "drilldown": null, "segments": [], "tab": null, "tableSort": null, "hiddenSeries": []}
+    },
+    {
+      "id": "undo-idempotency",
+      "title": "Undo & idempotency",
+      "utterance": "Filtere Atlas Drive; dieselbe Aktion kommt doppelt. Danach rückgängig.",
+      "oracleTruth": "executiveQ2",
+      "actions": [["set_filter", {"key": "product", "value": "Atlas Drive"}], ["repeat_previous", {}], ["undo_previous", {}]],
+      "expectedState": {"version": 3, "filters": {}, "timeRange": null, "focusedChartId": null, "drilldown": null, "segments": [], "tab": null, "tableSort": null, "hiddenSeries": []}
+    },
+    {
+      "id": "persistent-request-denied",
+      "title": "Persistent request stays preview-only",
+      "utterance": "Speichere und ersetze dieses Dashboard dauerhaft.",
+      "oracleTruth": "executiveQ2",
+      "persistentRequest": {"title": {"from": "Operations", "to": "Executive Control Tower"}},
+      "actions": [],
+      "expectedState": {"version": 1, "filters": {}, "timeRange": null, "focusedChartId": null, "drilldown": null, "segments": [], "tab": null, "tableSort": null, "hiddenSeries": []}
+    }
+  ]
+}

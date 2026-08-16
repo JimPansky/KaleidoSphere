@@ -66,6 +66,10 @@ These are candidates for later reviewed work. They are not implemented claims:
 - Additional clean-room and public-rendering validation for documentation and
   release assets.
 - Clearer product packaging and repo metadata after protected review.
+- A reviewed harness adapter and thin Superset overlay using the M6-00 event,
+  capability, approval, and reversible `ui-action/v1` contracts.
+- A BI-Control persistent revision workflow with preview/diff, trusted visual
+  approval, apply, readback, and rollback. Voice-only approval stays excluded.
 
 ## Explicit non-goals today
 
@@ -76,3 +80,6 @@ These are candidates for later reviewed work. They are not implemented claims:
 - Superset import or promotion execution from the current review-only bundle.
 - Direct Superset-to-source Oracle or MSSQL credentials.
 - Production, customer, SSO, HA, Kubernetes, or managed multi-tenant operation.
+- DeepSeek Harness/Cordis integration, runtime plugin installation/HMR,
+  arbitrary MCP servers, direct DOM/JavaScript agent control, or voice-only
+  approval of persistent changes.
