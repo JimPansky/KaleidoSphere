@@ -1,5 +1,23 @@
 # Release Notes
 
+## v0.8.0 - Attested external ownership contract v2
+
+Adds `superset-bi-agent.external` contract `2.0.0`. The running `bi-agent`
+attests product `v0.8.0`, the exact contract, accepted Adaptive Graph v1
+incumbent, capability set and authority boundaries with canonical SHA-256 at
+`GET /v2/capabilities`. `POST /v2/intents` accepts only typed status,
+discovery, source-read-only analyze, plan, preview and readback actions and
+digest-binds every response.
+
+The v2 boundary rejects free SQL, credentials, raw source rows, arbitrary URLs,
+unknown capabilities and direct persistent mutation. Analysis no longer
+implicitly publishes through the public agent path. Persistent Superset work is
+owned by SBA's trusted preview/direct-UI-approval/apply/readback/rollback
+workflow; model output and external clients have no mutation authority.
+
+This release proves local fixture/clean-room interoperability. It does not claim
+arbitrary database, production/customer, SSO, HA or multi-tenant readiness.
+
 ## Unreleased - M6-00 local contract/security foundation
 
 Adds harness-neutral v1 contracts for typed durable/live events, static built-in

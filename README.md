@@ -5,15 +5,15 @@
 [![License](https://img.shields.io/github/license/JimPansky/Superset_BI_Agent)](LICENSE)
 [![Docker Compose](https://img.shields.io/badge/Docker%20Compose-local%20stack-2496ed)](compose.yaml)
 
-Understand your database. Define the right dashboards. Keep SQL and credentials
-out of the model.
+Understand your database. Define the right dashboards. Keep SQL, credentials
+and persistent authority out of clients and models.
 
 Superset BI Agent is a local first-pass database understanding and BI
 requirements workflow for BI, data, and platform teams. It analyzes Oracle or
 Microsoft SQL Server metadata with a read-only account, stores an
 evidence-bound technical catalog, guides dashboard requirement discovery, and
-publishes fixed managed technical overview dashboards into its own Apache
-Superset stack. Optional model use is limited to bounded intent classification.
+prepares review-bound technical overview workflows for its own Apache Superset
+stack. Optional model use is limited to bounded intent classification.
 
 ## What you can do
 
@@ -21,7 +21,7 @@ Superset stack. Optional model use is limited to bounded intent classification.
 - Build a versioned local catalog with receipt IDs, snapshot hashes, coverage states, and blind spots.
 - Ask bounded technical questions about size, statistics, dependencies, stored logic, and coverage.
 - Run guided BI requirements discovery and export a human/machine brief with catalog provenance.
-- Open fixed managed Superset overview dashboards for system, table, code, and coverage views.
+- Preview fixed managed Superset overview dashboards for system, table, code, and coverage views.
 - Collect a read-only Superset runtime fingerprint before future reviewed promotion planning.
 - Build, inspect, and fail-closed preflight a deterministic review-only promotion ZIP from confirmed evidence.
 - Execute a human-approved bundle only against an isolated synthetic owned metadata target, with backup, UUID readback, idempotency, and restore proof.
@@ -63,13 +63,13 @@ production evidence. A successful response includes:
 ```json
 {
   "intent": "ANALYZE",
-  "tools": ["status", "analyze", "catalog_ingest", "publish", "readback", "catalog_question"],
+  "tools": ["status", "analyze", "catalog_ingest", "readback", "catalog_question"],
   "analysisReceipt": {
     "receiptId": "mssql-...",
     "runtimeValidation": "SYNTHETIC_UNVALIDATED",
     "snapshotSha256": "..."
   },
-  "publication": {"status": "PUBLISHED_IDEMPOTENT", "dashboards": 5}
+  "publication": {"status": "AWAITING_TRUSTED_APPROVAL", "mutationPerformed": false}
 }
 ```
 
@@ -82,8 +82,8 @@ flowchart LR
   A[Oracle or MSSQL metadata] -->|audited read-only SELECTs| B[Read-only analyzer]
   B --> C[Evidence catalog]
   C --> D[Bounded Q&A and BI discovery]
-  C --> E[Fixed managed Superset views]
-  D --> G[Review-only promotion bundle]
+  C --> E[BI proposal and preview]
+  D --> G[Trusted preview / approval / apply / readback / rollback]
   H[Superset fingerprint] --> G
   F[Optional LLM] -->|intent classification only| D
 ```
@@ -135,14 +135,17 @@ Supported today:
 - Oracle and Microsoft SQL Server read-only metadata analysis.
 - Versioned evidence-bound local technical catalog and bounded technical Q&A.
 - Guided BI requirements discovery with Markdown/JSON brief export.
-- Fixed managed technical overview dashboards in Apache Superset.
+- Review-bound managed technical overview dashboard workflows in Apache Superset.
+- Server-attested external API `2.0.0` for status, discovery, analyze, plan,
+  preview and readback; the runtime reports product `v0.8.0` and exact
+  capabilities at `GET /v2/capabilities`.
 - Read-only Superset 6.1.0 runtime fingerprint and fail-closed planning preflight.
 - Deterministic `chimpmaera.bi/superset-promotion-bundle/v1` review ZIP build,
   inspection, checksum, and fail-closed preflight.
 
 Not claimed today:
 
-- Dynamic dataset, chart, or dashboard generation from a discovery brief.
+- Ambient or client-authorized dynamic dataset, chart, or dashboard mutation.
 - Production/customer promotion, Superset-native ZIP import/export, or dynamic
   source-connected asset creation. The execution adapter is synthetic-owned and local-only.
 - Free-form SQL, SQL Lab, row sampling, semantic-model generation, or direct production compatibility.
