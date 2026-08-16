@@ -1,6 +1,6 @@
 {
   "name": "chimpmaera-bi",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "private": true,
   "description": "Standalone Docker M5 Superset fingerprint and review-only promotion bundle contracts, guided BI discovery, local technical knowledge catalog, BI agent, and Apache Superset.",
   "license": "Apache-2.0",
