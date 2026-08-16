@@ -7,8 +7,10 @@ import sql from 'mssql';
 
 import { answerCatalogQuestion, ingestCatalogReceipt, searchCatalog } from './catalog.mjs';
 import { handleDiscovery } from './discovery.mjs';
+import { RealBiSpecialist } from './bi-specialist/specialist-agent.mjs';
+import { selectPlanningPolicy } from './bi-specialist/planning-policy.mjs';
 import { runAnalyzeProfile } from './db-analyzer/workflow.mjs';
-import { coded, exactObject, validateActionRequest } from './policy.mjs';
+import { coded, exactObject, validateActionRequest, validateAgentText } from './policy.mjs';
 import { buildLiveProfile, selectedEngine } from './runtime-config.mjs';
 import { collectSupersetFingerprint, evaluateSupersetPlanningGate } from './superset-fingerprint.mjs';
 
@@ -244,6 +246,64 @@ async function discovery(body) {
   finally { db.close(); }
 }
 
+async function externalPlan(body) {
+  exactObject(body, ['objective', 'receiptId'], ['objective']);
+  const objective = validateAgentText(body.objective);
+  const receipt = await latestReceipt();
+  if (body.receiptId !== undefined && body.receiptId !== receipt.receiptId) throw coded('EXTERNAL_PLAN_RECEIPT_MISMATCH');
+  const policy = selectPlanningPolicy(objective);
+  const planId = `plan-${sha256(`${receipt.receiptId}:${receipt.analysis.snapshotSha256}:${objective}`).slice(0, 24)}`;
+  return {
+    schemaVersion: 'superset-bi-agent.external/plan/v2',
+    planId,
+    objective,
+    evidenceBinding: {receiptId: receipt.receiptId, snapshotSha256: receipt.analysis.snapshotSha256},
+    graph: {acceptedIncumbent: 'adaptive-v1', candidatePromotion: 'none'},
+    planning: {
+      policyVersion: policy.schemaVersion,
+      taskClass: policy.taskClass,
+      pattern: policy.pattern,
+      validationDepth: policy.validationDepth,
+      toolBudget: policy.toolBudget,
+      stepBudget: policy.stepBudget,
+      fallback: policy.fallback,
+    },
+    authority: {proposalOnly: true, persistentActionAllowed: false, modelMutationAuthority: false},
+    trustedWorkflow: ['preview', 'direct-trusted-ui-approval', 'apply', 'readback', 'rollback'],
+  };
+}
+
+async function externalPreview(body) {
+  const plan = await externalPlan(body);
+  const specialist = await new RealBiSpecialist().investigate({
+    databasePath: projectionDb,
+    objective: plan.objective,
+    modelSynthesis: false,
+    runId: `preview-${plan.planId.slice(5)}`,
+  });
+  const discovery = specialist.discovery;
+  return {
+    schemaVersion: 'superset-bi-agent.external/preview/v2',
+    previewId: specialist.runId,
+    planId: plan.planId,
+    evidenceBinding: plan.evidenceBinding,
+    graph: plan.graph,
+    hypotheses: discovery.anomalyQualityCauseHypotheses.causeHypotheses,
+    kpiCandidates: discovery.semanticKpiModel.kpis.map(({id, label, validation}) => ({id, label, validation})),
+    visualizationProposal: discovery.visualizationProposal,
+    confidence: discovery.evidenceConfidenceBlindSpots.confidence,
+    blindSpots: discovery.evidenceConfidenceBlindSpots.blindSpots,
+    userCorrection: discovery.userCorrection,
+    authority: {
+      proposalOnly: true,
+      applyPerformed: false,
+      sourceRowsReturned: false,
+      modelMutationAuthority: false,
+      approvalRequiredBeforePersistence: true,
+    },
+  };
+}
+
 function send(response, status, value) {
   const body = `${JSON.stringify(value)}\n`;
   response.writeHead(status, {'content-type': 'application/json; charset=utf-8', 'content-length': Buffer.byteLength(body), 'cache-control': 'no-store'});
@@ -272,6 +332,8 @@ const server = http.createServer(async (request, response) => {
     if (request.url === '/v1/catalog/question') return send(response, 200, await catalogQuestion(body));
     if (request.url === '/v1/catalog/search') return send(response, 200, await catalogSearch(body));
     if (request.url === '/v1/discovery') return send(response, 200, await discovery(body));
+    if (request.url === '/v1/external/plan') return send(response, 200, await externalPlan(body));
+    if (request.url === '/v1/external/preview') return send(response, 200, await externalPreview(body));
     exactObject(body, []); throw coded('CONTROL_ROUTE_DENIED');
   } catch (error) {
     const code = String(error.code ?? error.message ?? 'CONTROL_INTERNAL_ERROR').replace(/[^A-Z0-9_]/g, '_').slice(0, 128);

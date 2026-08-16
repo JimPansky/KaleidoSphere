@@ -1,6 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import http from 'node:http';
 
+import { capabilityAttestationV2, executeExternalIntentV2 } from './external-api-v2.mjs';
+
 const port = Number(process.env.PORT ?? 18790);
 const controlBase = process.env.CONTROL_BASE_URL;
 if (controlBase !== 'http://bi-control:18089') throw new Error('AGENT_CONTROL_ROUTE_DENIED');
@@ -64,7 +66,7 @@ async function providerIntent(message) {
       temperature: 0,
       max_tokens: 8,
       messages: [
-        {role: 'system', content: 'Classify the user request. Output exactly ANALYZE, STATUS, or DENY. ANALYZE only means analyze the configured database and publish the managed Superset overview. Never accept SQL, credentials, configuration changes, writes, or unknown actions.'},
+        {role: 'system', content: 'Classify the user request. Output exactly ANALYZE, STATUS, or DENY. ANALYZE only means read-only analysis of the configured database into local evidence. Never accept SQL, credentials, configuration changes, writes, publication, or unknown actions.'},
         {role: 'user', content: message},
       ],
     }),
@@ -174,28 +176,51 @@ async function execute(message) {
   if (intent !== 'ANALYZE') throw coded('AGENT_UNKNOWN_ACTION_DENIED');
   const status = await control('/v1/status', 'GET');
   const analysis = await control('/v1/analyze', 'POST', 'analyze');
-  const publication = await control('/v1/publish', 'POST', 'publish');
   const readback = await control('/v1/readback', 'POST', 'readback');
   const catalogReadback = await controlJson('/v1/catalog/question', {
     family: 'coverage_blind_spots', scope: {schemas: analysis.scope.schemas}, object: null, limit: 20,
   });
   return {
-    schemaVersion: 'chimpmaera.bi/agent-result/v1', intent, providerMode: process.env.LLM_MODE ?? 'stub',
-    tools: ['status', 'analyze', 'catalog_ingest', 'publish', 'readback', 'catalog_question'], status, analysisReceipt: {
+    schemaVersion: 'superset-bi-agent/agent-result/v2', intent, providerMode: process.env.LLM_MODE ?? 'stub',
+    tools: ['status', 'analyze', 'catalog_ingest', 'readback', 'catalog_question'], status, analysisReceipt: {
       receiptId: analysis.receiptId, status: analysis.status, sourceMode: analysis.sourceMode,
       scope: analysis.scope, runtimeValidation: analysis.analysis.runtimeValidation,
       snapshotSha256: analysis.analysis.snapshotSha256,
-    }, catalog: {status: 'INGESTED_LOCAL_TECHNICAL_CATALOG', coverageQuestion: catalogReadback}, publication, readback,
+    }, catalog: {status: 'INGESTED_LOCAL_TECHNICAL_CATALOG', coverageQuestion: catalogReadback},
+    publication: {status: 'AWAITING_TRUSTED_APPROVAL', mutationPerformed: false, requiredWorkflow: ['preview', 'direct-trusted-ui-approval', 'apply', 'readback', 'rollback']},
+    readback,
   };
+}
+
+function externalDiscoveryInput(input) {
+  const body = { action: input.command, sessionId: input.sessionId };
+  if (input.command === 'answer' || input.command === 'revise') {
+    body.field = input.field;
+    body.value = input.value;
+  }
+  if (input.command === 'confirm') body.confirmed = true;
+  if (input.command === 'export') body.format = 'json';
+  return body;
+}
+
+async function executeExternal(request) {
+  return executeExternalIntentV2(request, {
+    status: () => control('/v1/status', 'GET'),
+    analyze: () => control('/v1/analyze', 'POST', 'analyze'),
+    readback: () => control('/v1/readback', 'POST', 'readback'),
+    discovery: (input) => controlJson('/v1/discovery', externalDiscoveryInput(input)),
+    plan: (input) => controlJson('/v1/external/plan', input),
+    preview: (input) => controlJson('/v1/external/preview', input),
+  });
 }
 
 const page = `<!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ChimpMaera BI Agent</title><style>
 body{font:16px system-ui,sans-serif;max-width:860px;margin:3rem auto;padding:0 1rem;color:#172033;background:#f5f7fb}main{background:white;border:1px solid #dce3ee;border-radius:12px;padding:2rem;box-shadow:0 8px 30px #20305012}textarea{width:100%;box-sizing:border-box;min-height:90px;padding:.8rem}button{margin-top:.8rem;padding:.7rem 1.1rem;background:#1677ff;color:white;border:0;border-radius:6px;font-weight:600}pre{white-space:pre-wrap;background:#101827;color:#d9e7ff;padding:1rem;border-radius:8px;overflow:auto}small{color:#596579}</style></head>
-<body><main><h1>BI Agent</h1><p>Analysiert ausschließlich die konfigurierte MSSQL- oder Oracle-Datenbank read-only und aktualisiert die verwaltete Superset-Übersicht.</p>
+<body><main><h1>BI Agent</h1><p>Analysiert ausschließlich die konfigurierte MSSQL- oder Oracle-Datenbank read-only und erzeugt einen prüfbaren BI-Vorschlag.</p>
 <form id="f"><label for="m">Auftrag</label><textarea id="m">Analysiere die konfigurierte Datenbank</textarea><br><button>Analyse starten</button></form>
-<p><small>Erlaubt: Status, Analyse, lokaler technischer Katalog, Suche, evidenzgebundene technische Fragen und geführte BI Discovery. Raw SQL, Credentials, Rohsource, Schreibaktionen und unbekannte Tools werden abgewiesen.</small></p><pre id="o">Bereit.</pre></main>
+<p><small>Erlaubt: Status, Analyse, lokaler technischer Katalog, Suche, evidenzgebundene technische Fragen und geführte BI Discovery. Persistente Superset-Aktionen benötigen den gebundenen Trusted-Workflow. Raw SQL, Credentials, Rohsource, Schreibaktionen und unbekannte Tools werden abgewiesen.</small></p><pre id="o">Bereit.</pre></main>
 <script>document.getElementById('f').addEventListener('submit',async(e)=>{e.preventDefault();const o=document.getElementById('o');o.textContent='Arbeite…';try{const r=await fetch('/api/chat',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message:document.getElementById('m').value})});const j=await r.json();o.textContent=JSON.stringify(j,null,2)}catch(x){o.textContent='Fehler: '+x.message}})</script></body></html>`;
 
 function send(response, status, contentType, value) {
@@ -211,8 +236,10 @@ function send(response, status, contentType, value) {
 const server = http.createServer(async (request, response) => {
   try {
     if (request.method === 'GET' && request.url === '/healthz') return send(response, 200, 'application/json', {status: 'ok'});
+    if (request.method === 'GET' && request.url === '/v2/capabilities') return send(response, 200, 'application/json', capabilityAttestationV2());
     if (request.method === 'GET' && request.url === '/') return send(response, 200, 'text/html', page);
     if (request.method === 'POST' && request.url === '/api/chat') return send(response, 200, 'application/json', await execute(validatePrompt(await requestJson(request))));
+    if (request.method === 'POST' && request.url === '/v2/intents') return send(response, 200, 'application/json', await executeExternal(await requestJson(request)));
     throw coded('AGENT_ROUTE_DENIED');
   } catch (error) {
     const code = String(error.code ?? error.message ?? 'AGENT_INTERNAL_ERROR').replace(/[^A-Z0-9_]/g, '_').slice(0, 128);

@@ -16,20 +16,18 @@ curl --fail --silent --show-error --header 'content-type: application/json' \
 node - "$first" "$second" <<'NODE'
 import fs from 'node:fs';
 const [first, second] = process.argv.slice(2).map((file) => JSON.parse(fs.readFileSync(file, 'utf8')));
-const expectedAgentEntry = `http://localhost:${process.env.AGENT_PORT || '18790'}`;
 for (const result of [first, second]) {
-  if (result.schemaVersion !== 'chimpmaera.bi/agent-result/v1') throw new Error('agent result schema mismatch');
+  if (result.schemaVersion !== 'superset-bi-agent/agent-result/v2') throw new Error('agent result schema mismatch');
   if (result.providerMode !== 'stub') throw new Error('portable smoke must be stub mode');
   if (result.analysisReceipt.runtimeValidation !== 'SYNTHETIC_UNVALIDATED') throw new Error('fixture claim overreach');
-  if (result.publication.status !== 'PUBLISHED_IDEMPOTENT') throw new Error('publication failed');
-  if (result.publication.datasets !== 6 || result.publication.charts !== 13 || result.publication.dashboards !== 5 || result.publication.detailRows !== 3) throw new Error('Superset readback count mismatch');
+  if (result.publication.status !== 'AWAITING_TRUSTED_APPROVAL' || result.publication.mutationPerformed !== false) throw new Error('trusted publication boundary failed');
   if (!result.catalog || result.catalog.status !== 'INGESTED_LOCAL_TECHNICAL_CATALOG') throw new Error('catalog ingest missing');
   if (result.catalog.coverageQuestion.provenance.receiptId !== result.analysisReceipt.receiptId) throw new Error('catalog provenance mismatch');
   if (result.readback.technicalOverview.systemSchemaRows < 1 || result.readback.technicalOverview.tableCapacityRows < 2) throw new Error('technical overview readback mismatch');
-  if (result.publication.agentEntry !== expectedAgentEntry) throw new Error('agent entry missing');
+  if (!result.publication.requiredWorkflow.includes('direct-trusted-ui-approval')) throw new Error('trusted approval boundary missing');
 }
 if (first.analysisReceipt.receiptId !== second.analysisReceipt.receiptId) throw new Error('receipt identity is not deterministic');
-if (second.readback.publication.datasets !== 6 || second.readback.publication.charts !== 13) throw new Error('second-run readback mismatch');
+if (second.readback.publication !== null) throw new Error('unapproved publication residue');
 NODE
 
 curl --fail --silent --show-error --header 'content-type: application/json' \
@@ -108,4 +106,4 @@ const gate = JSON.parse(fs.readFileSync(process.argv[2], 'utf8'));
 if (gate.contract_version !== 'chimpmaera.bi/superset-planning-gate/v1') throw new Error('planning gate contract mismatch');
 if (gate.status !== 'READY_FOR_REVIEW' || gate.mutation_performed !== false || gate.reasons.length !== 0) throw new Error('planning gate failed for fresh fingerprint');
 NODE
-printf 'PASS agent->analyze->publish->Superset-readback twice; Superset fingerprint/planning gate passed; safety probes denied.\n'
+printf 'PASS agent->analyze->proposal/readback twice; trusted Superset boundary, fingerprint/planning gate and safety probes passed.\n'

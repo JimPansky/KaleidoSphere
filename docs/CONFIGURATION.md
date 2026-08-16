@@ -15,7 +15,7 @@ LLM_MODE=stub
 ```
 
 Fixture mode uses committed synthetic MSSQL metadata. It validates the local
-agent, analyzer, catalog, Discovery, Superset publication, readback, and
+agent, analyzer, catalog, Discovery, proposal, readback, and
 fingerprint paths without an external database or API key. Fixture evidence is
 reported as `SYNTHETIC_UNVALIDATED` and must not be treated as live database
 evidence.
@@ -53,6 +53,18 @@ AGENT_PORT=18790
 
 Change them in `.env` if the ports are already in use. The stack binds public
 ports to `127.0.0.1` only.
+
+## External API v2
+
+Clients configure only the SBA agent URL, for example
+`http://127.0.0.1:18790`. They first read `GET /v2/capabilities`, verify product
+`v0.8.0`, contract `2.0.0`, the required capability set and the canonical
+attestation digest, then send closed requests to `POST /v2/intents`.
+
+Do not configure a source database URL, Superset URL, DB credential or Superset
+credential in ChimpMaera. Those remain SBA-owned runtime configuration and file
+secrets. Missing or incompatible SBA makes BI unavailable; it does not widen a
+fallback path.
 
 ## Microsoft SQL Server
 
@@ -142,7 +154,7 @@ LLM_MODEL=provider-model-id
 
 Put the API key only in `.secrets/llm_api_key`. Optional model use is limited to
 classifying requests as `ANALYZE`, `STATUS`, or `DENY`. Catalog search,
-technical Q&A, Discovery suggestions, Superset publication, and fingerprint
+technical Q&A, Discovery suggestions, Superset proposals, and fingerprint
 logic remain deterministic local code.
 
 ## Superset fingerprint

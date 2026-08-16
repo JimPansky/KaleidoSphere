@@ -52,7 +52,7 @@ requests, credentials, prompt-injection text, and Superset mutation requests are
 rejected before tool calls.
 
 Catalog search, technical Q&A, BI Discovery suggestions, brief export,
-publication, readback, Superset fingerprint logic, and promotion-bundle
+proposal/readback, Superset fingerprint logic, and promotion-bundle
 build/inspect/preflight are deterministic local code paths.
 
 ## Superset boundary
@@ -60,11 +60,16 @@ build/inspect/preflight are deterministic local code paths.
 Superset reads only the local projection database. It does not receive Oracle or
 MSSQL credentials and does not connect directly to source databases.
 
-Current publication is fixed and managed. The materializer updates predefined
-technical overview assets over local projection tables. The promotion-bundle
-CLI produces an offline, review-only ZIP and never calls that materializer.
-Dynamic datasets, charts, dashboards, ZIP imports/exports, and promotion
-execution are future reviewed capabilities, not current behavior.
+Persistent Superset work is managed only through the exact trusted
+preview/direct-UI-approval/apply/readback/rollback workflow. Public analyze and
+the external v2 client do not call the materializer. The promotion-bundle CLI
+produces an offline, review-only ZIP and cannot grant authority. Dynamic assets,
+imports and exports retain synthetic/local nonclaims.
+
+The v2 attestation is runtime-generated, canonical-digest-bound and exact about
+product/contract versions and capabilities. Every intent response repeats that
+identity and has its own digest. Wrong versions, missing capabilities, malformed
+or tampered responses, unsafe fields and direct mutation intents fail closed.
 
 The Superset runtime fingerprint is read-only. It records sanitized target
 identity, runtime version, OpenAPI canonical hash, feature-flag capability
