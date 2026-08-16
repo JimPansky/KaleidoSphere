@@ -12,6 +12,15 @@ or Cordis, install plugins, connect a model/speech provider, control a browser,
 mutate Superset, apply persistent revisions, activate production behavior, or
 publish an external artifact.
 
+## v0.7.1 - Deterministic graph evidence fix
+
+This patch refreshes the graph pilot and adaptive investigation terminal
+manifests/state artifacts and aligns their runners, graph-pilot services,
+focused tests, and source-map coverage with deterministic artifact generation.
+
+This release does not deploy or activate a runtime, connect Superset, access
+customer data, or claim staging, production, customer, or live runtime evidence.
+
 ## v0.7.0 - Promotion review bundle contract
 
 M5-02 adds `chimpmaera.bi/superset-promotion-bundle/v1`: a deterministic,
