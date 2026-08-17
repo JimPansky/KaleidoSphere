@@ -1,6 +1,6 @@
 # Security
 
-Superset BI Agent is designed for governed first-pass database understanding,
+KaleidoSphere is designed for governed first-pass database understanding,
 not broad database automation. The trust boundary is narrow by default: collect
 safe metadata, store local evidence, answer from the catalog, and keep source
 data and credentials out of models and Superset source connections.

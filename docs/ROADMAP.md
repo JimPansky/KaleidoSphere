@@ -7,7 +7,7 @@ delivery promise, release schedule, or production compatibility claim.
 
 ### Portable local stack
 
-The repository provides a standalone Docker Compose stack with BI Agent,
+The repository provides a standalone Docker Compose stack with KaleidoSphere,
 bi-control, Apache Superset, local runtime directories, file secrets, tests, and
 release archive checks.
 

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://chimpmaera.invalid/contracts/superset-promotion-bundle/v1/promotion-bundle.schema.json",
-  "title": "ChimpMaera Superset review promotion bundle",
+  "title": "KaleidoSphere Superset review promotion bundle",
   "type": "object",
   "additionalProperties": false,
   "required": ["contract_version", "bundle_id", "artifact_mode", "created_at", "mutation_performed", "discovery", "catalog", "target", "superset", "fingerprint", "assets", "files", "disclosure", "limitations", "nonclaims", "integrity"],

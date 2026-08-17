@@ -1,14 +1,21 @@
-# Superset BI Agent
+# KaleidoSphere
 
-[![CI](https://github.com/JimPansky/Superset_BI_Agent/actions/workflows/ci.yml/badge.svg)](https://github.com/JimPansky/Superset_BI_Agent/actions/workflows/ci.yml)
-[![Latest release](https://img.shields.io/github/v/release/JimPansky/Superset_BI_Agent?sort=semver)](https://github.com/JimPansky/Superset_BI_Agent/releases/latest)
-[![License](https://img.shields.io/github/license/JimPansky/Superset_BI_Agent)](LICENSE)
+[![CI](https://github.com/JimPansky/KaleidoSphere/actions/workflows/ci.yml/badge.svg)](https://github.com/JimPansky/KaleidoSphere/actions/workflows/ci.yml)
+[![Latest release](https://img.shields.io/github/v/release/JimPansky/KaleidoSphere?sort=semver)](https://github.com/JimPansky/KaleidoSphere/releases/latest)
+[![License](https://img.shields.io/github/license/JimPansky/KaleidoSphere)](LICENSE)
 [![Docker Compose](https://img.shields.io/badge/Docker%20Compose-local%20stack-2496ed)](compose.yaml)
+
+**KaleidoSphere — Multi-perspective Business & Decision Intelligence**
+
+KaleidoSphere is the PANSPHAIRA ecosystem system for Business Intelligence,
+analytics, and Decision Intelligence. KaleidoSphere transforms fragmented
+enterprise data into coherent perspectives, revealing patterns, dependencies
+and actionable insights.
 
 Understand your database. Define the right dashboards. Keep SQL, credentials
 and persistent authority out of clients and models.
 
-Superset BI Agent is a local first-pass database understanding and BI
+KaleidoSphere is a local first-pass database understanding and BI
 requirements workflow for BI, data, and platform teams. It analyzes Oracle or
 Microsoft SQL Server metadata with a read-only account, stores an
 evidence-bound technical catalog, guides dashboard requirement discovery, and
@@ -35,8 +42,8 @@ Requirements: Docker Engine with Compose v2, OpenSSL, and free localhost ports
 `18088` and `18790`.
 
 ```bash
-git clone https://github.com/JimPansky/Superset_BI_Agent.git
-cd Superset_BI_Agent
+git clone https://github.com/JimPansky/KaleidoSphere.git
+cd KaleidoSphere
 cp .env.example .env
 ./bin/bi setup
 ./bin/bi up
@@ -50,7 +57,7 @@ cp .env.example .env
 ./bin/bi down
 ```
 
-Open <http://127.0.0.1:18790> for the Agent and
+Open <http://127.0.0.1:18790> for KaleidoSphere and
 <http://127.0.0.1:18088> for Superset. The generated Superset `analyst`
 password is stored in `.runtime/secrets/superset_analyst_password` with mode
 `0600` and is not printed by the scripts.
@@ -88,14 +95,14 @@ flowchart LR
   F[Optional LLM] -->|intent classification only| D
 ```
 
-Superset BI Agent does not send free-form SQL to a source database, does not
+KaleidoSphere does not send free-form SQL to a source database, does not
 sample source rows, and does not give Superset direct source-database
 credentials.
 
 ## Why teams use it
 
 Direct LLM-to-SQL workflows can blur exploration, credential-bearing access, and
-production data exposure. Superset BI Agent narrows the surface: collect safe
+production data exposure. KaleidoSphere narrows the surface: collect safe
 metadata, preserve coverage evidence, ask deterministic catalog-bound questions,
 turn requirements into a reviewable brief, and show fixed technical dashboards
 backed by the local catalog.
@@ -137,7 +144,7 @@ Supported today:
 - Guided BI requirements discovery with Markdown/JSON brief export.
 - Review-bound managed technical overview dashboard workflows in Apache Superset.
 - Server-attested external API `2.0.0` for status, discovery, analyze, plan,
-  preview and readback; the runtime reports product `v0.8.0` and exact
+  preview and readback; the runtime reports product `v0.9.0` and exact
   capabilities at `GET /v2/capabilities`.
 - Read-only Superset 6.1.0 runtime fingerprint and fail-closed planning preflight.
 - Deterministic `chimpmaera.bi/superset-promotion-bundle/v1` review ZIP build,
@@ -167,7 +174,7 @@ Not claimed today:
 
 ## Provenance
 
-Superset BI Agent is a standalone public repository with repository-authored
+KaleidoSphere is a standalone public repository with repository-authored
 runtime, catalog, discovery, Superset, fingerprint, promotion-bundle, tests, and docs. Some
 analyzer foundations were derived from the public ChimpMaera repository and are
 tracked in [SOURCE-MAP.md](SOURCE-MAP.md) and [SOURCE-MAP.json](SOURCE-MAP.json).

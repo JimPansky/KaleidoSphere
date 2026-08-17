@@ -12,7 +12,7 @@ const pkg = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'));
 const version = pkg.version;
 if (!/^\d+\.\d+\.\d+$/.test(version)) throw new Error('release version must be semver x.y.z');
 
-const archiveName = `Superset_BI_Agent-v${version}.tar.gz`;
+const archiveName = `KaleidoSphere-v${version}.tar.gz`;
 const checksumName = `${archiveName}.sha256`;
 const outputDir = path.resolve(process.argv[2] ?? path.join(root, 'dist', 'release'));
 const archivePath = path.join(outputDir, archiveName);
@@ -39,7 +39,7 @@ if (isGitCheckout()) {
   if (status && process.env.CM_BI_RELEASE_ALLOW_DIRTY !== '1') {
     throw new Error('release archive requires a clean tracked worktree; set CM_BI_RELEASE_ALLOW_DIRTY=1 only for local regression tests');
   }
-  const archive = spawn('git', ['archive', '--format=tar', `--prefix=Superset_BI_Agent-v${version}/`, 'HEAD'], { cwd: root, stdio: ['ignore', 'pipe', 'inherit'] });
+  const archive = spawn('git', ['archive', '--format=tar', `--prefix=KaleidoSphere-v${version}/`, 'HEAD'], { cwd: root, stdio: ['ignore', 'pipe', 'inherit'] });
   const archiveClosed = new Promise((resolve) => archive.on('close', resolve));
   await pipeline(archive.stdout, gzip, createWriteStream(archivePath, { mode: 0o644 }));
   const exitCode = await archiveClosed;
@@ -50,7 +50,7 @@ if (isGitCheckout()) {
     '--exclude=./.git', '--exclude=./node_modules', '--exclude=./.env', '--exclude=./dist',
     '--exclude=./.runtime/metadata', '--exclude=./.runtime/projection', '--exclude=./.runtime/receipts', '--exclude=./.runtime/secrets',
     '--exclude=./.secrets/llm_api_key', '--exclude=./.secrets/mssql_password', '--exclude=./.secrets/oracle_password',
-    '--transform', `s#^\\.#Superset_BI_Agent-v${version}#`, '-cf', '-', '.',
+    '--transform', `s#^\\.#KaleidoSphere-v${version}#`, '-cf', '-', '.',
   ], { cwd: root, stdio: ['ignore', 'pipe', 'inherit'] });
   const archiveClosed = new Promise((resolve) => archive.on('close', resolve));
   await pipeline(archive.stdout, gzip, createWriteStream(archivePath, { mode: 0o644 }));

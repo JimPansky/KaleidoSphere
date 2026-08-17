@@ -1,5 +1,18 @@
 # Release Notes
 
+## v0.9.0 - KaleidoSphere product identity
+
+Renames the public product to **KaleidoSphere — Multi-perspective Business &
+Decision Intelligence** and positions it as the PANSPHAIRA ecosystem system for
+Business Intelligence, analytics, and Decision Intelligence. Public UI, docs,
+repository metadata, container titles, and newly built release assets use the
+KaleidoSphere identity.
+
+Functionality, architecture, behavior, routes, data formats, environment
+variables, Compose service names, and the stable `superset-bi-agent` external
+contract identifiers remain unchanged. Existing tags, releases, assets, and
+historical evidence retain their original names.
+
 ## v0.8.0 - Attested external ownership contract v2
 
 Adds `superset-bi-agent.external` contract `2.0.0`. The running `bi-agent`

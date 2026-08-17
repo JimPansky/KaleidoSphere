@@ -5,7 +5,7 @@ import path from 'node:path';
 import { buildPromotionBundle, inspectPromotionBundle, preflightPromotionBundle, writePromotionBundle } from './promotion-bundle.mjs';
 
 function fail(message) {
-  process.stderr.write(`ChimpMaera BI promotion bundle ERROR: ${message}\n`);
+  process.stderr.write(`KaleidoSphere promotion bundle ERROR: ${message}\n`);
   process.exit(2);
 }
 

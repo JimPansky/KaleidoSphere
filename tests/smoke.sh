@@ -87,7 +87,9 @@ if curl --silent --max-time 2 http://127.0.0.1:18089/healthz >/dev/null 2>&1; th
   printf >&2 'bi-control must not be host-exposed\n'; exit 1
 fi
 curl --fail --silent "$superset/health" | grep -qx OK
-curl --fail --silent "$agent/" | grep -q 'BI Agent'
+page="$(curl --fail --silent "$agent/")"
+grep -q 'KaleidoSphere' <<<"$page"
+grep -q 'Multi-perspective Business &amp; Decision Intelligence' <<<"$page"
 ./bin/bi superset-fingerprint collect > "$fingerprint_file"
 node - "$fingerprint_file" <<'NODE'
 import fs from 'node:fs';

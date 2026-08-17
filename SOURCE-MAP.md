@@ -10,7 +10,7 @@ verified at that exact commit before copying; ChimpMaera was not mutated.
 M5 does not copy new ChimpMaera code. The Superset fingerprint and promotion
 bundle contracts, collector/builder/inspector, fail-closed gates, tests, and
 evidence documentation are repository-authored for this public
-Superset_BI_Agent release slice. The product
+KaleidoSphere release slice. The product
 README refresh and Architecture, Configuration, Security, and Roadmap documents
 are also repository-authored documentation.
 
