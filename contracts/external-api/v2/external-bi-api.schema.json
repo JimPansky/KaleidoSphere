@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/JimPansky/Superset_BI_Agent/contracts/external-api/v2/external-bi-api.schema.json",
-  "title": "Superset BI Agent external API v2",
+  "title": "KaleidoSphere external API v2",
   "type": "object",
   "additionalProperties": false,
   "required": ["schemaVersion", "requestId", "action"],

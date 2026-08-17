@@ -1,6 +1,6 @@
 # Configuration
 
-Superset BI Agent is configured with `.env` plus gitignored file secrets. Start
+KaleidoSphere is configured with `.env` plus gitignored file secrets. Start
 from the portable fixture mode, then switch to exactly one live engine when a
 read-only source account is ready.
 
@@ -58,11 +58,11 @@ ports to `127.0.0.1` only.
 
 Clients configure only the SBA agent URL, for example
 `http://127.0.0.1:18790`. They first read `GET /v2/capabilities`, verify product
-`v0.8.0`, contract `2.0.0`, the required capability set and the canonical
+`v0.9.0`, contract `2.0.0`, the required capability set and the canonical
 attestation digest, then send closed requests to `POST /v2/intents`.
 
 Do not configure a source database URL, Superset URL, DB credential or Superset
-credential in ChimpMaera. Those remain SBA-owned runtime configuration and file
+credential in PANSPHAIRA. Those remain KaleidoSphere-owned runtime configuration and file
 secrets. Missing or incompatible SBA makes BI unavailable; it does not widen a
 fallback path.
 

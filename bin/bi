@@ -5,7 +5,7 @@ umask 077
 bi_here="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$bi_here"
 
-fail() { printf >&2 'ChimpMaera BI ERROR: %s\n' "$*"; exit 1; }
+fail() { printf >&2 'KaleidoSphere ERROR: %s\n' "$*"; exit 1; }
 compose() { docker compose --file "$bi_here/compose.yaml" "$@"; }
 published_port() {
   local service="$1" container_port="$2" binding
@@ -57,7 +57,7 @@ case "${1:-help}" in
   up)
     require_setup
     compose up --detach --build --wait
-    printf 'Superset: http://127.0.0.1:%s\nAgent: http://127.0.0.1:%s\n' "$(published_port superset 8088)" "$(published_port bi-agent 18790)"
+    printf 'Superset: http://127.0.0.1:%s\nKaleidoSphere: http://127.0.0.1:%s\n' "$(published_port superset 8088)" "$(published_port bi-agent 18790)"
     ;;
   analyze)
     require_setup

@@ -39,8 +39,8 @@ FEATURE_FLAGS = {
     "HORIZONTAL_FILTER_BAR": True,
 }
 MENU_LINKS = [{
-    "name": "BI Agent",
-    "label": "BI Agent",
+    "name": "KaleidoSphere",
+    "label": "KaleidoSphere",
     "url": os.environ.get("AGENT_PUBLIC_URL", "http://localhost:18790"),
     "icon": "fa-robot",
 }]

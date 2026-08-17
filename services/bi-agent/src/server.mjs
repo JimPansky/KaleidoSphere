@@ -216,9 +216,9 @@ async function executeExternal(request) {
 
 const page = `<!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ChimpMaera BI Agent</title><style>
+<title>KaleidoSphere</title><style>
 body{font:16px system-ui,sans-serif;max-width:860px;margin:3rem auto;padding:0 1rem;color:#172033;background:#f5f7fb}main{background:white;border:1px solid #dce3ee;border-radius:12px;padding:2rem;box-shadow:0 8px 30px #20305012}textarea{width:100%;box-sizing:border-box;min-height:90px;padding:.8rem}button{margin-top:.8rem;padding:.7rem 1.1rem;background:#1677ff;color:white;border:0;border-radius:6px;font-weight:600}pre{white-space:pre-wrap;background:#101827;color:#d9e7ff;padding:1rem;border-radius:8px;overflow:auto}small{color:#596579}</style></head>
-<body><main><h1>BI Agent</h1><p>Analysiert ausschließlich die konfigurierte MSSQL- oder Oracle-Datenbank read-only und erzeugt einen prüfbaren BI-Vorschlag.</p>
+<body><main><h1>KaleidoSphere</h1><p><strong>Multi-perspective Business &amp; Decision Intelligence</strong></p><p>Analysiert ausschließlich die konfigurierte MSSQL- oder Oracle-Datenbank read-only und erzeugt einen prüfbaren BI-Vorschlag.</p>
 <form id="f"><label for="m">Auftrag</label><textarea id="m">Analysiere die konfigurierte Datenbank</textarea><br><button>Analyse starten</button></form>
 <p><small>Erlaubt: Status, Analyse, lokaler technischer Katalog, Suche, evidenzgebundene technische Fragen und geführte BI Discovery. Persistente Superset-Aktionen benötigen den gebundenen Trusted-Workflow. Raw SQL, Credentials, Rohsource, Schreibaktionen und unbekannte Tools werden abgewiesen.</small></p><pre id="o">Bereit.</pre></main>
 <script>document.getElementById('f').addEventListener('submit',async(e)=>{e.preventDefault();const o=document.getElementById('o');o.textContent='Arbeite…';try{const r=await fetch('/api/chat',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message:document.getElementById('m').value})});const j=await r.json();o.textContent=JSON.stringify(j,null,2)}catch(x){o.textContent='Fehler: '+x.message}})</script></body></html>`;

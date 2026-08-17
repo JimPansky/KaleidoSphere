@@ -16,10 +16,10 @@ TECH_DATASET_UUIDS = {
     "technical_coverage_blind_spots": "b1000000-0000-4000-8000-000000000014",
 }
 TECH_DASHBOARD_UUIDS = {
-    "ChimpMaera Technical System & Schema Overview": "b1000000-0000-4000-8000-000000000021",
-    "ChimpMaera Technical Tables, Freshness & Capacity": "b1000000-0000-4000-8000-000000000022",
-    "ChimpMaera Technical Code, Validity & Dependencies": "b1000000-0000-4000-8000-000000000023",
-    "ChimpMaera Technical Coverage, Errors & Blind Spots": "b1000000-0000-4000-8000-000000000024",
+    "KaleidoSphere Technical System & Schema Overview": "b1000000-0000-4000-8000-000000000021",
+    "KaleidoSphere Technical Tables, Freshness & Capacity": "b1000000-0000-4000-8000-000000000022",
+    "KaleidoSphere Technical Code, Validity & Dependencies": "b1000000-0000-4000-8000-000000000023",
+    "KaleidoSphere Technical Coverage, Errors & Blind Spots": "b1000000-0000-4000-8000-000000000024",
 }
 PROJECTION = Path("/var/lib/chimpmaera-bi/projection/analytics.db")
 APP = create_app()
@@ -203,12 +203,12 @@ def materialize(request):
 
         dashboard = db.session.query(Dashboard).filter_by(uuid=DASHBOARD_UUID).one_or_none()
         if not dashboard:
-            dashboard = Dashboard(uuid=DASHBOARD_UUID, dashboard_title="ChimpMaera BI Database Overview", slug="chimpmaera-bi-database-overview", published=True)
+            dashboard = Dashboard(uuid=DASHBOARD_UUID, dashboard_title="KaleidoSphere Database Overview", slug="chimpmaera-bi-database-overview", published=True)
             db.session.add(dashboard)
-        dashboard.dashboard_title = "ChimpMaera BI Database Overview"
+        dashboard.dashboard_title = "KaleidoSphere Database Overview"
         dashboard.slug = "chimpmaera-bi-database-overview"
         dashboard.published = True
-        dashboard.description = f"{summary['source_engine']} {summary['source_mode']} · READ-ONLY receipt {request['receiptId']} · database {summary['source_database']} · Open BI Agent: {os.environ.get('AGENT_PUBLIC_URL', 'http://localhost:18790')}"
+        dashboard.description = f"{summary['source_engine']} {summary['source_mode']} · READ-ONLY receipt {request['receiptId']} · database {summary['source_database']} · Open KaleidoSphere: {os.environ.get('AGENT_PUBLIC_URL', 'http://localhost:18790')}"
         dashboard.slices = charts
         chart_ids = [f"CHART-{chart.id}" for chart in charts]
         position = {
@@ -216,7 +216,7 @@ def materialize(request):
             "ROOT_ID":{"type":"ROOT","id":"ROOT_ID","children":["GRID_ID"]},
             "GRID_ID":{"type":"GRID","id":"GRID_ID","children":["ROW-AGENT","ROW-KPI","ROW-DETAIL"]},
             "ROW-AGENT":{"type":"ROW","id":"ROW-AGENT","children":["MARKDOWN-AGENT"],"meta":{"background":"BACKGROUND_TRANSPARENT"}},
-            "MARKDOWN-AGENT":{"type":"MARKDOWN","id":"MARKDOWN-AGENT","children":[],"meta":{"width":12,"height":10,"code":f"## BI Agent\n[Open BI Agent]({os.environ.get('AGENT_PUBLIC_URL', 'http://localhost:18790')}) · Receipt `{request['receiptId']}` · source is read-only."}},
+            "MARKDOWN-AGENT":{"type":"MARKDOWN","id":"MARKDOWN-AGENT","children":[],"meta":{"width":12,"height":10,"code":f"## KaleidoSphere\n[Open KaleidoSphere]({os.environ.get('AGENT_PUBLIC_URL', 'http://localhost:18790')}) · Receipt `{request['receiptId']}` · source is read-only."}},
             "ROW-KPI":{"type":"ROW","id":"ROW-KPI","children":chart_ids[:4],"meta":{"background":"BACKGROUND_TRANSPARENT"}},
             "ROW-DETAIL":{"type":"ROW","id":"ROW-DETAIL","children":chart_ids[4:],"meta":{"background":"BACKGROUND_TRANSPARENT"}},
         }
@@ -226,10 +226,10 @@ def materialize(request):
         dashboard.json_metadata = json.dumps({"native_filter_configuration":[],"timed_refresh_immune_slices":[]}, sort_keys=True)
 
         tech_dashboard_specs = [
-            ("ChimpMaera Technical System & Schema Overview", "chimpmaera-technical-system-schema-overview", [tech_charts[0], tech_charts[4]]),
-            ("ChimpMaera Technical Tables, Freshness & Capacity", "chimpmaera-technical-tables-freshness-capacity", [tech_charts[1], tech_charts[5]]),
-            ("ChimpMaera Technical Code, Validity & Dependencies", "chimpmaera-technical-code-validity-dependencies", [tech_charts[2], tech_charts[6]]),
-            ("ChimpMaera Technical Coverage, Errors & Blind Spots", "chimpmaera-technical-coverage-errors-blind-spots", [tech_charts[3], tech_charts[7]]),
+            ("KaleidoSphere Technical System & Schema Overview", "chimpmaera-technical-system-schema-overview", [tech_charts[0], tech_charts[4]]),
+            ("KaleidoSphere Technical Tables, Freshness & Capacity", "chimpmaera-technical-tables-freshness-capacity", [tech_charts[1], tech_charts[5]]),
+            ("KaleidoSphere Technical Code, Validity & Dependencies", "chimpmaera-technical-code-validity-dependencies", [tech_charts[2], tech_charts[6]]),
+            ("KaleidoSphere Technical Coverage, Errors & Blind Spots", "chimpmaera-technical-coverage-errors-blind-spots", [tech_charts[3], tech_charts[7]]),
         ]
         tech_dashboards = []
         for title, slug, dashboard_charts in tech_dashboard_specs:
