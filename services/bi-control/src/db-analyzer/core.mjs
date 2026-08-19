@@ -307,7 +307,7 @@ export function validateAnalyzeProfile(profile) {
   if (profile?.schemaVersion !== ANALYZE_PROFILE_SCHEMA) fail('DB_ANALYZE_PROFILE_SCHEMA_INVALID');
   if (!hasExactKeys(profile, ['schemaVersion', 'profileId', 'engine', 'mode', 'queryPack', 'scope', 'policy', 'adapter'])) fail('DB_ANALYZE_PROFILE_FIELDS_INVALID');
   if (typeof profile.profileId !== 'string' || !/^[a-z0-9][a-z0-9._-]{2,63}$/.test(profile.profileId)) fail('DB_ANALYZE_PROFILE_ID_INVALID');
-  if (!['mssql', 'oracle'].includes(profile.engine)) fail('DB_ANALYZE_PROFILE_ENGINE_INVALID');
+  if (!['mssql', 'oracle', 'postgresql'].includes(profile.engine)) fail('DB_ANALYZE_PROFILE_ENGINE_INVALID');
   if (!['SYNTHETIC', 'RUNTIME'].includes(profile.mode)) fail('DB_ANALYZE_PROFILE_MODE_UNSUPPORTED');
   if (!hasExactKeys(profile.queryPack, ['version']) || profile.queryPack.version !== 'v1') fail('DB_ANALYZE_PROFILE_PACK_INVALID');
   if (!hasExactKeys(profile.scope, ['database', 'container', 'schemas'])
@@ -341,7 +341,15 @@ export function validateAnalyzeProfile(profile) {
       || typeof profile.adapter.serviceName !== 'string' || profile.adapter.serviceName.length === 0
       || !(profile.adapter.serverDn === null || typeof profile.adapter.serverDn === 'string')
       || !Number.isInteger(profile.adapter.connectTimeoutMs) || profile.adapter.connectTimeoutMs < 1);
-    if (commonInvalid || mssqlInvalid || oracleInvalid) fail('DB_ANALYZE_PROFILE_ADAPTER_INVALID');
+    const postgresqlIdentifier = (value) => typeof value === 'string' && /^[A-Za-z_][A-Za-z0-9_$]{0,62}$/.test(value);
+    const postgresqlInvalid = profile.engine === 'postgresql' && (!hasExactKeys(profile.adapter, ['kind', 'host', 'port', 'user', 'passwordEnv', 'ssl', 'connectTimeoutMs'])
+      || profile.adapter.kind !== 'postgresql'
+      || typeof profile.adapter.ssl !== 'boolean'
+      || !Number.isInteger(profile.adapter.connectTimeoutMs) || profile.adapter.connectTimeoutMs < 1000 || profile.adapter.connectTimeoutMs > 120000
+      || profile.policy.maxQueryTimeoutMs < 1000 || profile.policy.maxQueryTimeoutMs > 120000
+      || !postgresqlIdentifier(profile.scope.database) || !postgresqlIdentifier(profile.adapter.user)
+      || profile.scope.schemas.some((schema) => !postgresqlIdentifier(schema)));
+    if (commonInvalid || mssqlInvalid || oracleInvalid || postgresqlInvalid) fail('DB_ANALYZE_PROFILE_ADAPTER_INVALID');
   }
   return profile;
 }

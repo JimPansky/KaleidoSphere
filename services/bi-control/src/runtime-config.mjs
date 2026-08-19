@@ -5,6 +5,7 @@ import { coded, parseSchemas } from './policy.mjs';
 const sha256 = (value) => createHash('sha256').update(value).digest('hex');
 const token = (value) => typeof value === 'string' && /^[A-Z][A-Z0-9_$#]{0,127}$/.test(value);
 const hostname = (value) => typeof value === 'string' && /^[A-Za-z0-9][A-Za-z0-9.-]{0,252}$/.test(value);
+const postgresqlIdentifier = (value) => typeof value === 'string' && /^[A-Za-z_][A-Za-z0-9_$]{0,62}$/.test(value);
 
 function integer(env, name, fallback, minimum, maximum) {
   const value = Number(env[name] ?? fallback);
@@ -20,7 +21,7 @@ function bool(env, name, fallback) {
 
 export function selectedEngine(env = process.env) {
   const engine = env.BI_ENGINE;
-  if (!['mssql', 'oracle'].includes(engine)) throw coded('CONFIG_BI_ENGINE_INVALID');
+  if (!['mssql', 'oracle', 'postgresql'].includes(engine)) throw coded('CONFIG_BI_ENGINE_INVALID');
   return engine;
 }
 
@@ -47,6 +48,27 @@ export function buildLiveProfile(env = process.env, passwordEnv) {
       scope: {database, container: null, schemas: parseSchemas(env.MSSQL_SCHEMAS)},
       policy: {access: 'READ_ONLY', allowRowSamples: false, maxQueryTimeoutMs: timeout},
       adapter: {kind: engine, host, port, user, passwordEnv, encrypt: bool(env, 'MSSQL_ENCRYPT', true), trustServerCertificate: bool(env, 'MSSQL_TRUST_SERVER_CERTIFICATE', false)},
+    };
+  }
+
+  if (engine === 'postgresql') {
+    const database = env.POSTGRESQL_DATABASE ?? '';
+    const host = env.POSTGRESQL_HOST ?? '';
+    const user = env.POSTGRESQL_USER ?? '';
+    const port = integer(env, 'POSTGRESQL_PORT', 5432, 1, 65535);
+    const connectTimeoutMs = integer(env, 'POSTGRESQL_CONNECT_TIMEOUT_MS', 10000, 1000, 120000);
+    const queryTimeoutMs = integer(env, 'POSTGRESQL_QUERY_TIMEOUT_MS', 10000, 1000, 120000);
+    const ssl = bool(env, 'POSTGRESQL_SSL', true);
+    const schemas = parseSchemas(env.POSTGRESQL_SCHEMAS);
+    if (!hostname(host) || !postgresqlIdentifier(database) || !postgresqlIdentifier(user)
+      || schemas.some((schema) => !postgresqlIdentifier(schema))) throw coded('DB_ANALYZE_CONFIG_INVALID');
+    return {
+      schemaVersion: 'chimpmaera.db/analyze-profile/v1',
+      profileId: `chimpmaera-bi-postgresql-${sha256(`${host}:${port}/${database}/${user}`).slice(0, 16)}`,
+      engine, mode: 'RUNTIME', queryPack: {version: 'v1'},
+      scope: {database, container: null, schemas},
+      policy: {access: 'READ_ONLY', allowRowSamples: false, maxQueryTimeoutMs: queryTimeoutMs},
+      adapter: {kind: engine, host, port, user, passwordEnv, ssl, connectTimeoutMs},
     };
   }
 
