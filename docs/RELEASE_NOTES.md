@@ -1,5 +1,23 @@
 # Release Notes
 
+## Unreleased - Progressive Run Controller v1
+
+Adds a persisted, deterministic MSSQL/Oracle progressive-analysis controller
+over the existing read-only query manifests, structure coverage ledgers,
+Evidence Store schema and canonical SHA-256 identity mechanism. The closed phase
+machine enforces Preflight, Breadth Inventory, Prioritization, Safe Aggregates,
+Relationship Graph, Hypothesis Validation and Report in order. Every visible
+object has an explicit COMPLETE/PARTIAL/DENIED/UNSUPPORTED/UNKNOWN state, and
+depth is blocked below 95% classified structural coverage unless a narrow,
+hash-bound persisted override authorizes exact objects and a bounded probe count.
+
+The v1 safety kernel also enforces hard run/object probe budgets, exact duplicate
+suppression and successful receipt replay on restart. It accepts only existing
+allowlisted MSSQL/Oracle method references and typed scoped identifiers; free
+SQL, raw values and credentials do not cross the controller boundary. Advanced
+near-duplicate matching, information-gain planning, no-gain stopping and the
+full hypothesis/counterevidence ledger remain explicitly in follow-up issue #37.
+
 ## v0.11.1 - KaleidoSphere brand and browser icons
 
 Ships the approved KaleidoSphere mark in the public README and BI-agent web UI,

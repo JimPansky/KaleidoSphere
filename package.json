@@ -7,9 +7,10 @@
   "type": "module",
   "engines": {"node": ">=24 <25"},
   "scripts": {
-    "test": "node --test tests/analyzer.test.mjs tests/ambiguous-outcome-reconciliation.test.mjs tests/assistant-foundation.test.mjs tests/bi-specialist.test.mjs tests/brand-assets.test.mjs tests/catalog.test.mjs tests/discovery.test.mjs tests/external-api-v2.test.mjs tests/graph-adaptive-v1.test.mjs tests/graph-pilot.test.mjs tests/oracle-runtime.test.mjs tests/postgresql-adapter.test.mjs tests/postgresql-e2e.test.mjs tests/postgresql-structure-scan.test.mjs tests/postgresql-wave2-profile.test.mjs tests/postgresql-wave2-relationships.test.mjs tests/postgresql-wave2-workflow.test.mjs tests/promotion-bundle.test.mjs tests/promotion-execution.test.mjs tests/release.test.mjs tests/security.test.mjs tests/source-map.test.mjs tests/superset-fingerprint.test.mjs tests/trusted-workflow.test.mjs tests/visual-scenario-lab.test.mjs",
+    "test": "node --test tests/analyzer.test.mjs tests/ambiguous-outcome-reconciliation.test.mjs tests/assistant-foundation.test.mjs tests/bi-specialist.test.mjs tests/brand-assets.test.mjs tests/catalog.test.mjs tests/discovery.test.mjs tests/external-api-v2.test.mjs tests/graph-adaptive-v1.test.mjs tests/graph-pilot.test.mjs tests/oracle-runtime.test.mjs tests/postgresql-adapter.test.mjs tests/postgresql-e2e.test.mjs tests/postgresql-structure-scan.test.mjs tests/postgresql-wave2-profile.test.mjs tests/postgresql-wave2-relationships.test.mjs tests/postgresql-wave2-workflow.test.mjs tests/progressive-controller.test.mjs tests/promotion-bundle.test.mjs tests/promotion-execution.test.mjs tests/release.test.mjs tests/security.test.mjs tests/source-map.test.mjs tests/superset-fingerprint.test.mjs tests/trusted-workflow.test.mjs tests/visual-scenario-lab.test.mjs",
     "test:brand": "node --test tests/brand-assets.test.mjs",
     "test:postgresql-wave2": "node --test tests/postgresql-wave2-profile.test.mjs tests/postgresql-wave2-relationships.test.mjs tests/postgresql-wave2-workflow.test.mjs",
+    "test:progressive-controller": "node --test tests/progressive-controller.test.mjs",
     "test:bi-specialist": "node --test tests/bi-specialist.test.mjs",
     "test:visual-scenarios": "node --test tests/visual-scenario-lab.test.mjs",
     "test:trusted-workflow": "node --test tests/trusted-workflow.test.mjs",
