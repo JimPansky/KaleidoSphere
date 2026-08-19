@@ -56,6 +56,15 @@ export function compilePostgresqlScopedQuery(query, statement, schemas) {
   return compiled;
 }
 
+export function compilePostgresqlProfileQuery({profile, query, statement, requestedSchemas = profile?.scope?.schemas}) {
+  if (!Array.isArray(profile?.scope?.schemas) || !Array.isArray(requestedSchemas)
+    || profile.scope.schemas.length !== requestedSchemas.length
+    || profile.scope.schemas.some((schema, index) => schema !== requestedSchemas[index])) {
+    fail('DB_ANALYZE_SCOPE_OVERRIDE_DENIED');
+  }
+  return compilePostgresqlScopedQuery(query, statement, requestedSchemas);
+}
+
 export function assertPostgresqlReadOnlySession(rows) {
   if (!Array.isArray(rows) || rows.length !== 1
     || rows[0]?.transaction_read_only !== 'on'

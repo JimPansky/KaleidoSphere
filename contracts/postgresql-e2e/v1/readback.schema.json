@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kaleidosphere.local/contracts/postgresql-e2e/v1/readback.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "fixtureId", "image", "canonicalEvidence", "groundTruth", "session", "negativeProbes", "privacy", "nonClaims"],
+  "properties": {
+    "schemaVersion": {"const": "kaleidosphere.db/postgresql-e2e-readback/v1"},
+    "fixtureId": {"const": "ks23-postgres-e2e-v1"},
+    "image": {
+      "type": "object", "additionalProperties": false,
+      "required": ["reference", "platform", "manifestDigest"],
+      "properties": {
+        "reference": {"const": "docker.io/library/postgres@sha256:94f23d40fdaf5e60cb2fd8a98c22f02a7b8724949f310d95a0ddf075e8c8b208"},
+        "platform": {"const": "linux/amd64"},
+        "manifestDigest": {"const": "sha256:94f23d40fdaf5e60cb2fd8a98c22f02a7b8724949f310d95a0ddf075e8c8b208"}
+      }
+    },
+    "canonicalEvidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["run1Sha256", "run2Sha256", "byteIdentical", "diskReadbackValidated", "runtimeValidated"],
+      "properties": {
+        "run1Sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "run2Sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "byteIdentical": {"const": true},
+        "diskReadbackValidated": {"const": true},
+        "runtimeValidated": {"const": true}
+      }
+    },
+    "groundTruth": {
+      "type": "object", "additionalProperties": false,
+      "required": ["beforeSha256", "afterSha256", "unchanged", "schemas", "relations", "columns", "constraints", "foreignKeys", "notValidatedChecks", "partialUniqueIndexes"],
+      "properties": {
+        "beforeSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "afterSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "unchanged": {"const": true},
+        "schemas": {"const": 1}, "relations": {"const": 3}, "columns": {"const": 13},
+        "constraints": {"const": 9}, "foreignKeys": {"const": 1},
+        "notValidatedChecks": {"const": 1}, "partialUniqueIndexes": {"const": 1}
+      }
+    },
+    "session": {
+      "type": "object", "additionalProperties": false,
+      "required": ["transactionReadOnly", "defaultTransactionReadOnly", "roleName", "adminCapabilities", "boundedTimeouts"],
+      "properties": {
+        "transactionReadOnly": {"const": "on"}, "defaultTransactionReadOnly": {"const": "on"},
+        "roleName": {"const": "ks23_scan"}, "adminCapabilities": {"const": false}, "boundedTimeouts": {"const": true}
+      }
+    },
+    "negativeProbes": {
+      "type": "object", "additionalProperties": false,
+      "required": ["mutationPolicyDispatches", "rawRowPolicyDispatches", "scopeOverrideDispatches", "databaseMutationSqlState", "databaseDdlSqlState", "timeoutState", "timeoutSqlState", "cancelState", "cancelSqlState", "activeFollowers", "postProbeHealthy", "noPartialEvidence"],
+      "properties": {
+        "mutationPolicyDispatches": {"const": 0}, "rawRowPolicyDispatches": {"const": 0}, "scopeOverrideDispatches": {"const": 0},
+        "databaseMutationSqlState": {"enum": ["25006", "42501"]}, "databaseDdlSqlState": {"enum": ["25006", "42501"]},
+        "timeoutState": {"const": "TIMEOUT"}, "timeoutSqlState": {"const": "57014"},
+        "cancelState": {"const": "CANCELLED"}, "cancelSqlState": {"const": "57014"},
+        "activeFollowers": {"const": 0}, "postProbeHealthy": {"const": true}, "noPartialEvidence": {"const": true}
+      }
+    },
+    "privacy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["rawRowCanaryMatches", "outsideCanaryMatches", "credentialCanaryMatches", "dsnMatches", "rawValueFields"],
+      "properties": {
+        "rawRowCanaryMatches": {"const": 0}, "outsideCanaryMatches": {"const": 0},
+        "credentialCanaryMatches": {"const": 0}, "dsnMatches": {"const": 0}, "rawValueFields": {"const": 0}
+      }
+    },
+    "nonClaims": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+  }
+}

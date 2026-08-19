@@ -6,6 +6,7 @@
   "engines": {"node": ">=24 <25"},
   "dependencies": {
     "mssql": "12.7.0",
-    "oracledb": "7.0.1"
+    "oracledb": "7.0.1",
+    "pg": "8.16.3"
   }
 }
