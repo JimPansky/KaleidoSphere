@@ -1,5 +1,22 @@
 # Release Notes
 
+## Unreleased - KaleidoSphere brand and browser icons
+
+Ships the approved KaleidoSphere mark in the public README and BI-agent web UI,
+plus exact safe routes for SVG/PNG logo assets, 16/32 pixel favicons, a 180
+pixel Apple touch icon, 192/512 pixel app icons and a web app manifest. The
+container now packages the same governed assets under its non-root runtime.
+
+All raster variants are deterministic downscales of the canonical 1254 pixel
+RGBA logo; the canonical PNG and SVG remain byte-identical to the approved
+source. Asset hashes, MIME types, dimensions, HTML references and route safety
+are covered by automated tests and the content-addressed Source Map.
+
+This increment does not redesign the mark, claim trademark/legal clearance,
+deploy or activate a runtime, add a service worker/offline support, claim PWA
+installability, ship a native application bundle or establish broad visual or
+cross-browser regression coverage.
+
 ## v0.11.0 - PostgreSQL profiling and relationship evidence
 
 Adds explicit, privacy-preserving PostgreSQL `rowCount`/`nullCount`/

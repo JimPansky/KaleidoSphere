@@ -1,5 +1,10 @@
 # KaleidoSphere
 
+<picture>
+  <source srcset="services/bi-agent/assets/kaleidosphere-logo.svg" type="image/svg+xml">
+  <img src="services/bi-agent/assets/kaleidosphere-logo.png" alt="KaleidoSphere logo" width="280" height="280">
+</picture>
+
 [![CI](https://github.com/JimPansky/KaleidoSphere/actions/workflows/ci.yml/badge.svg)](https://github.com/JimPansky/KaleidoSphere/actions/workflows/ci.yml)
 [![Latest release](https://img.shields.io/github/v/release/JimPansky/KaleidoSphere?sort=semver)](https://github.com/JimPansky/KaleidoSphere/releases/latest)
 [![License](https://img.shields.io/github/license/JimPansky/KaleidoSphere)](LICENSE)

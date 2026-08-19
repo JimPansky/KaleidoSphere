@@ -1,0 +1,24 @@
+{
+  "name": "KaleidoSphere",
+  "short_name": "KaleidoSphere",
+  "description": "Multi-perspective Business & Decision Intelligence",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f5f7fb",
+  "theme_color": "#172033",
+  "icons": [
+    {
+      "src": "/assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

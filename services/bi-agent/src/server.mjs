@@ -7,6 +7,21 @@ const port = Number(process.env.PORT ?? 18790);
 const controlBase = process.env.CONTROL_BASE_URL;
 if (controlBase !== 'http://bi-control:18089') throw new Error('AGENT_CONTROL_ROUTE_DENIED');
 
+const brandAssetSpecs = Object.freeze([
+  ['/assets/kaleidosphere-logo.svg', 'kaleidosphere-logo.svg', 'image/svg+xml'],
+  ['/assets/kaleidosphere-logo.png', 'kaleidosphere-logo.png', 'image/png'],
+  ['/assets/favicon-16x16.png', 'favicon-16x16.png', 'image/png'],
+  ['/assets/favicon-32x32.png', 'favicon-32x32.png', 'image/png'],
+  ['/assets/apple-touch-icon.png', 'apple-touch-icon.png', 'image/png'],
+  ['/assets/icon-192.png', 'icon-192.png', 'image/png'],
+  ['/assets/icon-512.png', 'icon-512.png', 'image/png'],
+  ['/assets/site.webmanifest', 'site.webmanifest', 'application/manifest+json'],
+]);
+const brandAssets = new Map(await Promise.all(brandAssetSpecs.map(async ([route, file, contentType]) => [
+  route,
+  {body: await readFile(new URL(`../assets/${file}`, import.meta.url)), contentType},
+])));
+
 const unsafe = /(?:\b(?:select|insert|update|delete|merge|drop|alter|create|truncate|grant|revoke|exec(?:ute)?|dbcc|backup|restore)\b|\braw\s+sql\b|\bsql\s*lab\b|source\s+code|pl\/sql\s+source|password|credential|secret|api[_ -]?key|ignore\s+(?:all\s+)?previous|system\s+prompt)/i;
 const analyzeIntent = /(?:analys(?:iere|e|ieren)|analy[sz]e).*(?:datenbank|database)|(?:datenbank|database).*(?:analys(?:iere|e|ieren)|analy[sz]e)/i;
 const statusIntent = /^(?:status|zustand|health|bereit)\??$/i;
@@ -216,18 +231,25 @@ async function executeExternal(request) {
 
 const page = `<!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="/assets/kaleidosphere-logo.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" sizes="180x180">
+<link rel="manifest" href="/assets/site.webmanifest">
+<meta name="theme-color" content="#172033">
 <title>KaleidoSphere</title><style>
-body{font:16px system-ui,sans-serif;max-width:860px;margin:3rem auto;padding:0 1rem;color:#172033;background:#f5f7fb}main{background:white;border:1px solid #dce3ee;border-radius:12px;padding:2rem;box-shadow:0 8px 30px #20305012}textarea{width:100%;box-sizing:border-box;min-height:90px;padding:.8rem}button{margin-top:.8rem;padding:.7rem 1.1rem;background:#1677ff;color:white;border:0;border-radius:6px;font-weight:600}pre{white-space:pre-wrap;background:#101827;color:#d9e7ff;padding:1rem;border-radius:8px;overflow:auto}small{color:#596579}</style></head>
-<body><main><h1>KaleidoSphere</h1><p><strong>Multi-perspective Business &amp; Decision Intelligence</strong></p><p>Analysiert ausschließlich die konfigurierte MSSQL- oder Oracle-Datenbank read-only und erzeugt einen prüfbaren BI-Vorschlag.</p>
+body{font:16px system-ui,sans-serif;max-width:860px;margin:3rem auto;padding:0 1rem;color:#172033;background:#f5f7fb}main{background:white;border:1px solid #dce3ee;border-radius:12px;padding:2rem;box-shadow:0 8px 30px #20305012}.brand{display:flex;align-items:center;gap:1rem}.brand-logo{width:112px;height:112px;object-fit:contain}.brand h1{margin:0}@media(max-width:480px){.brand-logo{width:88px;height:88px}}textarea{width:100%;box-sizing:border-box;min-height:90px;padding:.8rem}button{margin-top:.8rem;padding:.7rem 1.1rem;background:#1677ff;color:white;border:0;border-radius:6px;font-weight:600}pre{white-space:pre-wrap;background:#101827;color:#d9e7ff;padding:1rem;border-radius:8px;overflow:auto}small{color:#596579}</style></head>
+<body><main><div class="brand"><img class="brand-logo" src="/assets/kaleidosphere-logo.svg" width="112" height="112" alt=""><h1>KaleidoSphere</h1></div><p><strong>Multi-perspective Business &amp; Decision Intelligence</strong></p><p>Analysiert ausschließlich die konfigurierte MSSQL- oder Oracle-Datenbank read-only und erzeugt einen prüfbaren BI-Vorschlag.</p>
 <form id="f"><label for="m">Auftrag</label><textarea id="m">Analysiere die konfigurierte Datenbank</textarea><br><button>Analyse starten</button></form>
 <p><small>Erlaubt: Status, Analyse, lokaler technischer Katalog, Suche, evidenzgebundene technische Fragen und geführte BI Discovery. Persistente Superset-Aktionen benötigen den gebundenen Trusted-Workflow. Raw SQL, Credentials, Rohsource, Schreibaktionen und unbekannte Tools werden abgewiesen.</small></p><pre id="o">Bereit.</pre></main>
 <script>document.getElementById('f').addEventListener('submit',async(e)=>{e.preventDefault();const o=document.getElementById('o');o.textContent='Arbeite…';try{const r=await fetch('/api/chat',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({message:document.getElementById('m').value})});const j=await r.json();o.textContent=JSON.stringify(j,null,2)}catch(x){o.textContent='Fehler: '+x.message}})</script></body></html>`;
 
-function send(response, status, contentType, value) {
-  const body = contentType.startsWith('application/json') ? `${JSON.stringify(value)}\n` : value;
+function send(response, status, contentType, value, cacheControl = 'no-store') {
+  const body = contentType === 'application/json' ? `${JSON.stringify(value)}\n` : value;
+  const charset = /^(?:text\/|application\/(?:json|manifest\+json)$|image\/svg\+xml$)/.test(contentType) ? '; charset=utf-8' : '';
   response.writeHead(status, {
-    'content-type': `${contentType}; charset=utf-8`, 'content-length': Buffer.byteLength(body),
-    'cache-control': 'no-store', 'x-content-type-options': 'nosniff', 'x-frame-options': 'SAMEORIGIN',
+    'content-type': `${contentType}${charset}`, 'content-length': Buffer.byteLength(body),
+    'cache-control': cacheControl, 'x-content-type-options': 'nosniff', 'x-frame-options': 'SAMEORIGIN',
     'content-security-policy': "default-src 'self'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'self'; frame-ancestors 'self'",
   });
   response.end(body);
@@ -237,6 +259,10 @@ const server = http.createServer(async (request, response) => {
   try {
     if (request.method === 'GET' && request.url === '/healthz') return send(response, 200, 'application/json', {status: 'ok'});
     if (request.method === 'GET' && request.url === '/v2/capabilities') return send(response, 200, 'application/json', capabilityAttestationV2());
+    if (request.method === 'GET' && brandAssets.has(request.url)) {
+      const asset = brandAssets.get(request.url);
+      return send(response, 200, asset.contentType, asset.body, 'public, max-age=3600');
+    }
     if (request.method === 'GET' && request.url === '/') return send(response, 200, 'text/html', page);
     if (request.method === 'POST' && request.url === '/api/chat') return send(response, 200, 'application/json', await execute(validatePrompt(await requestJson(request))));
     if (request.method === 'POST' && request.url === '/v2/intents') return send(response, 200, 'application/json', await executeExternal(await requestJson(request)));

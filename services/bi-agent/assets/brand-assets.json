@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "kaleidosphere.brand-assets/v1",
+  "source": {
+    "path": "kaleidosphere-logo.png",
+    "width": 1254,
+    "height": 1254,
+    "mimeType": "image/png",
+    "sha256": "b8cba4a7765488e90c71562b16a749a0ee4a9d17cdac5345acbdf5b77232dccd"
+  },
+  "assets": [
+    {
+      "path": "kaleidosphere-logo.svg",
+      "route": "/assets/kaleidosphere-logo.svg",
+      "width": 1254,
+      "height": 1254,
+      "mimeType": "image/svg+xml",
+      "sha256": "d37b51c8a167a5a317f5d1b9804fdf647dfe58166bac391be84a26561df0a260"
+    },
+    {
+      "path": "kaleidosphere-logo.png",
+      "route": "/assets/kaleidosphere-logo.png",
+      "width": 1254,
+      "height": 1254,
+      "mimeType": "image/png",
+      "sha256": "b8cba4a7765488e90c71562b16a749a0ee4a9d17cdac5345acbdf5b77232dccd"
+    },
+    {
+      "path": "favicon-16x16.png",
+      "route": "/assets/favicon-16x16.png",
+      "width": 16,
+      "height": 16,
+      "mimeType": "image/png",
+      "sha256": "f324e36e53b518e6b1e9afa9d85bee975c6f90643b8134a6fb9b5f3c79e7c878"
+    },
+    {
+      "path": "favicon-32x32.png",
+      "route": "/assets/favicon-32x32.png",
+      "width": 32,
+      "height": 32,
+      "mimeType": "image/png",
+      "sha256": "27b5512c35b441076f33b2f59d8f8ac09b13ee4e13cc0716617163c9383108e8"
+    },
+    {
+      "path": "apple-touch-icon.png",
+      "route": "/assets/apple-touch-icon.png",
+      "width": 180,
+      "height": 180,
+      "mimeType": "image/png",
+      "sha256": "ab93cc34113bc0a984f4e80b771e6b6fa1ec0b267e6460864b8ddbf6b5f81acf"
+    },
+    {
+      "path": "icon-192.png",
+      "route": "/assets/icon-192.png",
+      "width": 192,
+      "height": 192,
+      "mimeType": "image/png",
+      "sha256": "56577e3c899559fc283a3e4ad41820c761755be32a798b8a5baabc6b182f5167"
+    },
+    {
+      "path": "icon-512.png",
+      "route": "/assets/icon-512.png",
+      "width": 512,
+      "height": 512,
+      "mimeType": "image/png",
+      "sha256": "6b597ea342729f3ae8e95e4e1aebd6211b89521b47d348bb4fbcf18f16026c4a"
+    }
+  ]
+}
