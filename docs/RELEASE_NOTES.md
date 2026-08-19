@@ -1,5 +1,19 @@
 # Release Notes
 
+## Unreleased - Harness-neutral closed-intent Evidence Bridge v1
+
+Adds an inactive local adapter that verifies External API v2 runtime
+attestations, request/result correlation and canonical integrity before mapping
+the six closed external intents into existing M6-00 execution-receipt events.
+Only safe IDs, authority classes and digests cross into adapter evidence; the
+external result body does not.
+
+The adapter adds no runtime route, foreign harness dependency, plugin loader,
+credentials, arbitrary endpoint, free SQL or apply authority. Unknown versions,
+capability/authority drift, tampering, replay, unsafe fields and correlation
+mismatch fail closed. Evidence is synthetic and does not claim real-harness E2E,
+production/customer readiness, semantic truth or deployment.
+
 ## v0.14.0 - MSSQL/Oracle safe-analysis method parity
 
 Adds controller-bound MSSQL and Oracle parity for four safe semantic methods:
