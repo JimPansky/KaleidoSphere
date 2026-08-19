@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "chimpmaera.db/query-manifest/v1",
+  "packId": "kaleidosphere-postgresql-structure-scan",
+  "packVersion": "1.0.0",
+  "engine": "postgresql",
+  "blindSpots": [
+    {
+      "code": "CHECK_DEFINITION_CONTENT_OMITTED",
+      "description": "Check constraint presence, columns and validation state are retained; definition text and literal content are not persisted."
+    },
+    {
+      "code": "RELATION_DEPENDENCIES_ONLY",
+      "description": "Dependency evidence is limited to catalog-declared view and materialized-view relation dependencies in scoped schemas."
+    },
+    {
+      "code": "NO_SEMANTIC_OR_INFERRED_RELATIONSHIPS",
+      "description": "Business semantics, candidate foreign keys and relationships inferred from names or values are outside this pack."
+    }
+  ],
+  "queries": [
+    {
+      "id": "postgresql.preflight.identity",
+      "category": "preflight",
+      "file": "preflight-identity.sql",
+      "outputColumns": ["engine", "engine_version", "database_name", "container_name"],
+      "sortKeys": ["engine", "database_name"],
+      "scopeColumn": null,
+      "readOnly": true,
+      "cost": "LOW",
+      "timeoutMs": 5000,
+      "privilege": {"minimum": "CONNECT plus visibility of server_version setting"},
+      "fallback": {"onDenied": "Fail closed because database identity cannot be proven"},
+      "provenance": {"sourceType": "OFFICIAL_CATALOG_API_REFERENCE", "url": "https://www.postgresql.org/docs/current/view-pg-settings.html", "spdx": "PostgreSQL", "copiedCode": false, "changeMarker": "KaleidoSphere-authored bounded identity SELECT"}
+    },
+    {
+      "id": "postgresql.structure.schemas",
+      "category": "schemas",
+      "file": "structure-schemas.sql",
+      "outputColumns": ["schema_name", "native_schema_oid", "owner_name"],
+      "sortKeys": ["schema_name"],
+      "scopeColumn": "schema_name",
+      "readOnly": true,
+      "cost": "LOW",
+      "timeoutMs": 5000,
+      "privilege": {"minimum": "Visibility of pg_namespace and pg_roles"},
+      "fallback": {"onDenied": "Record DENIED; schema inventory remains unknown"},
+      "provenance": {"sourceType": "OFFICIAL_CATALOG_API_REFERENCE", "url": "https://www.postgresql.org/docs/current/catalog-pg-namespace.html", "spdx": "PostgreSQL", "copiedCode": false, "changeMarker": "KaleidoSphere-authored scoped schema inventory SELECT"}
+    },
+    {
+      "id": "postgresql.structure.relations",
+      "category": "relations",
+      "file": "structure-relations.sql",
+      "outputColumns": ["schema_name", "relation_name", "relation_kind", "native_relation_oid", "persistence", "row_security_enabled", "is_partition"],
+      "sortKeys": ["schema_name", "relation_name", "relation_kind"],
+      "scopeColumn": "schema_name",
+      "readOnly": true,
+      "cost": "LOW",
+      "timeoutMs": 5000,
+      "privilege": {"minimum": "Visibility of pg_class and pg_namespace"},
+      "fallback": {"onDenied": "Record DENIED; relation inventory remains unknown"},
+      "provenance": {"sourceType": "OFFICIAL_CATALOG_API_REFERENCE", "url": "https://www.postgresql.org/docs/current/catalog-pg-class.html", "spdx": "PostgreSQL", "copiedCode": false, "changeMarker": "KaleidoSphere-authored scoped relation inventory SELECT"}
+    },
+    {
+      "id": "postgresql.structure.columns",
+      "category": "columns",
+      "file": "structure-columns.sql",
+      "outputColumns": ["schema_name", "relation_name", "relation_kind", "column_name", "ordinal_position", "type_schema_name", "data_type", "native_type_oid", "is_nullable", "has_default", "identity_kind", "generated_kind"],
+      "sortKeys": ["schema_name", "relation_name", "ordinal_position", "column_name"],
+      "scopeColumn": "schema_name",
+      "readOnly": true,
+      "cost": "BOUNDED",
+      "timeoutMs": 5000,
+      "privilege": {"minimum": "Visibility of pg_attribute, pg_class, pg_namespace and pg_type"},
+      "fallback": {"onDenied": "Record DENIED; columns and native types remain unknown"},
+      "provenance": {"sourceType": "OFFICIAL_CATALOG_API_REFERENCE", "url": "https://www.postgresql.org/docs/current/catalog-pg-attribute.html", "spdx": "PostgreSQL", "copiedCode": false, "changeMarker": "KaleidoSphere-authored scoped column inventory SELECT without defaults or values"}
+    },
+    {
+      "id": "postgresql.structure.constraints",
+      "category": "constraints",
+      "file": "structure-constraints.sql",
+      "outputColumns": ["schema_name", "relation_name", "constraint_name", "constraint_kind", "column_name", "ordinal_position", "referenced_schema_name", "referenced_relation_name", "referenced_column_name", "definition_disclosure", "delete_rule", "update_rule", "is_enabled", "is_validated", "is_deferrable", "is_initially_deferred"],
+      "sortKeys": ["schema_name", "relation_name", "constraint_kind", "constraint_name", "ordinal_position", "column_name"],
+      "scopeColumn": "schema_name",
+      "readOnly": true,
+      "cost": "BOUNDED",
+      "timeoutMs": 5000,
+      "privilege": {"minimum": "Visibility of pg_constraint, pg_attribute, pg_class and pg_namespace"},
+      "fallback": {"onDenied": "Record DENIED; constraints remain unknown and are never inferred"},
+      "provenance": {"sourceType": "OFFICIAL_CATALOG_API_REFERENCE", "url": "https://www.postgresql.org/docs/current/catalog-pg-constraint.html", "spdx": "PostgreSQL", "copiedCode": false, "changeMarker": "KaleidoSphere-authored PK, unique, FK and check metadata SELECT; definitions omitted"}
+    },
+    {
+      "id": "postgresql.structure.dependencies",
+      "category": "dependencies",
+      "file": "structure-dependencies.sql",
+      "outputColumns": ["source_schema_name", "source_relation_name", "source_relation_kind", "target_schema_name", "target_relation_name", "target_relation_kind", "dependency_kind", "relationship_authority", "inferred"],
+      "sortKeys": ["source_schema_name", "source_relation_name", "target_schema_name", "target_relation_name", "dependency_kind"],
+      "scopeColumn": "source_schema_name",
+      "readOnly": true,
+      "cost": "BOUNDED",
+      "timeoutMs": 5000,
+      "privilege": {"minimum": "Visibility of pg_depend, pg_rewrite, pg_class and pg_namespace"},
+      "fallback": {"onDenied": "Record DENIED or PARTIAL; do not infer missing dependencies"},
+      "provenance": {"sourceType": "OFFICIAL_CATALOG_API_REFERENCE", "url": "https://www.postgresql.org/docs/current/catalog-pg-depend.html", "spdx": "PostgreSQL", "copiedCode": false, "changeMarker": "KaleidoSphere-authored catalog-declared relation dependency SELECT"}
+    }
+  ]
+}

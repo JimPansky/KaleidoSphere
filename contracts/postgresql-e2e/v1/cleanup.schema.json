@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kaleidosphere.local/contracts/postgresql-e2e/v1/cleanup.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "ownedResources", "secretDirectoryAbsent", "preexistingInventory", "gateway"],
+  "properties": {
+    "schemaVersion": {"const": "kaleidosphere.db/postgresql-e2e-cleanup/v1"},
+    "ownedResources": {
+      "type": "object", "additionalProperties": false,
+      "required": ["containers", "networks", "volumes"],
+      "properties": {"containers": {"const": 0}, "networks": {"const": 0}, "volumes": {"const": 0}}
+    },
+    "secretDirectoryAbsent": {"const": true},
+    "preexistingInventory": {
+      "type": "object", "additionalProperties": false,
+      "required": ["unchanged", "containerCount", "networkCount", "volumeCount", "containersSha256", "networksSha256", "volumesSha256"],
+      "properties": {
+        "unchanged": {"const": true},
+        "containerCount": {"type": "integer", "minimum": 0}, "networkCount": {"type": "integer", "minimum": 0}, "volumeCount": {"type": "integer", "minimum": 0},
+        "containersSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}, "networksSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}, "volumesSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
+    "gateway": {
+      "type": "object", "additionalProperties": false,
+      "required": ["unchanged", "active", "inventorySha256"],
+      "properties": {"unchanged": {"const": true}, "active": {"const": true}, "inventorySha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}
+    }
+  }
+}

@@ -38,6 +38,7 @@ export const COVERAGE_STATES = Object.freeze([
   'ERROR',
 ]);
 export const COVERAGE_LEDGER_SCHEMA = 'chimpmaera.db/coverage-ledger/v1';
+export const CATALOG_SCAN_POLICY_SCHEMA = 'chimpmaera.db/catalog-scan-policy/v1';
 export const STORED_LOGIC_EVIDENCE_SCHEMA = 'chimpmaera.db/stored-logic-evidence/v1';
 export const STORED_LOGIC_DEFINITION_FINGERPRINT = 'CM-CANONICAL-SHA-256-OF-NATIVE-COMPONENTS/V1';
 export const STORED_LOGIC_POLICY_SCHEMA = 'chimpmaera.db/stored-logic-policy/v1';
@@ -72,6 +73,7 @@ const QUERY_CATEGORIES = new Set([
   'stored-arguments',
   'stored-errors',
   'stored-dependencies',
+  'dependencies',
   'operations',
   'db-links',
 ]);
@@ -303,11 +305,25 @@ function validateStoredLogicPolicy(profile) {
   return storedLogic;
 }
 
+function validateCatalogScanPolicy(policy) {
+  if (!hasExactKeys(policy, [
+    'schemaVersion', 'allowedQueryIds', 'maxQueries', 'maxRowsPerQuery', 'maxTotalRows',
+  ])
+    || policy.schemaVersion !== CATALOG_SCAN_POLICY_SCHEMA
+    || !Array.isArray(policy.allowedQueryIds) || policy.allowedQueryIds.length === 0
+    || policy.allowedQueryIds.some((queryId) => typeof queryId !== 'string' || !/^[a-z0-9][a-z0-9._-]{2,127}$/.test(queryId))
+    || new Set(policy.allowedQueryIds).size !== policy.allowedQueryIds.length
+    || ![policy.maxQueries, policy.maxRowsPerQuery, policy.maxTotalRows].every(Number.isInteger)
+    || policy.maxQueries < 1 || policy.maxRowsPerQuery < 1 || policy.maxTotalRows < 1
+    || policy.allowedQueryIds.length > policy.maxQueries) fail('DB_CATALOG_SCAN_POLICY_INVALID');
+  return policy;
+}
+
 export function validateAnalyzeProfile(profile) {
   if (profile?.schemaVersion !== ANALYZE_PROFILE_SCHEMA) fail('DB_ANALYZE_PROFILE_SCHEMA_INVALID');
   if (!hasExactKeys(profile, ['schemaVersion', 'profileId', 'engine', 'mode', 'queryPack', 'scope', 'policy', 'adapter'])) fail('DB_ANALYZE_PROFILE_FIELDS_INVALID');
   if (typeof profile.profileId !== 'string' || !/^[a-z0-9][a-z0-9._-]{2,63}$/.test(profile.profileId)) fail('DB_ANALYZE_PROFILE_ID_INVALID');
-  if (!['mssql', 'oracle'].includes(profile.engine)) fail('DB_ANALYZE_PROFILE_ENGINE_INVALID');
+  if (!['mssql', 'oracle', 'postgresql'].includes(profile.engine)) fail('DB_ANALYZE_PROFILE_ENGINE_INVALID');
   if (!['SYNTHETIC', 'RUNTIME'].includes(profile.mode)) fail('DB_ANALYZE_PROFILE_MODE_UNSUPPORTED');
   if (!hasExactKeys(profile.queryPack, ['version']) || profile.queryPack.version !== 'v1') fail('DB_ANALYZE_PROFILE_PACK_INVALID');
   if (!hasExactKeys(profile.scope, ['database', 'container', 'schemas'])
@@ -317,6 +333,7 @@ export function validateAnalyzeProfile(profile) {
     || profile.scope.schemas.some((schema) => typeof schema !== 'string' || schema.length === 0)
     || new Set(profile.scope.schemas).size !== profile.scope.schemas.length) fail('DB_ANALYZE_PROFILE_SCOPE_INVALID');
   const policyKeys = ['access', 'allowRowSamples', 'maxQueryTimeoutMs'];
+  if (profile.policy && Object.hasOwn(profile.policy, 'catalogScan')) policyKeys.push('catalogScan');
   if (profile.policy && Object.hasOwn(profile.policy, 'profiling')) policyKeys.push('profiling');
   if (profile.policy && Object.hasOwn(profile.policy, 'storedLogic')) policyKeys.push('storedLogic');
   if (!hasExactKeys(profile.policy, policyKeys)
@@ -324,6 +341,7 @@ export function validateAnalyzeProfile(profile) {
     || !Number.isInteger(profile.policy.maxQueryTimeoutMs) || profile.policy.maxQueryTimeoutMs < 1) fail('DB_ANALYZE_PROFILE_POLICY_INVALID');
   if (Object.hasOwn(profile.policy, 'profiling')) validateProfilingPolicy(profile);
   if (Object.hasOwn(profile.policy, 'storedLogic')) validateStoredLogicPolicy(profile);
+  if (Object.hasOwn(profile.policy, 'catalogScan')) validateCatalogScanPolicy(profile.policy.catalogScan);
   if (profile.mode === 'SYNTHETIC') {
     if (!hasExactKeys(profile.adapter, ['kind', 'fixture']) || profile.adapter.kind !== 'synthetic'
       || typeof profile.adapter.fixture !== 'string' || pathLike(profile.adapter.fixture)) fail('DB_ANALYZE_PROFILE_ADAPTER_INVALID');
@@ -341,7 +359,15 @@ export function validateAnalyzeProfile(profile) {
       || typeof profile.adapter.serviceName !== 'string' || profile.adapter.serviceName.length === 0
       || !(profile.adapter.serverDn === null || typeof profile.adapter.serverDn === 'string')
       || !Number.isInteger(profile.adapter.connectTimeoutMs) || profile.adapter.connectTimeoutMs < 1);
-    if (commonInvalid || mssqlInvalid || oracleInvalid) fail('DB_ANALYZE_PROFILE_ADAPTER_INVALID');
+    const postgresqlIdentifier = (value) => typeof value === 'string' && /^[A-Za-z_][A-Za-z0-9_$]{0,62}$/.test(value);
+    const postgresqlInvalid = profile.engine === 'postgresql' && (!hasExactKeys(profile.adapter, ['kind', 'host', 'port', 'user', 'passwordEnv', 'ssl', 'connectTimeoutMs'])
+      || profile.adapter.kind !== 'postgresql'
+      || typeof profile.adapter.ssl !== 'boolean'
+      || !Number.isInteger(profile.adapter.connectTimeoutMs) || profile.adapter.connectTimeoutMs < 1000 || profile.adapter.connectTimeoutMs > 120000
+      || profile.policy.maxQueryTimeoutMs < 1000 || profile.policy.maxQueryTimeoutMs > 120000
+      || !postgresqlIdentifier(profile.scope.database) || !postgresqlIdentifier(profile.adapter.user)
+      || profile.scope.schemas.some((schema) => !postgresqlIdentifier(schema)));
+    if (commonInvalid || mssqlInvalid || oracleInvalid || postgresqlInvalid) fail('DB_ANALYZE_PROFILE_ADAPTER_INVALID');
   }
   return profile;
 }
@@ -862,8 +888,21 @@ export function buildProfilingSupersetResult({ knowledgePack }) {
 
 export function validateQueryManifest(manifest) {
   if (manifest?.schemaVersion !== QUERY_MANIFEST_SCHEMA) fail('DB_QUERY_MANIFEST_SCHEMA_INVALID');
-  if (!['mssql', 'oracle'].includes(manifest.engine)) fail('DB_QUERY_MANIFEST_ENGINE_INVALID');
+  if (!['mssql', 'oracle', 'postgresql'].includes(manifest.engine)) fail('DB_QUERY_MANIFEST_ENGINE_INVALID');
   if (!manifest.packId || !manifest.packVersion || !Array.isArray(manifest.queries) || manifest.queries.length === 0) fail('DB_QUERY_MANIFEST_INCOMPLETE');
+  if (manifest.blindSpots !== undefined) {
+    if (!Array.isArray(manifest.blindSpots) || manifest.blindSpots.length === 0) fail('DB_QUERY_MANIFEST_BLIND_SPOTS_INVALID');
+    const codes = new Set();
+    for (const blindSpot of manifest.blindSpots) {
+      if (!hasExactKeys(blindSpot, ['code', 'description'])
+        || typeof blindSpot.code !== 'string' || !/^[A-Z][A-Z0-9_]{2,127}$/.test(blindSpot.code)
+        || codes.has(blindSpot.code)
+        || typeof blindSpot.description !== 'string' || blindSpot.description.length === 0) {
+        fail('DB_QUERY_MANIFEST_BLIND_SPOTS_INVALID');
+      }
+      codes.add(blindSpot.code);
+    }
+  } else if (manifest.engine === 'postgresql') fail('DB_QUERY_MANIFEST_BLIND_SPOTS_INVALID');
   const ids = new Set();
   for (const query of manifest.queries) {
     if (!query.id || ids.has(query.id)) fail('DB_QUERY_MANIFEST_QUERY_ID_INVALID');
@@ -950,8 +989,48 @@ function buildCoverageLedger(extracts) {
   };
 }
 
+function enforceCatalogScanPolicy({ manifest, resultSets, profileContext }) {
+  const policy = profileContext?.policy?.catalogScan;
+  if (policy === undefined) return;
+  validateCatalogScanPolicy(policy);
+  if (manifest.queries.length > policy.maxQueries
+    || manifest.queries.some((query) => !policy.allowedQueryIds.includes(query.id))) {
+    fail('DB_CATALOG_SCAN_ALLOWLIST_DENIED');
+  }
+  let totalRows = 0;
+  for (const query of manifest.queries) {
+    const rows = resultSets?.results?.[query.id]?.rows;
+    const rowCount = Array.isArray(rows) ? rows.length : 0;
+    if (rowCount > policy.maxRowsPerQuery) fail('DB_CATALOG_SCAN_BUDGET_EXCEEDED');
+    totalRows += rowCount;
+  }
+  if (totalRows > policy.maxTotalRows) fail('DB_CATALOG_SCAN_BUDGET_EXCEEDED');
+}
+
+function buildBlindSpots(manifest, coverageLedger) {
+  const declared = (manifest.blindSpots ?? []).map((blindSpot) => ({
+    ...blindSpot,
+    source: 'QUERY_PACK_DECLARATION',
+    queryId: null,
+    coverageState: null,
+    reasonCode: null,
+  }));
+  const observed = coverageLedger.entries
+    .filter((entry) => entry.state !== 'SUCCEEDED')
+    .map((entry) => ({
+      code: `QUERY_${entry.state}`,
+      description: 'Catalog visibility is incomplete; absence must not be interpreted as verified empty.',
+      source: 'COVERAGE_LEDGER',
+      queryId: entry.queryId,
+      coverageState: entry.state,
+      reasonCode: entry.reasonCode,
+    }));
+  return [...declared, ...observed];
+}
+
 export function buildPreflightEvidence({ manifest, sqlByQueryId, resultSets, profileContext, profilingEvidence, storedLogicEvidence }) {
   validateQueryManifest(manifest);
+  enforceCatalogScanPolicy({ manifest, resultSets, profileContext });
   const synthetic = resultSets?.schemaVersion === 'chimpmaera.db/synthetic-query-results/v1' && resultSets.runtimeValidated === false;
   const runtime = resultSets?.schemaVersion === 'chimpmaera.db/runtime-query-results/v1' && resultSets.runtimeValidated === true;
   if ((!synthetic && !runtime) || resultSets.engine !== manifest.engine
@@ -969,6 +1048,16 @@ export function buildPreflightEvidence({ manifest, sqlByQueryId, resultSets, pro
     const { rows } = normalizedResult;
     if (query.scopeColumn && profileContext
       && rows.some((row) => !profileContext.scope.schemas.includes(row[query.scopeColumn]))) fail('DB_QUERY_RESULT_SCOPE_INVALID');
+    if (manifest.engine === 'postgresql' && profileContext && query.category === 'constraints'
+      && rows.some((row) => row.constraint_kind === 'FOREIGN_KEY'
+        && !profileContext.scope.schemas.includes(row.referenced_schema_name))) fail('DB_QUERY_RESULT_SCOPE_INVALID');
+    if (manifest.engine === 'postgresql' && query.category === 'dependencies') {
+      if (rows.some((row) => row.relationship_authority !== 'CATALOG_DECLARED' || row.inferred !== false)) {
+        fail('DB_DECLARED_RELATIONSHIP_INVALID');
+      }
+      if (profileContext && rows.some((row) => !profileContext.scope.schemas.includes(row.source_schema_name)
+        || !profileContext.scope.schemas.includes(row.target_schema_name))) fail('DB_QUERY_RESULT_SCOPE_INVALID');
+    }
     return {
       queryId: query.id,
       category: query.category,
@@ -977,6 +1066,7 @@ export function buildPreflightEvidence({ manifest, sqlByQueryId, resultSets, pro
     };
   });
   const coverageLedger = buildCoverageLedger(extracts);
+  const blindSpots = buildBlindSpots(manifest, coverageLedger);
   const body = normalizeJsonValue({
     schemaVersion: PREFLIGHT_EVIDENCE_SCHEMA,
     packId: manifest.packId,
@@ -990,6 +1080,7 @@ export function buildPreflightEvidence({ manifest, sqlByQueryId, resultSets, pro
     ...(storedLogicEvidence === undefined ? {} : { storedLogic: storedLogicEvidence }),
     coverage: coverageLedger.stateCounts,
     coverageLedger,
+    ...(blindSpots.length === 0 ? {} : { blindSpots }),
     extracts,
   });
   return { ...body, snapshotSha256: identitySha256(body) };

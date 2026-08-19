@@ -1,0 +1,43 @@
+services:
+  postgres:
+    image: docker.io/library/postgres@sha256:94f23d40fdaf5e60cb2fd8a98c22f02a7b8724949f310d95a0ddf075e8c8b208
+    platform: linux/amd64
+    pull_policy: never
+    environment:
+      POSTGRES_DB: ks23_e2e
+      POSTGRES_USER: ks23_owner
+      POSTGRES_PASSWORD_FILE: /run/secrets/owner_password
+    secrets:
+      - owner_password
+    ports:
+      - target: 5432
+        published: ${KS23_HOST_PORT:?KS23_HOST_PORT is required}
+        host_ip: 127.0.0.1
+        protocol: tcp
+    networks:
+      - ks23_private
+    volumes:
+      - ks23_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ks23_owner -d ks23_e2e"]
+      interval: 2s
+      timeout: 2s
+      retries: 30
+      start_period: 5s
+    cpus: 1.0
+    mem_limit: 512m
+    pids_limit: 256
+    stop_grace_period: 10s
+    security_opt:
+      - no-new-privileges:true
+
+networks:
+  ks23_private:
+    driver: bridge
+
+volumes:
+  ks23_data:
+
+secrets:
+  owner_password:
+    file: ${KS23_OWNER_PASSWORD_FILE:?KS23_OWNER_PASSWORD_FILE is required}

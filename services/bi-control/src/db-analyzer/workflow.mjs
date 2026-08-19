@@ -14,6 +14,7 @@ import {
 } from './core.mjs';
 import { buildOptionalParserEnrichment } from './parser-enrichment.mjs';
 import { auditQueryPackSafety } from './query-safety.mjs';
+import { runPostgresqlQueries } from './postgresql-runtime.mjs';
 import { buildOracleConnectString } from '../runtime-config.mjs';
 
 const REPOSITORY_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
@@ -231,7 +232,9 @@ export async function runAnalyzeProfile(profileFile, options = {}) {
     ? await readJson(path.join(path.dirname(resolvedProfile), profile.adapter.fixture))
     : profile.engine === 'mssql'
       ? await runMssqlQueries({ profile, manifest, entries })
-      : await runOracleQueries({ profile, manifest, entries, driver: options.oracleDriver });
+      : profile.engine === 'postgresql'
+        ? await runPostgresqlQueries({ profile, manifest, entries, signal: options.signal, driver: options.postgresqlDriver })
+        : await runOracleQueries({ profile, manifest, entries, driver: options.oracleDriver });
   assertActive();
   let profilingEvidence;
   if (profile.policy.profiling !== undefined) {
