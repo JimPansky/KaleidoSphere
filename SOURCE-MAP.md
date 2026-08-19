@@ -106,3 +106,9 @@ evidence manifests are repository-authored clean-room work. They compose the exi
 M6-02 and M6-03 interfaces without copying Apache Superset, model, OpenClaw, or third-party
 runtime source. M6-04 files are ordinary repository-authored hashes under `files`, not derived
 files.
+
+Progressive Analysis v1 state, deterministic fixtures, tests, decision/evidence
+records, and documentation updates are repository-authored clean-room work for
+issue #37. They compose the existing Progressive Run Controller v1 without
+copying third-party source or widening its database authority. These files are
+ordinary repository-authored hashes under `files`, not derived files.

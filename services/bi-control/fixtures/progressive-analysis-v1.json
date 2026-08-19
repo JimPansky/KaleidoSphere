@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "kaleidosphere.analysis/progressive-analysis-fixtures/v1",
+  "runId": "fixture-mssql-progressive-analysis-v1",
+  "budgets": {
+    "maxRunProbes": 5,
+    "maxObjectProbes": 4,
+    "maxTableProbes": 4,
+    "maxHypothesisProbes": 3
+  },
+  "policy": {
+    "maxConsecutiveNoGain": 2,
+    "maxConsecutiveCounterevidence": 2,
+    "minExpectedGainBps": 1
+  },
+  "hypotheses": [
+    {
+      "hypothesisId": "orders-distribution-shift",
+      "hypothesisKind": "DISTRIBUTION_ANOMALY",
+      "confidenceBounds": {"lowerBps": 1500, "upperBps": 7500},
+      "sourceEvidence": "fixture-orders-distribution-source"
+    },
+    {
+      "hypothesisId": "orders-temporal-pattern",
+      "hypothesisKind": "TEMPORAL_PATTERN",
+      "confidenceBounds": {"lowerBps": 1000, "upperBps": 6500},
+      "sourceEvidence": "fixture-orders-temporal-source"
+    }
+  ],
+  "gainInputs": {
+    "high": {
+      "uncertaintyBps": 6000,
+      "outcomeProbabilityBps": 8000,
+      "relevanceBps": 9000,
+      "rationaleCode": "BOUNDED_UNCERTAINTY_REDUCTION"
+    },
+    "medium": {
+      "uncertaintyBps": 5000,
+      "outcomeProbabilityBps": 7000,
+      "relevanceBps": 8000,
+      "rationaleCode": "BOUNDED_UNCERTAINTY_REDUCTION"
+    }
+  }
+}

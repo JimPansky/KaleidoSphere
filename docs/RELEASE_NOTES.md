@@ -1,5 +1,25 @@
 # Release Notes
 
+## Unreleased - Progressive analysis budgets and hypothesis ledger
+
+Adds a sealed advanced-analysis layer on top of Progressive Run Controller v1.
+Every dispatch now reserves the existing run/object budget plus table and
+hypothesis debits in a compare-and-swap state before execution. Hypotheses retain
+supporting evidence, counterevidence, contradictions, receipt references,
+confidence bounds and explicit terminal reasons without promoting inference to
+business fact.
+
+Typed canonical intent features suppress near duplicates without inspecting SQL
+or values. Expected information gain is a persisted deterministic basis-point
+calculation and ordering signal, not an optimality claim. Consecutive no-gain or
+counterevidence bounds stop a branch. Unknown outcomes remain debited and cannot
+be blindly retried; a separate append-only readback receipt may reconcile them.
+
+The existing breadth gate, manifest allowlist, typed parameters, scope checks,
+timeouts, credential/raw-value rejection, and missing-privilege semantics remain
+unchanged. Evidence is local and synthetic; this does not activate a runtime or
+access production/customer databases.
+
 ## v0.12.0 - Progressive Run Controller v1
 
 Adds a persisted, deterministic MSSQL/Oracle progressive-analysis controller
