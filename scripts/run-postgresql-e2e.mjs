@@ -9,6 +9,7 @@ import {buildPostgresqlConnectionOptions, compilePostgresqlProfileQuery} from '.
 import {readPostgresqlSessionProof, runPostgresqlControlledProbe} from '../services/bi-control/src/db-analyzer/postgresql-runtime.mjs';
 import {auditCatalogQuery} from '../services/bi-control/src/db-analyzer/query-safety.mjs';
 import {buildStructureMapOutputs} from '../services/bi-control/src/db-analyzer/outputs.mjs';
+import {runPostgresqlAnalysisWave2} from '../services/bi-control/src/db-analyzer/postgresql-wave2-workflow.mjs';
 import {renderAnalyzeEvidence, runAnalyzeProfile} from '../services/bi-control/src/db-analyzer/workflow.mjs';
 import {validateOrThrow} from '../services/bi-control/src/graph-pilot/schema-validator.mjs';
 
@@ -78,6 +79,30 @@ const profileFor = (port, timeoutMs = 5000) => ({
     passwordEnv: 'KS23_SCAN_PASSWORD', ssl: false, connectTimeoutMs: 5000
   }
 });
+
+const wave2ProfileFor = (port) => {
+  const base = profileFor(port);
+  return {
+    ...base,
+    profileId: 'ks-analysis-wave2-e2e-v1',
+    policy: {
+      ...base.policy,
+      postgresqlAnalysis: {
+        schemaVersion: 'kaleidosphere.analysis/postgresql-wave2-policy/v1',
+        enabled: true,
+        profileTargets: [
+          {schemaName: 'ks23_app', relationName: 'accounts', columnName: 'account_id'},
+          {schemaName: 'ks23_app', relationName: 'orders', columnName: 'account_id'},
+          {schemaName: 'ks23_app', relationName: 'staging_events', columnName: 'account_id'}
+        ],
+        sensitiveTargets: [],
+        relationshipCandidates: {enabled: true, nameMatch: 'EXACT_COLUMN_NAME', minimumConfidenceBasisPoints: 7500},
+        budgets: {maxProfileTargets: 3, maxRelationshipCandidates: 2, maxQueries: 5, maxQueryTimeoutMs: 5000},
+        disclosure: {allowRawValues: false, allowExampleValues: false, allowDistributions: false}
+      }
+    }
+  };
+};
 
 const safePassword = (value) => {
   if (!/^[A-Za-z0-9_]{32,96}$/.test(value)) throw new Error('KS23_PASSWORD_SHAPE_INVALID');
@@ -182,6 +207,31 @@ function assertPositiveEvidence(evidence) {
   assert.equal(JSON.stringify(evidence).includes('ks23_outside'), false);
 }
 
+function assertPositiveWave2(result) {
+  assert.equal(result.runtimeValidation, 'RUNTIME_VALIDATED');
+  assert.equal(result.profileEvidence.factCount, 3);
+  assert.equal(result.relationshipEvidence.summary.evaluatedPairCount, 1);
+  assert.equal(result.relationshipEvidence.summary.eligibleCandidateCount, 1);
+  assert.equal(result.relationshipEvidence.summary.lowConfidenceRejectedCount, 0);
+  assert.equal(result.relationshipEvidence.observations.length, 1);
+  assert.equal(result.relationshipEvidence.observations[0].observationKind, 'OBSERVED');
+  assert.equal(result.relationshipEvidence.computations.length, 1);
+  assert.equal(result.relationshipEvidence.computations[0].observationKind, 'COMPUTED');
+  assert.equal(result.relationshipEvidence.computations[0].metrics.overlapBasisPoints, 10000);
+  assert.equal(result.relationshipEvidence.candidates.length, 1);
+  const candidate = result.relationshipEvidence.candidates[0];
+  assert.equal(candidate.observationKind, 'INFERRED');
+  assert.equal(candidate.claimStatus, 'PROPOSAL_ONLY');
+  assert.equal(candidate.confidence, 'HIGH');
+  assert.deepEqual(candidate.source, {schemaName: 'ks23_app', relationName: 'staging_events', columnName: 'account_id'});
+  assert.deepEqual(candidate.target, {schemaName: 'ks23_app', relationName: 'accounts', columnName: 'account_id'});
+  assert.equal(result.evidenceStore.factCount, 6);
+  assert.equal(result.plan.stepCount, 4);
+  assert.equal(result.plan.steps.some((step) => step.source?.relationName === 'orders'), false);
+  assert.equal(result.providerCallPerformed, false);
+  assert.equal(result.freeSqlAccepted, false);
+}
+
 async function loadPack() {
   const directory = path.join(repositoryRoot, 'services/bi-control/query-packs/db-analyzer/v1/postgresql');
   const manifest = JSON.parse(await readFile(path.join(directory, 'manifest.json'), 'utf8'));
@@ -216,11 +266,15 @@ async function main() {
   safePassword(ownerPassword); safePassword(scanPassword1); safePassword(scanPassword2);
 
   const profile = profileFor(port);
+  const wave2Profile = wave2ProfileFor(port);
   const runtimeDirectory = path.resolve(env('KS23_RUNTIME_DIRECTORY'));
   const outputRoot = path.join(repositoryRoot, 'docs/evidence/postgresql-e2e');
+  const wave2OutputRoot = path.join(repositoryRoot, 'docs/evidence/postgresql-wave2-e2e');
   await mkdir(runtimeDirectory, {recursive: true, mode: 0o700});
   const profileFile = path.join(runtimeDirectory, 'profile.json');
+  const wave2ProfileFile = path.join(runtimeDirectory, 'wave2-profile.json');
   await atomicWrite(profileFile, canonicalJson(profile));
+  await atomicWrite(wave2ProfileFile, canonicalJson(wave2Profile));
 
   await materializeFixture({profile, ownerPassword, scanPassword: scanPassword1});
   const before = await groundTruth(profile, ownerPassword);
@@ -237,6 +291,10 @@ async function main() {
   assertPositiveEvidence(evidence1);
   const run1File = path.join(outputRoot, 'run-1/evidence.canonical.json');
   await atomicWrite(run1File, renderAnalyzeEvidence(evidence1));
+  const wave2Result1 = await runPostgresqlAnalysisWave2(wave2ProfileFile, {repositoryRoot: path.join(repositoryRoot, 'services/bi-control')});
+  assertPositiveWave2(wave2Result1);
+  const wave2Run1File = path.join(wave2OutputRoot, 'run-1/result.canonical.json');
+  await atomicWrite(wave2Run1File, canonicalJson(wave2Result1));
 
   await rotateScanPassword({profile, ownerPassword, scanPassword: scanPassword2});
   process.env.KS23_SCAN_PASSWORD = scanPassword2;
@@ -244,6 +302,10 @@ async function main() {
   assertPositiveEvidence(evidence2);
   const run2File = path.join(outputRoot, 'run-2/evidence.canonical.json');
   await atomicWrite(run2File, renderAnalyzeEvidence(evidence2));
+  const wave2Result2 = await runPostgresqlAnalysisWave2(wave2ProfileFile, {repositoryRoot: path.join(repositoryRoot, 'services/bi-control')});
+  assertPositiveWave2(wave2Result2);
+  const wave2Run2File = path.join(wave2OutputRoot, 'run-2/result.canonical.json');
+  await atomicWrite(wave2Run2File, canonicalJson(wave2Result2));
   delete process.env.KS23_SCAN_PASSWORD;
 
   const [run1Bytes, run2Bytes] = await Promise.all([readFile(run1File), readFile(run2File)]);
@@ -255,6 +317,16 @@ async function main() {
   const run1Sha256 = sha256(run1Bytes);
   const run2Sha256 = sha256(run2Bytes);
   assert.equal(run1Sha256, run2Sha256);
+
+  const [wave2Run1Bytes, wave2Run2Bytes] = await Promise.all([readFile(wave2Run1File), readFile(wave2Run2File)]);
+  assert.deepEqual(wave2Run2Bytes, wave2Run1Bytes);
+  const wave2Run1Readback = JSON.parse(wave2Run1Bytes);
+  const wave2Run2Readback = JSON.parse(wave2Run2Bytes);
+  assertPositiveWave2(wave2Run1Readback);
+  assertPositiveWave2(wave2Run2Readback);
+  const wave2Run1Sha256 = sha256(wave2Run1Bytes);
+  const wave2Run2Sha256 = sha256(wave2Run2Bytes);
+  assert.equal(wave2Run1Sha256, wave2Run2Sha256);
 
   const {manifest, sqlByQueryId} = await loadPack();
   const projections = buildStructureMapOutputs({evidence: run1Readback, manifest, sqlByQueryId}).projections;
@@ -333,6 +405,62 @@ async function main() {
   const finalPrivacy = await scanArtifacts([run1File, run2File, readbackFile, humanFile], [ownerPassword, scanPassword1, scanPassword2]);
   assert.deepEqual(finalPrivacy, privacy);
 
+  const wave2Privacy = await scanArtifacts([wave2Run1File, wave2Run2File], [ownerPassword, scanPassword1, scanPassword2]);
+  assert.deepEqual(wave2Privacy, privacy);
+  const wave2Readback = {
+    schemaVersion: 'kaleidosphere.analysis/postgresql-wave2-e2e-readback/v1',
+    fixtureId: 'ks-analysis-wave2-e2e-v1',
+    image: {reference: IMAGE_REFERENCE, platform: 'linux/amd64', manifestDigest: IMAGE_DIGEST},
+    canonicalResult: {
+      run1Sha256: wave2Run1Sha256,
+      run2Sha256: wave2Run2Sha256,
+      byteIdentical: true,
+      diskReadbackValidated: true,
+      runtimeValidated: true
+    },
+    groundTruth: {beforeSha256, afterSha256, unchanged: true},
+    summary: {
+      profiledColumns: 3,
+      observedFacts: 4,
+      computedFacts: 1,
+      inferredCandidates: 1,
+      evaluatedPairs: 1,
+      highConfidenceCandidates: 1,
+      declaredForeignKeysExcluded: true,
+      evidenceStoreFacts: 6,
+      planSteps: 4
+    },
+    authority: {
+      proposalOnly: true,
+      executionAuthority: 'NONE',
+      mutationAuthority: 'NONE',
+      providerCallPerformed: false,
+      freeSqlAccepted: false
+    },
+    privacy: wave2Privacy,
+    nonClaims: [
+      'Local synthetic PostgreSQL 16.10 evidence only; no production, customer-data, HA, performance, TLS or version-breadth claim.',
+      'The inferred relationship is a review-required proposal based on one local aggregate snapshot, not semantic FK truth.',
+      'Composite, expression and partial unique targets are outside this Wave 2 candidate model.'
+    ]
+  };
+  const wave2ReadbackSchema = JSON.parse(await readFile(path.join(repositoryRoot, 'contracts/postgresql-wave2-e2e/v1/readback.schema.json'), 'utf8'));
+  validateOrThrow(wave2Readback, wave2ReadbackSchema, 'postgresql-wave2-e2e-readback');
+  const wave2ReadbackFile = path.join(wave2OutputRoot, 'readback.json');
+  await atomicWrite(wave2ReadbackFile, canonicalJson(wave2Readback));
+  const wave2HumanFile = path.join(wave2OutputRoot, 'README.md');
+  await atomicWrite(wave2HumanFile, `# PostgreSQL Analysis Wave 2 local readback\n\n`+
+    `The allowlisted Wave 2 flow ran twice through fresh read-only sessions against the digest-pinned PostgreSQL 16.10 fixture. `+
+    `Both canonical results are byte-identical at SHA-256 \`${wave2Run1Sha256}\`.\n\n`+
+    `Three columns were profiled with count-only evidence. One candidate pair was evaluated and produced the review-required high-confidence proposal `+
+    `\`ks23_app.staging_events.account_id\` → \`ks23_app.accounts.account_id\`; the declared orders foreign key was excluded rather than duplicated.\n\n`+
+    `Observed, computed and inferred records are separated and content-addressed. No source-row material, credentials, connection strings, provider calls, free SQL or mutation authority are included.\n`);
+  const wave2FinalPrivacy = await scanArtifacts(
+    [wave2Run1File, wave2Run2File, wave2ReadbackFile, wave2HumanFile],
+    [ownerPassword, scanPassword1, scanPassword2]
+  );
+  assert.deepEqual(wave2FinalPrivacy, wave2Privacy);
+
   console.log(JSON.stringify({
     fixtureId: readback.fixtureId,
     evidenceSha256: run1Sha256,
@@ -341,7 +469,15 @@ async function main() {
     cancel: {state: cancel.state, sqlState: cancel.sqlState, elapsedMs: cancel.elapsedMs},
     groundTruthUnchanged: true,
     privacy,
-    diskReadbackValidated: true
+    diskReadbackValidated: true,
+    wave2: {
+      resultSha256: wave2Run1Sha256,
+      byteIdentical: true,
+      profiledColumns: 3,
+      evaluatedPairs: 1,
+      highConfidenceCandidates: 1,
+      observedComputedInferred: [4, 1, 1]
+    }
   }));
 }
 

@@ -2,8 +2,9 @@
 
 KaleidoSphere is a single-host Docker Compose stack for governed database
 metadata understanding and BI requirements discovery. It is intentionally
-bounded: source databases are read only, source rows are excluded, and Superset
-is used for fixed technical overview dashboards over a local projection.
+bounded: source databases are read only, source-row material is excluded from
+artifacts, and Superset is used for fixed technical overview dashboards over a
+local projection.
 
 ## Components
 
@@ -25,23 +26,30 @@ is used for fixed technical overview dashboards over a local projection.
 
 ## Data flow
 
-1. The source analyzer reads Oracle or MSSQL metadata through audited SELECT
-   query packs and a scoped read-only principal.
+1. The source analyzer reads Oracle, MSSQL, or bounded PostgreSQL metadata
+   through audited SELECT query packs and a scoped read-only principal.
 2. The analyzer writes a local receipt with source scope, coverage states,
    runtime validation status, and snapshot SHA-256.
-3. `bi-control` ingests the safe receipt into the local technical catalog.
-4. Deterministic Q&A and guided BI Discovery read only the local catalog.
-5. `bi-control` owns Superset execution, but persistent work is admitted only
+3. The opt-in PostgreSQL Wave 2 module may additionally execute exact
+   allowlisted aggregate count templates for declared columns/candidate pairs.
+   It materializes counts and hashes only, then separates observed overlap,
+   computed scores, and inferred review proposals in a content-addressed
+   Evidence Store and authority-free rule plan.
+4. `bi-control` ingests safe receipts into the local technical catalog.
+5. Deterministic Q&A and guided BI Discovery read only the local catalog.
+6. `bi-control` owns Superset execution, but persistent work is admitted only
    through the exact trusted preview/approval/apply/readback/rollback workflow.
-6. External v2 clients receive proposals and semantic readback; they have no
+7. External v2 clients receive proposals and semantic readback; they have no
    ambient Superset mutation authority.
-7. Independently of the materializer, a confirmed Discovery brief, catalog
+8. Independently of the materializer, a confirmed Discovery brief, catalog
    evidence, and fresh compatible fingerprint can produce a deterministic
    review-only ZIP for human review and fail-closed preflight.
 
 ```mermaid
 flowchart LR
-  S[Oracle or MSSQL] -->|read-only metadata SELECTs| C[bi-control analyzer]
+  S[Oracle, MSSQL or bounded PostgreSQL] -->|read-only allowlisted SELECTs| C[bi-control analyzer]
+  C -->|aggregate counts only| W[PostgreSQL Wave 2 evidence]
+  W --> R
   C --> R[receipts]
   R --> P[local projection catalog]
   P --> Q[bounded Q&A]

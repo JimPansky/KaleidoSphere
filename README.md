@@ -142,6 +142,9 @@ Supported today:
 - Oracle and Microsoft SQL Server read-only metadata analysis.
 - Bounded PostgreSQL read-only metadata pilot with a frozen catalog pack and
   digest-pinned synthetic PostgreSQL 16.10 E2E/readback evidence.
+- Explicitly allowlisted PostgreSQL null/distinct count profiling and
+  single-column relationship-candidate evidence with observed/computed/inferred
+  separation, deterministic Evidence Store and proposal-only rule plan/reports.
 - Versioned evidence-bound local technical catalog and bounded technical Q&A.
 - Guided BI requirements discovery with Markdown/JSON brief export.
 - Review-bound managed technical overview dashboard workflows in Apache Superset.
@@ -157,7 +160,8 @@ Not claimed today:
 - Ambient or client-authorized dynamic dataset, chart, or dashboard mutation.
 - Production/customer promotion, Superset-native ZIP import/export, or dynamic
   source-connected asset creation. The execution adapter is synthetic-owned and local-only.
-- Free-form SQL, SQL Lab, row sampling, semantic-model generation, or direct production compatibility.
+- Free-form SQL, SQL Lab, source-row persistence/sampling, automatic relationship
+  activation, semantic-model generation, or direct production compatibility.
 - Direct Superset-to-source Oracle/MSSQL connections.
 - SSO, HA, Kubernetes, or managed multi-tenant operation.
 

@@ -12,6 +12,7 @@ export const PROFILING_COVERAGE_LEDGER_SCHEMA = 'chimpmaera.db/profiling-coverag
 export const PROFILING_REVIEW_RECEIPT_SCHEMA = 'chimpmaera.db/profiling-review-receipt/v1';
 export const PROFILING_KNOWLEDGE_PACK_SCHEMA = 'chimpmaera.db/profiling-knowledge-pack/v1';
 export const PROFILING_SUPERSET_RESULT_SCHEMA = 'chimpmaera.db/profiling-superset-result/v1';
+export const POSTGRESQL_WAVE2_POLICY_SCHEMA = 'kaleidosphere.analysis/postgresql-wave2-policy/v1';
 export const PROFILING_COVERAGE_STATES = Object.freeze([
   'SUCCEEDED',
   'PARTIAL',
@@ -129,6 +130,9 @@ const validScopedName = (value) => typeof value === 'string'
   && value === value.normalize('NFC')
   && !invalidUnicode.test(value)
   && !/[\u0000-\u001f\u007f]/.test(value);
+
+const postgresqlScopedIdentifier = (value) => typeof value === 'string'
+  && /^[A-Za-z_][A-Za-z0-9_$]{0,62}$/.test(value);
 
 const PROFILING_OUTPUT_COLUMNS = Object.freeze({
   NUMERIC: Object.freeze(['rowCount', 'nullCount', 'distinctCount', 'minimum', 'maximum']),
@@ -319,6 +323,62 @@ function validateCatalogScanPolicy(policy) {
   return policy;
 }
 
+export function validatePostgresqlWave2Policy(profile) {
+  const policy = profile?.policy?.postgresqlAnalysis;
+  if (!hasExactKeys(policy, [
+    'schemaVersion', 'enabled', 'profileTargets', 'sensitiveTargets',
+    'relationshipCandidates', 'budgets', 'disclosure',
+  ]) || policy.schemaVersion !== POSTGRESQL_WAVE2_POLICY_SCHEMA
+    || policy.enabled !== true
+    || profile.engine !== 'postgresql' || profile.mode !== 'RUNTIME'
+    || !Array.isArray(policy.profileTargets) || policy.profileTargets.length === 0
+    || !Array.isArray(policy.sensitiveTargets)) fail('DB_WAVE2_POLICY_INVALID');
+
+  const targetKey = (target) => `${target.schemaName}\u0000${target.relationName}\u0000${target.columnName}`;
+  const targets = new Set();
+  for (const target of policy.profileTargets) {
+    if (!hasExactKeys(target, ['schemaName', 'relationName', 'columnName'])
+      || !profile.scope.schemas.includes(target.schemaName)
+      || ![target.schemaName, target.relationName, target.columnName].every(postgresqlScopedIdentifier)
+      || targets.has(targetKey(target))) fail('DB_WAVE2_PROFILE_SCOPE_INVALID');
+    targets.add(targetKey(target));
+  }
+  const sensitive = new Set();
+  for (const target of policy.sensitiveTargets) {
+    if (!hasExactKeys(target, ['schemaName', 'relationName', 'columnName', 'classification'])
+      || target.classification !== 'SENSITIVE'
+      || !profile.scope.schemas.includes(target.schemaName)
+      || ![target.schemaName, target.relationName, target.columnName].every(postgresqlScopedIdentifier)
+      || sensitive.has(targetKey(target))) fail('DB_WAVE2_DISCLOSURE_INVALID');
+    sensitive.add(targetKey(target));
+  }
+  if ([...targets].some((key) => sensitive.has(key))) fail('DB_WAVE2_SENSITIVE_TARGET_DENIED');
+
+  const relationship = policy.relationshipCandidates;
+  if (!hasExactKeys(relationship, ['enabled', 'nameMatch', 'minimumConfidenceBasisPoints'])
+    || relationship.enabled !== true
+    || relationship.nameMatch !== 'EXACT_COLUMN_NAME'
+    || !Number.isInteger(relationship.minimumConfidenceBasisPoints)
+    || relationship.minimumConfidenceBasisPoints < 1
+    || relationship.minimumConfidenceBasisPoints > 10000) fail('DB_WAVE2_RELATIONSHIP_POLICY_INVALID');
+
+  const budgets = policy.budgets;
+  if (!hasExactKeys(budgets, [
+    'maxProfileTargets', 'maxRelationshipCandidates', 'maxQueries', 'maxQueryTimeoutMs',
+  ]) || !Object.values(budgets).every(Number.isInteger)
+    || budgets.maxProfileTargets < policy.profileTargets.length
+    || budgets.maxRelationshipCandidates < 1
+    || budgets.maxQueries < policy.profileTargets.length + budgets.maxRelationshipCandidates
+    || budgets.maxQueryTimeoutMs < 1000
+    || budgets.maxQueryTimeoutMs > profile.policy.maxQueryTimeoutMs) fail('DB_WAVE2_BUDGET_INVALID');
+
+  if (!hasExactKeys(policy.disclosure, ['allowRawValues', 'allowExampleValues', 'allowDistributions'])
+    || policy.disclosure.allowRawValues !== false
+    || policy.disclosure.allowExampleValues !== false
+    || policy.disclosure.allowDistributions !== false) fail('DB_WAVE2_DISCLOSURE_INVALID');
+  return policy;
+}
+
 export function validateAnalyzeProfile(profile) {
   if (profile?.schemaVersion !== ANALYZE_PROFILE_SCHEMA) fail('DB_ANALYZE_PROFILE_SCHEMA_INVALID');
   if (!hasExactKeys(profile, ['schemaVersion', 'profileId', 'engine', 'mode', 'queryPack', 'scope', 'policy', 'adapter'])) fail('DB_ANALYZE_PROFILE_FIELDS_INVALID');
@@ -336,12 +396,14 @@ export function validateAnalyzeProfile(profile) {
   if (profile.policy && Object.hasOwn(profile.policy, 'catalogScan')) policyKeys.push('catalogScan');
   if (profile.policy && Object.hasOwn(profile.policy, 'profiling')) policyKeys.push('profiling');
   if (profile.policy && Object.hasOwn(profile.policy, 'storedLogic')) policyKeys.push('storedLogic');
+  if (profile.policy && Object.hasOwn(profile.policy, 'postgresqlAnalysis')) policyKeys.push('postgresqlAnalysis');
   if (!hasExactKeys(profile.policy, policyKeys)
     || profile.policy.access !== 'READ_ONLY' || profile.policy.allowRowSamples !== false
     || !Number.isInteger(profile.policy.maxQueryTimeoutMs) || profile.policy.maxQueryTimeoutMs < 1) fail('DB_ANALYZE_PROFILE_POLICY_INVALID');
   if (Object.hasOwn(profile.policy, 'profiling')) validateProfilingPolicy(profile);
   if (Object.hasOwn(profile.policy, 'storedLogic')) validateStoredLogicPolicy(profile);
   if (Object.hasOwn(profile.policy, 'catalogScan')) validateCatalogScanPolicy(profile.policy.catalogScan);
+  if (Object.hasOwn(profile.policy, 'postgresqlAnalysis')) validatePostgresqlWave2Policy(profile);
   if (profile.mode === 'SYNTHETIC') {
     if (!hasExactKeys(profile.adapter, ['kind', 'fixture']) || profile.adapter.kind !== 'synthetic'
       || typeof profile.adapter.fixture !== 'string' || pathLike(profile.adapter.fixture)) fail('DB_ANALYZE_PROFILE_ADAPTER_INVALID');
@@ -359,14 +421,13 @@ export function validateAnalyzeProfile(profile) {
       || typeof profile.adapter.serviceName !== 'string' || profile.adapter.serviceName.length === 0
       || !(profile.adapter.serverDn === null || typeof profile.adapter.serverDn === 'string')
       || !Number.isInteger(profile.adapter.connectTimeoutMs) || profile.adapter.connectTimeoutMs < 1);
-    const postgresqlIdentifier = (value) => typeof value === 'string' && /^[A-Za-z_][A-Za-z0-9_$]{0,62}$/.test(value);
     const postgresqlInvalid = profile.engine === 'postgresql' && (!hasExactKeys(profile.adapter, ['kind', 'host', 'port', 'user', 'passwordEnv', 'ssl', 'connectTimeoutMs'])
       || profile.adapter.kind !== 'postgresql'
       || typeof profile.adapter.ssl !== 'boolean'
       || !Number.isInteger(profile.adapter.connectTimeoutMs) || profile.adapter.connectTimeoutMs < 1000 || profile.adapter.connectTimeoutMs > 120000
       || profile.policy.maxQueryTimeoutMs < 1000 || profile.policy.maxQueryTimeoutMs > 120000
-      || !postgresqlIdentifier(profile.scope.database) || !postgresqlIdentifier(profile.adapter.user)
-      || profile.scope.schemas.some((schema) => !postgresqlIdentifier(schema)));
+      || !postgresqlScopedIdentifier(profile.scope.database) || !postgresqlScopedIdentifier(profile.adapter.user)
+      || profile.scope.schemas.some((schema) => !postgresqlScopedIdentifier(schema)));
     if (commonInvalid || mssqlInvalid || oracleInvalid || postgresqlInvalid) fail('DB_ANALYZE_PROFILE_ADAPTER_INVALID');
   }
   return profile;
