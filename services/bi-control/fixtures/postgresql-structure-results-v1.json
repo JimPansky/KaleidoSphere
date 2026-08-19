@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "chimpmaera.db/synthetic-query-results/v1",
+  "engine": "postgresql",
+  "runtimeValidated": false,
+  "results": {
+    "postgresql.preflight.identity": {
+      "state": "SUCCEEDED",
+      "rows": [{"engine": "postgresql", "engine_version": "17.fixture", "database_name": "ks_fixture", "container_name": null}]
+    },
+    "postgresql.structure.schemas": {
+      "state": "SUCCEEDED",
+      "rows": [
+        {"schema_name": "reporting", "native_schema_oid": 2201, "owner_name": "ks_reader"},
+        {"schema_name": "public", "native_schema_oid": 2200, "owner_name": "ks_reader"}
+      ]
+    },
+    "postgresql.structure.relations": {
+      "state": "SUCCEEDED",
+      "rows": [
+        {"schema_name": "reporting", "relation_name": "order_rollup", "relation_kind": "VIEW", "native_relation_oid": 4103, "persistence": "p", "row_security_enabled": false, "is_partition": false},
+        {"schema_name": "public", "relation_name": "orders", "relation_kind": "TABLE", "native_relation_oid": 4102, "persistence": "p", "row_security_enabled": true, "is_partition": false},
+        {"schema_name": "public", "relation_name": "customers", "relation_kind": "TABLE", "native_relation_oid": 4101, "persistence": "p", "row_security_enabled": false, "is_partition": false}
+      ]
+    },
+    "postgresql.structure.columns": {
+      "state": "SUCCEEDED",
+      "rows": [
+        {"schema_name": "public", "relation_name": "orders", "relation_kind": "TABLE", "column_name": "total_amount", "ordinal_position": 3, "type_schema_name": "pg_catalog", "data_type": "numeric", "native_type_oid": 1700, "is_nullable": false, "has_default": false, "identity_kind": "", "generated_kind": ""},
+        {"schema_name": "reporting", "relation_name": "order_rollup", "relation_kind": "VIEW", "column_name": "customer_id", "ordinal_position": 1, "type_schema_name": "pg_catalog", "data_type": "int8", "native_type_oid": 20, "is_nullable": true, "has_default": false, "identity_kind": "", "generated_kind": ""},
+        {"schema_name": "public", "relation_name": "customers", "relation_kind": "TABLE", "column_name": "email", "ordinal_position": 2, "type_schema_name": "pg_catalog", "data_type": "text", "native_type_oid": 25, "is_nullable": false, "has_default": false, "identity_kind": "", "generated_kind": ""},
+        {"schema_name": "public", "relation_name": "orders", "relation_kind": "TABLE", "column_name": "customer_id", "ordinal_position": 2, "type_schema_name": "pg_catalog", "data_type": "int8", "native_type_oid": 20, "is_nullable": false, "has_default": false, "identity_kind": "", "generated_kind": ""},
+        {"schema_name": "public", "relation_name": "customers", "relation_kind": "TABLE", "column_name": "id", "ordinal_position": 1, "type_schema_name": "pg_catalog", "data_type": "int8", "native_type_oid": 20, "is_nullable": false, "has_default": true, "identity_kind": "d", "generated_kind": ""},
+        {"schema_name": "public", "relation_name": "orders", "relation_kind": "TABLE", "column_name": "id", "ordinal_position": 1, "type_schema_name": "pg_catalog", "data_type": "int8", "native_type_oid": 20, "is_nullable": false, "has_default": true, "identity_kind": "d", "generated_kind": ""}
+      ]
+    },
+    "postgresql.structure.constraints": {
+      "state": "SUCCEEDED",
+      "rows": [
+        {"schema_name": "public", "relation_name": "orders", "constraint_name": "orders_amount_check", "constraint_kind": "CHECK", "column_name": "total_amount", "ordinal_position": 1, "referenced_schema_name": null, "referenced_relation_name": null, "referenced_column_name": null, "definition_disclosure": "OMITTED_NO_RAW_DEFINITION", "delete_rule": null, "update_rule": null, "is_enabled": true, "is_validated": true, "is_deferrable": false, "is_initially_deferred": false},
+        {"schema_name": "public", "relation_name": "customers", "constraint_name": "customers_email_key", "constraint_kind": "UNIQUE", "column_name": "email", "ordinal_position": 1, "referenced_schema_name": null, "referenced_relation_name": null, "referenced_column_name": null, "definition_disclosure": "OMITTED_NO_RAW_DEFINITION", "delete_rule": null, "update_rule": null, "is_enabled": true, "is_validated": true, "is_deferrable": false, "is_initially_deferred": false},
+        {"schema_name": "public", "relation_name": "orders", "constraint_name": "orders_customer_fk", "constraint_kind": "FOREIGN_KEY", "column_name": "customer_id", "ordinal_position": 1, "referenced_schema_name": "public", "referenced_relation_name": "customers", "referenced_column_name": "id", "definition_disclosure": "OMITTED_NO_RAW_DEFINITION", "delete_rule": "NO_ACTION", "update_rule": "NO_ACTION", "is_enabled": true, "is_validated": true, "is_deferrable": false, "is_initially_deferred": false},
+        {"schema_name": "public", "relation_name": "customers", "constraint_name": "customers_pkey", "constraint_kind": "PRIMARY_KEY", "column_name": "id", "ordinal_position": 1, "referenced_schema_name": null, "referenced_relation_name": null, "referenced_column_name": null, "definition_disclosure": "OMITTED_NO_RAW_DEFINITION", "delete_rule": null, "update_rule": null, "is_enabled": true, "is_validated": true, "is_deferrable": false, "is_initially_deferred": false},
+        {"schema_name": "public", "relation_name": "orders", "constraint_name": "orders_pkey", "constraint_kind": "PRIMARY_KEY", "column_name": "id", "ordinal_position": 1, "referenced_schema_name": null, "referenced_relation_name": null, "referenced_column_name": null, "definition_disclosure": "OMITTED_NO_RAW_DEFINITION", "delete_rule": null, "update_rule": null, "is_enabled": true, "is_validated": true, "is_deferrable": false, "is_initially_deferred": false}
+      ]
+    },
+    "postgresql.structure.dependencies": {
+      "state": "SUCCEEDED",
+      "rows": [
+        {"source_schema_name": "reporting", "source_relation_name": "order_rollup", "source_relation_kind": "VIEW", "target_schema_name": "public", "target_relation_name": "orders", "target_relation_kind": "TABLE", "dependency_kind": "PG_DEPEND_REWRITE_NORMAL", "relationship_authority": "CATALOG_DECLARED", "inferred": false}
+      ]
+    }
+  }
+}

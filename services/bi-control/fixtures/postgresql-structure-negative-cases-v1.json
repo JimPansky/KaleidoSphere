@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "kaleidosphere.db/postgresql-structure-negative-cases/v1",
+  "cases": [
+    {
+      "caseId": "out-of-scope-schema",
+      "queryId": "postgresql.structure.relations",
+      "row": {"schema_name": "private", "relation_name": "secrets", "relation_kind": "TABLE", "native_relation_oid": 9999, "persistence": "p", "row_security_enabled": false, "is_partition": false},
+      "expectedError": "DB_QUERY_RESULT_SCOPE_INVALID"
+    },
+    {
+      "caseId": "inferred-dependency-disguised-as-declared",
+      "queryId": "postgresql.structure.dependencies",
+      "row": {"source_schema_name": "reporting", "source_relation_name": "order_rollup", "source_relation_kind": "VIEW", "target_schema_name": "public", "target_relation_name": "orders", "target_relation_kind": "TABLE", "dependency_kind": "NAME_SIMILARITY", "relationship_authority": "INFERRED", "inferred": true},
+      "expectedError": "DB_DECLARED_RELATIONSHIP_INVALID"
+    }
+  ]
+}

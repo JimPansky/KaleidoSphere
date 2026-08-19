@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "chimpmaera.db/analyze-profile/v1",
+  "profileId": "kaleidosphere-postgresql-structure-fixture-v1",
+  "engine": "postgresql",
+  "mode": "SYNTHETIC",
+  "queryPack": {"version": "v1"},
+  "scope": {"database": "ks_fixture", "container": null, "schemas": ["public", "reporting"]},
+  "policy": {
+    "access": "READ_ONLY",
+    "allowRowSamples": false,
+    "maxQueryTimeoutMs": 5000,
+    "catalogScan": {
+      "schemaVersion": "chimpmaera.db/catalog-scan-policy/v1",
+      "allowedQueryIds": [
+        "postgresql.preflight.identity",
+        "postgresql.structure.schemas",
+        "postgresql.structure.relations",
+        "postgresql.structure.columns",
+        "postgresql.structure.constraints",
+        "postgresql.structure.dependencies"
+      ],
+      "maxQueries": 6,
+      "maxRowsPerQuery": 64,
+      "maxTotalRows": 256
+    }
+  },
+  "adapter": {"kind": "synthetic", "fixture": "postgresql-structure-results-v1.json"}
+}

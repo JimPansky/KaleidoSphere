@@ -73,6 +73,7 @@ const objectName = (category, row) => {
   if (category === 'stored-arguments') return row.argument_name ?? row.subprogram_name ?? row.object_name;
   if (category === 'stored-errors') return row.object_name;
   if (category === 'stored-dependencies') return row.source_object_name;
+  if (category === 'dependencies') return row.source_relation_name;
   if (category === 'operations') return row.object_name ?? row.relation_name;
   if (category === 'db-links') return row.db_link_name;
   return null;
@@ -128,6 +129,8 @@ function buildRelationships(evidence, bindings) {
     if (extract.category === 'constraints') {
       for (const row of extract.rows.filter(({ constraint_kind: kind }) => kind === 'FOREIGN_KEY')) rows.push({
         relationshipKind: 'FOREIGN_KEY',
+        relationshipAuthority: 'CATALOG_DECLARED',
+        inferred: false,
         relationshipName: row.constraint_name,
         fromSchemaName: row.schema_name,
         fromObjectName: row.relation_name,
@@ -144,12 +147,32 @@ function buildRelationships(evidence, bindings) {
     if (extract.category === 'synonyms') {
       for (const row of extract.rows) rows.push({
         relationshipKind: 'SYNONYM_TARGET',
+        relationshipAuthority: 'CATALOG_DECLARED',
+        inferred: false,
         relationshipName: row.synonym_name,
         fromSchemaName: row.schema_name,
         fromObjectName: row.synonym_name,
         fromColumnName: null,
         toSchemaName: row.target_schema_name,
         toObjectName: row.target_object_name ?? row.target_reference,
+        toColumnName: null,
+        objectSha256: row.objectSha256,
+        sourceQueryId: binding.queryId,
+        sourceQuerySha256: binding.querySha256,
+        sourceReferenceUrl: binding.provenance.url,
+      });
+    }
+    if (extract.category === 'dependencies') {
+      for (const row of extract.rows) rows.push({
+        relationshipKind: row.dependency_kind,
+        relationshipAuthority: row.relationship_authority,
+        inferred: row.inferred,
+        relationshipName: null,
+        fromSchemaName: row.source_schema_name,
+        fromObjectName: row.source_relation_name,
+        fromColumnName: null,
+        toSchemaName: row.target_schema_name,
+        toObjectName: row.target_relation_name,
         toColumnName: null,
         objectSha256: row.objectSha256,
         sourceQueryId: binding.queryId,
@@ -187,7 +210,7 @@ function table(id, title, rows, columns) {
 
 function renderHtml({ evidence, bindings, projections, sourceBindingSha256 }) {
   const inventoryColumns = [['objectKind', 'Kind'], ['schemaName', 'Schema'], ['relationName', 'Relation'], ['objectName', 'Object'], ['sourceQueryId', 'Source query'], ['objectSha256', 'Object SHA-256']];
-  const relationshipColumns = [['relationshipKind', 'Kind'], ['relationshipName', 'Name'], ['fromSchemaName', 'From schema'], ['fromObjectName', 'From object'], ['toSchemaName', 'To schema'], ['toObjectName', 'To object'], ['sourceQueryId', 'Source query']];
+  const relationshipColumns = [['relationshipKind', 'Kind'], ['relationshipAuthority', 'Authority'], ['inferred', 'Inferred'], ['relationshipName', 'Name'], ['fromSchemaName', 'From schema'], ['fromObjectName', 'From object'], ['toSchemaName', 'To schema'], ['toObjectName', 'To object'], ['sourceQueryId', 'Source query']];
   const coverageColumns = [['queryId', 'Query'], ['category', 'Category'], ['state', 'State'], ['visibility', 'Visibility'], ['rowCount', 'Rows'], ['emptyInterpretation', 'Empty interpretation'], ['querySha256', 'Query SHA-256']];
   const references = bindings.map((binding) => `<li><code>${escapeHtml(binding.queryId)}</code> — <a href="${escapeHtml(binding.provenance.url)}">official catalog reference</a> — <code>${binding.querySha256}</code></li>`).join('');
   return `<!doctype html>

@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "chimpmaera.db/synthetic-query-results/v1",
+  "engine": "postgresql",
+  "runtimeValidated": false,
+  "results": {
+    "postgresql.preflight.identity": {"state": "SUCCEEDED", "rows": [{"engine": "postgresql", "engine_version": "17.fixture", "database_name": "ks_fixture", "container_name": null}]},
+    "postgresql.structure.schemas": {"state": "SUCCEEDED", "rows": [{"schema_name": "public", "native_schema_oid": 2200, "owner_name": "ks_reader"}]},
+    "postgresql.structure.relations": {"state": "SUCCEEDED", "rows": [{"schema_name": "public", "relation_name": "orders", "relation_kind": "TABLE", "native_relation_oid": 4102, "persistence": "p", "row_security_enabled": true, "is_partition": false}]},
+    "postgresql.structure.columns": {"state": "SUCCEEDED", "rows": [{"schema_name": "public", "relation_name": "orders", "relation_kind": "TABLE", "column_name": "id", "ordinal_position": 1, "type_schema_name": "pg_catalog", "data_type": "int8", "native_type_oid": 20, "is_nullable": false, "has_default": true, "identity_kind": "d", "generated_kind": ""}]},
+    "postgresql.structure.constraints": {"state": "PARTIAL", "reasonCode": "PG_CONSTRAINT_CATALOG_INCOMPLETE", "rows": [{"schema_name": "public", "relation_name": "orders", "constraint_name": "orders_pkey", "constraint_kind": "PRIMARY_KEY", "column_name": "id", "ordinal_position": 1, "referenced_schema_name": null, "referenced_relation_name": null, "referenced_column_name": null, "definition_disclosure": "OMITTED_NO_RAW_DEFINITION", "delete_rule": null, "update_rule": null, "is_enabled": true, "is_validated": true, "is_deferrable": false, "is_initially_deferred": false}]},
+    "postgresql.structure.dependencies": {"state": "DENIED", "reasonCode": "PG_DEPEND_VISIBILITY_DENIED", "rows": []}
+  }
+}
