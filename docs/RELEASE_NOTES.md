@@ -1,6 +1,6 @@
 # Release Notes
 
-## Unreleased - PostgreSQL profiling and relationship evidence
+## v0.11.0 - PostgreSQL profiling and relationship evidence
 
 Adds explicit, privacy-preserving PostgreSQL `rowCount`/`nullCount`/
 `distinctCount` profiling and bounded single-column relationship-candidate

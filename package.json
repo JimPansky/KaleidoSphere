@@ -1,6 +1,6 @@
 {
   "name": "chimpmaera-bi",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "private": true,
   "description": "KaleidoSphere transforms fragmented enterprise data into coherent perspectives, revealing patterns, dependencies and actionable insights.",
   "license": "Apache-2.0",
