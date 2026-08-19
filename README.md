@@ -9,8 +9,6 @@
 [![Latest release](https://img.shields.io/github/v/release/JoFe2/KaleidoSphere?sort=semver)](https://github.com/JoFe2/KaleidoSphere/releases/latest)
 [![License](https://img.shields.io/github/license/JoFe2/KaleidoSphere)](LICENSE)
 [![Docker Compose](https://img.shields.io/badge/Docker%20Compose-local%20stack-2496ed)](compose.yaml)
-[![Support KaleidoSphere on Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20KaleidoSphere-ff5e5b?logo=kofi&logoColor=white)](https://ko-fi.com/chimpmaera)
-[![Support KaleidoSphere on Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Support%20KaleidoSphere-ffdd00?logo=buymeacoffee&logoColor=000000)](https://www.buymeacoffee.com/jimpansky)
 
 **KaleidoSphere — Multi-perspective Business & Decision Intelligence**
 
@@ -191,11 +189,6 @@ Not claimed today:
   [BI discovery](docs/evidence/M4_GUIDED_BI_DISCOVERY.md),
   [Superset fingerprint](docs/evidence/M5_SUPERSET_FINGERPRINT.md), and
   [promotion bundle contract](docs/evidence/M5_PROMOTION_BUNDLE.md)
-
-## Contributing
-
-Support in the repository is welcome through issues, documentation, tests, and
-code contributions or pull requests. Sharing is caring.
 
 ## Provenance
 
