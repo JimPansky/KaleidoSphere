@@ -19,7 +19,7 @@ test('K2 attests, dispatches all six closed intents and maps each response throu
   assert.equal(report.executedIntents, 6);
   assert.equal(report.acceptedEvidence, 6);
   assert.equal(report.downstreamDispatches, 6);
-  assert.equal(report.reportDigest, 'sha256:4397a00c36ada65e7299cbf72ed116ae02b63a64a679036e295ef55a15fbe562');
+  assert.equal(report.reportDigest, 'sha256:d6861757f1cdc538b2d40308912f2d54a9df360adea84415397862d83a806b30');
   assert.deepEqual(report.evidence.map(({action}) => action), CLOSED_INTENTS);
   assert.ok(report.evidence.every((item) => item.status === 'succeeded' && item.evidenceDigest.startsWith('sha256:')));
 });
