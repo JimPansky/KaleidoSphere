@@ -1,6 +1,6 @@
 # Release Notes
 
-## Unreleased - Progressive Run Controller v1
+## v0.12.0 - Progressive Run Controller v1
 
 Adds a persisted, deterministic MSSQL/Oracle progressive-analysis controller
 over the existing read-only query manifests, structure coverage ledgers,
