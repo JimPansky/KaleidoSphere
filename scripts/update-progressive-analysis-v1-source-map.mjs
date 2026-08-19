@@ -8,14 +8,19 @@ const authoredFiles = [
   'README.md',
   'SOURCE-MAP.md',
   'docs/ARCHITECTURE.md',
+  'docs/CONFIGURATION.md',
   'docs/RELEASE_NOTES.md',
   'docs/decisions/PROGRESSIVE-ANALYSIS-V1.md',
   'docs/evidence/PROGRESSIVE_ANALYSIS_V1.md',
   'package.json',
   'scripts/update-progressive-analysis-v1-source-map.mjs',
+  'scripts/run-external-api-v2-clean-room.mjs',
+  'services/bi-agent/package.json',
   'services/bi-control/fixtures/progressive-analysis-v1.json',
   'services/bi-control/src/db-analyzer/progressive-analysis-v1.mjs',
   'tests/progressive-analysis-v1.test.mjs',
+  'tests/external-api-v2.test.mjs',
+  'tests/release.test.mjs',
 ];
 
 const sourceMap = JSON.parse(await readFile(sourceMapPath, 'utf8'));

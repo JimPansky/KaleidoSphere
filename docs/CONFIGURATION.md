@@ -58,7 +58,7 @@ ports to `127.0.0.1` only.
 
 Clients configure only the SBA agent URL, for example
 `http://127.0.0.1:18790`. They first read `GET /v2/capabilities`, verify product
-`v0.12.0`, contract `2.0.0`, the required capability set and the canonical
+`v0.13.0`, contract `2.0.0`, the required capability set and the canonical
 attestation digest, then send closed requests to `POST /v2/intents`.
 
 Do not configure a source database URL, Superset URL, DB credential or Superset
