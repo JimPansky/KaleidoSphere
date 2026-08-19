@@ -159,6 +159,8 @@ Supported today:
 - Read-only Superset 6.1.0 runtime fingerprint and fail-closed planning preflight.
 - Deterministic MSSQL/Oracle Progressive Run Controller v1 with explicit per-object coverage,
   a 95% breadth-before-depth gate, hard probe budgets, duplicate suppression and receipt resume.
+- Reservation-before-dispatch table/hypothesis budgets, persisted hypothesis and counterevidence,
+  typed near-duplicate suppression, deterministic expected-gain ordering and unknown-outcome reconciliation.
 - Deterministic `chimpmaera.bi/superset-promotion-bundle/v1` review ZIP build,
   inspection, checksum, and fail-closed preflight.
 
