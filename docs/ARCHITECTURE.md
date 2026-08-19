@@ -117,6 +117,21 @@ No source/Superset credential, arbitrary URL, free SQL, raw source row or direct
 mutation field is part of the contract. PANSPHAIRA is a thin optional client and
 does not need a Superset URL or database driver.
 
+### Harness-neutral Evidence Bridge v1
+
+The inactive K1 adapter verifies the runtime-generated External API v2
+attestation and result envelope before mapping a terminal outcome into the
+existing M6-00 `tool.execution.receipt` event. It emits only correlation IDs,
+authority, canonical digests and the existing receipt contract; the result body
+is never copied into adapter evidence. A pure deterministic builder supports
+repeatable proof, while an optional stateful consumer rejects replay.
+
+The bridge adds no route, runtime activation, network client, handler authority,
+plugin loader or credential surface. Unknown versions, capability/authority
+drift, tampering, replay, unsafe result fields and request/action/correlation
+mismatches fail closed. See
+`docs/decisions/HARNESS-NEUTRAL-EVIDENCE-BRIDGE-V1.md`.
+
 ## Fixed vs dynamic Superset boundary
 
 Superset execution is managed by the repository. Persistent changes require the

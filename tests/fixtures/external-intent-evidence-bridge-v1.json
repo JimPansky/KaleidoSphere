@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "kaleidosphere/external-intent-evidence-bridge-fixture/v1",
+  "requests": [
+    {"schemaVersion":"superset-bi-agent.external/intent-request/v2","requestId":"req-status","action":"status"},
+    {"schemaVersion":"superset-bi-agent.external/intent-request/v2","requestId":"req-discovery","action":"discovery","input":{"command":"start","sessionId":"demo-1"}},
+    {"schemaVersion":"superset-bi-agent.external/intent-request/v2","requestId":"req-analyze","action":"analyze"},
+    {"schemaVersion":"superset-bi-agent.external/intent-request/v2","requestId":"req-plan","action":"plan","input":{"objective":"Review weekly order value"}},
+    {"schemaVersion":"superset-bi-agent.external/intent-request/v2","requestId":"req-preview","action":"preview","input":{"objective":"Preview weekly order value","receiptId":"mssql-abc"}},
+    {"schemaVersion":"superset-bi-agent.external/intent-request/v2","requestId":"req-readback","action":"readback"}
+  ],
+  "context": {
+    "streamId":"external-api-v2",
+    "seq":1,
+    "occurredAt":"2026-08-19T17:30:02.000Z",
+    "producerArtifactDigest":"sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "startedAt":"2026-08-19T17:30:00.000Z",
+    "finishedAt":"2026-08-19T17:30:01.000Z",
+    "idempotencyKey":"fixture-idempotency"
+  }
+}
