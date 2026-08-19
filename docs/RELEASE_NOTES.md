@@ -1,6 +1,6 @@
 # Release Notes
 
-## Unreleased - Progressive analysis budgets and hypothesis ledger
+## v0.13.0 - Progressive analysis budgets and hypothesis ledger
 
 Adds a sealed advanced-analysis layer on top of Progressive Run Controller v1.
 Every dispatch now reserves the existing run/object budget plus table and

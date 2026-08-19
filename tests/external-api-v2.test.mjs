@@ -51,7 +51,7 @@ function handlers(calls = []) {
 test('G2 runtime attestation binds actual product, contract, capabilities and accepted graph incumbent', () => {
   const attestation = capabilityAttestationV2();
   assert.equal(attestation.schemaVersion, SBA_ATTESTATION_SCHEMA);
-  assert.equal(SBA_PRODUCT_VERSION, 'v0.12.0');
+  assert.equal(SBA_PRODUCT_VERSION, 'v0.13.0');
   assert.equal(attestation.product.version, SBA_PRODUCT_VERSION);
   assert.equal(attestation.contract.version, SBA_EXTERNAL_CONTRACT_VERSION);
   assert.equal(attestation.graph.acceptedIncumbent, 'adaptive-v1');
