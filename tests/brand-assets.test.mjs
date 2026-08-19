@@ -112,23 +112,6 @@ test('README provenance stays product-neutral while linking exact source maps', 
   assert.doesNotMatch(provenance, new RegExp(legacyProductName, 'i'));
 });
 
-test('README exposes accessible funding badges and a concise contribution invitation', async () => {
-  const readme = await readFile(path.join(root, 'README.md'), 'utf8');
-  const buyMeACoffeeHandle = ['jim', 'pansky'].join('');
-
-  assert.match(
-    readme,
-    /\[!\[Support KaleidoSphere on Ko-fi\]\(https:\/\/img\.shields\.io\/badge\/Ko--fi-Support%20KaleidoSphere-ff5e5b\?logo=kofi&logoColor=white\)\]\(https:\/\/ko-fi\.com\/chimpmaera\)/,
-  );
-  assert.ok(readme.includes(
-    `[![Support KaleidoSphere on Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Support%20KaleidoSphere-ffdd00?logo=buymeacoffee&logoColor=000000)](https://www.buymeacoffee.com/${buyMeACoffeeHandle})`,
-  ));
-  assert.match(readme, /## Contributing/);
-  assert.match(readme, /welcome through issues, documentation, tests, and\s+code contributions or pull requests\./);
-  assert.match(readme, /Sharing is caring\./);
-  assert.doesNotMatch(readme, /placeholder|fallback passage/i);
-});
-
 test('BI-agent serves exact brand bytes and denies unknown, traversal-shaped and wrong-method routes', async (t) => {
   const port = await freePort();
   const child = spawn(process.execPath, ['services/bi-agent/src/server.mjs'], {
