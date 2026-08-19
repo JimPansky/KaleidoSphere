@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "kaleidosphere/closed-intent-conformance-pack/v1",
+  "requests": [
+    {"schemaVersion":"superset-bi-agent.external/intent-request/v2","requestId":"k2-status","action":"status"},
+    {"schemaVersion":"superset-bi-agent.external/intent-request/v2","requestId":"k2-discovery","action":"discovery","input":{"command":"start","sessionId":"k2-demo"}},
+    {"schemaVersion":"superset-bi-agent.external/intent-request/v2","requestId":"k2-analyze","action":"analyze"},
+    {"schemaVersion":"superset-bi-agent.external/intent-request/v2","requestId":"k2-plan","action":"plan","input":{"objective":"Review weekly order value"}},
+    {"schemaVersion":"superset-bi-agent.external/intent-request/v2","requestId":"k2-preview","action":"preview","input":{"objective":"Preview weekly order value","receiptId":"fixture-receipt"}},
+    {"schemaVersion":"superset-bi-agent.external/intent-request/v2","requestId":"k2-readback","action":"readback"}
+  ],
+  "contexts": {
+    "status": {"eventId":"k2-event-status","streamId":"external-api-v2","correlationId":"k2-status","seq":1,"occurredAt":"2026-08-19T18:00:02.000Z","producerArtifactDigest":"sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","startedAt":"2026-08-19T18:00:00.000Z","finishedAt":"2026-08-19T18:00:01.000Z","idempotencyKey":"k2-status"},
+    "discovery": {"eventId":"k2-event-discovery","streamId":"external-api-v2","correlationId":"k2-discovery","seq":2,"occurredAt":"2026-08-19T18:00:05.000Z","producerArtifactDigest":"sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","startedAt":"2026-08-19T18:00:03.000Z","finishedAt":"2026-08-19T18:00:04.000Z","idempotencyKey":"k2-discovery"},
+    "analyze": {"eventId":"k2-event-analyze","streamId":"external-api-v2","correlationId":"k2-analyze","seq":3,"occurredAt":"2026-08-19T18:00:08.000Z","producerArtifactDigest":"sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","startedAt":"2026-08-19T18:00:06.000Z","finishedAt":"2026-08-19T18:00:07.000Z","idempotencyKey":"k2-analyze"},
+    "plan": {"eventId":"k2-event-plan","streamId":"external-api-v2","correlationId":"k2-plan","seq":4,"occurredAt":"2026-08-19T18:00:11.000Z","producerArtifactDigest":"sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","startedAt":"2026-08-19T18:00:09.000Z","finishedAt":"2026-08-19T18:00:10.000Z","idempotencyKey":"k2-plan"},
+    "preview": {"eventId":"k2-event-preview","streamId":"external-api-v2","correlationId":"k2-preview","seq":5,"occurredAt":"2026-08-19T18:00:14.000Z","producerArtifactDigest":"sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","startedAt":"2026-08-19T18:00:12.000Z","finishedAt":"2026-08-19T18:00:13.000Z","idempotencyKey":"k2-preview"},
+    "readback": {"eventId":"k2-event-readback","streamId":"external-api-v2","correlationId":"k2-readback","seq":6,"occurredAt":"2026-08-19T18:00:17.000Z","producerArtifactDigest":"sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","startedAt":"2026-08-19T18:00:15.000Z","finishedAt":"2026-08-19T18:00:16.000Z","idempotencyKey":"k2-readback"}
+  },
+  "stubResults": {
+    "status": {"status":"READY","engine":"mssql","catalogReady":true},
+    "discovery": {"schemaVersion":"chimpmaera.bi/discovery-session/v1","state":"READY","command":"start"},
+    "analyze": {"receiptId":"fixture-receipt","status":"ANALYZED_READ_ONLY","sourceMode":"fixture","engine":"mssql","scope":{"database":"fixture"},"safety":{"sourceReadOnly":true,"queryPackSelectOnly":true},"analysis":{"runtimeValidation":"SYNTHETIC_UNVALIDATED","snapshotSha256":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},"projection":{"sha256":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}},
+    "plan": {"schemaVersion":"superset-bi-agent.external/plan/v2","graph":{"acceptedIncumbent":"adaptive-v1"},"proposalOnly":true},
+    "preview": {"schemaVersion":"superset-bi-agent.external/preview/v2","proposalOnly":true,"receiptId":"fixture-receipt"},
+    "readback": {"receiptId":"fixture-receipt","summary":{"source_engine":"mssql","source_mode":"fixture","status":"ANALYZED_READ_ONLY","snapshot_sha256":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","source_read_only":1},"catalogSnapshot":{"receipt_id":"fixture-receipt"},"technicalOverview":{"coverageCount":2}}
+  }
+}

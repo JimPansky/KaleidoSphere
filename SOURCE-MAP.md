@@ -107,6 +107,13 @@ M6-02 and M6-03 interfaces without copying Apache Superset, model, OpenClaw, or 
 runtime source. M6-04 files are ordinary repository-authored hashes under `files`, not derived
 files.
 
+The K2 closed-intent conformance pack, deterministic synthetic fixture, negative
+matrix, focused tests and evidence documentation are repository-authored
+clean-room work. They compose the existing External API v2 and K1 contracts
+without copying or executing DeepSeek Harness, Cordis, plugin, model, provider
+or third-party runtime code. K2 paths are ordinary repository-authored hashes
+under `files`, not derived files.
+
 Progressive Analysis v1 state, deterministic fixtures, tests, decision/evidence
 records, and documentation updates are repository-authored clean-room work for
 issue #37. They compose the existing Progressive Run Controller v1 without
