@@ -140,11 +140,13 @@ read visibility for the declared schemas. Details are in
 Supported today:
 
 - Oracle and Microsoft SQL Server read-only metadata analysis.
+- Bounded PostgreSQL read-only metadata pilot with a frozen catalog pack and
+  digest-pinned synthetic PostgreSQL 16.10 E2E/readback evidence.
 - Versioned evidence-bound local technical catalog and bounded technical Q&A.
 - Guided BI requirements discovery with Markdown/JSON brief export.
 - Review-bound managed technical overview dashboard workflows in Apache Superset.
 - Server-attested external API `2.0.0` for status, discovery, analyze, plan,
-  preview and readback; the runtime reports product `v0.9.0` and exact
+  preview and readback; the runtime reports product `v0.10.0` and exact
   capabilities at `GET /v2/capabilities`.
 - Read-only Superset 6.1.0 runtime fingerprint and fail-closed planning preflight.
 - Deterministic `chimpmaera.bi/superset-promotion-bundle/v1` review ZIP build,
