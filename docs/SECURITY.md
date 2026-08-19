@@ -23,9 +23,10 @@ Primary risks addressed by the current design:
 
 ## Source database restrictions
 
-Live adapters execute only shipped audited metadata SELECT query packs. They use
-declared database/schema scope, driver binds, bounded timeouts, and read-only
-principals.
+Live adapters execute only shipped audited metadata or aggregate-count SELECT
+templates. They use declared database/schema/column scope, driver binds where
+values exist, strictly validated/quoted allowlisted identifiers, bounded
+timeouts, and read-only principals.
 
 The analyzer rejects or fails closed on unsafe configuration, scope mismatch,
 known DML/DDL/admin capability, malformed schema scope, unsupported engine, or
@@ -35,8 +36,12 @@ into object absence.
 
 ## Source-data exclusion
 
-The current stack does not collect source business rows or run count-all scans.
-It does not expose raw PL/SQL, view text, trigger body, scheduler action text,
+The current stack does not persist source business rows. The opt-in PostgreSQL
+Wave 2 module performs count-all/null/distinct and bounded equality-overlap scans
+only for explicitly allowlisted columns; source values are evaluated inside
+PostgreSQL but only aggregate integer counts cross the database boundary. It
+does not persist minima, maxima, distributions, labels, examples, or row
+material. The stack does not expose raw PL/SQL, view text, trigger body, scheduler action text,
 compile error text, DB-link username/password, raw DB-link host, source
 credentials, or provider keys to the agent, Superset, public artifacts, or an
 LLM. Public and agent-facing metadata uses identifiers, hashes, line counts,
@@ -54,6 +59,11 @@ rejected before tool calls.
 Catalog search, technical Q&A, BI Discovery suggestions, brief export,
 proposal/readback, Superset fingerprint logic, and promotion-bundle
 build/inspect/preflight are deterministic local code paths.
+
+PostgreSQL Wave 2 also defines a closed error-reaction proposal contract for a
+later optional agent. It accepts only registered method references, known
+Evidence Store hashes, enumerated reason/action pairs, and bounded retry counts.
+Validation grants no query, execution, mutation, DDL, or provider-call authority.
 
 ## Superset boundary
 

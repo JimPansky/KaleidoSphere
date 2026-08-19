@@ -1,5 +1,33 @@
 # Release Notes
 
+## Unreleased - PostgreSQL profiling and relationship evidence
+
+Adds explicit, privacy-preserving PostgreSQL `rowCount`/`nullCount`/
+`distinctCount` profiling and bounded single-column relationship-candidate
+evaluation. Versioned hash-bound templates execute only against allowlisted
+targets in read-only sessions. Accepted artifacts contain aggregate counts,
+identifiers and content hashes, not source-row material, labels, distributions,
+examples, credentials or connection strings.
+
+Wave 2 separates observed overlap facts, deterministic computed scores, and
+inferred review proposals. A content-addressed Evidence Store, authority-free
+rule plan, machine/human reports, and a closed future-agent problem-reaction
+proposal contract retain evidence, confidence, limitations, coverage and
+nonclaims without making a semantic FK assertion or calling a model/provider.
+
+The release evidence runs the flow twice against the digest-pinned synthetic
+PostgreSQL 16.10 fixture. Results are byte-identical at SHA-256
+`e907b98ee1049fae4456cb74195727e1cde63adae304e1817a5820b419906d70`;
+ground truth remains unchanged, privacy counters are zero, and owned runtime
+resources are removed while the preexisting Docker inventory and OpenClaw
+Gateway remain unchanged.
+
+This increment does not activate product/agent behavior, create database
+constraints, accept free SQL, persist source rows, access production/customer
+databases, call a provider, deploy anything, or claim HA, performance, TLS,
+extension, composite-key, semantic-truth or PostgreSQL-version breadth. The
+external API contract remains `2.0.0`.
+
 ## v0.10.0 - PostgreSQL end-to-end pilot
 
 Adds a bounded PostgreSQL read-only metadata-analysis pilot: credential-free

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kaleidosphere.local/contracts/postgresql-wave2-e2e/v1/readback.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "fixtureId", "image", "canonicalResult", "groundTruth", "summary", "authority", "privacy", "nonClaims"],
+  "properties": {
+    "schemaVersion": {"const": "kaleidosphere.analysis/postgresql-wave2-e2e-readback/v1"},
+    "fixtureId": {"const": "ks-analysis-wave2-e2e-v1"},
+    "image": {
+      "type": "object", "additionalProperties": false,
+      "required": ["reference", "platform", "manifestDigest"],
+      "properties": {
+        "reference": {"const": "docker.io/library/postgres@sha256:94f23d40fdaf5e60cb2fd8a98c22f02a7b8724949f310d95a0ddf075e8c8b208"},
+        "platform": {"const": "linux/amd64"},
+        "manifestDigest": {"const": "sha256:94f23d40fdaf5e60cb2fd8a98c22f02a7b8724949f310d95a0ddf075e8c8b208"}
+      }
+    },
+    "canonicalResult": {
+      "type": "object", "additionalProperties": false,
+      "required": ["run1Sha256", "run2Sha256", "byteIdentical", "diskReadbackValidated", "runtimeValidated"],
+      "properties": {
+        "run1Sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "run2Sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "byteIdentical": {"const": true},
+        "diskReadbackValidated": {"const": true},
+        "runtimeValidated": {"const": true}
+      }
+    },
+    "groundTruth": {
+      "type": "object", "additionalProperties": false,
+      "required": ["beforeSha256", "afterSha256", "unchanged"],
+      "properties": {
+        "beforeSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "afterSha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "unchanged": {"const": true}
+      }
+    },
+    "summary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["profiledColumns", "observedFacts", "computedFacts", "inferredCandidates", "evaluatedPairs", "highConfidenceCandidates", "declaredForeignKeysExcluded", "evidenceStoreFacts", "planSteps"],
+      "properties": {
+        "profiledColumns": {"const": 3},
+        "observedFacts": {"const": 4},
+        "computedFacts": {"const": 1},
+        "inferredCandidates": {"const": 1},
+        "evaluatedPairs": {"const": 1},
+        "highConfidenceCandidates": {"const": 1},
+        "declaredForeignKeysExcluded": {"const": true},
+        "evidenceStoreFacts": {"const": 6},
+        "planSteps": {"const": 4}
+      }
+    },
+    "authority": {
+      "type": "object", "additionalProperties": false,
+      "required": ["proposalOnly", "executionAuthority", "mutationAuthority", "providerCallPerformed", "freeSqlAccepted"],
+      "properties": {
+        "proposalOnly": {"const": true},
+        "executionAuthority": {"const": "NONE"},
+        "mutationAuthority": {"const": "NONE"},
+        "providerCallPerformed": {"const": false},
+        "freeSqlAccepted": {"const": false}
+      }
+    },
+    "privacy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["rawRowCanaryMatches", "outsideCanaryMatches", "credentialCanaryMatches", "dsnMatches", "rawValueFields"],
+      "properties": {
+        "rawRowCanaryMatches": {"const": 0}, "outsideCanaryMatches": {"const": 0},
+        "credentialCanaryMatches": {"const": 0}, "dsnMatches": {"const": 0}, "rawValueFields": {"const": 0}
+      }
+    },
+    "nonClaims": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+  }
+}

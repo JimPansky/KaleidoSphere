@@ -56,6 +56,16 @@ confirmed Discovery brief, catalog provenance and coverage, a compatible fresh
 Superset fingerprint, stable UUID review assets, per-file hashes, disclosure,
 limitations, and nonclaims. This stage does not import or mutate Superset.
 
+### PostgreSQL profiling and relationship evidence
+
+The bounded PostgreSQL path adds explicit null/distinct count profiling and
+single-column relationship-candidate evaluation. Only versioned aggregate
+templates execute against allowlisted columns in read-only sessions. Observed,
+computed, and inferred facts remain separate; candidates and the rule plan are
+review-required proposals with no DDL or execution authority. Two digest-pinned
+local PostgreSQL 16.10 runs provide byte-identical Evidence Store/report
+readback without source-row material.
+
 ## Candidate next capabilities
 
 These are candidates for later reviewed work. They are not implemented claims:
@@ -74,7 +84,8 @@ These are candidates for later reviewed work. They are not implemented claims:
 ## Explicit non-goals today
 
 - Free-form SQL generation or SQL Lab enablement.
-- Source-row sampling, business-row export, or model access to source rows.
+- Source-row sampling/persistence, business-row export, or model access to source rows.
+- Automatic foreign-key creation or activation from relationship candidates.
 - Dynamic Superset dataset/chart/dashboard generation without a reviewed
   promotion contract.
 - Superset import or promotion execution from the current review-only bundle.

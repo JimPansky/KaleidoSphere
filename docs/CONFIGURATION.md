@@ -136,6 +136,22 @@ Least-privilege expectations:
   visibility; packages, procedures, functions, triggers, scheduler programs,
   and database links are never invoked.
 
+## Bounded PostgreSQL Wave 2 profile
+
+PostgreSQL remains an explicitly bounded programmatic/E2E analysis path rather
+than a `BI_ENGINE` product activation. A runtime analyze profile may opt in with
+`policy.postgresqlAnalysis`. The policy must enumerate every
+`schemaName`/`relationName`/`columnName` target, a disjoint sensitive-target
+denylist, small profile/candidate/query/timeout budgets, exact-column-name
+relationship matching, and disclosure flags that are all `false` for row
+values, examples, and distributions.
+
+The adapter password is named only through `adapter.passwordEnv`; the secret
+value remains process-local. Identifiers are accepted only after they match the
+declared profile scope and canonical structure Evidence. Omit the entire policy
+to disable Wave 2. There is no CLI/free-SQL field, automatic FK creation,
+provider call, Superset publication, or production activation in this release.
+
 ## Optional OpenAI-compatible provider
 
 The deterministic default is:
