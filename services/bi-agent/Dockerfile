@@ -4,5 +4,6 @@ LABEL org.opencontainers.image.title="KaleidoSphere Agent" \
 WORKDIR /app
 COPY --chown=10001:10001 package.json ./
 COPY --chown=10001:10001 src ./src
+COPY --chown=10001:10001 assets ./assets
 USER 10001:10001
 CMD ["node", "src/server.mjs"]
