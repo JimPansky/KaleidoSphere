@@ -132,6 +132,22 @@ drift, tampering, replay, unsafe result fields and request/action/correlation
 mismatches fail closed. See
 `docs/decisions/HARNESS-NEUTRAL-EVIDENCE-BRIDGE-V1.md`.
 
+### Closed-intent conformance pack v1
+
+The optional K2 pack exercises all six closed intents through a deterministic,
+local consumer and passes every result through the existing K1 verification
+boundary. It consumes only the External API v2 attestation/request/result
+contracts and emits public-safe identifiers and canonical digests. An absent or
+incompatible consumer disables only the pack.
+
+K2 adds no production route, network client, dynamic plugin loader, provider,
+database, Superset, credential, SQL or mutation authority. Its negative matrix
+rejects boundary widening and malformed, tampered, replayed or stale evidence
+before any probe dispatch or evidence acceptance. The fixture proves local
+stub conformance only, not DeepSeek Harness API/ABI compatibility or real-harness
+end-to-end operation. See
+`docs/evidence/CLOSED_INTENT_CONFORMANCE_PACK_V1.md`.
+
 ## Fixed vs dynamic Superset boundary
 
 Superset execution is managed by the repository. Persistent changes require the

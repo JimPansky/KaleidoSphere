@@ -1,5 +1,20 @@
 # Release Notes
 
+## Unreleased - Harness-neutral closed-intent conformance pack v1
+
+Adds a deterministic, optional K2 pack that exercises all six External API v2
+closed intents through a local stub and maps each verified result through the K1
+Evidence Bridge. Independent runs are byte-identical; absent or incompatible
+consumers disable only the pack.
+
+Eleven negative probes reject extra tools, trusted apply, free SQL, arbitrary
+URLs, credentials/raw rows, malformed/tampered/replayed responses, stale
+contracts and missing capabilities with zero probe dispatches and zero accepted
+evidence. The pack adds no runtime route, network client, plugin loader,
+provider/database/Superset connection, credentials or mutation authority. This
+is synthetic local-stub conformance, not DeepSeek Harness API/ABI compatibility,
+real-harness E2E, production/customer readiness or deployment evidence.
+
 ## v0.15.0 - Harness-neutral closed-intent Evidence Bridge v1
 
 Adds an inactive local adapter that verifies External API v2 runtime
