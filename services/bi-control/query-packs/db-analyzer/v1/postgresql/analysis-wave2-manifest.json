@@ -23,6 +23,26 @@
         "referenceUrl": "https://www.postgresql.org/docs/current/functions-aggregate.html",
         "copiedCode": false
       }
+    },
+    {
+      "id": "postgresql.wave2.relationship-overlap",
+      "version": "1.0.0",
+      "kind": "RELATIONSHIP_OVERLAP",
+      "file": "relationship-overlap.sql",
+      "templateSha256": "d94d204f6ebb5c7fb06652f867a6028f8efa696defc931db3e8fd777cd24b09e",
+      "markers": ["SOURCE_SCHEMA", "SOURCE_RELATION", "SOURCE_COLUMN", "TARGET_SCHEMA", "TARGET_RELATION", "TARGET_COLUMN"],
+      "outputColumns": ["source_non_null_count", "source_distinct_count", "target_distinct_count", "matched_distinct_count"],
+      "readOnly": true,
+      "aggregateOnly": true,
+      "rowValues": false,
+      "exampleValues": false,
+      "cost": "BOUNDED_SCAN",
+      "timeoutMs": 5000,
+      "provenance": {
+        "sourceType": "KALEIDOSPHERE_AUTHORED_AGGREGATE_TEMPLATE",
+        "referenceUrl": "https://www.postgresql.org/docs/current/functions-aggregate.html",
+        "copiedCode": false
+      }
     }
   ],
   "blindSpots": [
