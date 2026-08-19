@@ -5,9 +5,9 @@
   <img src="services/bi-agent/assets/kaleidosphere-logo.png" alt="KaleidoSphere logo" width="280" height="280">
 </picture>
 
-[![CI](https://github.com/JimPansky/KaleidoSphere/actions/workflows/ci.yml/badge.svg)](https://github.com/JimPansky/KaleidoSphere/actions/workflows/ci.yml)
-[![Latest release](https://img.shields.io/github/v/release/JimPansky/KaleidoSphere?sort=semver)](https://github.com/JimPansky/KaleidoSphere/releases/latest)
-[![License](https://img.shields.io/github/license/JimPansky/KaleidoSphere)](LICENSE)
+[![CI](https://github.com/JoFe2/KaleidoSphere/actions/workflows/ci.yml/badge.svg)](https://github.com/JoFe2/KaleidoSphere/actions/workflows/ci.yml)
+[![Latest release](https://img.shields.io/github/v/release/JoFe2/KaleidoSphere?sort=semver)](https://github.com/JoFe2/KaleidoSphere/releases/latest)
+[![License](https://img.shields.io/github/license/JoFe2/KaleidoSphere)](LICENSE)
 [![Docker Compose](https://img.shields.io/badge/Docker%20Compose-local%20stack-2496ed)](compose.yaml)
 
 **KaleidoSphere — Multi-perspective Business & Decision Intelligence**
@@ -47,7 +47,7 @@ Requirements: Docker Engine with Compose v2, OpenSSL, and free localhost ports
 `18088` and `18790`.
 
 ```bash
-git clone https://github.com/JimPansky/KaleidoSphere.git
+git clone https://github.com/JoFe2/KaleidoSphere.git
 cd KaleidoSphere
 cp .env.example .env
 ./bin/bi setup
