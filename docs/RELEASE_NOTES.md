@@ -1,6 +1,6 @@
 # Release Notes
 
-## Unreleased - Harness-neutral closed-intent Evidence Bridge v1
+## v0.15.0 - Harness-neutral closed-intent Evidence Bridge v1
 
 Adds an inactive local adapter that verifies External API v2 runtime
 attestations, request/result correlation and canonical integrity before mapping
