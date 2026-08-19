@@ -1,5 +1,24 @@
 # Release Notes
 
+## v0.10.0 - PostgreSQL end-to-end pilot
+
+Adds a bounded PostgreSQL read-only metadata-analysis pilot: credential-free
+profiles, enforced read-only sessions and timeouts, a frozen six-query catalog
+pack for schemas, relations, columns, constraints and declared dependencies,
+and deterministic coverage/blind-spot evidence.
+
+The release includes reproducible synthetic E2E/readback evidence from two
+fresh sessions against the exact pinned PostgreSQL 16.10 linux/amd64 image.
+Credential rotation preserves byte-identical canonical evidence; timeout,
+cancellation, mutation, scope and raw-row probes fail closed; owned container,
+network, volume and secret resources are removed without changing preexisting
+Docker inventory.
+
+This release does not claim production/customer database validation, row
+sampling, free SQL, HA, performance, extension or multi-version breadth,
+production TLS, egress isolation, deployment or runtime activation. The
+external API contract remains `2.0.0`.
+
 ## v0.9.0 - KaleidoSphere product identity
 
 Renames the public product to **KaleidoSphere — Multi-perspective Business &
