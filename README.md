@@ -154,7 +154,7 @@ Supported today:
 - Guided BI requirements discovery with Markdown/JSON brief export.
 - Review-bound managed technical overview dashboard workflows in Apache Superset.
 - Server-attested external API `2.0.0` for status, discovery, analyze, plan,
-  preview and readback; the runtime reports product `v0.11.0` and exact
+  preview and readback; the runtime reports product `v0.11.1` and exact
   capabilities at `GET /v2/capabilities`.
 - Read-only Superset 6.1.0 runtime fingerprint and fail-closed planning preflight.
 - Deterministic `chimpmaera.bi/superset-promotion-bundle/v1` review ZIP build,
