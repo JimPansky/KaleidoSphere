@@ -1,6 +1,6 @@
 # Release Notes
 
-## Unreleased - KaleidoSphere brand and browser icons
+## v0.11.1 - KaleidoSphere brand and browser icons
 
 Ships the approved KaleidoSphere mark in the public README and BI-agent web UI,
 plus exact safe routes for SVG/PNG logo assets, 16/32 pixel favicons, a 180
