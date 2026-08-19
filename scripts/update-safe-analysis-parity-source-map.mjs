@@ -8,12 +8,15 @@ const authoredFiles = [
   'README.md',
   'SOURCE-MAP.md',
   'docs/ARCHITECTURE.md',
+  'docs/CONFIGURATION.md',
   'docs/RELEASE_NOTES.md',
   'docs/ROADMAP.md',
   'docs/decisions/SAFE-ANALYSIS-METHOD-PARITY.md',
   'docs/evidence/SAFE_ANALYSIS_METHOD_PARITY.md',
   'package.json',
   'scripts/update-safe-analysis-parity-source-map.mjs',
+  'scripts/run-external-api-v2-clean-room.mjs',
+  'services/bi-agent/package.json',
   'services/bi-control/query-packs/db-analyzer/v1/mssql/safe-analysis-manifest.json',
   'services/bi-control/query-packs/db-analyzer/v1/mssql/safe-column-summary.sql',
   'services/bi-control/query-packs/db-analyzer/v1/mssql/safe-quality-indicators.sql',
@@ -28,6 +31,8 @@ const authoredFiles = [
   'services/bi-control/src/db-analyzer/progressive-controller.mjs',
   'services/bi-control/src/db-analyzer/safe-analysis-methods.mjs',
   'tests/safe-analysis-method-parity.test.mjs',
+  'tests/external-api-v2.test.mjs',
+  'tests/release.test.mjs',
 ];
 
 const sourceMap = JSON.parse(await readFile(sourceMapPath, 'utf8'));
