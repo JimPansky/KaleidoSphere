@@ -5,15 +5,21 @@ import {resolve} from 'node:path';
 const root = resolve(process.cwd());
 const sourceMapPath = resolve(root, 'SOURCE-MAP.json');
 const authoredFiles = [
+  'README.md',
   'docs/ARCHITECTURE.md',
+  'docs/CONFIGURATION.md',
   'docs/decisions/HARNESS-NEUTRAL-EVIDENCE-BRIDGE-V1.md',
   'docs/evidence/HARNESS_NEUTRAL_EVIDENCE_BRIDGE_V1.md',
   'docs/RELEASE_NOTES.md',
   'package.json',
+  'scripts/run-external-api-v2-clean-room.mjs',
   'scripts/update-k1-evidence-bridge-source-map.mjs',
+  'services/bi-agent/package.json',
   'services/bi-agent/src/external-intent-evidence-bridge.mjs',
   'tests/external-intent-evidence-bridge.test.mjs',
+  'tests/external-api-v2.test.mjs',
   'tests/fixtures/external-intent-evidence-bridge-v1.json',
+  'tests/release.test.mjs',
 ];
 
 const sourceMap = JSON.parse(await readFile(sourceMapPath, 'utf8'));
