@@ -1,5 +1,29 @@
 # Release Notes
 
+## v0.14.0 - MSSQL/Oracle safe-analysis method parity
+
+Adds controller-bound MSSQL and Oracle parity for four safe semantic methods:
+bounded column summaries, temporal coverage, quality indicators and relationship
+overlap. Versioned content-addressed query packs use typed identifiers, a typed
+source-row cap, short timeouts, one aggregate output row and read-only sessions.
+Every dispatch retains the #36 breadth/coverage/allowlist/object budget gates;
+relationship pairs debit both visible objects, and #37 advanced dispatch also
+requires the table/hypothesis reservation before runtime execution.
+
+Equivalent synthetic engine fixtures normalize to the same semantic evidence
+hash while retaining documented dialect differences outside that hash. Observed
+counts, computed quality/key/overlap metrics, proposal-only inference and
+counterevidence remain distinct. Missing privileges and capabilities produce
+explicit `DENIED`, `UNSUPPORTED`, `PARTIAL` or `UNKNOWN` evidence and never an
+absence claim. Oracle native SQL Boolean columns are explicitly unsupported
+instead of being inferred from numeric conventions.
+
+This release does not accept free SQL, persist source rows/examples/labels or
+credentials, perform writes or automatic foreign-key creation, access a
+production/customer source, claim full-scan completeness, composite/universal
+keys, semantic relationship truth, universal temporal semantics, performance
+SLAs, deployment or production certification.
+
 ## v0.13.0 - Progressive analysis budgets and hypothesis ledger
 
 Adds a sealed advanced-analysis layer on top of Progressive Run Controller v1.

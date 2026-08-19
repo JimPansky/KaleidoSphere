@@ -161,6 +161,9 @@ Supported today:
   a 95% breadth-before-depth gate, hard probe budgets, duplicate suppression and receipt resume.
 - Reservation-before-dispatch table/hypothesis budgets, persisted hypothesis and counterevidence,
   typed near-duplicate suppression, deterministic expected-gain ordering and unknown-outcome reconciliation.
+- Controller-bound MSSQL/Oracle safe-analysis parity for bounded column, quality,
+  temporal and relationship aggregates. Typed pair targets debit both objects;
+  observed/computed evidence remains separate from proposal-only inference.
 - Deterministic `chimpmaera.bi/superset-promotion-bundle/v1` review ZIP build,
   inspection, checksum, and fail-closed preflight.
 
