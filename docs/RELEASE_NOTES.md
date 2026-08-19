@@ -1,6 +1,6 @@
 # Release Notes
 
-## Unreleased - Harness-neutral closed-intent conformance pack v1
+## v0.16.0 - Harness-neutral closed-intent conformance pack v1
 
 Adds a deterministic, optional K2 pack that exercises all six External API v2
 closed intents through a local stub and maps each verified result through the K1

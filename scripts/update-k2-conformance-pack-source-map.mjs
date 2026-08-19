@@ -5,15 +5,21 @@ import {resolve} from 'node:path';
 const root = resolve(process.cwd());
 const sourceMapPath = resolve(root, 'SOURCE-MAP.json');
 const authoredFiles = [
+  'README.md',
   'SOURCE-MAP.md',
   'docs/ARCHITECTURE.md',
+  'docs/CONFIGURATION.md',
   'docs/evidence/CLOSED_INTENT_CONFORMANCE_PACK_V1.md',
   'docs/RELEASE_NOTES.md',
   'package.json',
+  'scripts/run-external-api-v2-clean-room.mjs',
   'scripts/update-k2-conformance-pack-source-map.mjs',
+  'services/bi-agent/package.json',
   'services/bi-agent/src/closed-intent-conformance-pack.mjs',
   'tests/closed-intent-conformance-pack.test.mjs',
+  'tests/external-api-v2.test.mjs',
   'tests/fixtures/closed-intent-conformance-pack-v1.json',
+  'tests/release.test.mjs',
 ];
 
 const sourceMap = JSON.parse(await readFile(sourceMapPath, 'utf8'));
