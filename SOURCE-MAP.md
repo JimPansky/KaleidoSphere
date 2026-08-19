@@ -112,3 +112,10 @@ records, and documentation updates are repository-authored clean-room work for
 issue #37. They compose the existing Progressive Run Controller v1 without
 copying third-party source or widening its database authority. These files are
 ordinary repository-authored hashes under `files`, not derived files.
+
+Issue #38 safe-analysis method manifests, bounded MSSQL/Oracle aggregate SQL,
+controller pair-target accounting, canonical evidence/runtime code, deterministic
+fixtures, tests and decision/evidence records are repository-authored clean-room
+work. Official engine aggregate documentation is used as behavioral reference;
+no reference query code is copied. These paths are ordinary repository-authored
+hashes under `files`, not derived files.

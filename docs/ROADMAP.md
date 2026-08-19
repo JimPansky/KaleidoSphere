@@ -66,6 +66,17 @@ review-required proposals with no DDL or execution authority. Two digest-pinned
 local PostgreSQL 16.10 runs provide byte-identical Evidence Store/report
 readback without source-row material.
 
+### MSSQL/Oracle safe-analysis parity
+
+Four symmetric semantic methods provide bounded column summaries, quality
+indicators, temporal coverage and relationship overlap under the progressive
+controller. Exact pair targets debit both object budgets; advanced dispatch also
+requires the persisted table/hypothesis reservation. Canonical evidence separates
+observed aggregates, computed metrics, proposal-only inference and counterevidence.
+Privilege/capability failures stay explicit and never become an absence claim.
+Oracle native SQL Boolean columns remain explicitly unsupported rather than being
+guessed from numeric conventions.
+
 ## Candidate next capabilities
 
 These are candidates for later reviewed work. They are not implemented claims:

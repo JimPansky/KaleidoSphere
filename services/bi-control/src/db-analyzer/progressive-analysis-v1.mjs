@@ -94,8 +94,9 @@ function normalizeTableTarget(target, controllerRun) {
 }
 
 function tableTargetForProbe(target) {
-  if (!target || !identifier(target.schemaName) || !identifier(target.relationName)) fail('DB_PROGRESSIVE_CANDIDATE_TARGET_INVALID');
-  return normalizeJsonValue({kind: 'TABLE', schemaName: target.schemaName, relationName: target.relationName});
+  const endpoint = target?.kind === 'RELATIONSHIP' ? target.source : target;
+  if (!endpoint || !identifier(endpoint.schemaName) || !identifier(endpoint.relationName)) fail('DB_PROGRESSIVE_CANDIDATE_TARGET_INVALID');
+  return normalizeJsonValue({kind: 'TABLE', schemaName: endpoint.schemaName, relationName: endpoint.relationName});
 }
 
 function validateIntentFeatures(features) {
@@ -116,10 +117,21 @@ function validateDispatchShape(state, {phase, methodRef, target, arguments: args
     fail('DB_PROGRESSIVE_METHOD_DENIED');
   }
   if (Object.keys(args).some((key) => !safeText(key, 64) || SECRET_SHAPE.test(key))) fail('DB_PROGRESSIVE_PROBE_REQUEST_INVALID');
-  if (method.targetKind !== 'COLUMN'
-    || !exactKeys(target, ['kind', 'schemaName', 'relationName', 'columnName']) || target.kind !== 'COLUMN'
-    || ![target.schemaName, target.relationName, target.columnName].every(identifier)
-    || !state.controllerRun.scope.schemas.includes(target.schemaName)) fail('DB_PROGRESSIVE_SCOPE_DENIED');
+  if (method.targetKind === 'COLUMN') {
+    if (!exactKeys(target, ['kind', 'schemaName', 'relationName', 'columnName']) || target.kind !== 'COLUMN'
+      || ![target.schemaName, target.relationName, target.columnName].every(identifier)
+      || !state.controllerRun.scope.schemas.includes(target.schemaName)) fail('DB_PROGRESSIVE_SCOPE_DENIED');
+  } else if (method.targetKind === 'RELATIONSHIP') {
+    if (!exactKeys(target, ['kind', 'source', 'target']) || target.kind !== 'RELATIONSHIP') fail('DB_PROGRESSIVE_SCOPE_DENIED');
+    for (const endpoint of [target.source, target.target]) {
+      if (!exactKeys(endpoint, ['schemaName', 'relationName', 'columnName'])
+        || ![endpoint.schemaName, endpoint.relationName, endpoint.columnName].every(identifier)
+        || !state.controllerRun.scope.schemas.includes(endpoint.schemaName)) fail('DB_PROGRESSIVE_SCOPE_DENIED');
+    }
+    if (canonicalJson(target.source) === canonicalJson(target.target)) fail('DB_PROGRESSIVE_SCOPE_DENIED');
+  } else {
+    fail('DB_PROGRESSIVE_SCOPE_DENIED');
+  }
 }
 
 function expectedGain(gainInputs, bindingSha256) {

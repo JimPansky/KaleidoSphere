@@ -5,6 +5,7 @@ import {
   validateProfilingQueryManifest,
   validateQueryManifest,
 } from './core.mjs';
+import {validateSafeAnalysisMethodManifest} from './safe-analysis-methods.mjs';
 
 export const PROGRESSIVE_RUN_SCHEMA = 'kaleidosphere.analysis/progressive-run/v1';
 export const PROGRESSIVE_METHOD_REGISTRY_SCHEMA = 'kaleidosphere.analysis/progressive-method-registry/v1';
@@ -99,7 +100,7 @@ function methodDescriptor({methodRef, engine, phase, targetKind, allowedArgument
   });
 }
 
-export function buildProgressiveMethodRegistry({structureManifest, profilingManifest = null}) {
+export function buildProgressiveMethodRegistry({structureManifest, profilingManifest = null, safeAnalysisManifest = null}) {
   validateQueryManifest(structureManifest);
   if (!['mssql', 'oracle'].includes(structureManifest.engine)) fail('DB_PROGRESSIVE_ENGINE_INVALID');
   const engine = structureManifest.engine;
@@ -134,6 +135,22 @@ export function buildProgressiveMethodRegistry({structureManifest, profilingMani
       templateSha256: query.templateSha256,
     })));
   }
+  if (safeAnalysisManifest !== null) {
+    validateSafeAnalysisMethodManifest(safeAnalysisManifest);
+    if (safeAnalysisManifest.engine !== engine) fail('DB_PROGRESSIVE_METHOD_ENGINE_MISMATCH');
+    const safeManifestSha256 = identitySha256(safeAnalysisManifest);
+    methods.push(...safeAnalysisManifest.methods.map((method) => methodDescriptor({
+      methodRef: `${method.id}@${safeAnalysisManifest.packVersion}`,
+      engine,
+      phase: method.phase,
+      targetKind: method.targetKind,
+      allowedArgumentKeys: method.argumentKeys,
+      readOnly: true,
+      aggregateOnly: true,
+      sourceManifestSha256: safeManifestSha256,
+      templateSha256: method.templateSha256,
+    })));
+  }
   methods.sort((left, right) => compare(left.methodRef, right.methodRef));
   if (new Set(methods.map(({methodRef}) => methodRef)).size !== methods.length) fail('DB_PROGRESSIVE_METHOD_DUPLICATE');
   return seal({schemaVersion: PROGRESSIVE_METHOD_REGISTRY_SCHEMA, engine, methods}, 'registrySha256');
@@ -152,7 +169,7 @@ function validateMethodRegistry(registry) {
     ]) || refs.has(method.methodRef) || method.engine !== registry.engine
       || !METHOD_ID.test(method.methodRef.split('@')[0]) || !/^\d+\.\d+\.\d+$/.test(method.methodRef.split('@')[1] ?? '')
       || !PROGRESSIVE_PHASES.includes(method.phase)
-      || !['SCOPE', 'COLUMN'].includes(method.targetKind)
+      || !['SCOPE', 'COLUMN', 'RELATIONSHIP'].includes(method.targetKind)
       || !Array.isArray(method.allowedArgumentKeys)
       || method.allowedArgumentKeys.some((key) => !/^[a-z][a-zA-Z0-9]{0,63}$/.test(key) || SECRET_SHAPE.test(key))
       || method.readOnly !== true || typeof method.aggregateOnly !== 'boolean'
@@ -382,8 +399,12 @@ function validateRun(run) {
       || probe.scopeSha256 !== run.scopeSha256 || probe.methodRegistrySha256 !== run.methodRegistry.registrySha256
       || probe.coverageSha256 !== run.coverage.coverageSha256) fail('DB_PROGRESSIVE_PROBE_STATE_INVALID');
     validateTarget(probe.target, method.targetKind, run.scope);
-    const objectKey = targetCoverage(run, probe.target)?.objectKey ?? identitySha256(probe.target);
-    recomputedObjectCounts.set(objectKey, (recomputedObjectCounts.get(objectKey) ?? 0) + 1);
+    validateMethodArguments(probe.arguments, method.allowedArgumentKeys);
+    const objectKeys = targetCoverages(run, probe.target).map(({objectKey}) => objectKey);
+    if (objectKeys.length === 0) objectKeys.push(identitySha256(probe.target));
+    for (const objectKey of objectKeys) {
+      recomputedObjectCounts.set(objectKey, (recomputedObjectCounts.get(objectKey) ?? 0) + 1);
+    }
     probeKeys.add(probeKey);
   }
   const expectedObjectCounts = [...recomputedObjectCounts.entries()]
@@ -498,15 +519,41 @@ function validateTarget(target, targetKind, scope) {
       || !scope.schemas.includes(target.schemaName)) fail('DB_PROGRESSIVE_SCOPE_DENIED');
     return normalizeJsonValue(target);
   }
+  if (targetKind === 'RELATIONSHIP') {
+    if (!exactKeys(target, ['kind', 'source', 'target']) || target.kind !== 'RELATIONSHIP') fail('DB_PROGRESSIVE_TARGET_INVALID');
+    const normalizeEndpoint = (endpoint) => {
+      if (!exactKeys(endpoint, ['schemaName', 'relationName', 'columnName'])
+        || ![endpoint.schemaName, endpoint.relationName, endpoint.columnName].every(identifier)
+        || !scope.schemas.includes(endpoint.schemaName)) fail('DB_PROGRESSIVE_SCOPE_DENIED');
+      return normalizeJsonValue(endpoint);
+    };
+    const source = normalizeEndpoint(target.source);
+    const destination = normalizeEndpoint(target.target);
+    if (canonicalJson(source) === canonicalJson(destination)) fail('DB_PROGRESSIVE_TARGET_INVALID');
+    return normalizeJsonValue({kind: 'RELATIONSHIP', source, target: destination});
+  }
   fail('DB_PROGRESSIVE_TARGET_INVALID');
 }
 
-function targetCoverage(run, target) {
-  if (target.kind === 'SCOPE') return null;
-  return run.coverage.entries.find((entry) => entry.objectRef.kind === target.kind
-    && entry.objectRef.schemaName === target.schemaName
-    && entry.objectRef.relationName === target.relationName
-    && entry.objectRef.columnName === target.columnName) ?? null;
+function targetCoverages(run, target) {
+  if (target.kind === 'SCOPE') return [];
+  const endpoints = target.kind === 'RELATIONSHIP' ? [target.source, target.target] : [target];
+  return endpoints.map((endpoint) => run.coverage.entries.find((entry) => entry.objectRef.kind === 'COLUMN'
+    && entry.objectRef.schemaName === endpoint.schemaName
+    && entry.objectRef.relationName === endpoint.relationName
+    && entry.objectRef.columnName === endpoint.columnName) ?? null).filter(Boolean);
+}
+
+function validateMethodArguments(args, allowedArgumentKeys) {
+  if (!args || typeof args !== 'object' || Array.isArray(args)
+    || canonicalJson(Object.keys(args).sort()) !== canonicalJson(allowedArgumentKeys)) fail('DB_PROGRESSIVE_PROBE_REQUEST_INVALID');
+  for (const [key, value] of Object.entries(args)) {
+    if (SECRET_SHAPE.test(key)) fail('DB_PROGRESSIVE_PROBE_REQUEST_INVALID');
+    if (key === 'maxSourceRows' && (!Number.isInteger(value) || value < 1 || value > 10000)) fail('DB_PROGRESSIVE_PROBE_REQUEST_INVALID');
+    else if (key === 'typeFamily' && !['NUMERIC', 'TEMPORAL', 'CATEGORY', 'TEXT', 'BOOLEAN', 'PAIR'].includes(value)) fail('DB_PROGRESSIVE_PROBE_REQUEST_INVALID');
+    else if (!['maxSourceRows', 'typeFamily'].includes(key)) fail('DB_PROGRESSIVE_PROBE_REQUEST_INVALID');
+  }
+  return args;
 }
 
 function updateObjectCounts(counts, objectKey) {
@@ -517,21 +564,21 @@ function updateObjectCounts(counts, objectKey) {
 
 export function authorizeProgressiveProbe(run, request) {
   validateRun(run);
-  if (!exactKeys(request, ['phase', 'methodRef', 'target', 'arguments']) || request.phase !== run.phase
-    || !exactKeys(request.arguments, [])) fail('DB_PROGRESSIVE_PROBE_REQUEST_INVALID');
+  if (!exactKeys(request, ['phase', 'methodRef', 'target', 'arguments']) || request.phase !== run.phase) fail('DB_PROGRESSIVE_PROBE_REQUEST_INVALID');
   const method = run.methodRegistry.methods.find(({methodRef}) => methodRef === request.methodRef);
   if (!method || method.phase !== run.phase || method.engine !== run.engine || method.readOnly !== true
-    || method.acceptsFreeSql !== false || method.acceptsRawValues !== false || method.acceptsCredentials !== false
-    || canonicalJson(Object.keys(request.arguments).sort()) !== canonicalJson(method.allowedArgumentKeys)) {
+    || method.acceptsFreeSql !== false || method.acceptsRawValues !== false || method.acceptsCredentials !== false) {
     fail('DB_PROGRESSIVE_METHOD_DENIED');
   }
+  validateMethodArguments(request.arguments, method.allowedArgumentKeys);
   const target = validateTarget(request.target, method.targetKind, run.scope);
   const gate = DEPTH_PHASES.has(run.phase) ? breadthGate(run) : {mode: 'NOT_DEPTH', override: null};
-  const coverage = targetCoverage(run, target);
+  const coverages = targetCoverages(run, target) ?? [];
   if (DEPTH_PHASES.has(run.phase)) {
-    if (!coverage) fail('DB_PROGRESSIVE_TARGET_NOT_VISIBLE');
-    if (coverage.state !== 'COMPLETE') {
-      if (gate.override === null || !gate.override.allowedObjectKeys.includes(coverage.objectKey)) {
+    const expectedCoverageCount = target.kind === 'RELATIONSHIP' ? 2 : 1;
+    if (coverages.length !== expectedCoverageCount) fail('DB_PROGRESSIVE_TARGET_NOT_VISIBLE');
+    for (const coverage of coverages) {
+      if (coverage.state !== 'COMPLETE' && (gate.override === null || !gate.override.allowedObjectKeys.includes(coverage.objectKey))) {
         fail('DB_PROGRESSIVE_TARGET_COVERAGE_DENIED');
       }
     }
@@ -555,11 +602,13 @@ export function authorizeProgressiveProbe(run, request) {
     return {state: run, authorization: normalizeJsonValue({disposition: 'SUPPRESSED_DUPLICATE', probeKey, receiptSha256: receipt?.receiptSha256 ?? null})};
   }
   if (run.budget.authorizedProbeCount >= run.budget.maxRunProbes) fail('DB_PROGRESSIVE_RUN_BUDGET_EXCEEDED');
-  const objectKey = coverage?.objectKey ?? identitySha256(target);
-  const objectCount = run.budget.objectProbeCounts.find((entry) => entry.objectKey === objectKey)?.count ?? 0;
-  if (objectCount >= run.budget.maxObjectProbes) fail('DB_PROGRESSIVE_OBJECT_BUDGET_EXCEEDED');
-  if (gate.override !== null && coverage?.state !== 'COMPLETE') {
-    const overriddenCount = run.probes.filter((probe) => gate.override.allowedObjectKeys.includes(targetCoverage(run, probe.target)?.objectKey)).length;
+  const objectKeys = coverages.length > 0 ? coverages.map(({objectKey}) => objectKey) : [identitySha256(target)];
+  if (objectKeys.some((objectKey) => (run.budget.objectProbeCounts.find((entry) => entry.objectKey === objectKey)?.count ?? 0) >= run.budget.maxObjectProbes)) {
+    fail('DB_PROGRESSIVE_OBJECT_BUDGET_EXCEEDED');
+  }
+  if (gate.override !== null && coverages.some(({state}) => state !== 'COMPLETE')) {
+    const overriddenCount = run.probes.filter((probe) => targetCoverages(run, probe.target)
+      .some(({objectKey}) => gate.override.allowedObjectKeys.includes(objectKey))).length;
     if (overriddenCount >= gate.override.maxDepthProbeCount) fail('DB_PROGRESSIVE_OVERRIDE_BUDGET_EXCEEDED');
   }
   const probe = {...probeBody, probeKey};
@@ -570,7 +619,7 @@ export function authorizeProgressiveProbe(run, request) {
     budget: {
       ...run.budget,
       authorizedProbeCount: run.budget.authorizedProbeCount + 1,
-      objectProbeCounts: updateObjectCounts(run.budget.objectProbeCounts, objectKey),
+      objectProbeCounts: objectKeys.reduce((counts, objectKey) => updateObjectCounts(counts, objectKey), run.budget.objectProbeCounts),
     },
   });
   return {state, authorization: normalizeJsonValue({disposition: 'AUTHORIZED', probeKey, receiptSha256: null})};
