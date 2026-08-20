@@ -51,7 +51,7 @@ unchanged.
 - Full repository suite after inclusion in the default test command: 234/234
   passed.
 - Positive canonical report:
-  `sha256:d6861757f1cdc538b2d40308912f2d54a9df360adea84415397862d83a806b30`.
+  `sha256:681282179168e779759de7e8615ba14bab0becc8e36b5a0099e4a5c0b69cb0fd`.
 - Negative-matrix canonical report:
   `sha256:4bcdaca5813fd10baf5d914ae639376ff0640b0272220d81addc609af1e8e01c`.
 
