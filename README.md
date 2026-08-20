@@ -164,6 +164,9 @@ Supported today:
 - Controller-bound MSSQL/Oracle safe-analysis parity for bounded column, quality,
   temporal and relationship aggregates. Typed pair targets debit both objects;
   observed/computed evidence remains separate from proposal-only inference.
+- Deterministic proposal-only key, temporal, quality and relationship roles;
+  structural connected-component clusters; and a hash-chained six-surface diff
+  that distinguishes observed removal from visibility loss.
 - Deterministic `chimpmaera.bi/superset-promotion-bundle/v1` review ZIP build,
   inspection, checksum, and fail-closed preflight.
 
