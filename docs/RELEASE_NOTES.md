@@ -1,6 +1,6 @@
 # Release Notes
 
-## Unreleased - Proposal-only roles, clusters and extended evidence diff v2
+## v0.17.0 - Proposal-only roles, clusters and extended evidence diff v2
 
 Adds a deterministic terminal projection over the existing progressive
 controller, hypothesis ledger and MSSQL/Oracle safe-method evidence. Four closed
