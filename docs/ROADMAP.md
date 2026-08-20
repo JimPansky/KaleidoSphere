@@ -77,6 +77,14 @@ Privilege/capability failures stay explicit and never become an absence claim.
 Oracle native SQL Boolean columns remain explicitly unsupported rather than being
 guessed from numeric conventions.
 
+### Proposal-only roles, clusters and extended diff
+
+Issue #39 is implemented as a local deterministic projection over the #36-#38
+contracts. Closed technical role proposals, connected-component clusters and a
+six-surface hash-chained diff retain support and counterevidence. Observed
+removal is distinct from denied, unsupported or unknown visibility. This does
+not activate an external runtime, infer a domain model or promote business truth.
+
 ## Candidate next capabilities
 
 These are candidates for later reviewed work. They are not implemented claims:

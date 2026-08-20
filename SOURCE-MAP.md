@@ -126,3 +126,10 @@ fixtures, tests and decision/evidence records are repository-authored clean-room
 work. Official engine aggregate documentation is used as behavioral reference;
 no reference query code is copied. These paths are ordinary repository-authored
 hashes under `files`, not derived files.
+
+Issue #39 proposal-only role and structural-cluster projection, extended evidence
+diff, deterministic synthetic fixture, tests, decision/evidence records and
+documentation are repository-authored clean-room work. They compose only the
+existing #36-#38 contracts and do not copy or execute third-party model, database
+or clustering code. These paths are ordinary repository-authored hashes under
+`files`, not derived files.

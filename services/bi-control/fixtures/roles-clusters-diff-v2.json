@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "kaleidosphere.analysis/roles-clusters-diff-fixture/v1",
+  "scope": {"database": "FIXTURE", "container": null, "schemas": ["APP"]},
+  "targets": {
+    "orderId": {"kind": "COLUMN", "schemaName": "APP", "relationName": "ORDERS", "columnName": "ORDER_ID"},
+    "customerId": {"kind": "COLUMN", "schemaName": "APP", "relationName": "ORDERS", "columnName": "CUSTOMER_ID"},
+    "customerKey": {"kind": "COLUMN", "schemaName": "APP", "relationName": "CUSTOMERS", "columnName": "CUSTOMER_ID"},
+    "orderDate": {"kind": "COLUMN", "schemaName": "APP", "relationName": "ORDERS", "columnName": "ORDER_DATE"},
+    "relationship": {
+      "kind": "RELATIONSHIP",
+      "source": {"schemaName": "APP", "relationName": "ORDERS", "columnName": "CUSTOMER_ID"},
+      "target": {"schemaName": "APP", "relationName": "CUSTOMERS", "columnName": "CUSTOMER_ID"}
+    }
+  },
+  "budgets": {"maxRunProbes": 10, "maxObjectProbes": 5, "maxTableProbes": 6, "maxHypothesisProbes": 6},
+  "policy": {"maxConsecutiveNoGain": 2, "maxConsecutiveCounterevidence": 2, "minExpectedGainBps": 1},
+  "results": {
+    "orderKey": {"rowCount": 8, "nullCount": 0, "distinctCount": 8},
+    "customerKey": {"rowCount": 5, "nullCount": 0, "distinctCount": 5},
+    "temporal": {"rowCount": 8, "nullCount": 0, "distinctCount": 8, "minimum": "2026-01-01T00:00:00.000000", "maximum": "2026-01-08T00:00:00.000000", "freshnessMaximum": "2026-01-08T00:00:00.000000"},
+    "relationship": {"sourceNonNullCount": 8, "sourceDistinctCount": 5, "targetNonNullCount": 5, "targetDistinctCount": 5, "matchedDistinctCount": 5},
+    "relationshipCounter": {"sourceNonNullCount": 8, "sourceDistinctCount": 5, "targetNonNullCount": 6, "targetDistinctCount": 5, "matchedDistinctCount": 3},
+    "quality": {"rowCount": 8, "nullCount": 1, "distinctCount": 5}
+  },
+  "expected": {
+    "mssqlSnapshotSha256": "222160e3738ee6adec8aaf4f16023bb104557bc3d8b3142953bb0af75a6f55d9",
+    "oracleSnapshotSha256": "c4c21028f4f5d55025cb5dc37f240672933f07f4bfa2687e550c96293a473d42",
+    "semanticProjectionSha256": "dabe86ed1abfbfde24c95b80311c11e1685897ee85df2437e66ff9a278258d3c",
+    "connectedClusterSha256": "991dedc810755a58d8d8f4b9f04b86948904e900f5b7267a67d169fc92c5bbe4",
+    "observedRemovalDiffSha256": "80b6f08852a5a311128d55b2ade54fc14d25b991461ad8eded0d125fd560a018",
+    "visibilityLossDiffSha256": "0c8337919e124fef02fde4be830158fedcacd8641a574c3b7357109fd8a2e3a2"
+  }
+}

@@ -1,5 +1,22 @@
 # Release Notes
 
+## Unreleased - Proposal-only roles, clusters and extended evidence diff v2
+
+Adds a deterministic terminal projection over the existing progressive
+controller, hypothesis ledger and MSSQL/Oracle safe-method evidence. Four closed
+technical role kinds and structural connected-component clusters retain exact
+support, counterevidence, receipts and stable hashes. Counterevidence-only
+relationships cannot create link roles or merge clusters.
+
+The hash-chained extended diff covers coverage, profiles, relationships,
+hypotheses, roles and clusters. A structural item is `REMOVED` only after a
+successful current query with complete visibility. Denied, unsupported and
+unknown visibility remain explicit and never become deletion claims.
+
+This local candidate does not persist source rows or credentials, activate
+foreign keys, infer authoritative organizational/domain roles or causal
+clusters, access production/customer systems, deploy or publish a release.
+
 ## v0.16.0 - Harness-neutral closed-intent conformance pack v1
 
 Adds a deterministic, optional K2 pack that exercises all six External API v2
