@@ -1,5 +1,29 @@
 # Release Notes
 
+## v0.18.7 - Signed portable receipt-envelope verifier
+
+Adds the K4e.4 Portable Companion receipt-envelope verifier and explainer. The
+offline-only utility accepts a closed, size-bounded synthetic envelope, verifies
+an allowlisted Ed25519 detached signature, canonical payload digest, Portable
+Companion contract binding, External API v2 capability-manifest binding,
+repository source binding and strict freshness window.
+
+Machine and human-readable output keep observed facts, computed facts, inferred
+candidates and non-claims in separate arrays. Successful verification is
+explicitly `VERIFIED_INTEGRITY_ONLY`: it proves local envelope integrity against
+an explicitly supplied synthetic fixture public key, not runtime evidence, BI
+truth, live observation or production trust. Negative tests fail closed for
+missing or invalid signatures, unsupported algorithms, digest mismatch, stale
+and future timestamps, wrong contract/capability/source bindings, oversized
+input, malformed encodings and synthetic fixtures claiming live observation.
+
+This release does not add runtime evidence creation, signing authority, remote
+verification, network lookup, key retrieval, credentials, raw provider
+payloads, arbitrary algorithms, mutable receipts, claim promotion, free SQL,
+mutation/deploy/evidence authority, hosted/SaaS, remote-MCP, marketplace,
+customer data, Gateway/provider/default-model/runtime activation, production
+trust anchors or production-readiness claims.
+
 ## v0.18.6 - Secret-free profile-template validator
 
 Adds the K4e.3 Portable Companion profile-template validator. The validator is

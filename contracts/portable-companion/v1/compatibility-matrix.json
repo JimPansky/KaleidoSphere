@@ -194,6 +194,14 @@
       {
         "path": "services/bi-control/src/portable-companion/template-validator.mjs",
         "role": "Offline profile-template validator that rejects secret values, endpoints, free SQL and runtime dispatch requests."
+      },
+      {
+        "path": "contracts/portable-companion/v1/receipt-envelope.schema.json",
+        "role": "Closed signed synthetic receipt-envelope schema with immutable claim classes and strict bindings."
+      },
+      {
+        "path": "services/bi-control/src/portable-companion/receipt-verifier.mjs",
+        "role": "Offline signature, digest, binding and freshness verifier that reports integrity only without evidence authority."
       }
     ],
     "deniedInputs": [

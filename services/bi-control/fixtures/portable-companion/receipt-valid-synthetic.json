@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "kaleidosphere.portable-companion/receipt-envelope/v1",
+  "contractVersion": "1.0.0",
+  "receipt": {
+    "schemaVersion": "kaleidosphere.portable-companion/signed-receipt/v1",
+    "receiptId": "synthetic-receipt-k4e4-v1",
+    "issuedAt": "2026-08-21T20:00:00.000Z",
+    "expiresAt": "2026-08-21T20:15:00.000Z",
+    "evidenceClass": "synthetic-fixture",
+    "liveObservationClaim": false,
+    "mutable": false,
+    "claims": {
+      "observedFacts": [
+        {
+          "id": "synthetic-file-loaded",
+          "claimClass": "observed-fact",
+          "statement": "A deterministic synthetic fixture file was supplied to the local verifier."
+        }
+      ],
+      "computedFacts": [
+        {
+          "id": "fixture-payload-digest",
+          "claimClass": "computed-fact",
+          "statement": "The signed envelope binds the canonical digest of its synthetic receipt payload."
+        }
+      ],
+      "inferredCandidates": [
+        {
+          "id": "separate-runtime-verification",
+          "claimClass": "inferred-candidate",
+          "statement": "Any later runtime result would require separate attestation and receipt verification."
+        }
+      ],
+      "nonClaims": [
+        {
+          "id": "not-live-evidence",
+          "claimClass": "non-claim",
+          "statement": "This synthetic fixture is not live runtime evidence."
+        },
+        {
+          "id": "not-bi-truth",
+          "claimClass": "non-claim",
+          "statement": "Envelope integrity does not establish BI correctness or factual truth."
+        },
+        {
+          "id": "not-signing-authority",
+          "claimClass": "non-claim",
+          "statement": "The fixture grants no signing or evidence authority."
+        },
+        {
+          "id": "not-production-trust",
+          "claimClass": "non-claim",
+          "statement": "The fixture key is not a production trust anchor."
+        }
+      ]
+    }
+  },
+  "bindings": {
+    "contract": {
+      "id": "kaleidosphere.portable-companion",
+      "version": "1.0.0",
+      "schemaVersion": "kaleidosphere.portable-companion/contract/v1",
+      "schemaDigest": "sha256:dd1ea27146098fcd6ea585cd5ff548da12342fdd2ea638c12d1c25d7b39f98f9"
+    },
+    "capability": {
+      "contractId": "superset-bi-agent.external",
+      "contractVersion": "2.0.0",
+      "capabilityId": "bi.readback.read",
+      "runtimeIntent": "readback",
+      "manifestDigest": "sha256:2273bd6d26dd0e5ac4878c474b19499920ef2d6257d0cec6a6bfad044de0974e"
+    },
+    "source": {
+      "repository": "JoFe2/KaleidoSphere",
+      "sourceMapSchemaVersion": "chimpmaera.bi/source-map/v2",
+      "sourceCommit": "cee9fd5835ac3527af54b5974b5d53414eac88d8",
+      "fixtureClass": "synthetic-only"
+    }
+  },
+  "payloadDigest": "sha256:ef1046d40b5ef3560add5bf7dd1e7742bbb3e8d4e9b921720a08fdfd8db11617",
+  "signature": {
+    "algorithm": "Ed25519",
+    "encoding": "base64url",
+    "keyId": "ks-synthetic-receipt-fixture-v1",
+    "value": "gWEilkE5Wl75mw8uLExyZu0uyoRKfYC2qqcQc2BYo5QP_m3ZQAX1oQR1QSf7fO0toI8qJy5vxgX5iyXibcC3CA"
+  }
+}

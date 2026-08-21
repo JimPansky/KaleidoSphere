@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "kaleidosphere.portable-companion/receipt-verification-context/v1",
+  "trustClass": "synthetic-fixture-only",
+  "keyId": "ks-synthetic-receipt-fixture-v1",
+  "publicKey": {
+    "format": "spki-der",
+    "encoding": "base64",
+    "value": "MCowBQYDK2VwAyEA51q8GY8/q8A5CIY7IFXLoic9gT2W4GgqLyhht0iFOnQ="
+  }
+}

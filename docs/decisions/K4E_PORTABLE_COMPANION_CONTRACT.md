@@ -98,3 +98,24 @@ discover arbitrary endpoints, does not accept credentials, does not execute free
 SQL, does not return raw rows/provider payloads, does not mutate or deploy
 anything, and does not prove live evidence, hosted/SaaS, remote-MCP, production
 or marketplace readiness.
+
+## K4e.4 Signed Receipt Verification
+
+Issue #85 implements `receipt-envelope.verify` as a local integrity verifier and
+explainer. The envelope is immutable, size bounded, signed with the single
+allowlisted `Ed25519` algorithm and bound to the Portable Companion contract
+schema, canonical External API v2 capability manifest and repository source
+map. A caller must supply an explicit local verification context; the verifier
+does not discover or retrieve keys.
+
+The initial fixture trust class is deliberately `synthetic-fixture-only`.
+Successful verification is reported as `VERIFIED_INTEGRITY_ONLY`, never as live
+evidence or a production trust decision. Observed facts, computed facts,
+inferred candidates and non-claims remain separate in both the signed receipt
+and verifier output. No claim crosses classes, and synthetic input with a live
+observation claim fails closed.
+
+The verifier contains no private key and grants no signing, runtime, evidence,
+mutation, deployment, network, credential, remote-service or production trust
+authority. Rollback remains a protected successor PR and regular successor
+release; immutable release tags are never moved.
