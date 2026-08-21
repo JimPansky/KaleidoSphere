@@ -1,0 +1,9 @@
+{
+  "selector": "plan",
+  "expected": {
+    "capabilityCount": 1,
+    "actions": ["plan"],
+    "authority": "proposal-only",
+    "guidanceCodes": ["READ_BOUNDARY_FIRST", "REQUIRE_RECEIPT_BEFORE_EVIDENCE"]
+  }
+}

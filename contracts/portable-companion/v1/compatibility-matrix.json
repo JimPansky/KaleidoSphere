@@ -182,6 +182,10 @@
       {
         "path": "services/bi-control/src/portable-companion/doctor.mjs",
         "role": "Offline Doctor/readiness evaluation with local utility and runtime availability kept separate."
+      },
+      {
+        "path": "services/bi-control/src/portable-companion/capability-explorer.mjs",
+        "role": "Offline capability explorer that binds guidance to the canonical External API v2 capability manifest digest."
       }
     ],
     "deniedInputs": [

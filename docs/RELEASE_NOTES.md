@@ -1,5 +1,25 @@
 # Release Notes
 
+## v0.18.5 - Digest-bound capability explorer
+
+Adds the K4e.2 Portable Companion capability explorer for offline guidance over
+the canonical External API v2 capability manifest. Every report binds to the
+manifest version, manifest digest and source-map commit, and keeps the closed
+runtime intent vocabulary unchanged at exactly `status`, `discovery`, `analyze`,
+`plan`, `preview` and `readback`.
+
+The explorer can list all six capabilities or select one by manifest id/action.
+Its guidance is advisory only, marks dispatch as false, and requires separate
+verified runtime receipts before any evidence claim. Negative tests fail closed
+for unknown capability keys, manifest digest mismatch, stale manifest versions,
+runtime-intent invocation from guidance, and live-evidence claims without a
+receipt.
+
+This release does not add runtime dispatch, arbitrary endpoint discovery,
+remote fetch, hosted catalogs, credentials, free SQL, raw rows/customer payloads,
+provider payloads, mutation/deploy authority, hosted/SaaS, remote-MCP,
+marketplace or production-readiness claims.
+
 ## v0.18.4 - Portable Doctor readiness utility
 
 Adds the K4e.1 Portable Doctor/readiness utility for the Portable Companion v1

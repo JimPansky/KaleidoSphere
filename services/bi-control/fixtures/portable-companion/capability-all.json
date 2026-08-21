@@ -1,0 +1,8 @@
+{
+  "selector": null,
+  "expected": {
+    "capabilityCount": 6,
+    "actions": ["status", "discovery", "analyze", "plan", "preview", "readback"],
+    "guidanceCodes": ["USE_TRUSTED_RUNTIME_OUTSIDE_UTILITY", "KEEP_LOCAL_GUIDANCE_ADVISORY"]
+  }
+}
