@@ -1,0 +1,9 @@
+{
+  "selector": "bi.discovery.run",
+  "expected": {
+    "capabilityCount": 1,
+    "actions": ["discovery"],
+    "authority": "local-evidence-write",
+    "guidanceCodes": ["READ_BOUNDARY_FIRST", "REQUIRE_RECEIPT_BEFORE_EVIDENCE"]
+  }
+}

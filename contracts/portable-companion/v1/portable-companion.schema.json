@@ -345,6 +345,160 @@
         "message": { "type": "string", "maxLength": 220 },
         "dispatch": { "const": false }
       }
+    },
+    "CapabilityExplorerReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "contractVersion",
+        "action",
+        "manifestBinding",
+        "externalApiV2",
+        "selectedCapabilityKey",
+        "capabilities",
+        "boundaries",
+        "guidance",
+        "nonClaims",
+        "integrity"
+      ],
+      "properties": {
+        "schemaVersion": { "const": "kaleidosphere.portable-companion/capability-explorer/v1" },
+        "contractVersion": { "const": "1.0.0" },
+        "action": { "const": "capability.explorer.read" },
+        "manifestBinding": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["schemaVersion", "manifestVersion", "digest", "sourceCommit"],
+          "properties": {
+            "schemaVersion": { "const": "kaleidosphere.external/capability-manifest/v1" },
+            "manifestVersion": { "const": "1.0.0" },
+            "digest": { "$ref": "#/$defs/Sha256Digest" },
+            "sourceCommit": { "type": "string", "pattern": "^[a-f0-9]{40}$" }
+          }
+        },
+        "externalApiV2": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["contractId", "contractVersion", "runtimeIntents"],
+          "properties": {
+            "contractId": { "const": "superset-bi-agent.external" },
+            "contractVersion": { "const": "2.0.0" },
+            "runtimeIntents": {
+              "type": "array",
+              "minItems": 6,
+              "maxItems": 6,
+              "prefixItems": [
+                { "const": "status" },
+                { "const": "discovery" },
+                { "const": "analyze" },
+                { "const": "plan" },
+                { "const": "preview" },
+                { "const": "readback" }
+              ],
+              "items": false
+            }
+          }
+        },
+        "selectedCapabilityKey": {
+          "type": ["string", "null"],
+          "pattern": "^[a-z][a-z0-9.-]{1,80}$"
+        },
+        "capabilities": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": { "$ref": "#/$defs/CapabilityExplorerCapability" }
+        },
+        "boundaries": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "runtimeDispatchAccepted",
+            "arbitraryEndpointDiscoveryAccepted",
+            "credentialsAccepted",
+            "freeSqlAccepted",
+            "rawSourceRowsAccepted",
+            "liveEvidenceClaimAcceptedWithoutReceipt"
+          ],
+          "properties": {
+            "runtimeDispatchAccepted": { "const": false },
+            "arbitraryEndpointDiscoveryAccepted": { "const": false },
+            "credentialsAccepted": { "const": false },
+            "freeSqlAccepted": { "const": false },
+            "rawSourceRowsAccepted": { "const": false },
+            "liveEvidenceClaimAcceptedWithoutReceipt": { "const": false }
+          }
+        },
+        "guidance": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "$ref": "#/$defs/CapabilityExplorerGuidance" }
+        },
+        "nonClaims": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": { "type": "string", "maxLength": 240 }
+        },
+        "integrity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["algorithm", "digest"],
+          "properties": {
+            "algorithm": { "const": "sha256-canonical-json" },
+            "digest": { "$ref": "#/$defs/Sha256Digest" }
+          }
+        }
+      }
+    },
+    "CapabilityExplorerCapability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "action", "authority", "sideEffect", "executableInRuntime", "dispatch", "evidenceRequirements", "guidance"],
+      "properties": {
+        "id": { "enum": ["bi.status.read", "bi.discovery.run", "bi.analysis.run", "bi.graph.adaptive-v1.plan", "bi.preview.create", "bi.readback.read"] },
+        "action": { "enum": ["status", "discovery", "analyze", "plan", "preview", "readback"] },
+        "authority": { "enum": ["read-only", "local-evidence-write", "source-read-only", "proposal-only"] },
+        "sideEffect": { "enum": ["none", "reversible-local-evidence"] },
+        "executableInRuntime": { "const": true },
+        "dispatch": { "const": false },
+        "evidenceRequirements": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["attestationBindingRequired", "resultIntegrityDigestRequired", "executionReceiptRequired"],
+          "properties": {
+            "attestationBindingRequired": { "const": true },
+            "resultIntegrityDigestRequired": { "const": true },
+            "executionReceiptRequired": { "const": true }
+          }
+        },
+        "guidance": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": { "$ref": "#/$defs/CapabilityExplorerGuidance" }
+        }
+      }
+    },
+    "CapabilityExplorerGuidance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message", "dispatch", "claimClass"],
+      "properties": {
+        "code": {
+          "enum": [
+            "READ_BOUNDARY_FIRST",
+            "REQUIRE_RECEIPT_BEFORE_EVIDENCE",
+            "USE_TRUSTED_RUNTIME_OUTSIDE_UTILITY",
+            "KEEP_LOCAL_GUIDANCE_ADVISORY"
+          ]
+        },
+        "message": { "type": "string", "maxLength": 240 },
+        "dispatch": { "const": false },
+        "claimClass": { "const": "inferred-candidate" }
+      }
     }
   }
 }
