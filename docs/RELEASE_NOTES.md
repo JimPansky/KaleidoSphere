@@ -1,5 +1,26 @@
 # Release Notes
 
+## v0.18.6 - Secret-free profile-template validator
+
+Adds the K4e.3 Portable Companion profile-template validator. The validator is
+offline-only, accepts a closed placeholder template shape, emits deterministic
+placeholder-only validation reports, and preserves the exact External API v2
+runtime intent vocabulary: `status`, `discovery`, `analyze`, `plan`, `preview`
+and `readback`.
+
+Valid templates contain only environment-style placeholders and secret
+references, with all dispatch, credential-value, arbitrary-endpoint, free-SQL
+and raw-row constraints set to false. Negative tests fail closed for password,
+API token, bearer token, DSN and private-key values, raw database endpoints or
+arbitrary URLs, unknown profile keys, free SQL fields/text, runtime dispatch
+requests and runtime-intent widening.
+
+This release does not add credential storage, OAuth, live connection tests,
+endpoint lookup, remote fetch, hosted catalogs, free SQL, raw rows/customer
+payloads, provider payloads, runtime dispatch, Gateway/provider/default-model
+activation, mutation/deploy authority, hosted/SaaS, remote-MCP, marketplace or
+production-readiness claims.
+
 ## v0.18.5 - Digest-bound capability explorer
 
 Adds the K4e.2 Portable Companion capability explorer for offline guidance over
