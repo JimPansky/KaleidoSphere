@@ -61,4 +61,17 @@ if (isGitCheckout()) {
 const digest = createHash('sha256').update(await readFile(archivePath)).digest('hex');
 const checksumLine = `${digest}  ${archiveName}\n`;
 await writeFile(checksumPath, checksumLine, { mode: 0o644 });
-process.stdout.write(`${checksumLine}${archivePath}\n${checksumPath}\n`);
+
+const distribution = spawnSync(process.execPath, [
+  path.join(root, 'scripts', 'build-agent-skill-distribution.mjs'),
+  path.join(outputDir, 'agent-skill-distribution'),
+], {
+  cwd: root,
+  encoding: 'utf8',
+  env: process.env,
+});
+if (distribution.status !== 0) {
+  throw new Error(`agent skill distribution build failed: ${distribution.stderr || distribution.stdout}`);
+}
+
+process.stdout.write(`${checksumLine}${archivePath}\n${checksumPath}\n${distribution.stdout}`);

@@ -148,3 +148,16 @@ Leonxlnx/taste-skill, OpenClaw, Hermes, Claude Code or Codex executable source i
 copied. The pinned taste-skill is a license/scope reference only. K3 paths are
 ordinary repository-authored/distribution hashes under `files`, not derived
 runtime files.
+
+K4 adds repository-authored deterministic distribution machinery around the same
+unchanged canonical AgentSkill bytes. `scripts/build-agent-skill-distribution.mjs`
+derives ClawHub/OpenClaw/Hermes, Codex and Claude Code package layouts from
+`agent-skills/kaleidosphere` and `package.json` version only, writes ignored
+`dist/` artifacts, and emits release-ready archives plus SHA256 sidecars. The
+Codex manifest follows the current Codex plugin structure and is validated with
+the current `@plugin-creator` validator during focused tests. The Claude Code
+manifest is limited to documented skills-only plugin metadata. K4 does not copy
+OpenClaw, ClawHub, Codex, Claude Code, Hermes or third-party executable source
+and does not claim public catalog listing or unavailable host runtime execution.
+The generated ClawHub bundle may be MIT-0 on ClawHub as required by that catalog;
+repository source and unrelated code remain Apache-2.0.

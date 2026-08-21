@@ -1,5 +1,18 @@
 # Release Notes
 
+## v0.18.2 - Single-source AgentSkill distribution
+
+Adds deterministic single-source AgentSkill distribution generation for
+ClawHub/OpenClaw/Hermes, Codex and Claude Code. The existing KaleidoSphere
+AgentSkill bytes from applied Skill Workshop proposal
+`kaleidosphere-20260821-e90f51c924` remain unchanged; host packages are thin
+generated views only.
+
+The release archive workflow now emits host-specific archives and SHA256
+sidecars for public distribution. New tests cover byte equality, manifest
+validity, deterministic rebuilds, archive safety, the closed action contract and
+the ClawHub MIT-0 versus repository Apache-2.0 license boundary.
+
 ## v0.18.1 - External capability manifest foundation
 
 Adds a deterministic, contract-versioned manifest at
