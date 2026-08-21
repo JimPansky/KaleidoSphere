@@ -35,6 +35,27 @@
       "evidence": "installer-roundtrip-validated-codex-0.144.1"
     }
   },
+  "distribution": {
+    "builder": "scripts/build-agent-skill-distribution.mjs",
+    "generatedRoot": "dist/agent-skill-distribution",
+    "versionSource": "package.json",
+    "views": {
+      "clawhubOpenClawHermes": "dist/agent-skill-distribution/clawhub/kaleidosphere",
+      "codex": "dist/agent-skill-distribution/codex/kaleidosphere-agent-skill",
+      "claudeCode": "dist/agent-skill-distribution/claude/kaleidosphere-agent-skill"
+    },
+    "archives": [
+      "kaleidosphere-clawhub-skill-v${version}.tar.gz",
+      "kaleidosphere-codex-plugin-v${version}.tar.gz",
+      "kaleidosphere-claude-plugin-v${version}.tar.gz"
+    ],
+    "licenseBoundary": "ClawHub-published generated skill bundles are MIT-0 on ClawHub; repository source and Codex/Claude archives remain Apache-2.0 unless a future catalog imposes separate listing terms.",
+    "nonClaims": [
+      "Generated artifacts do not claim public marketplace listing.",
+      "Generated artifacts do not claim Hermes, Codex or Claude Code runtime execution.",
+      "Generated artifacts do not widen the closed KaleidoSphere action contract."
+    ]
+  },
   "nonClaims": [
     "No marketplace listing or remote package registry presence is claimed.",
     "No Hermes or Claude Code runtime execution is claimed because their binaries were unavailable.",

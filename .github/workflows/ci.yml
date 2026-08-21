@@ -22,6 +22,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - run: npm run dist:agent-skill
       - run: npm test
       - name: Validate Docker Compose
         run: docker compose --env-file .env.example --file compose.yaml config --quiet
