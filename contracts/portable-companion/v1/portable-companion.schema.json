@@ -198,6 +198,153 @@
           "maxProperties": 0
         }
       }
+    },
+    "DoctorReadinessReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "contractVersion",
+        "action",
+        "localUtilityStatus",
+        "runtimeStatus",
+        "statuses",
+        "inspected",
+        "checks",
+        "guidance",
+        "nonClaims",
+        "integrity"
+      ],
+      "properties": {
+        "schemaVersion": { "const": "kaleidosphere.portable-companion/doctor-readiness/v1" },
+        "contractVersion": { "const": "1.0.0" },
+        "action": { "const": "doctor.readiness.check" },
+        "localUtilityStatus": {
+          "enum": ["READY_LOCAL_UTILITY", "LOCAL_PARTIAL_CONFIGURATION", "LOCAL_BLOCKED"]
+        },
+        "runtimeStatus": {
+          "enum": ["RUNTIME_AVAILABLE", "RUNTIME_UNAVAILABLE", "RUNTIME_PARTIAL"]
+        },
+        "statuses": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["readyLocalUtility", "runtimeAvailable", "analysisSucceeded", "readbackSucceeded"],
+          "properties": {
+            "readyLocalUtility": { "type": "boolean" },
+            "runtimeAvailable": { "type": "boolean" },
+            "analysisSucceeded": { "const": false },
+            "readbackSucceeded": { "const": false }
+          }
+        },
+        "inspected": { "$ref": "#/$defs/DoctorLocalSnapshot" },
+        "checks": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "items": { "$ref": "#/$defs/DoctorCheck" }
+        },
+        "guidance": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": { "$ref": "#/$defs/DoctorGuidance" }
+        },
+        "nonClaims": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": { "type": "string", "maxLength": 220 }
+        },
+        "integrity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["algorithm", "digest"],
+          "properties": {
+            "algorithm": { "const": "sha256-canonical-json" },
+            "digest": { "$ref": "#/$defs/Sha256Digest" }
+          }
+        }
+      }
+    },
+    "DoctorLocalSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hostBundle", "runtime", "transport", "capabilityManifest", "configuration"],
+      "properties": {
+        "hostBundle": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "version", "supported"],
+          "properties": {
+            "id": { "const": "kaleidosphere" },
+            "version": { "type": "string", "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+$" },
+            "supported": { "type": "boolean" }
+          }
+        },
+        "runtime": { "$ref": "#/$defs/DoctorStateRuntime" },
+        "transport": { "$ref": "#/$defs/DoctorStateTransport" },
+        "capabilityManifest": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "observedDigest", "expectedDigest"],
+          "properties": {
+            "state": { "enum": ["current", "missing", "stale"] },
+            "observedDigest": { "type": ["string", "null"], "pattern": "^sha256:[a-f0-9]{64}$" },
+            "expectedDigest": { "$ref": "#/$defs/Sha256Digest" }
+          }
+        },
+        "configuration": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "missing"],
+          "properties": {
+            "state": { "enum": ["complete", "partial", "missing"] },
+            "missing": {
+              "type": "array",
+              "items": {
+                "enum": ["runtime.identity", "transport.profile", "capability-manifest.file", "host-bundle.support"]
+              },
+              "uniqueItems": true
+            }
+          }
+        }
+      }
+    },
+    "DoctorStateRuntime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state"],
+      "properties": {
+        "state": { "enum": ["present", "missing", "partial"] }
+      }
+    },
+    "DoctorStateTransport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state"],
+      "properties": {
+        "state": { "enum": ["configured", "missing", "partial"] }
+      }
+    },
+    "DoctorCheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "status", "summary"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]{1,40}$" },
+        "status": { "enum": ["PASS", "WARN", "FAIL", "MISSING", "PARTIAL", "STALE", "UNSUPPORTED"] },
+        "summary": { "type": "string", "maxLength": 220 }
+      }
+    },
+    "DoctorGuidance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message", "dispatch"],
+      "properties": {
+        "code": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]{1,80}$" },
+        "message": { "type": "string", "maxLength": 220 },
+        "dispatch": { "const": false }
+      }
     }
   }
 }
