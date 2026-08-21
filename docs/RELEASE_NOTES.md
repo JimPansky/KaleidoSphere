@@ -1,5 +1,26 @@
 # Release Notes
 
+## v0.18.3 - Portable Companion contract foundation
+
+Adds the K4e.0 Portable Companion v1 contract foundation under
+`contracts/portable-companion/v1`. The contract is separately versioned,
+offline-only, and keeps the External API v2 runtime intent set unchanged at
+exactly `status`, `discovery`, `analyze`, `plan`, `preview` and `readback`.
+
+The foundation defines a closed local utility vocabulary, compatibility matrix,
+threat model/source map, claim classes and fail-closed validator. Tests cover
+unknown actions and fields, schema/version/size/depth bounds, credential and
+secret-looking values, free SQL, endpoint discovery, raw rows/provider payloads,
+mutation/deploy/evidence claims, runtime-intent widening, and manifest/digest
+drift. Reserved utility actions enable later #82-#88 slices without implementing
+doctor, explorer, validator, receipt, demo, evidence inspector or cross-harness
+behavior here.
+
+This release does not add runtime dispatch, arbitrary endpoint discovery,
+credentials, free SQL, raw rows/provider payloads, mutation/deploy authority,
+hosted/SaaS, remote-MCP, marketplace, customer-data or production-readiness
+claims.
+
 ## v0.18.2 - Single-source AgentSkill distribution
 
 Adds deterministic single-source AgentSkill distribution generation for

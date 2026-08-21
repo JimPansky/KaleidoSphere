@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/JoFe2/KaleidoSphere/contracts/portable-companion/v1/portable-companion.schema.json",
+  "title": "KaleidoSphere Portable Companion v1 contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contract",
+    "externalApiV2",
+    "utilityActions",
+    "boundaries",
+    "claimClasses",
+    "compatibility",
+    "integrity"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "kaleidosphere.portable-companion/contract/v1" },
+    "contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "stability", "authority"],
+      "properties": {
+        "id": { "const": "kaleidosphere.portable-companion" },
+        "version": { "const": "1.0.0" },
+        "stability": { "const": "foundation" },
+        "authority": { "const": "offline-utility-only" }
+      }
+    },
+    "externalApiV2": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contractId", "contractVersion", "runtimeIntents"],
+      "properties": {
+        "contractId": { "const": "superset-bi-agent.external" },
+        "contractVersion": { "const": "2.0.0" },
+        "runtimeIntents": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "prefixItems": [
+            { "const": "status" },
+            { "const": "discovery" },
+            { "const": "analyze" },
+            { "const": "plan" },
+            { "const": "preview" },
+            { "const": "readback" }
+          ],
+          "items": false
+        }
+      }
+    },
+    "utilityActions": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "items": { "$ref": "#/$defs/UtilityAction" }
+    },
+    "boundaries": { "$ref": "#/$defs/Boundaries" },
+    "claimClasses": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "prefixItems": [
+        { "const": "observed-fact" },
+        { "const": "computed-fact" },
+        { "const": "inferred-candidate" },
+        { "const": "human-decision" },
+        { "const": "non-claim" }
+      ],
+      "items": false
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["matrixSchemaVersion", "matrixDigest", "sourceMapDigest"],
+      "properties": {
+        "matrixSchemaVersion": { "const": "kaleidosphere.portable-companion/compatibility-matrix/v1" },
+        "matrixDigest": { "$ref": "#/$defs/Sha256Digest" },
+        "sourceMapDigest": { "$ref": "#/$defs/Sha256Digest" }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "digest"],
+      "properties": {
+        "algorithm": { "const": "sha256-canonical-json" },
+        "digest": { "$ref": "#/$defs/Sha256Digest" }
+      }
+    }
+  },
+  "$defs": {
+    "Sha256Digest": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "UtilityAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "ownerIssue",
+        "lifecycle",
+        "authority",
+        "sideEffect",
+        "runtimeIntent",
+        "claimClass",
+        "dispatch"
+      ],
+      "properties": {
+        "id": {
+          "enum": [
+            "contract.describe",
+            "compatibility.matrix.read",
+            "threat-model.read",
+            "source-map.verify",
+            "doctor.readiness.check",
+            "capability.explorer.read",
+            "profile-template.validate",
+            "receipt-envelope.verify",
+            "synthetic-demo.run",
+            "evidence-inspector.inspect",
+            "cross-harness.verify"
+          ]
+        },
+        "ownerIssue": { "enum": [81, 82, 83, 84, 85, 86, 87, 88] },
+        "lifecycle": { "enum": ["foundation", "reserved"] },
+        "authority": { "const": "offline-utility-only" },
+        "sideEffect": { "enum": ["none", "local-validation-only", "local-fixture-only"] },
+        "runtimeIntent": {
+          "type": ["string", "null"],
+          "enum": ["status", "discovery", "analyze", "plan", "preview", "readback", null]
+        },
+        "claimClass": {
+          "enum": ["observed-fact", "computed-fact", "inferred-candidate", "human-decision", "non-claim"]
+        },
+        "dispatch": { "const": false }
+      }
+    },
+    "Boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "offlinePortableUtilitiesOnly",
+        "runtimeDispatchAccepted",
+        "arbitraryEndpointDiscoveryAccepted",
+        "credentialsAccepted",
+        "freeSqlAccepted",
+        "rawSourceRowsAccepted",
+        "providerPayloadsAccepted",
+        "mutationAuthority",
+        "deployAuthority",
+        "evidenceClaimAuthority",
+        "hostedSaasAccepted",
+        "remoteMcpAccepted"
+      ],
+      "properties": {
+        "offlinePortableUtilitiesOnly": { "const": true },
+        "runtimeDispatchAccepted": { "const": false },
+        "arbitraryEndpointDiscoveryAccepted": { "const": false },
+        "credentialsAccepted": { "const": false },
+        "freeSqlAccepted": { "const": false },
+        "rawSourceRowsAccepted": { "const": false },
+        "providerPayloadsAccepted": { "const": false },
+        "mutationAuthority": { "const": false },
+        "deployAuthority": { "const": false },
+        "evidenceClaimAuthority": { "const": false },
+        "hostedSaasAccepted": { "const": false },
+        "remoteMcpAccepted": { "const": false }
+      }
+    },
+    "PortableUtilityRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "contractVersion", "action"],
+      "properties": {
+        "schemaVersion": { "const": "kaleidosphere.portable-companion/utility-request/v1" },
+        "contractVersion": { "const": "1.0.0" },
+        "action": {
+          "enum": [
+            "contract.describe",
+            "compatibility.matrix.read",
+            "threat-model.read",
+            "source-map.verify",
+            "doctor.readiness.check",
+            "capability.explorer.read",
+            "profile-template.validate",
+            "receipt-envelope.verify",
+            "synthetic-demo.run",
+            "evidence-inspector.inspect",
+            "cross-harness.verify"
+          ]
+        },
+        "input": {
+          "type": "object",
+          "additionalProperties": false,
+          "maxProperties": 0
+        }
+      }
+    }
+  }
+}

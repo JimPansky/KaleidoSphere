@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "kaleidosphere.portable-companion/compatibility-matrix/v1",
+  "contract": {
+    "id": "kaleidosphere.portable-companion",
+    "version": "1.0.0",
+    "status": "foundation"
+  },
+  "externalApiV2": {
+    "contractId": "superset-bi-agent.external",
+    "contractVersion": "2.0.0",
+    "runtimeIntents": ["status", "discovery", "analyze", "plan", "preview", "readback"],
+    "runtimeIntentCount": 6,
+    "wideningAllowed": false
+  },
+  "portableUtilityActions": [
+    {
+      "id": "contract.describe",
+      "ownerIssue": 81,
+      "lifecycle": "foundation",
+      "runtimeIntent": null,
+      "authority": "offline-utility-only",
+      "sideEffect": "none",
+      "claimClass": "computed-fact",
+      "dispatch": false
+    },
+    {
+      "id": "compatibility.matrix.read",
+      "ownerIssue": 81,
+      "lifecycle": "foundation",
+      "runtimeIntent": null,
+      "authority": "offline-utility-only",
+      "sideEffect": "none",
+      "claimClass": "computed-fact",
+      "dispatch": false
+    },
+    {
+      "id": "threat-model.read",
+      "ownerIssue": 81,
+      "lifecycle": "foundation",
+      "runtimeIntent": null,
+      "authority": "offline-utility-only",
+      "sideEffect": "none",
+      "claimClass": "non-claim",
+      "dispatch": false
+    },
+    {
+      "id": "source-map.verify",
+      "ownerIssue": 81,
+      "lifecycle": "foundation",
+      "runtimeIntent": null,
+      "authority": "offline-utility-only",
+      "sideEffect": "local-validation-only",
+      "claimClass": "computed-fact",
+      "dispatch": false
+    },
+    {
+      "id": "doctor.readiness.check",
+      "ownerIssue": 82,
+      "lifecycle": "reserved",
+      "runtimeIntent": "status",
+      "authority": "offline-utility-only",
+      "sideEffect": "local-validation-only",
+      "claimClass": "computed-fact",
+      "dispatch": false
+    },
+    {
+      "id": "capability.explorer.read",
+      "ownerIssue": 83,
+      "lifecycle": "reserved",
+      "runtimeIntent": "discovery",
+      "authority": "offline-utility-only",
+      "sideEffect": "none",
+      "claimClass": "inferred-candidate",
+      "dispatch": false
+    },
+    {
+      "id": "profile-template.validate",
+      "ownerIssue": 84,
+      "lifecycle": "reserved",
+      "runtimeIntent": "analyze",
+      "authority": "offline-utility-only",
+      "sideEffect": "local-validation-only",
+      "claimClass": "computed-fact",
+      "dispatch": false
+    },
+    {
+      "id": "receipt-envelope.verify",
+      "ownerIssue": 85,
+      "lifecycle": "reserved",
+      "runtimeIntent": "readback",
+      "authority": "offline-utility-only",
+      "sideEffect": "local-validation-only",
+      "claimClass": "computed-fact",
+      "dispatch": false
+    },
+    {
+      "id": "synthetic-demo.run",
+      "ownerIssue": 86,
+      "lifecycle": "reserved",
+      "runtimeIntent": "preview",
+      "authority": "offline-utility-only",
+      "sideEffect": "local-fixture-only",
+      "claimClass": "observed-fact",
+      "dispatch": false
+    },
+    {
+      "id": "evidence-inspector.inspect",
+      "ownerIssue": 87,
+      "lifecycle": "reserved",
+      "runtimeIntent": "readback",
+      "authority": "offline-utility-only",
+      "sideEffect": "local-validation-only",
+      "claimClass": "computed-fact",
+      "dispatch": false
+    },
+    {
+      "id": "cross-harness.verify",
+      "ownerIssue": 88,
+      "lifecycle": "reserved",
+      "runtimeIntent": null,
+      "authority": "offline-utility-only",
+      "sideEffect": "local-validation-only",
+      "claimClass": "computed-fact",
+      "dispatch": false
+    }
+  ],
+  "claimClasses": [
+    {
+      "id": "observed-fact",
+      "meaning": "Directly observed from deterministic local files or synthetic fixtures.",
+      "evidenceAuthority": "local-only"
+    },
+    {
+      "id": "computed-fact",
+      "meaning": "Derived by deterministic local validation, hashing, parsing or comparison.",
+      "evidenceAuthority": "local-only"
+    },
+    {
+      "id": "inferred-candidate",
+      "meaning": "Guidance candidate that requires later verification before product claims.",
+      "evidenceAuthority": "advisory-only"
+    },
+    {
+      "id": "human-decision",
+      "meaning": "Explicit trusted-owner or trusted-UI decision outside this portable foundation.",
+      "evidenceAuthority": "external-decision-required"
+    },
+    {
+      "id": "non-claim",
+      "meaning": "Boundary, denial, or documentation statement that asserts no runtime result.",
+      "evidenceAuthority": "no-evidence-claim"
+    }
+  ],
+  "boundaries": {
+    "offlinePortableUtilitiesOnly": true,
+    "runtimeDispatchAccepted": false,
+    "arbitraryEndpointDiscoveryAccepted": false,
+    "credentialsAccepted": false,
+    "freeSqlAccepted": false,
+    "rawSourceRowsAccepted": false,
+    "providerPayloadsAccepted": false,
+    "mutationAuthority": false,
+    "deployAuthority": false,
+    "evidenceClaimAuthority": false,
+    "hostedSaasAccepted": false,
+    "remoteMcpAccepted": false
+  },
+  "threatModel": {
+    "trustedSources": [
+      {
+        "path": "contracts/portable-companion/v1/portable-companion.schema.json",
+        "role": "Closed v1 schema and request envelope."
+      },
+      {
+        "path": "contracts/portable-companion/v1/compatibility-matrix.json",
+        "role": "Closed utility vocabulary, runtime-intent compatibility and non-claims."
+      },
+      {
+        "path": "services/bi-control/src/portable-companion/contract.mjs",
+        "role": "Local validation, digest binding and fail-closed drift checks."
+      }
+    ],
+    "deniedInputs": [
+      "unknown utility action",
+      "unknown request field",
+      "unsupported contract version",
+      "oversized or overly deep JSON",
+      "credential or token-like field/value",
+      "free SQL or SQL Lab text",
+      "arbitrary URL, endpoint, host or port discovery",
+      "raw rows or provider payloads",
+      "mutation, apply, deploy, publish or delete request",
+      "live evidence, production readiness, customer-data or marketplace claim"
+    ],
+    "sourceMap": {
+      "owner": "JoFe2/KaleidoSphere",
+      "sourceMapFile": "SOURCE-MAP.json",
+      "sourceMapDigestAlgorithm": "sha256-canonical-json",
+      "generatedArtifacts": "dist/ and release archives only; none are committed by this foundation.",
+      "rollback": "Before merge close PR; after merge use a protected successor PR and release. Never retag immutable releases."
+    }
+  },
+  "nonClaims": [
+    "No runtime dispatch.",
+    "No arbitrary endpoint discovery.",
+    "No credentials or secret handling.",
+    "No free SQL.",
+    "No raw source rows or provider payloads.",
+    "No mutation, deploy, apply, publish or delete authority.",
+    "No live evidence, production readiness, customer-data fitness, hosted/SaaS, remote-MCP or marketplace claim."
+  ]
+}
