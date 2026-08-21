@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "kaleidosphere.portable-companion/profile-template/v1",
+  "contractVersion": "1.0.0",
+  "templateId": "template.readback.placeholder",
+  "templateKind": "readback-profile",
+  "selectedRuntimeIntent": "readback",
+  "placeholders": {
+    "identityRef": "${KS_READBACK_IDENTITY_REF}",
+    "dataScopeRef": "${KS_READBACK_DATA_SCOPE_REF}",
+    "objectiveRef": "${KS_READBACK_OBJECTIVE_REF}",
+    "evidenceRef": "${KS_READBACK_EVIDENCE_REF}"
+  },
+  "secretReferences": [
+    {
+      "id": "readback-access",
+      "ref": "${KS_READBACK_RUNTIME_ACCESS_REF}"
+    }
+  ],
+  "constraints": {
+    "dispatch": false,
+    "allowRuntimeDispatch": false,
+    "allowCredentialValues": false,
+    "allowArbitraryEndpoints": false,
+    "allowFreeSql": false,
+    "allowRawRows": false
+  }
+}

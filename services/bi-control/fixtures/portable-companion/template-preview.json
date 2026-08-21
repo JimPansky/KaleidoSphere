@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "kaleidosphere.portable-companion/profile-template/v1",
+  "contractVersion": "1.0.0",
+  "templateId": "template.preview.placeholder",
+  "templateKind": "preview-profile",
+  "selectedRuntimeIntent": "preview",
+  "placeholders": {
+    "identityRef": "${KS_PREVIEW_IDENTITY_REF}",
+    "dataScopeRef": "${KS_PREVIEW_DATA_SCOPE_REF}",
+    "objectiveRef": "${KS_PREVIEW_OBJECTIVE_REF}",
+    "evidenceRef": "${KS_PREVIEW_EVIDENCE_REF}"
+  },
+  "secretReferences": [
+    {
+      "id": "preview-access",
+      "ref": "${KS_PREVIEW_RUNTIME_ACCESS_REF}"
+    }
+  ],
+  "constraints": {
+    "dispatch": false,
+    "allowRuntimeDispatch": false,
+    "allowCredentialValues": false,
+    "allowArbitraryEndpoints": false,
+    "allowFreeSql": false,
+    "allowRawRows": false
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/JoFe2/KaleidoSphere/contracts/portable-companion/v1/profile-template.schema.json",
+  "title": "KaleidoSphere Portable Companion v1 profile template",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contractVersion",
+    "templateId",
+    "templateKind",
+    "selectedRuntimeIntent",
+    "placeholders",
+    "secretReferences",
+    "constraints"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "kaleidosphere.portable-companion/profile-template/v1" },
+    "contractVersion": { "const": "1.0.0" },
+    "templateId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9.-]{1,80}$"
+    },
+    "templateKind": {
+      "enum": ["analysis-profile", "preview-profile", "readback-profile"]
+    },
+    "selectedRuntimeIntent": {
+      "enum": ["status", "discovery", "analyze", "plan", "preview", "readback"]
+    },
+    "placeholders": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["identityRef", "dataScopeRef", "objectiveRef", "evidenceRef"],
+      "properties": {
+        "identityRef": { "$ref": "#/$defs/EnvPlaceholder" },
+        "dataScopeRef": { "$ref": "#/$defs/EnvPlaceholder" },
+        "objectiveRef": { "$ref": "#/$defs/EnvPlaceholder" },
+        "evidenceRef": { "$ref": "#/$defs/EnvPlaceholder" }
+      }
+    },
+    "secretReferences": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "ref"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9.-]{1,60}$"
+          },
+          "ref": { "$ref": "#/$defs/EnvPlaceholder" }
+        }
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "dispatch",
+        "allowRuntimeDispatch",
+        "allowCredentialValues",
+        "allowArbitraryEndpoints",
+        "allowFreeSql",
+        "allowRawRows"
+      ],
+      "properties": {
+        "dispatch": { "const": false },
+        "allowRuntimeDispatch": { "const": false },
+        "allowCredentialValues": { "const": false },
+        "allowArbitraryEndpoints": { "const": false },
+        "allowFreeSql": { "const": false },
+        "allowRawRows": { "const": false }
+      }
+    }
+  },
+  "$defs": {
+    "EnvPlaceholder": {
+      "type": "string",
+      "pattern": "^\\$\\{[A-Z][A-Z0-9_]{2,80}\\}$"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "kaleidosphere.portable-companion/profile-template/v1",
+  "contractVersion": "1.0.0",
+  "templateId": "template.analysis.placeholder",
+  "templateKind": "analysis-profile",
+  "selectedRuntimeIntent": "analyze",
+  "placeholders": {
+    "identityRef": "${KS_PORTABLE_IDENTITY_REF}",
+    "dataScopeRef": "${KS_PORTABLE_DATA_SCOPE_REF}",
+    "objectiveRef": "${KS_PORTABLE_OBJECTIVE_REF}",
+    "evidenceRef": "${KS_PORTABLE_EVIDENCE_REF}"
+  },
+  "secretReferences": [
+    {
+      "id": "runtime-access",
+      "ref": "${KS_PORTABLE_RUNTIME_ACCESS_REF}"
+    }
+  ],
+  "constraints": {
+    "dispatch": false,
+    "allowRuntimeDispatch": false,
+    "allowCredentialValues": false,
+    "allowArbitraryEndpoints": false,
+    "allowFreeSql": false,
+    "allowRawRows": false
+  }
+}

@@ -186,6 +186,14 @@
       {
         "path": "services/bi-control/src/portable-companion/capability-explorer.mjs",
         "role": "Offline capability explorer that binds guidance to the canonical External API v2 capability manifest digest."
+      },
+      {
+        "path": "contracts/portable-companion/v1/profile-template.schema.json",
+        "role": "Closed placeholder-only request/profile-template schema."
+      },
+      {
+        "path": "services/bi-control/src/portable-companion/template-validator.mjs",
+        "role": "Offline profile-template validator that rejects secret values, endpoints, free SQL and runtime dispatch requests."
       }
     ],
     "deniedInputs": [
