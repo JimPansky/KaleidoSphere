@@ -58,7 +58,7 @@ ports to `127.0.0.1` only.
 
 Clients configure only the SBA agent URL, for example
 `http://127.0.0.1:18790`. They first read `GET /v2/capabilities`, verify product
-`v0.18.0`, contract `2.0.0`, the required capability set and the canonical
+`v0.18.1`, contract `2.0.0`, the required capability set and the canonical
 attestation digest, then send closed requests to `POST /v2/intents`.
 
 Thin adapters may additionally read `GET /v2/capability-manifest`. They must

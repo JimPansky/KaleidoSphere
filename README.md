@@ -173,7 +173,7 @@ Supported today:
 - Guided BI requirements discovery with Markdown/JSON brief export.
 - Review-bound managed technical overview dashboard workflows in Apache Superset.
 - Server-attested external API `2.0.0` for status, discovery, analyze, plan,
-  preview and readback; the runtime reports product `v0.18.0` and exact
+  preview and readback; the runtime reports product `v0.18.1` and exact
   capabilities at `GET /v2/capabilities`. The additive
   `GET /v2/capability-manifest` projects only those six actions with canonical
   integrity, current-attestation, executable-state, authority and evidence bindings for thin
