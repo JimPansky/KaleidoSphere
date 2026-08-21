@@ -1,5 +1,30 @@
 # Release Notes
 
+## v0.18.0 - Governed multi-harness AgentSkill adapters
+
+Packages the exact Skill Workshop-generated KaleidoSphere reference skill as
+one shared AgentSkills core for OpenClaw, Hermes, Claude Code and Codex. The
+only capability surface is the existing External API v2 action set: `status`,
+`discovery`, `analyze`, `plan`, `preview` and `readback`. Host records contain
+installation/discovery metadata only; they do not copy business logic.
+
+The deterministic validator accepts all six safe action shapes and denies an
+eleven-case widening matrix before dispatch. It rejects extra tools, trusted
+apply, free SQL, arbitrary URLs, credentials, raw rows, malformed requests,
+non-empty read-only inputs, stale contracts, unknown discovery commands and
+invalid request IDs. Visual taste guidance is advisory only: it is rejected as
+PanSphaira HMI implementation authority, adapted for internal visual review,
+and adapted for presentation clarity without becoming a BI truth or evidence
+judge.
+
+OpenClaw is runtime-discovered locally. The current AgentSkills installer was
+round-tripped for Codex and Claude Code in a disposable project with an empty
+post-removal skill lock. Hermes is structurally validated against its current
+`~/.hermes/skills/<name>` contract because no Hermes binary is installed. No
+marketplace listing, configured transport, provider, endpoint, credential,
+mutation authority, deployment, production readiness or customer-data fitness
+is claimed.
+
 ## v0.17.0 - Proposal-only roles, clusters and extended evidence diff v2
 
 Adds a deterministic terminal projection over the existing progressive

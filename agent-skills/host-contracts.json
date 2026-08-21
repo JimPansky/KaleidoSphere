@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "kaleidosphere/agent-skill-host-contracts/v1",
+  "sharedPackage": "agent-skills/kaleidosphere",
+  "sharedBusinessLogicCopies": 1,
+  "workshop": {
+    "proposalId": "kaleidosphere-20260821-e90f51c924",
+    "status": "applied",
+    "skillSha256": "4c711c4d4111530a9c895070710c74be12711834daab19f3adc8267383d1ca2c",
+    "contractSha256": "9d964e02e2606a8f35c0e378bb1f3a5b353e20db5a5836c2677557bde99a7d71",
+    "validatorSha256": "20000bab047da9741bb338cd52fe0d33afef6cef84e9d7427f2ce54ec5651509"
+  },
+  "hosts": {
+    "openclaw": {
+      "target": "<workspace>/skills/kaleidosphere",
+      "install": "OpenClaw Skill Workshop apply",
+      "discover": "openclaw skills info kaleidosphere --json",
+      "evidence": "runtime-validated-openclaw-2026.7.1-2"
+    },
+    "hermes": {
+      "target": "~/.hermes/skills/kaleidosphere",
+      "install": "copy the shared package into the current Hermes skills directory",
+      "discover": "Hermes skill discovery after install",
+      "evidence": "structure-validated-runtime-unavailable"
+    },
+    "claude-code": {
+      "target": ".claude/skills/kaleidosphere",
+      "install": "skills add <package> --agent claude-code --skill kaleidosphere --copy -y",
+      "discover": "skills list --agent claude-code --json",
+      "evidence": "installer-roundtrip-validated-binary-unavailable"
+    },
+    "codex": {
+      "target": ".agents/skills/kaleidosphere",
+      "install": "skills add <package> --agent codex --skill kaleidosphere --copy -y",
+      "discover": "skills list --agent codex --json",
+      "evidence": "installer-roundtrip-validated-codex-0.144.1"
+    }
+  },
+  "nonClaims": [
+    "No marketplace listing or remote package registry presence is claimed.",
+    "No Hermes or Claude Code runtime execution is claimed because their binaries were unavailable.",
+    "A validated request does not imply a configured transport, accepted evidence, mutation authority or deployment."
+  ]
+}
