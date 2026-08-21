@@ -36,7 +36,7 @@ function request(requestId, action, input) {
 
 function verifyEnvelope(value, action) {
   if (value.schemaVersion !== 'superset-bi-agent.external/intent-result/v2' || value.action !== action) fail(`${action}: envelope mismatch`);
-  if (value.runtime.product.id !== 'superset-bi-agent' || value.runtime.product.version !== 'v0.18.0') fail(`${action}: product mismatch`);
+  if (value.runtime.product.id !== 'superset-bi-agent' || value.runtime.product.version !== 'v0.18.1') fail(`${action}: product mismatch`);
   if (value.runtime.contract.id !== 'superset-bi-agent.external' || value.runtime.contract.version !== '2.0.0') fail(`${action}: contract mismatch`);
   const body = Object.fromEntries(Object.entries(value).filter(([key]) => key !== 'integrity'));
   if (value.integrity?.digest !== digest(body)) fail(`${action}: response digest mismatch`);
@@ -44,7 +44,7 @@ function verifyEnvelope(value, action) {
 
 const attestation = await get('/v2/capabilities');
 const attestationBody = Object.fromEntries(Object.entries(attestation).filter(([key]) => key !== 'attestation'));
-if (attestation.product.version !== 'v0.18.0' || attestation.contract.version !== '2.0.0') fail('attestation version mismatch');
+if (attestation.product.version !== 'v0.18.1' || attestation.contract.version !== '2.0.0') fail('attestation version mismatch');
 if (attestation.attestation.digest !== digest(attestationBody)) fail('attestation digest mismatch');
 if (attestation.graph.acceptedIncumbent !== 'adaptive-v1' || attestation.graph.candidatePromotion !== 'none') fail('graph incumbent mismatch');
 const required = ['bi.status.read', 'bi.discovery.run', 'bi.analysis.run', 'bi.graph.adaptive-v1.plan', 'bi.preview.create', 'bi.readback.read'];

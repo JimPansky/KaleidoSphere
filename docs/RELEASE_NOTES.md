@@ -1,6 +1,6 @@
 # Release Notes
 
-## Unreleased - External capability manifest foundation
+## v0.18.1 - External capability manifest foundation
 
 Adds a deterministic, contract-versioned manifest at
 `GET /v2/capability-manifest`. It projects only the existing six external
