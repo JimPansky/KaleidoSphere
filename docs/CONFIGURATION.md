@@ -61,6 +61,12 @@ Clients configure only the SBA agent URL, for example
 `v0.18.0`, contract `2.0.0`, the required capability set and the canonical
 attestation digest, then send closed requests to `POST /v2/intents`.
 
+Thin adapters may additionally read `GET /v2/capability-manifest`. They must
+verify its canonical integrity, exact current-attestation digest and exact
+six-capability set before registering tools. A stale, missing, duplicated,
+unknown or drifted capability disables the adapter; it never enables a fallback
+action or accepts an operator-supplied replacement manifest.
+
 Do not configure a source database URL, Superset URL, DB credential or Superset
 credential in PANSPHAIRA. Those remain KaleidoSphere-owned runtime configuration and file
 secrets. Missing or incompatible SBA makes BI unavailable; it does not widen a

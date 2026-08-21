@@ -81,6 +81,12 @@ product/contract versions and capabilities. Every intent response repeats that
 identity and has its own digest. Wrong versions, missing capabilities, malformed
 or tampered responses, unsafe fields and direct mutation intents fail closed.
 
+The additive external capability manifest is deterministic and contains only
+the six already-allowed actions. Consumers must bind it to the exact current v2
+attestation; an internally consistent manifest for an older product/contract or
+attestation is stale and denied. Unknown, missing, duplicated, action-drifted or
+byte-tampered capabilities are denied before tool registration or dispatch.
+
 The Superset runtime fingerprint is read-only. It records sanitized target
 identity, runtime version, OpenAPI canonical hash, feature-flag capability
 status, provenance, freshness, compatibility verdict, limitations, and

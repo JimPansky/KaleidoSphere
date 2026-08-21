@@ -63,6 +63,12 @@ answered from local safe projections only. New Compose, control, catalog,
 Superset materializer, fingerprint, review-bundle, agent UI, tests, and documentation were
 authored specifically for this repository.
 
+The external capability-manifest v1 schema, runtime projection/validator,
+additive read-only endpoint, and focused fail-closed tests are repository-authored
+clean-room work. They project the existing External API v2 attestation and do
+not copy code from the M0 reference repositories. The incumbent
+`/v2/capabilities` and `/v2/intents` contracts remain unchanged.
+
 M6-00 contract schemas, four assistant-foundation runtime modules, deterministic
 fixtures, tests, ADR, evidence, and documentation updates are repository-authored
 clean-room work. DeepSeek Harness commit

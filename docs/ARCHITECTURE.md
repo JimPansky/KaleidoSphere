@@ -127,6 +127,15 @@ with canonical SHA-256. `POST /v2/intents` repeats that runtime identity and
 digest-binds its result. Clients must validate all of those fields, not trust an
 operator-configured version string.
 
+`GET /v2/capability-manifest` is an additive, deterministic projection for thin
+harness adapters. It contains only the six external actions and makes their
+executable state, authority, side-effect and evidence requirements explicit. Its validator first
+checks the canonical manifest digest, then requires the exact current v2
+attestation and exact capability set; validly re-hashed older manifests,
+unknown/duplicated/missing capabilities and action drift fail closed. The
+manifest does not discover transports or grant runtime, install or mutation
+authority.
+
 The closed intent set is status, discovery, analyze, plan, preview and readback.
 No source/Superset credential, arbitrary URL, free SQL, raw source row or direct
 mutation field is part of the contract. PANSPHAIRA is a thin optional client and
