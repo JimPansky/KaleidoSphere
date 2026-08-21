@@ -1,5 +1,25 @@
 # Release Notes
 
+## v0.18.4 - Portable Doctor readiness utility
+
+Adds the K4e.1 Portable Doctor/readiness utility for the Portable Companion v1
+contract. The doctor evaluates a small allowlisted local snapshot and reports
+stable local-utility and runtime-availability statuses separately:
+`READY_LOCAL_UTILITY` can be true while `RUNTIME_AVAILABLE` remains false.
+
+The utility detects missing runtime, missing transport, stale capability
+manifest, unsupported host bundle and partial local configuration without
+starting services, following redirects, probing networks or collecting
+credentials. Fixtures cover runtime-present, runtime-missing and partially
+configured states. Negative tests fail closed for URL/redirect/network/
+service-start requests, credentials or connection strings, unknown local fields
+and false analysis/readback success claims when runtime is absent.
+
+This release does not add runtime dispatch, arbitrary endpoint discovery,
+credentials, free SQL, raw rows/provider payloads, mutation/deploy authority,
+hosted/SaaS, remote-MCP, marketplace, customer-data or production-readiness
+claims.
+
 ## v0.18.3 - Portable Companion contract foundation
 
 Adds the K4e.0 Portable Companion v1 contract foundation under

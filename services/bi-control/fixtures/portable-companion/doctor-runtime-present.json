@@ -1,0 +1,30 @@
+{
+  "name": "runtime-present-current-manifest",
+  "snapshot": {
+    "hostBundle": {
+      "id": "kaleidosphere",
+      "version": "v0.18.4",
+      "supported": true
+    },
+    "runtime": {
+      "state": "present"
+    },
+    "transport": {
+      "state": "configured"
+    },
+    "capabilityManifest": {
+      "state": "current",
+      "observedDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "expectedDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "configuration": {
+      "state": "complete",
+      "missing": []
+    }
+  },
+  "expected": {
+    "localUtilityStatus": "READY_LOCAL_UTILITY",
+    "runtimeStatus": "RUNTIME_AVAILABLE",
+    "guidanceCodes": ["READY_WITH_RUNTIME"]
+  }
+}

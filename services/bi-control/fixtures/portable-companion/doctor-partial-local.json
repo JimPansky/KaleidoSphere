@@ -1,0 +1,30 @@
+{
+  "name": "partial-local-configuration-stale-manifest",
+  "snapshot": {
+    "hostBundle": {
+      "id": "kaleidosphere",
+      "version": "v0.18.4",
+      "supported": true
+    },
+    "runtime": {
+      "state": "partial"
+    },
+    "transport": {
+      "state": "partial"
+    },
+    "capabilityManifest": {
+      "state": "stale",
+      "observedDigest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "expectedDigest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    },
+    "configuration": {
+      "state": "partial",
+      "missing": ["runtime.identity", "transport.profile"]
+    }
+  },
+  "expected": {
+    "localUtilityStatus": "LOCAL_PARTIAL_CONFIGURATION",
+    "runtimeStatus": "RUNTIME_PARTIAL",
+    "guidanceCodes": ["COMPLETE_LOCAL_CONFIGURATION", "RUNTIME_PARTIAL", "TRANSPORT_PARTIAL", "STALE_CAPABILITY_MANIFEST"]
+  }
+}

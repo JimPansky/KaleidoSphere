@@ -1,0 +1,30 @@
+{
+  "name": "runtime-missing-local-utility-ready",
+  "snapshot": {
+    "hostBundle": {
+      "id": "kaleidosphere",
+      "version": "v0.18.4",
+      "supported": true
+    },
+    "runtime": {
+      "state": "missing"
+    },
+    "transport": {
+      "state": "missing"
+    },
+    "capabilityManifest": {
+      "state": "missing",
+      "observedDigest": null,
+      "expectedDigest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    "configuration": {
+      "state": "complete",
+      "missing": []
+    }
+  },
+  "expected": {
+    "localUtilityStatus": "READY_LOCAL_UTILITY",
+    "runtimeStatus": "RUNTIME_UNAVAILABLE",
+    "guidanceCodes": ["RUNTIME_MISSING", "TRANSPORT_MISSING", "CAPABILITY_MANIFEST_MISSING"]
+  }
+}

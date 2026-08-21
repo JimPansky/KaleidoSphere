@@ -178,6 +178,10 @@
       {
         "path": "services/bi-control/src/portable-companion/contract.mjs",
         "role": "Local validation, digest binding and fail-closed drift checks."
+      },
+      {
+        "path": "services/bi-control/src/portable-companion/doctor.mjs",
+        "role": "Offline Doctor/readiness evaluation with local utility and runtime availability kept separate."
       }
     ],
     "deniedInputs": [
