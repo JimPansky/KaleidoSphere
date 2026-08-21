@@ -67,6 +67,25 @@ Open <http://127.0.0.1:18790> for KaleidoSphere and
 password is stored in `.runtime/secrets/superset_analyst_password` with mode
 `0600` and is not printed by the scripts.
 
+## AgentSkills package
+
+`agent-skills/kaleidosphere` is one shared, instruction-only AgentSkill for the
+six closed External API v2 intents. It adds no endpoint, credential, provider,
+plugin executable or mutation authority.
+
+Codex and Claude Code can install the same package with the current
+AgentSkills installer:
+
+```bash
+npx skills add ./agent-skills/kaleidosphere \
+  --agent codex claude-code --skill kaleidosphere --copy -y
+```
+
+OpenClaw uses the same package under `<workspace>/skills/kaleidosphere`;
+Hermes uses `~/.hermes/skills/kaleidosphere`. Host-specific installation and
+evidence status are recorded in `agent-skills/host-contracts.json`. No
+marketplace listing is claimed.
+
 ## First result
 
 The fixture run returns real local evidence over synthetic metadata, not
@@ -154,7 +173,7 @@ Supported today:
 - Guided BI requirements discovery with Markdown/JSON brief export.
 - Review-bound managed technical overview dashboard workflows in Apache Superset.
 - Server-attested external API `2.0.0` for status, discovery, analyze, plan,
-  preview and readback; the runtime reports product `v0.17.0` and exact
+  preview and readback; the runtime reports product `v0.18.0` and exact
   capabilities at `GET /v2/capabilities`.
 - Read-only Superset 6.1.0 runtime fingerprint and fail-closed planning preflight.
 - Deterministic MSSQL/Oracle Progressive Run Controller v1 with explicit per-object coverage,

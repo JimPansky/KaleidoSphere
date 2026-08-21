@@ -133,3 +133,12 @@ documentation are repository-authored clean-room work. They compose only the
 existing #36-#38 contracts and do not copy or execute third-party model, database
 or clustering code. These paths are ordinary repository-authored hashes under
 `files`, not derived files.
+
+K3 packages the exact OpenClaw Skill Workshop-generated KaleidoSphere
+AgentSkill artifact with repository-authored host metadata, tests and a decision
+record. The shared skill instructions, contract and validator were created and
+applied through governed proposal `kaleidosphere-20260821-e90f51c924`; no
+Leonxlnx/taste-skill, OpenClaw, Hermes, Claude Code or Codex executable source is
+copied. The pinned taste-skill is a license/scope reference only. K3 paths are
+ordinary repository-authored/distribution hashes under `files`, not derived
+runtime files.
