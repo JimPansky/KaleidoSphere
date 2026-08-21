@@ -148,6 +148,13 @@ test('BI-agent serves exact brand bytes and denies unknown, traversal-shaped and
     assert.equal(sha256(Buffer.from(await response.arrayBuffer())), asset.sha256, asset.route);
   }
 
+  const capabilityManifestResponse = await fetch(`http://127.0.0.1:${port}/v2/capability-manifest`);
+  assert.equal(capabilityManifestResponse.status, 200);
+  assert.equal(capabilityManifestResponse.headers.get('cache-control'), 'no-store');
+  const capabilityManifest = await capabilityManifestResponse.json();
+  assert.equal(capabilityManifest.schemaVersion, 'kaleidosphere.external/capability-manifest/v1');
+  assert.deepEqual(capabilityManifest.capabilities.map(({action}) => action), ['status', 'discovery', 'analyze', 'plan', 'preview', 'readback']);
+
   const webManifestResponse = await fetch(`http://127.0.0.1:${port}/assets/site.webmanifest`);
   assert.equal(webManifestResponse.status, 200);
   assert.equal(webManifestResponse.headers.get('content-type'), 'application/manifest+json; charset=utf-8');

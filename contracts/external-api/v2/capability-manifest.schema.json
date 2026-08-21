@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/JoFe2/KaleidoSphere/contracts/external-api/v2/capability-manifest.schema.json",
+  "title": "KaleidoSphere external capability manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "manifestVersion", "product", "contract", "attestation", "capabilities", "boundaries", "integrity"],
+  "properties": {
+    "schemaVersion": {"const": "kaleidosphere.external/capability-manifest/v1"},
+    "manifestVersion": {"const": "1.0.0"},
+    "product": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "component"],
+      "properties": {
+        "id": {"const": "superset-bi-agent"},
+        "version": {"type": "string", "pattern": "^v[0-9]+\\.[0-9]+\\.[0-9]+(?:-[A-Za-z0-9.-]+)?$"},
+        "component": {"const": "bi-agent-runtime"}
+      }
+    },
+    "contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": {"const": "superset-bi-agent.external"},
+        "version": {"const": "2.0.0"}
+      }
+    },
+    "attestation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "digest"],
+      "properties": {
+        "schemaVersion": {"const": "superset-bi-agent.external/capability-attestation/v2"},
+        "digest": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "action", "executable", "authority", "sideEffect", "evidence"],
+        "properties": {
+          "id": {"enum": ["bi.status.read", "bi.discovery.run", "bi.analysis.run", "bi.graph.adaptive-v1.plan", "bi.preview.create", "bi.readback.read"]},
+          "action": {"enum": ["status", "discovery", "analyze", "plan", "preview", "readback"]},
+          "executable": {"const": true},
+          "authority": {"enum": ["read-only", "local-evidence-write", "source-read-only", "proposal-only"]},
+          "sideEffect": {"enum": ["none", "reversible-local-evidence"]},
+          "evidence": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["attestationBindingRequired", "resultIntegrityDigestRequired", "executionReceiptRequired"],
+            "properties": {
+              "attestationBindingRequired": {"const": true},
+              "resultIntegrityDigestRequired": {"const": true},
+              "executionReceiptRequired": {"const": true}
+            }
+          }
+        }
+      }
+    },
+    "boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["externalIntentOnly", "sourceDatabaseCredentialsAccepted", "freeSqlAccepted", "rawSourceRowsReturned", "modelMutationAuthority", "directSupersetMutationIntentAccepted", "persistentSupersetWorkflow"],
+      "properties": {
+        "externalIntentOnly": {"const": true},
+        "sourceDatabaseCredentialsAccepted": {"const": false},
+        "freeSqlAccepted": {"const": false},
+        "rawSourceRowsReturned": {"const": false},
+        "modelMutationAuthority": {"const": false},
+        "directSupersetMutationIntentAccepted": {"const": false},
+        "persistentSupersetWorkflow": {"const": "trusted-preview-approval-apply-readback-rollback-only"}
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "digest"],
+      "properties": {
+        "algorithm": {"const": "sha256-canonical-json"},
+        "digest": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"}
+      }
+    }
+  }
+}

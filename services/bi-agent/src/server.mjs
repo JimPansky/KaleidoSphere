@@ -1,6 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import http from 'node:http';
 
+import { capabilityManifestV1 } from './capability-manifest-v1.mjs';
 import { capabilityAttestationV2, executeExternalIntentV2 } from './external-api-v2.mjs';
 
 const port = Number(process.env.PORT ?? 18790);
@@ -259,6 +260,7 @@ const server = http.createServer(async (request, response) => {
   try {
     if (request.method === 'GET' && request.url === '/healthz') return send(response, 200, 'application/json', {status: 'ok'});
     if (request.method === 'GET' && request.url === '/v2/capabilities') return send(response, 200, 'application/json', capabilityAttestationV2());
+    if (request.method === 'GET' && request.url === '/v2/capability-manifest') return send(response, 200, 'application/json', capabilityManifestV1());
     if (request.method === 'GET' && brandAssets.has(request.url)) {
       const asset = brandAssets.get(request.url);
       return send(response, 200, asset.contentType, asset.body, 'public, max-age=3600');

@@ -3,6 +3,13 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
 import {
+  capabilityManifestV1,
+  KS_CAPABILITY_MANIFEST_SCHEMA,
+  KS_CAPABILITY_MANIFEST_VERSION,
+  requireExternalCapabilityV1,
+  validateCapabilityManifestV1,
+} from '../services/bi-agent/src/capability-manifest-v1.mjs';
+import {
   capabilityAttestationV2,
   executeExternalIntentV2,
   SBA_ATTESTATION_SCHEMA,
@@ -67,6 +74,91 @@ test('G2 attestation makes trusted mutation capabilities non-external and author
   assert(trusted.every((item) => item.authority === 'trusted-approval-only' && item.externalIntent === false));
   assert.equal(capabilityAttestationV2().boundaries.directSupersetMutationIntentAccepted, false);
   assert.equal(capabilityAttestationV2().boundaries.modelMutationAuthority, false);
+});
+
+test('M1a manifest deterministically projects only the six external capabilities', () => {
+  const first = capabilityManifestV1();
+  const second = capabilityManifestV1();
+  assert.deepEqual(first, second);
+  assert.equal(first.schemaVersion, KS_CAPABILITY_MANIFEST_SCHEMA);
+  assert.equal(first.manifestVersion, KS_CAPABILITY_MANIFEST_VERSION);
+  assert.equal(first.attestation.digest, capabilityAttestationV2().attestation.digest);
+  assert.deepEqual(first.capabilities.map((item) => item.action), ['status', 'discovery', 'analyze', 'plan', 'preview', 'readback']);
+  assert(first.capabilities.every((item) => item.executable === true));
+  assert(first.capabilities.every((item) => item.evidence.attestationBindingRequired
+    && item.evidence.resultIntegrityDigestRequired && item.evidence.executionReceiptRequired));
+  assert.equal(first.boundaries.externalIntentOnly, true);
+  assert.equal(first.boundaries.modelMutationAuthority, false);
+  const body = Object.fromEntries(Object.entries(first).filter(([key]) => key !== 'integrity'));
+  assert.equal(first.integrity.digest, sha256Digest(body));
+  assert.equal(validateCapabilityManifestV1(first), first);
+  assert.equal(requireExternalCapabilityV1(first, 'bi.analysis.run', 'analyze').authority, 'source-read-only');
+});
+
+test('M1a manifest JSON Schema is closed, fixed-version and authority/evidence aware', async () => {
+  const schema = JSON.parse(await readFile('contracts/external-api/v2/capability-manifest.schema.json', 'utf8'));
+  assert.equal(schema.additionalProperties, false);
+  assert.equal(schema.properties.schemaVersion.const, KS_CAPABILITY_MANIFEST_SCHEMA);
+  assert.equal(schema.properties.manifestVersion.const, KS_CAPABILITY_MANIFEST_VERSION);
+  assert.equal(schema.properties.capabilities.minItems, 6);
+  assert.equal(schema.properties.capabilities.maxItems, 6);
+  assert.equal(schema.properties.capabilities.items.properties.evidence.additionalProperties, false);
+  assert.equal(schema.properties.boundaries.properties.modelMutationAuthority.const, false);
+});
+
+function withRecomputedIntegrity(value) {
+  const body = Object.fromEntries(Object.entries(value).filter(([key]) => key !== 'integrity'));
+  value.integrity = {algorithm: 'sha256-canonical-json', digest: sha256Digest(body)};
+  return value;
+}
+
+test('M1a manifest fails closed for tampered, stale, unknown, missing and misbound capabilities', () => {
+  const tampered = structuredClone(capabilityManifestV1());
+  tampered.capabilities[0].authority = 'proposal-only';
+  assert.throws(() => validateCapabilityManifestV1(tampered), /CAPABILITY_MANIFEST_INTEGRITY_DENIED/);
+
+  const stale = structuredClone(capabilityManifestV1());
+  stale.product.version = 'v0.17.0';
+  withRecomputedIntegrity(stale);
+  assert.throws(() => validateCapabilityManifestV1(stale), /CAPABILITY_MANIFEST_STALE_DENIED/);
+
+  const unknown = structuredClone(capabilityManifestV1());
+  unknown.capabilities[0].id = 'bi.future.unknown';
+  withRecomputedIntegrity(unknown);
+  assert.throws(() => validateCapabilityManifestV1(unknown), /CAPABILITY_MANIFEST_UNKNOWN_CAPABILITY_DENIED/);
+
+  const missing = structuredClone(capabilityManifestV1());
+  missing.capabilities.pop();
+  withRecomputedIntegrity(missing);
+  assert.throws(() => validateCapabilityManifestV1(missing), /CAPABILITY_MANIFEST_CAPABILITY_SET_DENIED/);
+
+  const duplicate = structuredClone(capabilityManifestV1());
+  duplicate.capabilities[1] = structuredClone(duplicate.capabilities[0]);
+  withRecomputedIntegrity(duplicate);
+  assert.throws(() => validateCapabilityManifestV1(duplicate), /CAPABILITY_MANIFEST_DUPLICATE_CAPABILITY_DENIED/);
+
+  const nonExecutable = structuredClone(capabilityManifestV1());
+  nonExecutable.capabilities[0].executable = false;
+  withRecomputedIntegrity(nonExecutable);
+  assert.throws(() => validateCapabilityManifestV1(nonExecutable), /CAPABILITY_MANIFEST_CAPABILITY_NOT_EXECUTABLE/);
+
+  const evidenceMissing = structuredClone(capabilityManifestV1());
+  delete evidenceMissing.capabilities[0].evidence.executionReceiptRequired;
+  withRecomputedIntegrity(evidenceMissing);
+  assert.throws(() => validateCapabilityManifestV1(evidenceMissing), /CAPABILITY_MANIFEST_EVIDENCE_MISSING_DENIED/);
+
+  const drifted = structuredClone(capabilityManifestV1());
+  drifted.capabilities[0].action = 'preview';
+  withRecomputedIntegrity(drifted);
+  assert.throws(() => validateCapabilityManifestV1(drifted), /CAPABILITY_MANIFEST_CAPABILITY_DRIFT_DENIED/);
+
+  const boundaryDrift = structuredClone(capabilityManifestV1());
+  boundaryDrift.boundaries.freeSqlAccepted = true;
+  withRecomputedIntegrity(boundaryDrift);
+  assert.throws(() => validateCapabilityManifestV1(boundaryDrift), /CAPABILITY_MANIFEST_BOUNDARY_DRIFT_DENIED/);
+
+  assert.throws(() => requireExternalCapabilityV1(capabilityManifestV1(), 'bi.unknown', 'status'), /CAPABILITY_MANIFEST_UNKNOWN_CAPABILITY_DENIED/);
+  assert.throws(() => requireExternalCapabilityV1(capabilityManifestV1(), 'bi.status.read', 'analyze'), /CAPABILITY_MANIFEST_ACTION_BINDING_DENIED/);
 });
 
 test('G2 external request JSON Schema is closed and lists only high-level non-mutating intents', async () => {

@@ -1,5 +1,18 @@
 # Release Notes
 
+## Unreleased - External capability manifest foundation
+
+Adds a deterministic, contract-versioned manifest at
+`GET /v2/capability-manifest`. It projects only the existing six external
+External API v2 capabilities and binds each action to its incumbent authority,
+executable state, side-effect and evidence requirements. Canonical integrity and exact current
+runtime-attestation validation reject tampered, stale, missing, duplicated,
+unknown and action-drifted capabilities.
+
+This is additive. `GET /v2/capabilities`, `POST /v2/intents`, API v2, all
+harness paths and the DSH plugin remain unchanged. It adds no dynamic loading,
+endpoint discovery, credentials, arbitrary SQL, raw rows or mutation authority.
+
 ## v0.18.0 - Governed multi-harness AgentSkill adapters
 
 Packages the exact Skill Workshop-generated KaleidoSphere reference skill as
