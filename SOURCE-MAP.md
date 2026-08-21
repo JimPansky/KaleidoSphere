@@ -161,3 +161,14 @@ OpenClaw, ClawHub, Codex, Claude Code, Hermes or third-party executable source
 and does not claim public catalog listing or unavailable host runtime execution.
 The generated ClawHub bundle may be MIT-0 on ClawHub as required by that catalog;
 repository source and unrelated code remain Apache-2.0.
+
+K4e.0 adds the Portable Companion v1 contract foundation as repository-authored
+clean-room work. The schema, compatibility matrix, validator module, decision
+record, tests, release notes and source-map updates define closed offline utility
+actions, claim classes, non-claims, threat model/source map and digest drift
+checks without copying third-party runtime source or widening External API v2.
+The six runtime intents remain exactly `status`, `discovery`, `analyze`, `plan`,
+`preview` and `readback`; #82-#88 utility actions are reserved vocabulary only
+and do not dispatch, deploy, accept credentials/free SQL/raw rows/provider
+payloads, discover arbitrary endpoints, or claim hosted/SaaS, remote-MCP,
+marketplace, customer-data, live-evidence or production readiness.

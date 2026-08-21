@@ -37,7 +37,7 @@ test('distribution builder creates three byte-identical thin host views', async 
   const dir = await buildDistribution();
   const manifest = JSON.parse(await readFile(path.join(dir, 'manifest.json'), 'utf8'));
 
-  assert.equal(manifest.packageVersion, '0.18.2');
+  assert.equal(manifest.packageVersion, '0.18.3');
   assert.equal(manifest.canonicalSource, 'agent-skills/kaleidosphere');
   assert.match(manifest.hosts.clawhubOpenClawHermes.licenseBoundary, /MIT-0/);
   assert.match(manifest.hosts.clawhubOpenClawHermes.licenseBoundary, /Apache-2\.0/);
@@ -57,7 +57,7 @@ test('host manifests stay skills-only and compatible with current schemas', asyn
   const claudeManifest = JSON.parse(await readFile(path.join(dir, 'claude', 'kaleidosphere-agent-skill', '.claude-plugin', 'plugin.json'), 'utf8'));
 
   assert.equal(codexManifest.name, 'kaleidosphere-agent-skill');
-  assert.equal(codexManifest.version, '0.18.2');
+  assert.equal(codexManifest.version, '0.18.3');
   assert.equal(codexManifest.skills, './skills/');
   assert(!('apps' in codexManifest));
   assert(!('mcpServers' in codexManifest));
@@ -71,7 +71,7 @@ test('host manifests stay skills-only and compatible with current schemas', asyn
 
   assert.deepEqual(Object.keys(claudeManifest).sort(), ['author', 'description', 'homepage', 'license', 'name', 'repository', 'version']);
   assert.equal(claudeManifest.name, 'kaleidosphere-agent-skill');
-  assert.equal(claudeManifest.version, '0.18.2');
+  assert.equal(claudeManifest.version, '0.18.3');
 });
 
 test('generated artifacts are deterministic and archive-safe', async () => {
@@ -85,7 +85,7 @@ test('generated artifacts are deterministic and archive-safe', async () => {
   const archives = JSON.parse(await readFile(path.join(first, 'archives.json'), 'utf8'));
   assert.equal(archives.length, 3);
   for (const archive of archives) {
-    assert.match(archive.archive, /^archives\/kaleidosphere-(?:clawhub-skill|codex-plugin|claude-plugin)-v0\.18\.2\.tar\.gz$/);
+    assert.match(archive.archive, /^archives\/kaleidosphere-(?:clawhub-skill|codex-plugin|claude-plugin)-v0\.18\.3\.tar\.gz$/);
     const checksum = await readFile(path.join(first, archive.checksum), 'utf8');
     assert.equal(checksum, `${archive.sha256}  ${path.basename(archive.archive)}\n`);
     const verifyDir = await mkdtemp(path.join(tmpdir(), 'ks-agent-skill-sha-'));
