@@ -162,6 +162,17 @@ and does not claim public catalog listing or unavailable host runtime execution.
 The generated ClawHub bundle may be MIT-0 on ClawHub as required by that catalog;
 repository source and unrelated code remain Apache-2.0.
 
+K4e.7 binds those three host layouts to the canonical Portable Companion v1
+schemas/compatibility matrix and the canonical External API v2 schema without
+copying runtime implementations into a host adapter. A byte-identical generated
+reference records canonical input digests, the unchanged six runtime intents,
+the closed portable utility vocabulary and offline authority boundaries. The
+builder's local `--verify` readback rejects manual view drift, undeclared actions,
+intent changes, secrets, active hook/MCP surfaces, executable-mode files and
+archive traversal. Generated `dist/` trees and release archives remain derived,
+ignored artifacts; host runtime execution, marketplace approval, remote services
+and production readiness are not claimed.
+
 K4e.0 adds the Portable Companion v1 contract foundation as repository-authored
 clean-room work. The schema, compatibility matrix, validator module, decision
 record, tests, release notes and source-map updates define closed offline utility

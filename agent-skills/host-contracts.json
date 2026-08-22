@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "kaleidosphere/agent-skill-host-contracts/v1",
+  "schemaVersion": "kaleidosphere/agent-skill-host-contracts/v2",
   "sharedPackage": "agent-skills/kaleidosphere",
   "sharedBusinessLogicCopies": 1,
   "workshop": {
@@ -55,6 +55,51 @@
       "Generated artifacts do not claim Hermes, Codex or Claude Code runtime execution.",
       "Generated artifacts do not widen the closed KaleidoSphere action contract."
     ]
+  },
+  "crossHarness": {
+    "schemaVersion": "kaleidosphere/cross-harness-portable/v1",
+    "canonicalSources": {
+      "skill": [
+        "agent-skills/kaleidosphere/SKILL.md",
+        "agent-skills/kaleidosphere/references/contract.json",
+        "agent-skills/kaleidosphere/scripts/validate-request.mjs"
+      ],
+      "portableCompanion": [
+        "contracts/portable-companion/v1/portable-companion.schema.json",
+        "contracts/portable-companion/v1/compatibility-matrix.json",
+        "contracts/portable-companion/v1/profile-template.schema.json",
+        "contracts/portable-companion/v1/receipt-envelope.schema.json"
+      ],
+      "externalApiV2": "contracts/external-api/v2/external-bi-api.schema.json"
+    },
+    "generatedReference": "references/portable-companion-v1.json",
+    "externalApiV2Intents": ["status", "discovery", "analyze", "plan", "preview", "readback"],
+    "portableUtilityActions": [
+      "contract.describe",
+      "compatibility.matrix.read",
+      "threat-model.read",
+      "source-map.verify",
+      "doctor.readiness.check",
+      "capability.explorer.read",
+      "profile-template.validate",
+      "receipt-envelope.verify",
+      "synthetic-demo.run",
+      "evidence-inspector.inspect",
+      "cross-harness.verify"
+    ],
+    "security": {
+      "skillsOnly": true,
+      "hooksAllowed": false,
+      "mcpServersAllowed": false,
+      "executableModeFilesAllowed": false,
+      "externalCallsAllowed": false,
+      "secretsAllowed": false,
+      "archiveTraversalAllowed": false
+    },
+    "authority": "offline-utility-only",
+    "runtimeDispatch": false,
+    "marketplaceApprovalClaim": false,
+    "productionClaim": false
   },
   "nonClaims": [
     "No marketplace listing or remote package registry presence is claimed.",
