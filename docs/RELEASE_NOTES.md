@@ -1,5 +1,28 @@
 # Release Notes
 
+## v0.18.9 - Cross-harness Portable Companion distribution
+
+Completes K4e.7 by deriving the ClawHub/OpenClaw/Hermes, Codex and Claude host
+views from the canonical KaleidoSphere AgentSkill, Portable Companion v1
+schemas/compatibility matrix and External API v2 schema only. Each host view
+contains the same byte-identical generated Portable Companion reference with
+content digests for every canonical input. The distribution manifest binds the
+reference, exact portable utility vocabulary and unchanged runtime intents:
+`status`, `discovery`, `analyze`, `plan`, `preview` and `readback`.
+
+The builder now has a fail-closed `--verify` readback mode. Tests prove rejection
+of manual host-view drift, undeclared portable actions, any External API v2
+intent change, secret-like content, hook or MCP surfaces, executable-mode files
+and archive traversal. Generated files are non-executable, plugin manifests stay
+skills-only, archives are deterministic, and all three archive sidecars bind the
+published bytes.
+
+This release does not add credentials, raw/customer data, provider payloads,
+external calls, runtime dispatch or activation, Gateway/provider/default-model
+changes, hosted/SaaS, remote MCP, public marketplace approval, host runtime
+compatibility, production evidence or a production-readiness claim. Portable
+Companion v1 remains an offline, authority-free local utility boundary.
+
 ## v0.18.8 - Deterministic synthetic tiny-fixture demo
 
 Adds the K4e.5 Portable Companion synthetic demo: a deterministic local-only

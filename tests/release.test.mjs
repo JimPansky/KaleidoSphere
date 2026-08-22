@@ -22,18 +22,18 @@ test('release archive checksum is portable from a clean verifier directory', asy
     env: { ...process.env, CM_BI_RELEASE_ALLOW_DIRTY: '1' },
   });
 
-  const checksumPath = path.join(buildDir, 'KaleidoSphere-v0.18.8.tar.gz.sha256');
-  const archivePath = path.join(buildDir, 'KaleidoSphere-v0.18.8.tar.gz');
+  const checksumPath = path.join(buildDir, 'KaleidoSphere-v0.18.9.tar.gz.sha256');
+  const archivePath = path.join(buildDir, 'KaleidoSphere-v0.18.9.tar.gz');
   const checksum = await readFile(checksumPath, 'utf8');
-  assert.match(checksum, /^[a-f0-9]{64}  KaleidoSphere-v0\.18\.8\.tar\.gz\n$/);
+  assert.match(checksum, /^[a-f0-9]{64}  KaleidoSphere-v0\.18\.9\.tar\.gz\n$/);
   assert.doesNotMatch(checksum.split(/\s+/)[1], /\//);
 
   await cp(checksumPath, path.join(verifyDir, path.basename(checksumPath)));
   await cp(archivePath, path.join(verifyDir, path.basename(archivePath)));
-  run('sha256sum', ['-c', 'KaleidoSphere-v0.18.8.tar.gz.sha256'], { cwd: verifyDir });
+  run('sha256sum', ['-c', 'KaleidoSphere-v0.18.9.tar.gz.sha256'], { cwd: verifyDir });
 
-  const listing = run('tar', ['-tzf', 'KaleidoSphere-v0.18.8.tar.gz'], { cwd: verifyDir }).stdout;
-  assert(listing.includes('KaleidoSphere-v0.18.8/package.json\n'));
+  const listing = run('tar', ['-tzf', 'KaleidoSphere-v0.18.9.tar.gz'], { cwd: verifyDir }).stdout;
+  assert(listing.includes('KaleidoSphere-v0.18.9/package.json\n'));
   assert(!listing.includes('/.git/'));
   assert(!listing.includes('KaleidoSphere-v0.18.2/.env\n'));
   assert(!listing.includes('/node_modules/'));
@@ -42,9 +42,9 @@ test('release archive checksum is portable from a clean verifier directory', asy
   }
 
   for (const name of [
-    'kaleidosphere-clawhub-skill-v0.18.8.tar.gz',
-    'kaleidosphere-codex-plugin-v0.18.8.tar.gz',
-    'kaleidosphere-claude-plugin-v0.18.8.tar.gz',
+    'kaleidosphere-clawhub-skill-v0.18.9.tar.gz',
+    'kaleidosphere-codex-plugin-v0.18.9.tar.gz',
+    'kaleidosphere-claude-plugin-v0.18.9.tar.gz',
   ]) {
     await cp(path.join(buildDir, 'agent-skill-distribution', 'archives', `${name}.sha256`), path.join(verifyDir, `${name}.sha256`));
     await cp(path.join(buildDir, 'agent-skill-distribution', 'archives', name), path.join(verifyDir, name));

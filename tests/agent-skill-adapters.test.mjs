@@ -29,7 +29,25 @@ test('repository package is byte-identical to the applied Skill Workshop artifac
 test('one shared closed core serves four thin host contracts', async () => {
   const contract = JSON.parse(await readFile(`${root}/references/contract.json`, 'utf8'));
   const hosts = JSON.parse(await readFile('agent-skills/host-contracts.json', 'utf8'));
+  const portable = JSON.parse(await readFile('contracts/portable-companion/v1/compatibility-matrix.json', 'utf8'));
+  const externalSchema = JSON.parse(await readFile('contracts/external-api/v2/external-bi-api.schema.json', 'utf8'));
+  assert.equal(hosts.schemaVersion, 'kaleidosphere/agent-skill-host-contracts/v2');
   assert.deepEqual(contract.actions, ['status', 'discovery', 'analyze', 'plan', 'preview', 'readback']);
+  assert.deepEqual(hosts.crossHarness.externalApiV2Intents, contract.actions);
+  assert.deepEqual(hosts.crossHarness.externalApiV2Intents, externalSchema.properties.action.enum);
+  assert.deepEqual(portable.externalApiV2.runtimeIntents, contract.actions);
+  assert.deepEqual(hosts.crossHarness.portableUtilityActions, portable.portableUtilityActions.map((item) => item.id));
+  assert.equal(hosts.crossHarness.authority, 'offline-utility-only');
+  assert.equal(hosts.crossHarness.runtimeDispatch, false);
+  assert.deepEqual(hosts.crossHarness.security, {
+    skillsOnly: true,
+    hooksAllowed: false,
+    mcpServersAllowed: false,
+    executableModeFilesAllowed: false,
+    externalCallsAllowed: false,
+    secretsAllowed: false,
+    archiveTraversalAllowed: false,
+  });
   assert.equal(contract.authority, 'authority-free');
   assert.equal(hosts.sharedBusinessLogicCopies, 1);
   assert.deepEqual(Object.keys(hosts.hosts), ['openclaw', 'hermes', 'claude-code', 'codex']);
