@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "kaleidosphere.portable-companion/synthetic-demo-fixture/v1",
+  "contractVersion": "1.0.0",
+  "demoId": "synthetic-tiny-fixture-v1",
+  "classification": {
+    "machine": {
+      "synthetic": true,
+      "fixtureClass": "synthetic-only",
+      "liveEvidence": false,
+      "runtimeObservation": false
+    },
+    "human": "SYNTHETIC OFFLINE FIXTURE — NOT LIVE OR RUNTIME EVIDENCE"
+  },
+  "fixedNow": "2026-08-22T03:47:00.000Z",
+  "boundaries": {
+    "runtimeDispatch": false,
+    "network": false,
+    "liveEvidenceClaim": false,
+    "runtimeReadbackClaim": false,
+    "benchmarkClaim": false
+  },
+  "flow": {
+    "status": {
+      "snapshot": {
+        "hostBundle": {
+          "id": "kaleidosphere",
+          "version": "v0.18.8",
+          "supported": true
+        },
+        "runtime": { "state": "missing" },
+        "transport": { "state": "missing" },
+        "capabilityManifest": { "state": "missing", "observedDigest": null },
+        "configuration": { "state": "complete", "missing": [] }
+      }
+    },
+    "guidance": {
+      "capabilityKey": "bi.preview.create"
+    },
+    "template": {
+      "profile": {
+        "schemaVersion": "kaleidosphere.portable-companion/profile-template/v1",
+        "contractVersion": "1.0.0",
+        "templateId": "synthetic.preview.placeholder",
+        "templateKind": "preview-profile",
+        "selectedRuntimeIntent": "preview",
+        "placeholders": {
+          "identityRef": "${KS_SYNTHETIC_IDENTITY_REF}",
+          "dataScopeRef": "${KS_SYNTHETIC_DATA_SCOPE_REF}",
+          "objectiveRef": "${KS_SYNTHETIC_OBJECTIVE_REF}",
+          "evidenceRef": "${KS_SYNTHETIC_EVIDENCE_REF}"
+        },
+        "secretReferences": [
+          { "id": "synthetic-access", "ref": "${KS_SYNTHETIC_ACCESS_REF}" }
+        ],
+        "constraints": {
+          "dispatch": false,
+          "allowRuntimeDispatch": false,
+          "allowCredentialValues": false,
+          "allowArbitraryEndpoints": false,
+          "allowFreeSql": false,
+          "allowRawRows": false
+        }
+      }
+    },
+    "receipt": {
+      "envelope": {
+        "schemaVersion": "kaleidosphere.portable-companion/receipt-envelope/v1",
+        "contractVersion": "1.0.0",
+        "receipt": {
+          "schemaVersion": "kaleidosphere.portable-companion/signed-receipt/v1",
+          "receiptId": "synthetic-demo-receipt-v1",
+          "issuedAt": "2026-08-22T03:40:00.000Z",
+          "expiresAt": "2026-08-22T03:55:00.000Z",
+          "evidenceClass": "synthetic-fixture",
+          "liveObservationClaim": false,
+          "mutable": false,
+          "claims": {
+            "observedFacts": [
+              { "id": "synthetic-fixture-loaded", "claimClass": "observed-fact", "statement": "A deterministic synthetic demo fixture was supplied to the local utility." }
+            ],
+            "computedFacts": [
+              { "id": "synthetic-flow-bound", "claimClass": "computed-fact", "statement": "The envelope binds the canonical digest of this synthetic receipt payload." }
+            ],
+            "inferredCandidates": [
+              { "id": "separate-runtime-required", "claimClass": "inferred-candidate", "statement": "Any later runtime result would require separate trusted execution and verification." }
+            ],
+            "nonClaims": [
+              { "id": "not-live-evidence", "claimClass": "non-claim", "statement": "This synthetic demo is not live runtime evidence." },
+              { "id": "not-bi-truth", "claimClass": "non-claim", "statement": "Local integrity does not establish BI correctness or factual truth." },
+              { "id": "not-signing-authority", "claimClass": "non-claim", "statement": "The fixture grants no signing or evidence authority." },
+              { "id": "not-production-trust", "claimClass": "non-claim", "statement": "The fixture public key is not a production trust anchor." }
+            ]
+          }
+        },
+        "bindings": {
+          "contract": {
+            "id": "kaleidosphere.portable-companion",
+            "version": "1.0.0",
+            "schemaVersion": "kaleidosphere.portable-companion/contract/v1",
+            "schemaDigest": "sha256:dd1ea27146098fcd6ea585cd5ff548da12342fdd2ea638c12d1c25d7b39f98f9"
+          },
+          "capability": {
+            "contractId": "superset-bi-agent.external",
+            "contractVersion": "2.0.0",
+            "capabilityId": "bi.readback.read",
+            "runtimeIntent": "readback",
+            "manifestDigest": "sha256:2273bd6d26dd0e5ac4878c474b19499920ef2d6257d0cec6a6bfad044de0974e"
+          },
+          "source": {
+            "repository": "JoFe2/KaleidoSphere",
+            "sourceMapSchemaVersion": "chimpmaera.bi/source-map/v2",
+            "sourceCommit": "cee9fd5835ac3527af54b5974b5d53414eac88d8",
+            "fixtureClass": "synthetic-only"
+          }
+        },
+        "payloadDigest": "sha256:b1ccc719d039c144c75c2cab0af24d8c479bd079ded30ec4a295cf5d65879cbb",
+        "signature": {
+          "algorithm": "Ed25519",
+          "encoding": "base64url",
+          "keyId": "ks-synthetic-demo-fixture-v1",
+          "value": "4egKrVO6NmEpvVDsP_T9ytBVv6kfMm0EK4ZX8q2vXmF7Xt4ztA1bKZarCyJfIZoQvVuUL1wEHnmVM9jj3tYoDg"
+        }
+      },
+      "context": {
+        "schemaVersion": "kaleidosphere.portable-companion/receipt-verification-context/v1",
+        "trustClass": "synthetic-fixture-only",
+        "keyId": "ks-synthetic-demo-fixture-v1",
+        "publicKey": {
+          "format": "spki-der",
+          "encoding": "base64",
+          "value": "MCowBQYDK2VwAyEADhXRqqSQtxpWLIehwWpbJ6/hRtlq1ZYBqao7kHhmsFY="
+        }
+      }
+    }
+  }
+}
