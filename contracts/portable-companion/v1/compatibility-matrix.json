@@ -202,6 +202,14 @@
       {
         "path": "services/bi-control/src/portable-companion/receipt-verifier.mjs",
         "role": "Offline signature, digest, binding and freshness verifier that reports integrity only without evidence authority."
+      },
+      {
+        "path": "services/bi-control/fixtures/portable-companion/synthetic-demo-v1.json",
+        "role": "Closed tiny synthetic fixture with fixed time, explicit machine and human labels, and denied dispatch, network, live-evidence, readback and benchmark claims."
+      },
+      {
+        "path": "services/bi-control/src/portable-companion/synthetic-demo.mjs",
+        "role": "Deterministic offline composition of released doctor, guidance, placeholder-template and synthetic receipt-verification utilities without runtime dispatch."
       }
     ],
     "deniedInputs": [

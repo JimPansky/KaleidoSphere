@@ -1,5 +1,28 @@
 # Release Notes
 
+## v0.18.8 - Deterministic synthetic tiny-fixture demo
+
+Adds the K4e.5 Portable Companion synthetic demo: a deterministic local-only
+composition of the released doctor, capability explorer, placeholder-template
+validator and synthetic receipt-envelope verifier. A single closed tiny fixture
+uses a fixed time and no runtime transport, network request or external source.
+Two independent renders are byte-identical canonical JSON.
+
+The root report and every status, guidance, template and receipt layer carry an
+exact machine-readable `synthetic-only` classification and a human-readable
+synthetic warning. Status is explicitly `RUNTIME_UNAVAILABLE`, guidance is
+advisory, the template is placeholder-only, and the receipt result is
+`VERIFIED_INTEGRITY_ONLY` with `synthetic-fixture-only` trust. Negative tests
+fail closed for removed or altered synthetic labels, secret-looking values, raw
+rows, customer-like identifiers, runtime dispatch, network requests, affirmative
+live-evidence/runtime-observation claims and integrity drift.
+
+This release is not live or customer evidence, a benchmark, runtime readback,
+BI correctness, signing/evidence authority or a production claim. It adds no
+database or provider payload, credential, real endpoint, generated private
+data, free SQL, mutation/deploy authority, Superset/UI, Gateway/provider/model
+activation, hosted/SaaS, remote-MCP or marketplace behavior.
+
 ## v0.18.7 - Signed portable receipt-envelope verifier
 
 Adds the K4e.4 Portable Companion receipt-envelope verifier and explainer. The

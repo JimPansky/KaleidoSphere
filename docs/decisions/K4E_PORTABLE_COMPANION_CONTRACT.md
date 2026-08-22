@@ -119,3 +119,26 @@ The verifier contains no private key and grants no signing, runtime, evidence,
 mutation, deployment, network, credential, remote-service or production trust
 authority. Rollback remains a protected successor PR and regular successor
 release; immutable release tags are never moved.
+
+## K4e.5 Deterministic Synthetic Demo
+
+Issue #86 implements `synthetic-demo.run` as a fixed, local-only composition of
+the released doctor, capability explorer, profile-template validator and
+receipt-envelope verifier. The single tiny fixture supplies a missing-runtime
+snapshot, one preview guidance selection, a placeholder-only preview template
+and a signed synthetic receipt whose verification time is fixed in the fixture.
+No clock, network, runtime transport or customer source influences the result.
+
+The canonical renderer produces byte-identical JSON on repeated runs. The root
+report and all four flow layers carry the exact same machine-readable synthetic
+classification and human-readable synthetic warning. Status remains
+`RUNTIME_UNAVAILABLE`, guidance remains advisory, template values remain
+placeholders, and receipt verification remains `VERIFIED_INTEGRITY_ONLY` with a
+`synthetic-fixture-only` trust class.
+
+Fixture and output validators fail closed when a synthetic label is missing or
+altered, when secret-looking material, raw rows or customer-like identifiers are
+introduced, when dispatch or network is requested, or when output claims live
+evidence or runtime observation. The demo grants no runtime readback, benchmark,
+signing/evidence, deployment, hosted, remote-MCP, marketplace or production
+authority.
